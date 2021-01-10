@@ -148,19 +148,18 @@ var UqMan = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    UqMan.prototype.getUserRoles = function (userId) {
+    UqMan.prototype.getRoles = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (userId === this.userId)
+                        if (this.roles !== undefined)
                             return [2 /*return*/, this.roles];
                         _a = this;
-                        return [4 /*yield*/, this.uqApi.roles()];
+                        return [4 /*yield*/, this.uqApi.getRoles()];
                     case 1:
                         _a.roles = _b.sent();
-                        this.userId = userId;
                         return [2 /*return*/, this.roles];
                 }
             });
@@ -228,8 +227,9 @@ var UqMan = /** @class */ (function () {
             debugger;
         }
         this.localAccess.set(entities);
-        var access = entities.access, tuids = entities.tuids, version = entities.version;
+        var access = entities.access, tuids = entities.tuids, role = entities.role, version = entities.version;
         this.uqVersion = version;
+        this.allRoles = role === null || role === void 0 ? void 0 : role.names;
         this.buildTuids(tuids);
         this.buildAccess(access);
     };

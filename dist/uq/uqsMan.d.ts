@@ -21,7 +21,8 @@ export declare class UQsMan {
     id: number;
     private constructor();
     addUq(uq: UqMan): void;
-    static getUqUserRoles(uqLower: string, userId: number): Promise<string[]>;
+    static uq(uqLower: string): UqMan;
+    static getUqUserRoles(uqLower: string): Promise<string[]>;
     private buildTVs;
     init(uqsData: UqData[]): Promise<void>;
     load(): Promise<string[]>;

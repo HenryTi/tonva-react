@@ -124,17 +124,11 @@ export class Selectable extends ListBase {
         this.list.props.item.onSelect(undefined, true, this.anySelected);
     }
     unselectAll() {
-        // if (this._items) this._items.forEach(v => v.selected = false);
         this.checkAll(false);
         this.list.props.item.onSelect(undefined, false, this.anySelected);
     }
-    /*
-    updateProps(nextProps:any) {
-        if (nextProps.selectedItems === this._selectedItems) return;
-        this.buildItems();
-    }
-    */
-    private get anySelected():boolean {return this._items.some(v => v.selected)}
+
+	private get anySelected():boolean {return this._items.some(v => v.selected)}
     private onSelect(item:SelectableItem, selected:boolean) {
         item.selected = selected;
         this.list.props.item.onSelect(item.item, selected, this.anySelected);
@@ -143,31 +137,8 @@ export class Selectable extends ListBase {
     get selectedItems():any[] {
         return this._items.filter(v => v.selected === true).map(v => v.item);
     }
-    /*
-    set selectedItems(value: any[]) {
-        if (value === undefined) return;
-        if (this._items === undefined) return;
-        let sLen = this._items.length;
-        let list = value.slice();
-        for (let n=0; n<sLen; n++) {
-            let sItem = this._items[n];
-            let len = list.length;
-            if (len === 0) break;
-            let item = sItem.item;
-            for (let i=0; i<len; i++) {
-                let v = list[i];
-                if (item === v) {
-                    sItem.selected = true;
-                    value.splice(i, 1);
-                    break;
-                }
-            }
-        };
-    }
-    */
-    //w-100 mb-0 pl-3
-    //m-0 w-100
-    render = (item:SelectableItem, index:number):JSX.Element => {
+
+	render = (item:SelectableItem, index:number):JSX.Element => {
         let {key} = this.list.props.item;
 		return React.createElement(this.row, {item, index, key:key===undefined?index:key(item)});
     }

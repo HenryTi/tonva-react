@@ -73,24 +73,42 @@ var React = __importStar(require("react"));
 var unknown_1 = require("./unknown");
 var widget_1 = require("./widget");
 var mobx_react_1 = require("mobx-react");
+var mobx_1 = require("mobx");
 var ButtonWidget = /** @class */ (function (_super) {
     __extends(ButtonWidget, _super);
     function ButtonWidget() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.onClick = function () { return __awaiter(_this, void 0, void 0, function () {
-            var _a, name, type;
+            var _a, name, type, onButtonClick, ret;
+            var _this = this;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        this.clearError();
-                        this.clearContextError();
+                        mobx_1.runInAction(function () {
+                            _this.clearError();
+                            _this.clearContextError();
+                        });
                         _a = this.itemSchema, name = _a.name, type = _a.type;
                         if (!(type === 'submit')) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.context.submit(name)];
                     case 1:
                         _b.sent();
-                        _b.label = 2;
-                    case 2: return [2 /*return*/];
+                        return [2 /*return*/];
+                    case 2:
+                        onButtonClick = this.context.form.props.onButtonClick;
+                        if (onButtonClick === undefined) {
+                            alert("button " + name + " clicked. you should define form onButtonClick");
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, onButtonClick(name, this.context)];
+                    case 3:
+                        ret = _b.sent();
+                        if (ret === undefined)
+                            return [2 /*return*/];
+                        mobx_1.runInAction(function () {
+                            _this.context.setError(name, ret);
+                        });
+                        return [2 /*return*/];
                 }
             });
         }); };

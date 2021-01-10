@@ -117,6 +117,7 @@ var Tab = /** @class */ (function () {
     });
     Tab.prototype.shown = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -131,7 +132,9 @@ var Tab = /** @class */ (function () {
                         return [4 /*yield*/, this.load()];
                     case 3:
                         _a.sent();
-                        this.loaded = true;
+                        mobx_1.runInAction(function () {
+                            _this.loaded = true;
+                        });
                         _a.label = 4;
                     case 4: return [2 /*return*/];
                 }
@@ -150,6 +153,7 @@ var TabsView = /** @class */ (function () {
     function TabsView(props) {
         var _this = this;
         this.tabClick = function (tab) { return __awaiter(_this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -163,9 +167,11 @@ var TabsView = /** @class */ (function () {
                                 tab = this.tabArr[0];
                             }
                         }
-                        this.selectedTab.selected = false;
-                        tab.selected = true;
-                        this.selectedTab = tab;
+                        mobx_1.runInAction(function () {
+                            _this.selectedTab.selected = false;
+                            tab.selected = true;
+                            _this.selectedTab = tab;
+                        });
                         return [4 /*yield*/, tab.shown()];
                     case 1:
                         _a.sent();
@@ -173,15 +179,6 @@ var TabsView = /** @class */ (function () {
                 }
             });
         }); };
-        /*
-        showTab(tabName: string) {
-            let tab = this.tabs.find(v => v.name === tabName);
-            if (tab === undefined) return;
-            if (this.selectedTab !== undefined) this.selectedTab.selected = false;
-            tab.selected = true;
-            this.selectedTab = tab;
-        }
-        */
         this.tabs = mobx_react_1.observer(function () {
             var _a = _this.props, tabPosition = _a.tabPosition, borderColor = _a.borderColor;
             var bsCur, bsTab;

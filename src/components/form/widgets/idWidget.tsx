@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Widget } from './widget';
 import { UiIdItem, TempletType, ItemSchema } from '../../schema';
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observable, runInAction } from 'mobx';
 import { Context } from '../context';
 import { FieldProps } from '../field';
 
@@ -28,11 +28,13 @@ export class IdWidget extends Widget {
             alert('no pickId defined!');
             return;
         }
-        let id = await pickId(this.context, this.name, this.value);        
-        this.setDataValue(id);
-        this.clearError();
-        this.clearContextError();
-        this.checkRules();
+		let id = await pickId(this.context, this.name, this.value);
+		runInAction(() => {
+			this.setDataValue(id);
+			this.clearError();
+			this.clearContextError();
+			this.checkRules();	
+		});
     }
 
     render() {

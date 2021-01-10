@@ -205,8 +205,8 @@ export class UqApi extends ApiBase {
         let ret = await this.get('access', {acc:acc});
         return ret;
 	}
-	async roles():Promise<string[]> {
-		let ret = await this.get('roles');
+	async getRoles():Promise<string[]> {
+		let ret = await this.get('get-roles',);
 		if (!ret) return null;
 		let parts:string[] = (ret as string).split('|');
 		let s:string[] = [];
@@ -217,6 +217,16 @@ export class UqApi extends ApiBase {
 		}
 		if (s.length === 0) return null;
 		return s;
+	}
+	async getAllRoleUsers():Promise<{user:number, admin:number, roles:string}[]> {
+		let ret = await this.get('get-all-role-users');
+		return ret;
+	}
+	async setUserRoles(theUser:number, admin:number, roles:string):Promise<void> {
+		await this.post('set-user-roles', {theUser, admin, roles});
+	}
+	async deleteUserRoles(theUser:number):Promise<void> {
+		await this.get('delete-user-roles', {theUser});
 	}
 
     /*async loadEntities():Promise<any> {

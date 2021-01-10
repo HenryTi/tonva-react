@@ -74,11 +74,15 @@ export class UQsMan {
     addUq(uq: UqMan) {
         this.collection[uq.name] = uq;
 	}
+
+	static uq(uqLower: string): UqMan {
+		return UQsMan.value.collection[uqLower];
+	}
 	
-	static async getUqUserRoles(uqLower:string, userId:number):Promise<string[]> {
+	static async getUqUserRoles(uqLower:string):Promise<string[]> {
 		let uqMan = UQsMan.value.collection[uqLower];
 		if (uqMan === undefined) return null;
-		let roles = await uqMan.getUserRoles(userId);
+		let roles = await uqMan.getRoles();
 		return roles;
 	}
 
@@ -156,7 +160,10 @@ export class UQsMan {
             }
             let proxy = uqs[l] = new Proxy(entities, {
                 get: function(target, key, receiver) {
-                    let lk = (key as string).toLowerCase();
+					let lk = (key as string).toLowerCase();
+					if (lk === 'uqname') {
+						return uqMan.name;
+					}
                     let ret = target[lk];
                     if (ret !== undefined) return ret;
 					debugger;

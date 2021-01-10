@@ -407,10 +407,12 @@ function buildArrs(arrFields) {
     }
     return ts;
 }
-var typeMap = {
+/*
+const typeMap:{[type:string]:string} = {
     action: 'Action',
     query: 'Query',
-};
+}
+*/
 function buildReturns(entity, returns) {
     if (!returns)
         return;

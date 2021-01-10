@@ -84,6 +84,7 @@ var IdWidget = /** @class */ (function (_super) {
         _this.value = null;
         _this.onClick = function () { return __awaiter(_this, void 0, void 0, function () {
             var pickId, id;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -95,10 +96,12 @@ var IdWidget = /** @class */ (function (_super) {
                         return [4 /*yield*/, pickId(this.context, this.name, this.value)];
                     case 1:
                         id = _a.sent();
-                        this.setDataValue(id);
-                        this.clearError();
-                        this.clearContextError();
-                        this.checkRules();
+                        mobx_1.runInAction(function () {
+                            _this.setDataValue(id);
+                            _this.clearError();
+                            _this.clearContextError();
+                            _this.checkRules();
+                        });
                         return [2 /*return*/];
                 }
             });

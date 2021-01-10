@@ -12,7 +12,14 @@ export declare class UqApi extends ApiBase {
     init(): Promise<void>;
     protected getHttpChannel(): Promise<HttpChannel>;
     loadAccess(): Promise<any>;
-    roles(): Promise<string[]>;
+    getRoles(): Promise<string[]>;
+    getAllRoleUsers(): Promise<{
+        user: number;
+        admin: number;
+        roles: string;
+    }[]>;
+    setUserRoles(theUser: number, admin: number, roles: string): Promise<void>;
+    deleteUserRoles(theUser: number): Promise<void>;
     allSchemas(): Promise<any>;
     schema(name: string): Promise<any>;
     queueModify(start: number, page: number, entities: string): Promise<any>;

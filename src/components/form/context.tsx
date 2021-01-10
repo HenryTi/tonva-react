@@ -4,7 +4,7 @@ import { UiSchema, UiArr, UiItem } from '../schema';
 import { ArrSchema, ItemSchema } from '../schema';
 import { Widget } from './widgets/widget';
 //import { ArrRow } from './arrRow';
-import { observable, computed, makeObservable } from 'mobx';
+import { observable, computed, makeObservable, runInAction } from 'mobx';
 import { ContextRule } from './rules';
 import { observer } from 'mobx-react';
 
@@ -150,26 +150,32 @@ export abstract class Context {
     }
 
     setError(itemName:string, error:string) {
-        let widget = this.widgets[itemName];
-        if (widget === undefined) return;
-        widget.setContextError(error);
-        this.addErrorWidget(widget);
+		runInAction(() => {
+			let widget = this.widgets[itemName];
+			if (widget === undefined) return;
+			widget.setContextError(error);
+			this.addErrorWidget(widget);	
+		})
     }
 
     clearContextErrors() {
-        for (let i in this.widgets) {
-            let widget = this.widgets[i];
-            if (widget === undefined) continue;
-            widget.clearContextError();
-        }
+		runInAction(() => {
+			for (let i in this.widgets) {
+				let widget = this.widgets[i];
+				if (widget === undefined) continue;
+				widget.clearContextError();
+			}	
+		});
     }
 
     clearWidgetsErrors() {
-        for (let i in this.widgets) {
-            let widget = this.widgets[i];
-            if (widget === undefined) continue;
-            widget.clearError();
-        }
+		runInAction(() => {
+			for (let i in this.widgets) {
+				let widget = this.widgets[i];
+				if (widget === undefined) continue;
+				widget.clearError();
+			}	
+		});
     }
 
     checkRules() {

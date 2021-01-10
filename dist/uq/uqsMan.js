@@ -109,7 +109,10 @@ var UQsMan = /** @class */ (function () {
     UQsMan.prototype.addUq = function (uq) {
         this.collection[uq.name] = uq;
     };
-    UQsMan.getUqUserRoles = function (uqLower, userId) {
+    UQsMan.uq = function (uqLower) {
+        return UQsMan.value.collection[uqLower];
+    };
+    UQsMan.getUqUserRoles = function (uqLower) {
         return __awaiter(this, void 0, void 0, function () {
             var uqMan, roles;
             return __generator(this, function (_a) {
@@ -118,7 +121,7 @@ var UQsMan = /** @class */ (function () {
                         uqMan = UQsMan.value.collection[uqLower];
                         if (uqMan === undefined)
                             return [2 /*return*/, null];
-                        return [4 /*yield*/, uqMan.getUserRoles(userId)];
+                        return [4 /*yield*/, uqMan.getRoles()];
                     case 1:
                         roles = _a.sent();
                         return [2 /*return*/, roles];
@@ -225,6 +228,9 @@ var UQsMan = /** @class */ (function () {
             var proxy = uqs[l] = new Proxy(entities, {
                 get: function (target, key, receiver) {
                     var lk = key.toLowerCase();
+                    if (lk === 'uqname') {
+                        return uqMan.name;
+                    }
                     var ret = target[lk];
                     if (ret !== undefined)
                         return ret;

@@ -43,4 +43,6 @@ export declare abstract class CAppBase extends Controller {
     protected onNavRoutes(): void;
     private showUnsupport;
     getUqRoles(uqName: string): Promise<string[]>;
+    isAdmin(roles: string[]): boolean;
+    isRole(roles: string[], role: string): boolean;
 }

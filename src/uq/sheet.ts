@@ -1,7 +1,7 @@
 import { Entity } from './entity';
 import { PageItems } from '../tool/pageItems';
 import { EntityCaller } from './caller';
-import { ArrFields, Field } from './uqMan';
+import { ArrFields } from './uqMan';
 
 export interface SheetState {
     name: string;

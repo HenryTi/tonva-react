@@ -3,18 +3,21 @@ import { UiButton, TempletType } from '../../schema';
 import { Unknown } from './unknown';
 import { Widget } from './widget';
 import { observer } from 'mobx-react';
+import { runInAction } from 'mobx';
 
 export class ButtonWidget extends Widget {
     protected get ui(): UiButton {return this._ui as UiButton};
 
     protected onClick = async () => {
-        this.clearError();
-        this.clearContextError();
+		runInAction(() => {
+			this.clearError();
+			this.clearContextError();
+		})
         let {name, type} = this.itemSchema;
         if (type === 'submit') {
-            await this.context.submit(name);
+			await this.context.submit(name);
+			return;
         }
-        /*
         let {onButtonClick} = this.context.form.props;
         if (onButtonClick === undefined) {
             alert(`button ${name} clicked. you should define form onButtonClick`);
@@ -22,8 +25,9 @@ export class ButtonWidget extends Widget {
         }
         let ret = await onButtonClick(name, this.context);
         if (ret === undefined) return;
-        this.context.setError(name, ret);
-        */
+		runInAction(() => {
+			this.context.setError(name, ret);
+		});
     }
 
     private observerRender = observer(() => {

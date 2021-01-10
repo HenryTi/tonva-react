@@ -195,9 +195,19 @@ export abstract class CAppBase extends Controller {
 		}
 		if (roles) return roles;
 
-		roles = await UQsMan.getUqUserRoles(uq, nav.user.id);
+		roles = await UQsMan.getUqUserRoles(uq);
 		if (!roles) roles = null;
 		nav.setUqRoles(uq, roles);
 		return roles;
+	}
+
+	isAdmin(roles:string[]):boolean {
+		return this.isRole(roles, '$');
+	}
+
+	isRole(roles:string[], role:string):boolean {
+		if (!roles) return false;
+		role = role.toLowerCase();
+		return roles.indexOf(role) >= 0;
 	}
 }

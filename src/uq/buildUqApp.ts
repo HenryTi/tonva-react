@@ -412,10 +412,12 @@ function buildArrs(arrFields: ArrFields[]):string {
 	return ts;
 }
 
+/*
 const typeMap:{[type:string]:string} = {
 	action: 'Action',
 	query: 'Query',
 }
+*/
 function buildReturns(entity:Entity, returns:ArrFields[]):string {
 	if (!returns) return;
 	//let {typeName} = entity;

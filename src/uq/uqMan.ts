@@ -150,12 +150,10 @@ export class UqMan {
         return new ReactBoxId(id, tuid, this.tvs[name]);
 	}
 	
-	private userId:number;
 	private roles:string[];
-	async getUserRoles(userId:number):Promise<string[]> {
-		if (userId === this.userId) return this.roles;
-		this.roles = await this.uqApi.roles();
-		this.userId = userId;
+	async getRoles():Promise<string[]> {
+		if (this.roles !== undefined) return this.roles;
+		this.roles = await this.uqApi.getRoles();
 		return this.roles;
 	}
 
@@ -179,6 +177,7 @@ export class UqMan {
         }
     }
 
+	allRoles: string[];
     readonly tuidArr: Tuid[] = [];
     readonly actionArr: Action[] = [];
     readonly enumArr: UqEnum[] = [];
@@ -213,8 +212,9 @@ export class UqMan {
             debugger;
         }
         this.localAccess.set(entities);
-        let {access, tuids, version} = entities;
-        this.uqVersion = version;
+        let {access, tuids, role, version} = entities;
+		this.uqVersion = version;
+		this.allRoles = role?.names;
         this.buildTuids(tuids);
         this.buildAccess(access);
 	}

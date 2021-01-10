@@ -240,7 +240,7 @@ var CAppBase = /** @class */ (function (_super) {
                         }
                         if (roles)
                             return [2 /*return*/, roles];
-                        return [4 /*yield*/, uq_1.UQsMan.getUqUserRoles(uq, components_1.nav.user.id)];
+                        return [4 /*yield*/, uq_1.UQsMan.getUqUserRoles(uq)];
                     case 1:
                         roles = _a.sent();
                         if (!roles)
@@ -250,6 +250,15 @@ var CAppBase = /** @class */ (function (_super) {
                 }
             });
         });
+    };
+    CAppBase.prototype.isAdmin = function (roles) {
+        return this.isRole(roles, '$');
+    };
+    CAppBase.prototype.isRole = function (roles, role) {
+        if (!roles)
+            return false;
+        role = role.toLowerCase();
+        return roles.indexOf(role) >= 0;
     };
     return CAppBase;
 }(vm_1.Controller));

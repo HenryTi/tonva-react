@@ -246,27 +246,36 @@ var Context = /** @class */ (function () {
         }
     };
     Context.prototype.setError = function (itemName, error) {
-        var widget = this.widgets[itemName];
-        if (widget === undefined)
-            return;
-        widget.setContextError(error);
-        this.addErrorWidget(widget);
+        var _this = this;
+        mobx_1.runInAction(function () {
+            var widget = _this.widgets[itemName];
+            if (widget === undefined)
+                return;
+            widget.setContextError(error);
+            _this.addErrorWidget(widget);
+        });
     };
     Context.prototype.clearContextErrors = function () {
-        for (var i in this.widgets) {
-            var widget = this.widgets[i];
-            if (widget === undefined)
-                continue;
-            widget.clearContextError();
-        }
+        var _this = this;
+        mobx_1.runInAction(function () {
+            for (var i in _this.widgets) {
+                var widget = _this.widgets[i];
+                if (widget === undefined)
+                    continue;
+                widget.clearContextError();
+            }
+        });
     };
     Context.prototype.clearWidgetsErrors = function () {
-        for (var i in this.widgets) {
-            var widget = this.widgets[i];
-            if (widget === undefined)
-                continue;
-            widget.clearError();
-        }
+        var _this = this;
+        mobx_1.runInAction(function () {
+            for (var i in _this.widgets) {
+                var widget = _this.widgets[i];
+                if (widget === undefined)
+                    continue;
+                widget.clearError();
+            }
+        });
     };
     Context.prototype.checkRules = function () {
         this.clearErrors();

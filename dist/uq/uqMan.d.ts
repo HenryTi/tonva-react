@@ -73,9 +73,8 @@ export declare class UqMan {
     });
     get entities(): any;
     private createBoxIdFromTVs;
-    private userId;
     private roles;
-    getUserRoles(userId: number): Promise<string[]>;
+    getRoles(): Promise<string[]>;
     tuid(name: string): Tuid;
     tuidDiv(name: string, div: string): TuidDiv;
     action(name: string): Action;
@@ -86,6 +85,7 @@ export declare class UqMan {
     history(name: string): History;
     pending(name: string): Pending;
     sheetFromTypeId(typeId: number): Sheet;
+    allRoles: string[];
     readonly tuidArr: Tuid[];
     readonly actionArr: Action[];
     readonly enumArr: UqEnum[];

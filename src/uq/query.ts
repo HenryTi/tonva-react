@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import {observable, IObservableArray, makeObservable} from 'mobx';
+import {observable, IObservableArray} from 'mobx';
 import { PageItems } from '../tool';
-import {Field, ArrFields, UqMan} from './uqMan';
+import {Field, ArrFields} from './uqMan';
 import {Entity} from './entity';
 import { QueryQueryCaller, QueryPageCaller } from './caller';
 

@@ -272,12 +272,12 @@ var UqApi = /** @class */ (function (_super) {
             });
         });
     };
-    UqApi.prototype.roles = function () {
+    UqApi.prototype.getRoles = function () {
         return __awaiter(this, void 0, void 0, function () {
             var ret, parts, s, _i, parts_1, p;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.get('roles')];
+                    case 0: return [4 /*yield*/, this.get('get-roles')];
                     case 1:
                         ret = _a.sent();
                         if (!ret)
@@ -294,6 +294,43 @@ var UqApi = /** @class */ (function (_super) {
                         if (s.length === 0)
                             return [2 /*return*/, null];
                         return [2 /*return*/, s];
+                }
+            });
+        });
+    };
+    UqApi.prototype.getAllRoleUsers = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.get('get-all-role-users')];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqApi.prototype.setUserRoles = function (theUser, admin, roles) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.post('set-user-roles', { theUser: theUser, admin: admin, roles: roles })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UqApi.prototype.deleteUserRoles = function (theUser) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.get('delete-user-roles', { theUser: theUser })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
             });
         });

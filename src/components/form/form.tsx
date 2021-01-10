@@ -49,7 +49,7 @@ export class Form extends React.Component<FormProps> {
         let {schema, uiSchema, 
             Container, FieldContainer, FieldClass, 
             ButtonClass, res,
-        } = props;
+		} = props;
         this.Container = Container || this.DefaultContainer;
         this.FieldContainer = FieldContainer || this.DefaultFieldContainer;
         this.FieldClass = FieldClass!==undefined && FieldClass!==''&&FieldClass!==null? FieldClass : this.DefaultFieldClass;

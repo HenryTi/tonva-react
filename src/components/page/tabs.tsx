@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeObservable, observable } from 'mobx';
+import { makeObservable, observable, runInAction } from 'mobx';
 import { observer } from 'mobx-react';
 import classNames from 'classnames';
 import { IVPage } from './page';
@@ -85,7 +85,9 @@ class Tab {
         if (this.load !== undefined) {
 			if (this.loaded === false) {
 				await this.load();
-				this.loaded = true;
+				runInAction(() => {
+					this.loaded = true;
+				});
 			}
         }
     }
@@ -159,22 +161,14 @@ export class TabsView {
 			}
 		}
 
-        this.selectedTab.selected = false;
-        tab.selected = true;
-		this.selectedTab = tab;
+		runInAction(() => {
+			this.selectedTab.selected = false;
+			tab.selected = true;
+			this.selectedTab = tab;
+		});
 		
 		await tab.shown();
     }
-
-	/*
-    showTab(tabName: string) {
-        let tab = this.tabs.find(v => v.name === tabName);
-        if (tab === undefined) return;
-        if (this.selectedTab !== undefined) this.selectedTab.selected = false;
-        tab.selected = true;
-        this.selectedTab = tab;
-	}
-	*/
 
 	private tabs = observer(() => {
         let {tabPosition, borderColor} = this.props;

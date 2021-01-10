@@ -106,30 +106,6 @@ var Selectable = /** @class */ (function (_super) {
                 _this._items = retItems;
             }
         };
-        /*
-        set selectedItems(value: any[]) {
-            if (value === undefined) return;
-            if (this._items === undefined) return;
-            let sLen = this._items.length;
-            let list = value.slice();
-            for (let n=0; n<sLen; n++) {
-                let sItem = this._items[n];
-                let len = list.length;
-                if (len === 0) break;
-                let item = sItem.item;
-                for (let i=0; i<len; i++) {
-                    let v = list[i];
-                    if (item === v) {
-                        sItem.selected = true;
-                        value.splice(i, 1);
-                        break;
-                    }
-                }
-            };
-        }
-        */
-        //w-100 mb-0 pl-3
-        //m-0 w-100
         _this.render = function (item, index) {
             var key = _this.list.props.item.key;
             return React.createElement(_this.row, { item: item, index: index, key: key === undefined ? index : key(item) });
@@ -208,17 +184,10 @@ var Selectable = /** @class */ (function (_super) {
         this.list.props.item.onSelect(undefined, true, this.anySelected);
     };
     Selectable.prototype.unselectAll = function () {
-        // if (this._items) this._items.forEach(v => v.selected = false);
         this.checkAll(false);
         this.list.props.item.onSelect(undefined, false, this.anySelected);
     };
     Object.defineProperty(Selectable.prototype, "anySelected", {
-        /*
-        updateProps(nextProps:any) {
-            if (nextProps.selectedItems === this._selectedItems) return;
-            this.buildItems();
-        }
-        */
         get: function () { return this._items.some(function (v) { return v.selected; }); },
         enumerable: false,
         configurable: true
