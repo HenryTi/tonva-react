@@ -712,8 +712,8 @@
         "affectsGlobalScope": false
       },
       "./src/net/uqapi.ts": {
-        "version": "32dc43296f8d901958586e0b4eca6473f4956fd23b2568dae2e5df21b1cf6506",
-        "signature": "fb67eabd46cd722cf8ad0cf88f498aba0a1797a7ad51d4c32d10f08a7c20cd83",
+        "version": "be7e7bd12c095b091197f83fe1cc4803a6a6c4d7d5c63dbfe820420d64917d75",
+        "signature": "7ec0f0a889942962d8db2298b58d8da6a546cb92597bfe1fd5024c842181d80a",
         "affectsGlobalScope": false
       },
       "./src/net/nettoken.ts": {

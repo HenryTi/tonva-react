@@ -311,11 +311,11 @@ var UqApi = /** @class */ (function (_super) {
             });
         });
     };
-    UqApi.prototype.setUserRoles = function (theUser, admin, roles) {
+    UqApi.prototype.setUserRoles = function (theUser, roles) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.post('set-user-roles', { theUser: theUser, admin: admin, roles: roles })];
+                    case 0: return [4 /*yield*/, this.post('set-user-roles', { theUser: theUser, roles: roles })];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];

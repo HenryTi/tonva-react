@@ -222,8 +222,8 @@ export class UqApi extends ApiBase {
 		let ret = await this.get('get-all-role-users');
 		return ret;
 	}
-	async setUserRoles(theUser:number, admin:number, roles:string):Promise<void> {
-		await this.post('set-user-roles', {theUser, admin, roles});
+	async setUserRoles(theUser:number, roles:string):Promise<void> {
+		await this.post('set-user-roles', {theUser, roles});
 	}
 	async deleteUserRoles(theUser:number):Promise<void> {
 		await this.get('delete-user-roles', {theUser});

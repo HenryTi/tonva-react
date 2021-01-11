@@ -18,7 +18,7 @@ export declare class UqApi extends ApiBase {
         admin: number;
         roles: string;
     }[]>;
-    setUserRoles(theUser: number, admin: number, roles: string): Promise<void>;
+    setUserRoles(theUser: number, roles: string): Promise<void>;
     deleteUserRoles(theUser: number): Promise<void>;
     allSchemas(): Promise<any>;
     schema(name: string): Promise<any>;
