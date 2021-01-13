@@ -259,15 +259,15 @@ async function buildUqsFolder(uqsFolder:string, options: UqOptions) {
 		fs.mkdirSync(uqsFolder);
 	}
 	else {
-		fs.readdir(uqsFolder, (err, files) => {
-			if (err) throw err;
-		  
+		try {
+			let files = fs.readdirSync(uqsFolder);
 			for (const file of files) {
-			  fs.unlink(path.join(uqsFolder, file), err => {
-				if (err) throw err;
-			  });
-			}
-		});		
+				fs.unlinkSync(path.join(uqsFolder, file));
+			}	
+		}
+		catch (err) {
+			throw new err;
+		}
 	}
 	let tsUqsIndexHeader = buildTsHeader();
 	let tsUqsIndexContent = `\n\nexport interface UQs {`;

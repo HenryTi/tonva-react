@@ -188,12 +188,12 @@ function buildTsVMain() {
 }
 function buildUqsFolder(uqsFolder, options) {
     return __awaiter(this, void 0, void 0, function () {
-        var uqErrors, uqsMan, coll, promiseArr, uqs, i, lowerI, _i, uqs_1, uq, tsUqsIndexHeader, tsUqsIndexContent, tsUqsExports, _a, uqs_2, uq, uqOwner, uqName, enumArr, o1, n1, tsUq, _b, _c, enm, enmName;
-        return __generator(this, function (_d) {
-            switch (_d.label) {
+        var uqErrors, uqsMan, coll, promiseArr, uqs, i, lowerI, _i, uqs_1, uq, files, _a, files_1, file, tsUqsIndexHeader, tsUqsIndexContent, tsUqsExports, _b, uqs_2, uq, uqOwner, uqName, enumArr, o1, n1, tsUq, _c, _d, enm, enmName;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
                 case 0: return [4 /*yield*/, uqAppStart(options)];
                 case 1:
-                    uqErrors = _d.sent();
+                    uqErrors = _e.sent();
                     uqsMan = index_1.UQsMan.value;
                     coll = uqsMan.getUqCollection();
                     promiseArr = [];
@@ -214,28 +214,27 @@ function buildUqsFolder(uqsFolder, options) {
                     }
                     return [4 /*yield*/, Promise.all(promiseArr)];
                 case 2:
-                    _d.sent();
+                    _e.sent();
                     if (!fs_1.default.existsSync(uqsFolder)) {
                         fs_1.default.mkdirSync(uqsFolder);
                     }
                     else {
-                        fs_1.default.readdir(uqsFolder, function (err, files) {
-                            if (err)
-                                throw err;
-                            for (var _i = 0, files_1 = files; _i < files_1.length; _i++) {
-                                var file = files_1[_i];
-                                fs_1.default.unlink(path_1.default.join(uqsFolder, file), function (err) {
-                                    if (err)
-                                        throw err;
-                                });
+                        try {
+                            files = fs_1.default.readdirSync(uqsFolder);
+                            for (_a = 0, files_1 = files; _a < files_1.length; _a++) {
+                                file = files_1[_a];
+                                fs_1.default.unlinkSync(path_1.default.join(uqsFolder, file));
                             }
-                        });
+                        }
+                        catch (err) {
+                            throw new err;
+                        }
                     }
                     tsUqsIndexHeader = buildTsHeader();
                     tsUqsIndexContent = "\n\nexport interface UQs {";
                     tsUqsExports = '\n\n';
-                    for (_a = 0, uqs_2 = uqs; _a < uqs_2.length; _a++) {
-                        uq = uqs_2[_a];
+                    for (_b = 0, uqs_2 = uqs; _b < uqs_2.length; _b++) {
+                        uq = uqs_2[_b];
                         uqOwner = uq.uqOwner, uqName = uq.uqName, enumArr = uq.enumArr;
                         o1 = getUqOwnerName(uqOwner);
                         n1 = getUqName(uqName);
@@ -246,8 +245,8 @@ function buildUqsFolder(uqsFolder, options) {
                         tsUqsIndexContent += "\n\t" + o1 + n1 + ": " + o1 + n1 + ".Uq" + o1 + n1 + ";";
                         if (enumArr.length > 0) {
                             tsUqsExports += "\nexport {";
-                            for (_b = 0, _c = uq.enumArr; _b < _c.length; _b++) {
-                                enm = _c[_b];
+                            for (_c = 0, _d = uq.enumArr; _c < _d.length; _c++) {
+                                enm = _d[_c];
                                 enmName = "" + capitalCaseString(enm.sName);
                                 tsUqsExports += "\n\t" + enmName + " as " + o1 + n1 + enmName + ",";
                             }
