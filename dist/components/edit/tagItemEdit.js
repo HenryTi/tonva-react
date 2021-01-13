@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -69,6 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TagMultiItemEdit = exports.TagSingleItemEdit = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var nav_1 = require("../nav");
 var page_1 = require("../page/page");
@@ -81,11 +93,11 @@ var TagItemEdit = /** @class */ (function (_super) {
         _this.inputs = {};
         _this.page = mobx_react_1.observer(function (props) {
             var resolve = props.resolve;
-            var right = React.createElement("button", { className: "btn btn-sm btn-success align-self-center", disabled: !_this.isChanged, onClick: function () {
+            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center", disabled: !_this.isChanged, onClick: function () {
                     _this.verifyValue();
                     if (_this.error === undefined)
                         resolve(_this.newValue);
-                } }, "\u4FDD\u5B58");
+                } }, { children: "\u4FDD\u5B58" }), void 0);
             /*
             let content = list?
                 list.map((v, index:number) => {
@@ -99,8 +111,7 @@ var TagItemEdit = /** @class */ (function (_super) {
                 :
                 <>no list defined</>;
             */
-            return React.createElement(page_1.Page, { header: '更改' + _this.label, right: right },
-                React.createElement("div", { className: "p-3" }, _this.renderInputs()));
+            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: jsx_runtime_1.jsx("div", __assign({ className: "p-3" }, { children: _this.renderInputs() }), void 0) }), void 0);
         });
         return _this;
     }

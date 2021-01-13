@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -69,6 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RadioItemEdit = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var nav_1 = require("../nav");
 var page_1 = require("../page/page");
@@ -87,26 +99,19 @@ var RadioItemEdit = /** @class */ (function (_super) {
             var resolve = props.resolve;
             var name = _this.itemSchema.name;
             var list = _this.uiItem.list;
-            var right = React.createElement("button", { className: "btn btn-sm btn-success align-self-center", disabled: !_this.isChanged, onClick: function () {
+            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center", disabled: !_this.isChanged, onClick: function () {
                     _this.verifyValue();
                     if (_this.error === undefined)
                         resolve(_this.newValue);
-                } }, "\u4FDD\u5B58");
+                } }, { children: "\u4FDD\u5B58" }), void 0);
             var content = list ?
                 list.map(function (v, index) {
                     var title = v.title, value = v.value;
-                    return React.createElement("div", { key: index, className: "col" },
-                        React.createElement("label", { className: "px-3 py-2 cursor-pointer" },
-                            React.createElement("input", { name: name, type: "radio", value: value, onClick: function () { return _this.onChange(value); }, defaultChecked: value === _this.value }),
-                            " ",
-                            title || value,
-                            " \u00A0"));
+                    return jsx_runtime_1.jsx("div", __assign({ className: "col" }, { children: jsx_runtime_1.jsxs("label", __assign({ className: "px-3 py-2 cursor-pointer" }, { children: [jsx_runtime_1.jsx("input", { name: name, type: "radio", value: value, onClick: function () { return _this.onChange(value); }, defaultChecked: value === _this.value }, void 0), " ", title || value, " \u00A0"] }), void 0) }), index);
                 })
                 :
-                    React.createElement(React.Fragment, null, "no list defined");
-            return React.createElement(page_1.Page, { header: '更改' + _this.label, right: right },
-                React.createElement("div", { className: "m-3" },
-                    React.createElement("div", { className: "row row-cols-2 row-cols-sm-3 row-cols-md-4" }, content)));
+                    jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "no list defined" }, void 0);
+            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: jsx_runtime_1.jsx("div", __assign({ className: "m-3" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "row row-cols-2 row-cols-sm-3 row-cols-md-4" }, { children: content }), void 0) }), void 0) }), void 0);
         });
         return _this;
     }

@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -72,6 +83,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchBox = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var mobx_1 = require("mobx");
@@ -143,15 +155,10 @@ var SearchBox = /** @class */ (function (_super) {
                 inputSize = 'input-group-lg';
                 break;
         }
-        return React.createElement("form", { className: className, onSubmit: this.onSubmit },
-            React.createElement("div", { className: classnames_1.default("input-group", inputSize) },
-                label && React.createElement("div", { className: "input-group-addon align-self-center mr-2" }, label),
-                React.createElement("input", { ref: function (v) { return _this.input = v; }, onChange: this.onChange, type: "text", name: "key", onFocus: onFocus, className: classnames_1.default('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }),
-                React.createElement("div", { className: "input-group-append" },
-                    React.createElement("button", { className: "btn btn-primary", type: "submit", disabled: this.disabled },
-                        React.createElement("i", { className: 'fa fa-search' }),
-                        React.createElement("i", { className: "fa" }),
-                        buttonText))));
+        return jsx_runtime_1.jsx("form", __assign({ className: className, onSubmit: this.onSubmit }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default("input-group", inputSize) }, { children: [label && jsx_runtime_1.jsx("div", __assign({ className: "input-group-addon align-self-center mr-2" }, { children: label }), void 0),
+                    jsx_runtime_1.jsx("input", { ref: function (v) { return _this.input = v; }, onChange: this.onChange, type: "text", name: "key", onFocus: onFocus, className: classnames_1.default('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }, void 0),
+                    jsx_runtime_1.jsx("div", __assign({ className: "input-group-append" }, { children: jsx_runtime_1.jsxs("button", __assign({ className: "btn btn-primary", type: "submit", disabled: this.disabled }, { children: [jsx_runtime_1.jsx("i", { className: 'fa fa-search' }, void 0),
+                                jsx_runtime_1.jsx("i", { className: "fa" }, void 0), buttonText] }), void 0) }), void 0)] }), void 0) }), void 0);
     };
     return SearchBox;
 }(React.Component));

@@ -1,26 +1,18 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TagView = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var radioStyle = { height: 'auto' };
 var TagView = /** @class */ (function () {
     function TagView(tag) {
@@ -34,14 +26,14 @@ var TagView = /** @class */ (function () {
         else {
             names = this.tag.namesFromIds(values);
         }
-        return React.createElement("div", { className: "d-flex flex-wrap " }, names.map(function (name, index) {
-            return React.createElement("div", { key: index, className: "mx-2 border border-muted rounded px-3 bg-light" }, name);
-        }));
+        return jsx_runtime_1.jsx("div", __assign({ className: "d-flex flex-wrap " }, { children: names.map(function (name, index) {
+                return jsx_runtime_1.jsx("div", __assign({ className: "mx-2 border border-muted rounded px-3 bg-light" }, { children: name }), index);
+            }) }), void 0);
     };
     TagView.prototype.renderRadios = function (value, options) {
         var _this = this;
         var content = this.tag.values.map(function (item, index) {
-            return React.createElement("div", { className: "col", key: index }, _this.renderRadio(item, value, options));
+            return jsx_runtime_1.jsx("div", __assign({ className: "col" }, { children: _this.renderRadio(item, value, options) }), index);
         });
         return this.renderView(options, content);
     };
@@ -50,7 +42,7 @@ var TagView = /** @class */ (function () {
         var arr = values === undefined ? undefined : values.split('|').map(function (v) { return Number(v); });
         var content = this.tag.values.map(function (item, index) {
             var checked = arr === undefined ? undefined : arr.indexOf(item.id) >= 0;
-            return React.createElement("div", { className: "col", key: index }, _this.renderCheck(item, checked, options));
+            return jsx_runtime_1.jsx("div", __assign({ className: "col" }, { children: _this.renderCheck(item, checked, options) }), index);
         });
         return this.renderView(options, content);
     };
@@ -60,24 +52,19 @@ var TagView = /** @class */ (function () {
             'row ' + wrapClassName
             :
                 'row row-cols-2 row-cols-sm-3 row-cols-md-4';
-        return React.createElement("div", { className: className, style: radioStyle },
-            React.createElement("div", { className: wrapClassName }, content));
+        return jsx_runtime_1.jsx("div", __assign({ className: className, style: radioStyle }, { children: jsx_runtime_1.jsx("div", __assign({ className: wrapClassName }, { children: content }), void 0) }), void 0);
     };
     TagView.prototype.renderRadio = function (item, value, options) {
         var id = item.id, name = item.name;
         var inputs = options.inputs, inputName = options.inputName, onInputChange = options.onInputChange;
         var ref = inputs && (function (input) { return inputs[id] = input; });
-        return React.createElement("label", { className: "form-radio-inline" },
-            React.createElement("input", { ref: ref, type: "radio", name: inputName, value: id, defaultChecked: value === id, onChange: onInputChange }),
-            name);
+        return jsx_runtime_1.jsxs("label", __assign({ className: "form-radio-inline" }, { children: [jsx_runtime_1.jsx("input", { ref: ref, type: "radio", name: inputName, value: id, defaultChecked: value === id, onChange: onInputChange }, void 0), name] }), void 0);
     };
     TagView.prototype.renderCheck = function (item, checked, options) {
         var id = item.id, name = item.name;
         var inputs = options.inputs, onInputChange = options.onInputChange;
         var ref = inputs && (function (input) { return inputs[id] = input; });
-        return React.createElement("label", { className: "form-radio-inline" },
-            React.createElement("input", { ref: ref, type: "checkbox", value: id, defaultChecked: checked, onChange: onInputChange }),
-            name);
+        return jsx_runtime_1.jsxs("label", __assign({ className: "form-radio-inline" }, { children: [jsx_runtime_1.jsx("input", { ref: ref, type: "checkbox", value: id, defaultChecked: checked, onChange: onInputChange }, void 0), name] }), void 0);
     };
     return TagView;
 }());

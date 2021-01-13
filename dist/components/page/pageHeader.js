@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -69,6 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PageHeader = exports.renderPageHeader = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var nav_1 = require("../nav");
 function renderPageHeader(props, inWebNav) {
@@ -119,11 +131,9 @@ function renderPageHeader(props, inWebNav) {
             var user = nav_1.nav.user;
             if (user !== undefined) {
                 var nick = user.nick, name_1 = user.name;
-                debugLogout = React.createElement("div", { className: "d-flex align-items-center" },
-                    React.createElement("small", { className: "text-light" }, nick || name_1),
-                    // eslint-disable-next-line
-                    React.createElement("div", { className: "ml-2 py-2 px-3 cursor-pointer", role: "button", onClick: onLogoutClick },
-                        React.createElement("i", { className: "fa fa-sign-out fa-lg" })));
+                debugLogout = jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center" }, { children: [jsx_runtime_1.jsx("small", __assign({ className: "text-light" }, { children: nick || name_1 }), void 0),
+                        // eslint-disable-next-line
+                        jsx_runtime_1.jsx("div", __assign({ className: "ml-2 py-2 px-3 cursor-pointer", role: "button", onClick: onLogoutClick }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-sign-out fa-lg" }, void 0) }), void 0)] }), void 0);
             }
         }
     }
@@ -134,10 +144,10 @@ function renderPageHeader(props, inWebNav) {
                 break;
             default:
             case 'back':
-                vBack = React.createElement("nav", { onClick: onBack }, nav_1.nav.backIcon);
+                vBack = jsx_runtime_1.jsx("nav", __assign({ onClick: onBack }, { children: nav_1.nav.backIcon }), void 0);
                 break;
             case 'close':
-                vBack = React.createElement("nav", { onClick: onBack }, nav_1.nav.backIcon);
+                vBack = jsx_runtime_1.jsx("nav", __assign({ onClick: onBack }, { children: nav_1.nav.backIcon }), void 0);
                 break;
         }
     }
@@ -146,23 +156,13 @@ function renderPageHeader(props, inWebNav) {
         // pop = <header onClick={this.openWindow} className="mx-1"><FA name="external-link" /></header>;
     }
     if (vBack === undefined && typeof center === 'string') {
-        center = React.createElement("div", { className: "px-3" }, center);
+        center = jsx_runtime_1.jsx("div", __assign({ className: "px-3" }, { children: center }), void 0);
     }
-    var rightView = (right || debugLogout) && React.createElement("aside", null,
-        right,
-        " ",
-        debugLogout);
-    var header = React.createElement("header", { className: className },
-        React.createElement("nav", null,
-            vBack,
-            React.createElement("div", null, center),
-            rightView),
-        ex);
+    var rightView = (right || debugLogout) && jsx_runtime_1.jsxs("aside", { children: [right, " ", debugLogout] }, void 0);
+    var header = jsx_runtime_1.jsxs("header", __assign({ className: className }, { children: [jsx_runtime_1.jsxs("nav", { children: [vBack, jsx_runtime_1.jsx("div", { children: center }, void 0), rightView] }, void 0), ex] }), void 0);
     if (inWebNav === true)
         return header;
-    return React.createElement(React.Fragment, null,
-        React.createElement("section", { className: "tv-page-header" }, header),
-        header);
+    return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: "tv-page-header" }, { children: header }), void 0), header] }, void 0);
 }
 exports.renderPageHeader = renderPageHeader;
 var PageHeader = /** @class */ (function (_super) {

@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -33,6 +44,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConfirmReloadPage = exports.ReloadPage = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var nav_1 = require("./nav");
 var page_1 = require("./page/page");
@@ -73,25 +85,17 @@ var ReloadPage = /** @class */ (function (_super) {
             title = '程序需要升级';
             msg = '请点击下面按钮重启';
         }
-        return React.createElement(page_1.Page, { header: false },
-            React.createElement("div", { className: "text-center p-5" },
-                React.createElement("div", { className: "text-info py-5" },
-                    React.createElement("span", { className: "text-danger" }, title),
-                    React.createElement("br", null),
-                    msg,
-                    React.createElement("br", null),
-                    React.createElement("span", { className: "small text-muted" }, this.props.message)),
-                React.createElement("button", { className: "btn btn-danger", onClick: this.reload }, "\u7ACB\u523B\u91CD\u542F")));
+        return jsx_runtime_1.jsx(page_1.Page, __assign({ header: false }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "text-center p-5" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "text-info py-5" }, { children: [jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: title }), void 0),
+                            jsx_runtime_1.jsx("br", {}, void 0), msg, jsx_runtime_1.jsx("br", {}, void 0),
+                            jsx_runtime_1.jsx("span", __assign({ className: "small text-muted" }, { children: this.props.message }), void 0)] }), void 0),
+                    jsx_runtime_1.jsx("button", __assign({ className: "btn btn-danger", onClick: this.reload }, { children: "\u7ACB\u523B\u91CD\u542F" }), void 0)] }), void 0) }), void 0);
     };
     return ReloadPage;
 }(React.Component));
 exports.ReloadPage = ReloadPage;
 var ConfirmReloadPage = function (props) {
-    return React.createElement(page_1.Page, { header: "\u5347\u7EA7\u8F6F\u4EF6", back: "close" },
-        React.createElement("div", { className: "py-5 px-3 my-5 mx-2 border bg-white rounded" },
-            React.createElement("div", { className: "text-center text-info" }, "\u5347\u7EA7\u5C06\u6E05\u9664\u6240\u6709\u672C\u673A\u7F13\u51B2\u533A\u5185\u5BB9\uFF0C\u5E76\u4ECE\u670D\u52A1\u5668\u91CD\u65B0\u5B89\u88C5\u7A0B\u5E8F\uFF01"),
-            React.createElement("div", { className: "text-center mt-5" },
-                React.createElement("button", { className: "btn btn-danger mr-3", onClick: function () { return props.confirm(true); } }, "\u786E\u8BA4\u5347\u7EA7"))));
+    return jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u5347\u7EA7\u8F6F\u4EF6", back: "close" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "py-5 px-3 my-5 mx-2 border bg-white rounded" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "text-center text-info" }, { children: "\u5347\u7EA7\u5C06\u6E05\u9664\u6240\u6709\u672C\u673A\u7F13\u51B2\u533A\u5185\u5BB9\uFF0C\u5E76\u4ECE\u670D\u52A1\u5668\u91CD\u65B0\u5B89\u88C5\u7A0B\u5E8F\uFF01" }), void 0),
+                jsx_runtime_1.jsx("div", __assign({ className: "text-center mt-5" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-danger mr-3", onClick: function () { return props.confirm(true); } }, { children: "\u786E\u8BA4\u5347\u7EA7" }), void 0) }), void 0)] }), void 0) }), void 0);
     // <button className="btn btn-outline-danger" onClick={()=>props.confirm(false)}>暂不</button>
 };
 exports.ConfirmReloadPage = ConfirmReloadPage;

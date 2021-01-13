@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -36,6 +47,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StackedFA = exports.FA = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var FA = /** @class */ (function (_super) {
@@ -46,7 +58,7 @@ var FA = /** @class */ (function (_super) {
     FA.prototype.render = function () {
         var _a = this.props, name = _a.name, className = _a.className, size = _a.size, spin = _a.spin, fixWidth = _a.fixWidth, border = _a.border, pull = _a.pull, pulse = _a.pulse, rotate = _a.rotate, flip = _a.flip, inverse = _a.inverse;
         var cn = classnames_1.default(className, 'fa', name && ('fa-' + name), size && 'fa-' + size, fixWidth && 'fa-fw', border && 'fa-border', pull && 'fa-pull-' + pull, spin && 'fa-spin', pulse && 'fa-pulse', rotate && 'fa-rotate-' + rotate, flip && 'fa-flip-' + flip, inverse && 'fa-inverse');
-        return React.createElement("i", { className: cn });
+        return jsx_runtime_1.jsx("i", { className: cn }, void 0);
     };
     return FA;
 }(React.Component));
@@ -59,7 +71,7 @@ var StackedFA = /** @class */ (function (_super) {
     StackedFA.prototype.render = function () {
         var _a = this.props, className = _a.className, size = _a.size, children = _a.children;
         var cn = classnames_1.default('fa-stack', className, size && 'fa-' + size);
-        return React.createElement("span", { className: cn }, children);
+        return jsx_runtime_1.jsx("span", __assign({ className: cn }, { children: children }), void 0);
     };
     return StackedFA;
 }(React.Component));

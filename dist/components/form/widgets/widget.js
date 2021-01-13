@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -36,6 +47,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Widget = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var rules_1 = require("../rules");
@@ -59,10 +71,7 @@ var Widget = /** @class */ (function () {
             var label = _this.label;
             if (_this.itemSchema.required === true && form.props.requiredFlag !== false) {
                 if (label !== null)
-                    label = React.createElement(React.Fragment, null,
-                        label,
-                        "\u00A0",
-                        React.createElement("span", { className: "text-danger" }, "*"));
+                    label = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [label, "\u00A0", jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "*" }), void 0)] }, void 0);
             }
             return form.FieldContainer(label, _this.renderBody());
         });
@@ -242,11 +251,9 @@ var Widget = /** @class */ (function () {
             var _a = this.ui, discription = _a.discription, discriptionClassName = _a.discriptionClassName;
             if (discriptionClassName === undefined)
                 discriptionClassName = 'small text-muted';
-            elDiscription = React.createElement("span", { className: discriptionClassName }, discription);
+            elDiscription = jsx_runtime_1.jsx("span", __assign({ className: discriptionClassName }, { children: discription }), void 0);
         }
-        return React.createElement(React.Fragment, null,
-            this.render(),
-            elDiscription);
+        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [this.render(), elDiscription] }, void 0);
     };
     Object.defineProperty(Widget.prototype, "label", {
         get: function () {
@@ -268,7 +275,7 @@ var Widget = /** @class */ (function () {
     });
     Widget.prototype.renderTemplet = function () {
         if (this.children !== undefined) {
-            return React.createElement(React.Fragment, null, this.children);
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: this.children }, void 0);
         }
         if (this.ui === undefined)
             return undefined;
@@ -286,10 +293,7 @@ var Widget = /** @class */ (function () {
         return errorList.map(function (err) { return React.createElement(tag, {
             key: err,
             className: 'text-danger d-inline-block my-2 ml-3'
-        }, React.createElement(React.Fragment, null,
-            React.createElement("i", { className: "fa fa-exclamation-circle" }),
-            " \u00A0",
-            err)); });
+        }, jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }, void 0)); });
     };
     __decorate([
         mobx_1.computed

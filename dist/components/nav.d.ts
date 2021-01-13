@@ -81,7 +81,6 @@ export declare class Nav {
     private loadPredefinedUnit;
     setSettings(settings?: NavSettings): void;
     get oem(): string;
-    hashParam: string;
     private centerHost;
     private arrs;
     private unitJsonPath;
@@ -159,8 +158,6 @@ export declare class Nav {
     back(confirm?: boolean): Promise<void>;
     regConfirmClose(confirmClose: () => Promise<boolean>): void;
     confirmBox(message?: string): boolean;
-    navToApp(url: string, unitId: number, apiId?: number, sheetType?: number, sheetId?: number): Promise<void>;
-    navToSite(url: string): void;
     get logs(): string[];
     log(msg: string): void;
     logMark(): void;

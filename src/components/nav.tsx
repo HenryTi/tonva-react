@@ -6,9 +6,9 @@ import {Page} from './page/page';
 import {netToken} from '../net/netToken';
 import FetchErrorView, { SystemNotifyPage } from './fetchErrorView';
 import {FetchError} from '../net/fetchError';
-import {appUrl, setAppInFrame, getExHash, getExHashPos} from '../net/appBridge';
+import {/*appUrl, setAppInFrame, getExHash, getExHashPos*/} from '../net/appBridge';
 import {LocalData, env} from '../tool';
-import {guestApi, logoutApis, setCenterUrl, setCenterToken, appInFrame, host, resUrlFromHost, messageHub} from '../net';
+import {guestApi, logoutApis, setCenterUrl, setCenterToken, /*appInFrame, */host, resUrlFromHost, messageHub} from '../net';
 //import { WsBase, wsBridge } from '../net/wsChannel';
 import { resOptions } from '../res/res';
 import { Loading } from './loading';
@@ -501,7 +501,7 @@ export class Nav {
         return this.navSettings && this.navSettings.oem;
     }
 
-    hashParam: string;
+    //hashParam: string;
     private centerHost: string;
     private arrs = ['/test', '/test/'];
     private unitJsonPath():string {
@@ -547,12 +547,14 @@ export class Nav {
 			env.isDevelopment = true;
 		}
 		await host.start(this.testing);
+		/*
 		let hash = document.location.hash;
 		if (hash !== undefined && hash.length > 0) {
 			let pos = getExHashPos();
 			if (pos < 0) pos = undefined;
 			this.hashParam = hash.substring(1, pos);
 		}
+		*/
 		let {url, ws, resHost} = host;
 		this.centerHost = url;
 		this.resUrl = resUrlFromHost( resHost);
@@ -568,7 +570,7 @@ export class Nav {
 			throw Error('guest can not be undefined');
 		}
 		nav.setGuest(guest);
-
+		/*
 		let exHash = getExHash();
 		let appInFrame = setAppInFrame(exHash);
 		if (exHash !== undefined && window !== window.parent) {
@@ -588,6 +590,7 @@ export class Nav {
 
 		let predefinedUnit = await this.loadPredefinedUnit();
 		appInFrame.predefinedUnit = predefinedUnit;
+		*/
 	}
 
     async start() {
@@ -919,7 +922,7 @@ export class Nav {
 	}
 
     async logout(callback?:()=>Promise<void>) { //notShowLogin?:boolean) {
-        appInFrame.unit = undefined;
+        //appInFrame.unit = undefined;
         this.local.logoutClear();
         this.user = undefined; //{} as User;
         logoutApis();
@@ -992,7 +995,8 @@ export class Nav {
     }
     confirmBox(message?:string): boolean {
         return this.navView.confirmBox(message);
-    }
+	}
+	/*
     async navToApp(url: string, unitId: number, apiId?:number, sheetType?:number, sheetId?:number):Promise<void> {
         return new Promise<void>((resolve, reject) => {
             let sheet = this.centerHost.includes('http://localhost:') === true? 'sheet_debug':'sheet'
@@ -1001,7 +1005,7 @@ export class Nav {
                     appUrl(url, unitId, sheet, [apiId, sheetType, sheetId]);
             console.log('navToApp: %s', JSON.stringify(uh));
             nav.push(<article className='app-container'>
-                <span id={uh.hash} onClick={()=>this.back()} /*style={mobileHeaderStyle}*/>
+                <span id={uh.hash} onClick={()=>this.back()} >
                     <i className="fa fa-arrow-left" />
                 </span>
                 {
@@ -1019,7 +1023,7 @@ export class Nav {
         // show in new window
         window.open(url);
     }
-
+	*/
     get logs() {return logs};
     log(msg:string) {
         logs.push(msg);

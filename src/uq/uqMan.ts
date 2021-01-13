@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { UqApi, UqData, UnitxApi, appInFrame } from '../net';
+import { UqApi, UqData, UnitxApi/*, appInFrame*/ } from '../net';
 import { Tuid, TuidDiv, TuidImport, TuidInner, TuidBox, TuidsCache } from './tuid';
 import { Action } from './action';
 import { Sheet } from './sheet';
@@ -9,7 +9,7 @@ import { History } from './history';
 import { Map } from './map';
 import { Pending } from './pending';
 import { CreateBoxId, BoxId } from './tuid';
-import { LocalMap, LocalCache } from '../tool';
+import { LocalMap, LocalCache, env } from '../tool';
 import { UQsMan } from './uqsMan';
 import { ReactBoxId } from './tuid/reactBoxId';
 import { Tag } from './tag/tag';
@@ -77,7 +77,7 @@ export class UqMan {
 	private readonly pendings: {[name:string]: Pending} = {};
 	private readonly tags: {[name:string]: Tag} = {};
     private readonly tuidsCache: TuidsCache;
-    private readonly localAccess: LocalCache;
+    private readonly localEntities: LocalCache;
     private readonly tvs:{[entity:string]:(values:any)=>JSX.Element};
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
@@ -88,9 +88,10 @@ export class UqMan {
     readonly uqName: string;
     readonly name: string;
     readonly uqApi: UqApi;
-    readonly id: number;
+	readonly id: number;
 
     uqVersion: number;
+	ownerProfix: string;
 
     constructor(uqs:UQsMan, uqData: UqData, createBoxId:CreateBoxId, tvs:{[entity:string]:(values:any)=>JSX.Element}) {
         this.createBoxId = createBoxId;
@@ -98,34 +99,36 @@ export class UqMan {
             this.createBoxId = this.createBoxIdFromTVs;
             this.tvs = tvs || {};
         }
-        let {id, uqOwner, uqName, access, newVersion} = uqData;
+        let {id, uqOwner, uqName, /*access, */newVersion} = uqData;
         this.newVersion = newVersion;
         this.uqOwner = uqOwner;
         this.uqName = uqName;
         this.id = id;
         this.name = uqOwner + '/' + uqName;
         this.uqVersion = 0;
-        this.localMap = uqs.localMap.map(this.name);
+		//this.localMap = uqs.localMap.map(this.name);
+		this.localMap = env.localDb.map(this.name);
         this.localModifyMax = this.localMap.child('$modifyMax');
-        this.localAccess = this.localMap.child('$access');
-        //let hash = document.location.hash;
+        this.localEntities = this.localMap.child('$access');
         let baseUrl = 'tv/';
 
+		/*
         let acc: string[];
         if (access === null || access === undefined || access === '*') {
             acc = [];
         }
         else {
             acc = access.split(';').map(v => v.trim()).filter(v => v.length > 0);
-        }
+		}
+		*/
         if (this.name === '$$$/$unitx') {
             // 这里假定，点击home link之后，已经设置unit了
             // 调用 UnitxApi会自动搜索绑定 unitx service
-            this.uqApi = new UnitxApi(appInFrame.unit);
+            this.uqApi = new UnitxApi(env.unit);
         }
         else {
-            let {appOwner, appName} = uqs;
-            this.uqApi = new UqApi(baseUrl, appOwner, appName, uqOwner, uqName, acc, true);
+            //let {appOwner, appName} = uqs;
+            this.uqApi = new UqApi(baseUrl, /*appOwner, appName, */uqOwner, uqName/*, acc*/, true);
         }
         this.tuidsCache = new TuidsCache(this);
     }
@@ -195,9 +198,9 @@ export class UqMan {
 
     async loadEntities(): Promise<string> {
         try {
-            let entities = this.localAccess.get();
+            let entities = this.localEntities.get();
             if (!entities) {
-                entities = await this.uqApi.loadAccess();
+                entities = await this.uqApi.loadEntities();
 			}
             if (!entities) return;
             this.buildEntities(entities);
@@ -211,7 +214,7 @@ export class UqMan {
         if (entities === undefined) {
             debugger;
         }
-        this.localAccess.set(entities);
+        this.localEntities.set(entities);
         let {access, tuids, role, version} = entities;
 		this.uqVersion = version;
 		this.allRoles = role?.names;

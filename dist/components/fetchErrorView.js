@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -69,6 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SystemNotifyPage = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var net_1 = require("../net");
 var page_1 = require("./page/page");
@@ -104,35 +116,24 @@ var FetchErrorView = /** @class */ (function (_super) {
         if (typeof error === 'object') {
             var err = [];
             for (var i in error) {
-                err.push(React.createElement("li", { key: i },
-                    React.createElement("label", null, i),
-                    React.createElement("div", { style: { wordWrap: "break-word" } }, error[i])));
+                err.push(jsx_runtime_1.jsxs("li", { children: [jsx_runtime_1.jsx("label", { children: i }, void 0), jsx_runtime_1.jsx("div", __assign({ style: { wordWrap: "break-word" } }, { children: error[i] }), void 0)] }, i));
             }
-            errContent = React.createElement("ul", null, err);
+            errContent = jsx_runtime_1.jsx("ul", { children: err }, void 0);
         }
         else {
-            errContent = React.createElement("div", null, error);
+            errContent = jsx_runtime_1.jsx("div", { children: error }, void 0);
         }
-        return React.createElement("div", null,
-            React.createElement("article", null,
-                React.createElement("main", { className: "va-error" },
-                    React.createElement("div", null, "\u7F51\u7EDC\u51FA\u73B0\u95EE\u9898"),
-                    React.createElement("div", null, "\u70B9\u51FB\u91CD\u65B0\u8BBF\u95EE"),
-                    React.createElement("div", { style: { wordWrap: "break-word" } },
-                        "url: ",
-                        url),
-                    errContent,
-                    React.createElement("div", { className: "p-3" },
-                        React.createElement("button", { type: 'button', onClick: this.reApi }, "\u91CD\u65B0API"),
-                        React.createElement("button", { type: 'button', onClick: this.close }, "\u5173\u95ED")))));
+        return jsx_runtime_1.jsx("div", { children: jsx_runtime_1.jsx("article", { children: jsx_runtime_1.jsxs("main", __assign({ className: "va-error" }, { children: [jsx_runtime_1.jsx("div", { children: "\u7F51\u7EDC\u51FA\u73B0\u95EE\u9898" }, void 0),
+                        jsx_runtime_1.jsx("div", { children: "\u70B9\u51FB\u91CD\u65B0\u8BBF\u95EE" }, void 0),
+                        jsx_runtime_1.jsxs("div", __assign({ style: { wordWrap: "break-word" } }, { children: ["url: ", url] }), void 0), errContent, jsx_runtime_1.jsxs("div", __assign({ className: "p-3" }, { children: [jsx_runtime_1.jsx("button", __assign({ type: 'button', onClick: this.reApi }, { children: "\u91CD\u65B0API" }), void 0),
+                                jsx_runtime_1.jsx("button", __assign({ type: 'button', onClick: this.close }, { children: "\u5173\u95ED" }), void 0)] }), void 0)] }), void 0) }, void 0) }, void 0);
     };
     return FetchErrorView;
 }(React.Component));
 exports.default = FetchErrorView;
 var SystemNotifyPage = function (_a) {
     var message = _a.message;
-    return React.createElement(page_1.Page, { header: "\u7CFB\u7EDF\u63D0\u9192" },
-        React.createElement("div", { className: "px-3" }, message));
+    return jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u7CFB\u7EDF\u63D0\u9192" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "px-3" }, { children: message }), void 0) }), void 0);
 };
 exports.SystemNotifyPage = SystemNotifyPage;
 //# sourceMappingURL=fetchErrorView.js.map

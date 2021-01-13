@@ -69,6 +69,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResUploader = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var ResUploader = /** @class */ (function (_super) {
     __extends(ResUploader, _super);
@@ -115,7 +116,7 @@ var ResUploader = /** @class */ (function (_super) {
     ResUploader.prototype.render = function () {
         var _this = this;
         var _a = this.props, className = _a.className, multiple = _a.multiple, onFilesChange = _a.onFilesChange;
-        return React.createElement("input", { className: className, ref: function (t) { return _this.fileInput = t; }, onChange: onFilesChange, type: 'file', name: 'file', multiple: multiple });
+        return jsx_runtime_1.jsx("input", { className: className, ref: function (t) { return _this.fileInput = t; }, onChange: onFilesChange, type: 'file', name: 'file', multiple: multiple }, void 0);
     };
     return ResUploader;
 }(React.Component));

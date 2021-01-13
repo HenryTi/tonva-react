@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -33,6 +44,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormField = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var widgets_1 = require("./widgets");
 var context_1 = require("./context");
@@ -45,14 +57,11 @@ var FormField = /** @class */ (function (_super) {
         var _a = this.props, name = _a.name, children = _a.children;
         var context = this.context;
         if (context === undefined)
-            return React.createElement("span", { className: "text-danger" }, "!only in Form!");
+            return jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "!only in Form!" }), void 0);
         var itemSchema = context.getItemSchema(name);
         var content = widgets_1.factory(context, itemSchema, children, this.props);
         if (content === undefined) {
-            return React.createElement("span", { className: "text-danger" },
-                "!!",
-                name,
-                " is not defined!!");
+            return jsx_runtime_1.jsxs("span", __assign({ className: "text-danger" }, { children: ["!!", name, " is not defined!!"] }), void 0);
         }
         return content;
     };

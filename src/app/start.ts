@@ -10,7 +10,9 @@ export async function start(CApp: new (config: AppConfig) => CAppBase, appConfig
 		let html0 = html[0];
 		if (html0) {
 			let version = html0?.getAttribute('data-version');
-			if (version) appConfig.version = version;
+			if (version) {
+				//appConfig.version = version;
+			}
 		}
 	}
 

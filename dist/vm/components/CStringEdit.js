@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -53,6 +64,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CStringEdit = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = __importDefault(require("react"));
 var lodash_1 = __importDefault(require("lodash"));
 var components_1 = require("../../components");
@@ -92,16 +104,14 @@ var CStringEdit = /** @class */ (function (_super) {
                         onValueChange(_this.value);
                 }
             };
-            var right = react_1.default.createElement(mobx_react_1.observer(function () { return react_1.default.createElement("button", { className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: onSave }, "\u4FDD\u5B58"); }));
+            var right = react_1.default.createElement(mobx_react_1.observer(function () { return jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0); }));
             var onKeyDown = function (evt) {
                 if (evt.keyCode === 13)
                     onSave();
             };
-            _this.openPage(react_1.default.createElement(components_1.Page, { header: label, right: right },
-                react_1.default.createElement("div", { className: "m-3" },
-                    react_1.default.createElement("input", { type: "text", onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, maxLength: maxLength }),
-                    react_1.default.createElement(mobx_react_1.observer(function () { return placeholder && react_1.default.createElement("div", { className: "small muted m-2" }, placeholder); })),
-                    _this.error && react_1.default.createElement("div", { className: "text-danger" }, _this.error))));
+            _this.openPage(jsx_runtime_1.jsx(components_1.Page, __assign({ header: label, right: right }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("input", { type: "text", onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, maxLength: maxLength }, void 0),
+                        react_1.default.createElement(mobx_react_1.observer(function () { return placeholder && jsx_runtime_1.jsx("div", __assign({ className: "small muted m-2" }, { children: placeholder }), void 0); })),
+                        _this.error && jsx_runtime_1.jsx("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0));
         };
         mobx_1.makeObservable(_this, {
             value: mobx_1.observable,
@@ -121,16 +131,11 @@ var CStringEdit = /** @class */ (function (_super) {
         this.value = value;
         if (props)
             lodash_1.default.merge(this.props, props);
-        return react_1.default.createElement(mobx_react_1.observer(function () { return react_1.default.createElement(react_1.default.Fragment, null,
-            _this.renderValue(),
-            _this.renderPencil()); }));
+        return react_1.default.createElement(mobx_react_1.observer(function () { return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [_this.renderValue(), _this.renderPencil()] }, void 0); }));
     };
-    CStringEdit.prototype.renderValue = function () { return react_1.default.createElement(react_1.default.Fragment, null, this.value); };
+    CStringEdit.prototype.renderValue = function () { return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: this.value }, void 0); };
     CStringEdit.prototype.renderPencil = function () {
-        return react_1.default.createElement("span", { onClick: this.onEdit, className: "cursor-pointer" },
-            "\u00A0 ",
-            react_1.default.createElement(components_1.FA, { className: "text-info", name: "pencil-square-o" }),
-            " \u00A0");
+        return jsx_runtime_1.jsxs("span", __assign({ onClick: this.onEdit, className: "cursor-pointer" }, { children: ["\u00A0 ", jsx_runtime_1.jsx(components_1.FA, { className: "text-info", name: "pencil-square-o" }, void 0), " \u00A0"] }), void 0);
     };
     CStringEdit.prototype.verifyValue = function () { };
     return CStringEdit;

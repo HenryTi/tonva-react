@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -23,6 +34,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArrComponent = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_react_1 = require("mobx-react");
 var classnames_1 = __importDefault(require("classnames"));
@@ -37,6 +49,7 @@ exports.ArrComponent = mobx_react_1.observer(function (_a) {
     var form = parentContext.form;
     var arrRowContexts = parentContext.getArrRowContexts(name);
     var ui = parentContext.getUiItem(name);
+    var onDeleted = ui.onDeleted, onRestored = ui.onRestored;
     var arrLabel = name;
     var Templet;
     var selectable, deletable, restorable;
@@ -70,83 +83,77 @@ exports.ArrComponent = mobx_react_1.observer(function (_a) {
         arrLabel = label || arrLabel;
     }
     var first = true;
-    return ArrContainer(arrLabel, React.createElement(React.Fragment, null, data.map(function (row, index) {
-        var rowContext;
-        var rowContent;
-        var sep = undefined;
-        if (first === false)
-            sep = RowSeperator;
-        else
-            first = false;
-        if (children !== undefined) {
-            rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
-            rowContent = React.createElement(React.Fragment, null, children);
-        }
-        else {
-            var typeofTemplet = typeof Templet;
-            if (typeofTemplet === 'function') {
+    return ArrContainer(arrLabel, jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: data.map(function (row, index) {
+            var rowContext;
+            var rowContent;
+            var sep = undefined;
+            if (first === false)
+                sep = RowSeperator;
+            else
+                first = false;
+            if (children !== undefined) {
                 rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
-                rowContent = React.createElement(mobx_react_1.observer(Templet), row);
-            }
-            else if (typeofTemplet === 'object') {
-                rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
-                rowContent = Templet;
+                rowContent = jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: children }, void 0);
             }
             else {
-                rowContext = new context_1.RowContext(parentContext, arrSchema, row, false);
-                rowContent = React.createElement(React.Fragment, null, arr.map(function (v, index) {
-                    return React.createElement(React.Fragment, { key: v.name }, factory_1.factory(rowContext, v, undefined));
-                }));
-            }
-        }
-        var rowKey = rowContext.rowKey;
-        arrRowContexts[rowKey] = rowContext;
-        var selectCheck, deleteIcon;
-        if (selectable === true) {
-            var onClick = function (evt) {
-                var checked = evt.target.checked;
-                row.$isSelected = checked;
-                var $source = row.$source;
-                if ($source !== undefined)
-                    $source.$isSelected = checked;
-                rowContext.clearErrors();
-            };
-            selectCheck = React.createElement("div", { className: "form-row-checkbox" },
-                React.createElement("input", { type: "checkbox", onClick: onClick, defaultChecked: row.$isSelected }));
-        }
-        var isDeleted = !(row.$isDeleted === undefined || row.$isDeleted === false);
-        if (deletable === true) {
-            var icon = isDeleted ? 'fa-undo' : 'fa-trash';
-            var onDelClick = function () {
-                if (restorable === true) {
-                    row.$isDeleted = !isDeleted;
-                    var $source = row.$source;
-                    if ($source !== undefined)
-                        $source.$isDeleted = !isDeleted;
+                var typeofTemplet = typeof Templet;
+                if (typeofTemplet === 'function') {
+                    rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
+                    rowContent = React.createElement(mobx_react_1.observer(Templet), row);
+                }
+                else if (typeofTemplet === 'object') {
+                    rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
+                    rowContent = Templet;
                 }
                 else {
-                    var p = data.indexOf(row);
-                    if (p >= 0)
-                        data.splice(p, 1);
+                    rowContext = new context_1.RowContext(parentContext, arrSchema, row, false);
+                    rowContent = jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: arr.map(function (v, index) {
+                            return jsx_runtime_1.jsx(React.Fragment, { children: factory_1.factory(rowContext, v, undefined) }, v.name);
+                        }) }, void 0);
                 }
-                rowContext.clearErrors();
-            };
-            deleteIcon = React.createElement("div", { className: "form-row-edit text-info", onClick: onDelClick },
-                React.createElement("i", { className: classnames_1.default('fa', icon, 'fa-fw') }));
-        }
-        var editContainer = selectable === true || deletable === true ?
-            function (content) { return React.createElement("fieldset", { disabled: isDeleted },
-                React.createElement("div", { className: classnames_1.default('d-flex', { 'deleted': isDeleted, 'row-selected': row.$isSelected }) },
-                    selectCheck,
-                    React.createElement("div", { className: selectable === true && deletable === true ? "form-row-content" : "form-row-content-1" }, content),
-                    deleteIcon)); }
-            :
-                function (content) { return content; };
-        return React.createElement(context_1.ContextContainer.Provider, { key: rowKey, value: rowContext },
-            sep,
-            RowContainer(editContainer(React.createElement(React.Fragment, null,
-                React.createElement(rowContext.renderErrors, null),
-                rowContent))));
-    })));
+            }
+            var rowKey = rowContext.rowKey;
+            arrRowContexts[rowKey] = rowContext;
+            var selectCheck, deleteIcon;
+            if (selectable === true) {
+                var onClick = function (evt) {
+                    var checked = evt.target.checked;
+                    row.$isSelected = checked;
+                    var $source = row.$source;
+                    if ($source !== undefined)
+                        $source.$isSelected = checked;
+                    rowContext.clearErrors();
+                };
+                selectCheck = jsx_runtime_1.jsx("div", __assign({ className: "form-row-checkbox" }, { children: jsx_runtime_1.jsx("input", { type: "checkbox", onClick: onClick, defaultChecked: row.$isSelected }, void 0) }), void 0);
+            }
+            var isDeleted = !(row.$isDeleted === undefined || row.$isDeleted === false);
+            if (deletable === true) {
+                var icon = isDeleted ? 'fa-undo' : 'fa-trash';
+                var onDelClick = function () {
+                    if (restorable === true) {
+                        row.$isDeleted = !isDeleted;
+                        var $source = row.$source;
+                        if ($source !== undefined)
+                            $source.$isDeleted = !isDeleted;
+                        if (onRestored)
+                            onRestored(row);
+                    }
+                    else {
+                        var p = data.indexOf(row);
+                        if (p >= 0)
+                            data.splice(p, 1);
+                        if (onDeleted)
+                            onDeleted(row);
+                    }
+                    rowContext.clearErrors();
+                };
+                deleteIcon = jsx_runtime_1.jsx("div", __assign({ className: "form-row-edit text-info", onClick: onDelClick }, { children: jsx_runtime_1.jsx("i", { className: classnames_1.default('fa', icon, 'fa-fw') }, void 0) }), void 0);
+            }
+            var editContainer = selectable === true || deletable === true ?
+                function (content) { return jsx_runtime_1.jsx("fieldset", __assign({ disabled: isDeleted }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('d-flex', { 'deleted': isDeleted, 'row-selected': row.$isSelected }) }, { children: [selectCheck, jsx_runtime_1.jsx("div", __assign({ className: selectable === true && deletable === true ? "form-row-content" : "form-row-content-1" }, { children: content }), void 0), deleteIcon] }), void 0) }), void 0); }
+                :
+                    function (content) { return content; };
+            return jsx_runtime_1.jsxs(context_1.ContextContainer.Provider, __assign({ value: rowContext }, { children: [sep, RowContainer(editContainer(jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx(rowContext.renderErrors, {}, void 0), rowContent] }, void 0)))] }), rowKey);
+        }) }, void 0));
 });
 //# sourceMappingURL=arrComponent.js.map

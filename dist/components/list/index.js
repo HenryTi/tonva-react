@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -42,6 +53,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.List = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var mobx_react_1 = require("mobx-react");
@@ -103,7 +115,7 @@ var List = /** @class */ (function (_super) {
         if (before === undefined)
             before = '-';
         if (loading === undefined)
-            loading = function () { return React.createElement("i", { className: "fa fa-spinner fa-spin fa-2x fa-fw text-info" }); };
+            loading = function () { return jsx_runtime_1.jsx("i", { className: "fa fa-spinner fa-spin fa-2x fa-fw text-info" }, void 0); };
         if (none === undefined)
             none = List_1.res.none;
         //this.listBase.selectedItems = selectedItems;
@@ -113,9 +125,9 @@ var List = /** @class */ (function (_super) {
                 return;
             switch (typeof row) {
                 default:
-                case 'string': return React.createElement("li", { className: "va-list-" + type }, row);
-                case 'function': return React.createElement("li", { className: "va-list-" + type }, row());
-                case 'object': return React.createElement("li", null, row);
+                case 'string': return jsx_runtime_1.jsx("li", __assign({ className: "va-list-" + type }, { children: row }), void 0);
+                case 'function': return jsx_runtime_1.jsx("li", __assign({ className: "va-list-" + type }, { children: row() }), void 0);
+                case 'object': return jsx_runtime_1.jsx("li", { children: row }, void 0);
             }
         }
         var content, waitingMore;
@@ -136,11 +148,7 @@ var List = /** @class */ (function (_super) {
         var tabIndex;
         if (onFocus !== undefined)
             tabIndex = -1;
-        return React.createElement("ul", { className: classnames_1.default('va-list', className), onFocus: onFocus, tabIndex: tabIndex },
-            staticRow(header, 'header'),
-            content,
-            waitingMore,
-            staticRow(footer, 'footer'));
+        return jsx_runtime_1.jsxs("ul", __assign({ className: classnames_1.default('va-list', className), onFocus: onFocus, tabIndex: tabIndex }, { children: [staticRow(header, 'header'), content, waitingMore, staticRow(footer, 'footer')] }), void 0);
     };
     var List_1;
     List.res = res_1.resLang(res_2.listRes);

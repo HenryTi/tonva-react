@@ -12,31 +12,23 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectWidget = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
 var mobx_1 = require("mobx");
 var widget_1 = require("./widget");
@@ -67,15 +59,15 @@ var SelectWidget = /** @class */ (function (_super) {
         if (this.readOnly === true) {
             var option = this.ui.list.find(function (v) { return v.value === _this.value; });
             var title = (option === undefined) ? '(???)' : option.title;
-            return React.createElement("span", { className: "form-control w-min-6c" }, title);
+            return jsx_runtime_1.jsx("span", __assign({ className: "form-control w-min-6c" }, { children: title }), void 0);
         }
-        return React.createElement("select", { ref: function (select) { return _this.select = select; }, className: classnames_1.default(this.className, 'form-control'), defaultValue: this.defaultValue, onChange: this.onInputChange }, this.ui.list.map(function (v, index) {
-            var title = v.title, value = v.value;
-            var cn;
-            //if (value === undefined || value === null) cn = 'text-light small';
-            //else cn = 'text-danger';
-            return React.createElement("option", { className: cn, key: index, value: value }, title || value);
-        }));
+        return jsx_runtime_1.jsx("select", __assign({ ref: function (select) { return _this.select = select; }, className: classnames_1.default(this.className, 'form-control'), defaultValue: this.defaultValue, onChange: this.onInputChange }, { children: this.ui.list.map(function (v, index) {
+                var title = v.title, value = v.value;
+                var cn;
+                //if (value === undefined || value === null) cn = 'text-light small';
+                //else cn = 'text-danger';
+                return jsx_runtime_1.jsx("option", __assign({ className: cn, value: value }, { children: title || value }), index);
+            }) }), void 0);
     };
     return SelectWidget;
 }(widget_1.Widget));

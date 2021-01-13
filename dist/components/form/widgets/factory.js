@@ -1,26 +1,7 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.factory = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var textWidget_1 = require("./textWidget");
 var textareaWidget_1 = require("./textareaWidget");
 var passwordWidget_1 = require("./passwordWidget");
@@ -131,7 +112,7 @@ function factory(context, itemSchema, children, fieldProps) {
     switch (type) {
         case 'arr':
             var arrSchema = context.getItemSchema(name);
-            return React.createElement(arrComponent_1.ArrComponent, { parentContext: context, arrSchema: arrSchema, children: children });
+            return jsx_runtime_1.jsx(arrComponent_1.ArrComponent, { parentContext: context, arrSchema: arrSchema, children: children }, void 0);
         default:
             break;
     }
@@ -168,7 +149,7 @@ function factory(context, itemSchema, children, fieldProps) {
                 typeWidget = ui.WidgetClass;
                 break;
             case 'group':
-                return React.createElement("span", null, "impletment group");
+                return jsx_runtime_1.jsx("span", { children: "impletment group" }, void 0);
         }
         //label = uiLabel || name;
     }
@@ -179,7 +160,7 @@ function factory(context, itemSchema, children, fieldProps) {
         widget.init();
         widgets[name] = widget;
     }
-    return React.createElement(widget.container, null);
+    return jsx_runtime_1.jsx(widget.container, {}, void 0);
     /*
     if (isRow === false) {
         let WidgetElement = observer(() => widget.container());

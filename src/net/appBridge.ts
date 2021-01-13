@@ -4,6 +4,7 @@ import {uid} from '../tool/uid';
 import {uqTokenApi, callCenterapi, centerToken, setCenterToken} from './uqApi';
 import {setSubAppWindow} from './wsChannel';
 import { host } from './host';
+import { env } from '../tool';
 
 export interface UqToken {
     name: string;
@@ -17,16 +18,17 @@ export function logoutUqTokens() {
         uqTokens[i] = undefined;
     }
 }
-
+/*
 export interface AppInFrame {
     hash: string;
-    unit: number;       // unit id
+    //unit: number;       // unit id
     page?: string;
     param?: string[];
     predefinedUnit?: number;  // 比如像Cart这样的应用，直接让用户访问的，就需要在unit.json里面定义unitName
 }
 const appsInFrame:{[key:string]:AppInFrame} = {};
-
+*/
+/*
 class AppInFrameClass implements AppInFrame {
     hash: string;
     private _unit: number;
@@ -37,6 +39,7 @@ class AppInFrameClass implements AppInFrame {
 }
 
 export let appInFrame:AppInFrame = new AppInFrameClass();
+*/
 /* {
     hash: undefined,
     get unit():number {return } undefined, //debugUnitId,
@@ -112,11 +115,12 @@ async function initSubWin(message:any) {
     await nav.showAppView();
 }
 async function onReceiveAppApiMessage(hash: string, apiName: string): Promise<UqToken> {
-    let appInFrame = appsInFrame[hash];
-    if (appInFrame === undefined) return {name:apiName, db:undefined, url:undefined, token:undefined};
+    //let appInFrame = appsInFrame[hash];
+    //if (appInFrame === undefined) return {name:apiName, db:undefined, url:undefined, token:undefined};
     //let unit = getUnit();
-    let {unit, predefinedUnit} = appInFrame;
-    unit = unit || predefinedUnit;
+    //let {unit, predefinedUnit} = appInFrame;
+	//unit = unit || predefinedUnit;
+	let {unit} = env;
     if (!unit) {
         console.error('no unit defined in unit.json or in index.html, or not logined in', unit);
     }
@@ -146,7 +150,7 @@ async function onAppApiReturn(message:any) {
         token: token,
     } as UqToken);
 }
-
+/*
 export function setAppInFrame(appHash: string):AppInFrame {
     if (appHash) {
         let parts = appHash.split('-');
@@ -177,7 +181,8 @@ export function getExHash():string {
     if (pos < 0) return undefined;
     return document.location.hash.substring(pos);
 }
-
+*/
+/*
 export function appUrl(url: string, unitId: number, page?:string, param?:any[]):{url:string; hash:string} {
     let u:string;
     for (;;) {
@@ -199,7 +204,8 @@ export function appUrl(url: string, unitId: number, page?:string, param?:any[]):
     }
     return {url: url, hash: u};
 }
-
+*/
+/*
 function getUnit():number {
 	let {unit, predefinedUnit} = appInFrame;
     let realUnit = unit || predefinedUnit;
@@ -208,16 +214,17 @@ function getUnit():number {
 	}
     return realUnit;
 }
-
+*/
 interface UqTokenAction {
     resolve: (value?: UqToken | PromiseLike<UqToken>) => void;
     reject: (reason?: any) => void;
 }
 const uqTokenActions:{[uq:string]: UqTokenAction} = {};
-export async function buildAppUq(uq:string, uqOwner:string, uqName:string, appOwner:string, appName:string):Promise<void> {
+export async function buildAppUq(uq:string, uqOwner:string, uqName:string):Promise<void> {
     if (!isBridged()) {
-        let unit = getUnit();
-        let uqToken = await uqTokenApi.uq({unit,  uqOwner, uqName, appOwner, appName});
+		//let unit = getUnit();
+		let {unit} = env;
+        let uqToken = await uqTokenApi.uq({unit,  uqOwner, uqName});
         if (uqToken.token === undefined) uqToken.token = centerToken;
         let {db, url, urlTest} = uqToken;
         let realUrl = host.getUrlOrTest(db, url, urlTest);
@@ -226,7 +233,7 @@ export async function buildAppUq(uq:string, uqOwner:string, uqName:string, appOw
         uqTokens[uq] = uqToken;
         return uqToken;
     }
-    console.log("**** before buildAppUq ****", appInFrame);
+    //console.log("**** before buildAppUq ****", appInFrame);
     let bp = uqTokenActions[uq];
     if (bp !== undefined) return;
     return new Promise<void>((resolve, reject) => {
@@ -240,7 +247,7 @@ export async function buildAppUq(uq:string, uqOwner:string, uqName:string, appOw
                     token: token,
                 };
                 uqTokenActions[uq] = undefined;
-                console.log("**** after buildAppUq ****", appInFrame);
+                //console.log("**** after buildAppUq ****", appInFrame);
                 resolve();
             },
             reject: reject,
@@ -248,12 +255,12 @@ export async function buildAppUq(uq:string, uqOwner:string, uqName:string, appOw
         (window.opener || window.parent).postMessage({
             type: 'app-api',
             apiName: uq,
-            hash: appInFrame.hash,
+            //hash: appInFrame.hash,
         }, "*");
     });
 }
 
-export function appUq(uq:string):UqToken {
+export function getUqToken(uq:string):UqToken {
     let uts = uqTokens;
     return uts[uq];
 }

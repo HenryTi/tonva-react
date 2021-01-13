@@ -12,31 +12,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TagMultiWidget = exports.TagSingleWidget = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
 var widget_1 = require("./widget");
 var TagWidget = /** @class */ (function (_super) {
@@ -78,7 +59,7 @@ var TagSingleWidget = /** @class */ (function (_super) {
     TagSingleWidget.prototype.render = function () {
         var _a = this.ui, valuesView = _a.valuesView, wrapClassName = _a.wrapClassName;
         if (valuesView === undefined)
-            return React.createElement(React.Fragment, null, "valuesView must be defined");
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "valuesView must be defined" }, void 0);
         var isRow = this.context.isRow;
         var rowKey;
         if (isRow === true) {
@@ -129,7 +110,7 @@ var TagMultiWidget = /** @class */ (function (_super) {
     TagMultiWidget.prototype.render = function () {
         var _a = this.ui, valuesView = _a.valuesView, wrapClassName = _a.wrapClassName;
         if (valuesView === undefined)
-            return React.createElement(React.Fragment, null, "valuesView must be defined");
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "valuesView must be defined" }, void 0);
         var cn = classnames_1.default(this.className, 'py-0');
         var options = {
             className: cn,

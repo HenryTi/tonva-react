@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -36,6 +47,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DropdownActions = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var DropdownActions = /** @class */ (function (_super) {
@@ -80,40 +92,32 @@ var DropdownActions = /** @class */ (function (_super) {
         //isOpen={this.state.dropdownOpen} toggle={this.toggle}
         var cn = className || 'cursor-pointer dropdown-toggle btn btn-sm';
         //if (className) cn += className;
-        return React.createElement("div", { className: 'dropdown' },
-            React.createElement("button", { ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle },
-                React.createElement("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) })),
-            React.createElement("div", { ref: function (v) { return _this.menu = v; }, className: classnames_1.default({ "dropdown-menu": true, "dropdown-menu-right": isRight, "show": dropdownOpen }) }, actions.map(function (v, index) {
-                if (!v) {
-                    return React.createElement("div", { className: "dropdown-divider", key: index });
-                }
-                var icon = v.icon, caption = v.caption, action = v.action, iconClass = v.iconClass, captionClass = v.captionClass;
-                if (icon === undefined && caption === undefined)
-                    return React.createElement("div", { className: "dropdown-divider" });
-                var i;
-                if (hasIcon === true) {
-                    if (icon !== undefined)
-                        icon = 'fa-' + icon;
-                    i = React.createElement("i", { className: classnames_1.default('mr-2', 'fa', icon, 'fa-fw', iconClass || itemIconClass), "aria-hidden": true });
-                }
-                if (action === undefined)
-                    return React.createElement("h6", { className: "dropdown-header" },
-                        i,
-                        " ",
-                        caption);
-                var onMenuItemClick = function (evt) {
-                    evt.preventDefault();
-                    action();
-                };
-                var onTouchStart = function (evt) {
-                    action();
-                };
-                // eslint-disable-next-line
-                return React.createElement("a", { className: "dropdown-item", key: index, href: "#/", onClick: onMenuItemClick, onTouchStart: onTouchStart },
-                    i,
-                    " ",
-                    React.createElement("span", { className: captionClass || itemCaptionClass }, caption));
-            })));
+        return jsx_runtime_1.jsxs("div", __assign({ className: 'dropdown' }, { children: [jsx_runtime_1.jsx("button", __assign({ ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle }, { children: jsx_runtime_1.jsx("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) }, void 0) }), void 0),
+                jsx_runtime_1.jsx("div", __assign({ ref: function (v) { return _this.menu = v; }, className: classnames_1.default({ "dropdown-menu": true, "dropdown-menu-right": isRight, "show": dropdownOpen }) }, { children: actions.map(function (v, index) {
+                        if (!v) {
+                            return jsx_runtime_1.jsx("div", { className: "dropdown-divider" }, index);
+                        }
+                        var icon = v.icon, caption = v.caption, action = v.action, iconClass = v.iconClass, captionClass = v.captionClass;
+                        if (icon === undefined && caption === undefined)
+                            return jsx_runtime_1.jsx("div", { className: "dropdown-divider" }, void 0);
+                        var i;
+                        if (hasIcon === true) {
+                            if (icon !== undefined)
+                                icon = 'fa-' + icon;
+                            i = jsx_runtime_1.jsx("i", { className: classnames_1.default('mr-2', 'fa', icon, 'fa-fw', iconClass || itemIconClass), "aria-hidden": true }, void 0);
+                        }
+                        if (action === undefined)
+                            return jsx_runtime_1.jsxs("h6", __assign({ className: "dropdown-header" }, { children: [i, " ", caption] }), void 0);
+                        var onMenuItemClick = function (evt) {
+                            evt.preventDefault();
+                            action();
+                        };
+                        var onTouchStart = function (evt) {
+                            action();
+                        };
+                        // eslint-disable-next-line
+                        return jsx_runtime_1.jsxs("a", __assign({ className: "dropdown-item", href: "#/", onClick: onMenuItemClick, onTouchStart: onTouchStart }, { children: [i, " ", jsx_runtime_1.jsx("span", __assign({ className: captionClass || itemCaptionClass }, { children: caption }), void 0)] }), index);
+                    }) }), void 0)] }), void 0);
     };
     return DropdownActions;
 }(React.Component));

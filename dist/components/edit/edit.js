@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -75,6 +86,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Edit = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 //import _ from 'lodash';
 var mobx_react_1 = require("mobx-react");
@@ -153,11 +165,11 @@ var Edit = /** @class */ (function (_super) {
             });
         }); };
         var topBorderClassName = props.topBorderClassName, bottomBorderClassName = props.bottomBorderClassName, sepClassName = props.sepClassName, rowContainerClassName = props.rowContainerClassName, uiSchema = props.uiSchema;
-        _this.topBorder = React.createElement("div", { className: topBorderClassName || _this.defaultSepClassName });
-        _this.bottomBorder = React.createElement("div", { className: bottomBorderClassName || _this.defaultSepClassName });
+        _this.topBorder = jsx_runtime_1.jsx("div", { className: topBorderClassName || _this.defaultSepClassName }, void 0);
+        _this.bottomBorder = jsx_runtime_1.jsx("div", { className: bottomBorderClassName || _this.defaultSepClassName }, void 0);
         _this.rowContainerClassName = rowContainerClassName || _this.defaultRowContainerClassName;
         //if (stopEdit !== true) this.rowContainerClassName += ' cursor-pointer';
-        _this.sep = React.createElement("div", { className: sepClassName || _this.defaultSepClassName });
+        _this.sep = jsx_runtime_1.jsx("div", { className: sepClassName || _this.defaultSepClassName }, void 0);
         _this.uiSchema = (uiSchema && uiSchema.items) || {};
         return _this;
     }
@@ -165,57 +177,46 @@ var Edit = /** @class */ (function (_super) {
         var _this = this;
         var schema = this.props.schema;
         var sep;
-        return React.createElement("div", null,
-            this.topBorder,
-            schema.map(function (itemSchema, index) {
-                var stopEdit = _this.props.stopEdit;
-                var name = itemSchema.name;
-                var uiItem = _this.uiSchema === undefined ? undefined : _this.uiSchema[name];
-                var label, labelHide;
-                if (uiItem !== undefined) {
-                    label = uiItem.label || name;
-                    labelHide = uiItem.labelHide;
-                }
-                ;
-                var value = _this.props.data[name];
-                var itemEdit = createItemEdit(_this, itemSchema, uiItem, label, value);
-                var rowContainerClassName = _this.rowContainerClassName;
-                var editInRow = itemEdit.editInRow;
-                if (editInRow === false) {
-                    if (stopEdit !== true)
-                        editInRow = false;
-                }
-                if (editInRow === false)
-                    rowContainerClassName += ' cursor-pointer';
-                var required = itemSchema.required;
-                var requireFlag = required === true && React.createElement("span", { className: "text-danger" }, "*");
-                var divLabel, cn = 'flex-fill d-flex ';
-                if (labelHide === true) {
-                    divLabel = undefined;
-                }
-                else {
-                    divLabel = React.createElement("div", null,
-                        label,
-                        " ",
-                        requireFlag);
-                    cn += 'justify-content-end';
-                }
-                var ret = React.createElement(React.Fragment, { key: index },
-                    sep,
-                    React.createElement("div", { className: 'd-flex align-items-center' + rowContainerClassName, onClick: function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4 /*yield*/, this.rowClick(itemEdit)];
-                                case 1: return [2 /*return*/, _a.sent()];
-                            }
-                        }); }); } },
-                        divLabel,
-                        React.createElement("div", { className: cn }, itemEdit === undefined ? undefined : itemEdit.renderContent()),
-                        editInRow === false && React.createElement("div", { className: "w-2c text-right" },
-                            React.createElement("i", { className: "fa fa-angle-right" }))));
-                sep = _this.sep;
-                return ret;
-            }),
-            this.bottomBorder);
+        return jsx_runtime_1.jsxs("div", { children: [this.topBorder, schema.map(function (itemSchema, index) {
+                    var stopEdit = _this.props.stopEdit;
+                    var name = itemSchema.name;
+                    var uiItem = _this.uiSchema === undefined ? undefined : _this.uiSchema[name];
+                    var label, labelHide;
+                    if (uiItem !== undefined) {
+                        label = uiItem.label || name;
+                        labelHide = uiItem.labelHide;
+                    }
+                    ;
+                    var value = _this.props.data[name];
+                    var itemEdit = createItemEdit(_this, itemSchema, uiItem, label, value);
+                    var rowContainerClassName = _this.rowContainerClassName;
+                    var editInRow = itemEdit.editInRow;
+                    if (editInRow === false) {
+                        if (stopEdit !== true)
+                            editInRow = false;
+                    }
+                    if (editInRow === false)
+                        rowContainerClassName += ' cursor-pointer';
+                    var required = itemSchema.required;
+                    var requireFlag = required === true && jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "*" }), void 0);
+                    var divLabel, cn = 'flex-fill d-flex ';
+                    if (labelHide === true) {
+                        divLabel = undefined;
+                    }
+                    else {
+                        divLabel = jsx_runtime_1.jsxs("div", { children: [label, " ", requireFlag] }, void 0);
+                        cn += 'justify-content-end';
+                    }
+                    var ret = jsx_runtime_1.jsxs(React.Fragment, { children: [sep, jsx_runtime_1.jsxs("div", __assign({ className: 'd-flex align-items-center' + rowContainerClassName, onClick: function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, this.rowClick(itemEdit)];
+                                        case 1: return [2 /*return*/, _a.sent()];
+                                    }
+                                }); }); } }, { children: [divLabel, jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: itemEdit === undefined ? undefined : itemEdit.renderContent() }), void 0),
+                                    editInRow === false && jsx_runtime_1.jsx("div", __assign({ className: "w-2c text-right" }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-angle-right" }, void 0) }), void 0)] }), void 0)] }, index);
+                    sep = _this.sep;
+                    return ret;
+                }), this.bottomBorder] }, void 0);
     };
     Edit.prototype.onItemChanged = function (itemEdit, newValue) {
         return __awaiter(this, void 0, void 0, function () {

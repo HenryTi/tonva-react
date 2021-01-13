@@ -14,7 +14,7 @@ import { UQsMan } from './uqsMan';
 import { Tag } from './tag/tag';
 import { UqEnum } from './enum';
 export declare type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'char' | 'text' | 'datetime' | 'date' | 'time' | 'timestamp';
-export declare function fieldDefaultValue(type: FieldType): "" | 0 | "2000-1-1" | "0:00";
+export declare function fieldDefaultValue(type: FieldType): 0 | "" | "2000-1-1" | "0:00";
 export interface Field {
     name: string;
     type: FieldType;
@@ -53,7 +53,7 @@ export declare class UqMan {
     private readonly pendings;
     private readonly tags;
     private readonly tuidsCache;
-    private readonly localAccess;
+    private readonly localEntities;
     private readonly tvs;
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
@@ -68,6 +68,7 @@ export declare class UqMan {
     readonly uqApi: UqApi;
     readonly id: number;
     uqVersion: number;
+    ownerProfix: string;
     constructor(uqs: UQsMan, uqData: UqData, createBoxId: CreateBoxId, tvs: {
         [entity: string]: (values: any) => JSX.Element;
     });

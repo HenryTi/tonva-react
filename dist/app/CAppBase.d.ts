@@ -6,12 +6,19 @@ export interface IConstructor<T> {
     new (...args: any[]): T;
 }
 export interface AppConfig {
-    appName: string;
-    version: string;
-    tvs: TVs;
-    uqNameMap?: {
-        [uqName: string]: string;
+    app?: {
+        name: string;
+        version: string;
+        ownerMap?: {
+            [key: string]: string;
+        };
     };
+    uqs?: {
+        [owner: string]: {
+            [name: string]: string;
+        };
+    };
+    tvs?: TVs;
     loginTop?: JSX.Element;
     oem?: string;
     privacy?: string;
@@ -24,9 +31,6 @@ export interface Elements {
 export declare abstract class CAppBase extends Controller {
     private appConfig;
     protected _uqs: any;
-    protected readonly name: string;
-    protected readonly noUnit: boolean;
-    appUnits: any[];
     constructor(config?: AppConfig);
     get uqs(): any;
     internalT(str: string): any;

@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -69,6 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextAreaItemEdit = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var nav_1 = require("../nav");
 var page_1 = require("../page/page");
@@ -98,15 +110,13 @@ var TextAreaItemEdit = /** @class */ (function (_super) {
                     resolve(val);
                 }
             };
-            var right = React.createElement("button", { className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: onSave }, "\u4FDD\u5B58");
+            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0);
             var onKeyDown = function (evt) {
                 // if (evt.keyCode === 13) onSave();
             };
-            return React.createElement(page_1.Page, { header: _this.label, right: right },
-                React.createElement("div", { className: "m-3" },
-                    React.createElement("textarea", { onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, rows: 6 }),
-                    _this.uiItem && React.createElement("div", { className: "small muted m-2" }, _this.uiItem.placeholder),
-                    _this.error && React.createElement("div", { className: "text-danger" }, _this.error)));
+            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: _this.label, right: right }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("textarea", { onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, rows: 6 }, void 0),
+                        _this.uiItem && jsx_runtime_1.jsx("div", __assign({ className: "small muted m-2" }, { children: _this.uiItem.placeholder }), void 0),
+                        _this.error && jsx_runtime_1.jsx("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0);
         });
         return _this;
     }

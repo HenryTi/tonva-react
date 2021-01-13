@@ -1,7 +1,11 @@
 import { VPage } from '../vm';
 import { CAppBase } from "./CAppBase";
 export declare class VUnsupportedUnit extends VPage<CAppBase> {
-    open(predefinedUnit: number): Promise<void>;
+    private params;
+    open(params: {
+        predefinedUnit: number;
+        uqsLoadErrors: string[];
+    }): Promise<void>;
     private page;
 }
 export declare class VUnitSelect extends VPage<CAppBase> {

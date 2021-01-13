@@ -2,16 +2,13 @@ import { HttpChannel } from './httpChannel';
 import { ApiBase } from './apiBase';
 export declare function logoutApis(): void;
 export declare class UqApi extends ApiBase {
-    private access;
-    appOwner: string;
-    appName: string;
     uqOwner: string;
     uqName: string;
     uq: string;
-    constructor(basePath: string, appOwner: string, appName: string, uqOwner: string, uqName: string, access: string[], showWaiting?: boolean);
+    constructor(basePath: string, /*appOwner:string, appName:string, */ uqOwner: string, uqName: string, showWaiting?: boolean);
     init(): Promise<void>;
     protected getHttpChannel(): Promise<HttpChannel>;
-    loadAccess(): Promise<any>;
+    loadEntities(): Promise<any>;
     getRoles(): Promise<string[]>;
     getAllRoleUsers(): Promise<{
         user: number;
@@ -43,8 +40,6 @@ export declare class UqTokenApi extends CenterApiBase {
         unit: number;
         uqOwner: string;
         uqName: string;
-        appOwner: string;
-        appName: string;
     }): Promise<any>;
 }
 export declare const uqTokenApi: UqTokenApi;
@@ -74,15 +69,18 @@ export interface UqServiceData {
     token: string;
 }
 export declare class CenterAppApi extends CenterApiBase {
-    uqs(appOwner: string, appName: string): Promise<UqAppData>;
-    private uqsPure;
+    appUqs(appOwner: string, appName: string): Promise<UqAppData>;
+    uqs(uqs: {
+        owner: string;
+        name: string;
+        version: string;
+    }[]): Promise<UqData[]>;
     unitxUq(unit: number): Promise<UqServiceData>;
     changePassword(param: {
         orgPassword: string;
         newPassword: string;
     }): Promise<any>;
 }
-export declare function loadAppUqs(appOwner: string, appName: string): Promise<UqAppData>;
 export interface RegisterParameter {
     nick: string;
     user: string;

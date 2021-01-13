@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -43,6 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Selectable = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_1 = require("mobx");
 var classnames_1 = __importDefault(require("classnames"));
@@ -114,13 +126,11 @@ var Selectable = /** @class */ (function (_super) {
             var item = props.item, index = props.index;
             var className = _this.list.props.item.className;
             var labelId = item.labelId, selected = item.selected, obItem = item.item;
-            return React.createElement("li", { className: classnames_1.default(className) },
-                React.createElement("div", { className: "d-flex align-items-center px-3" },
-                    React.createElement("input", { ref: function (input) { if (input)
-                            _this.inputItems[labelId] = input; }, className: "", type: "checkbox", value: "", id: labelId, defaultChecked: selected, onChange: function (e) {
-                            _this.onSelect(item, e.target.checked);
-                        } }),
-                    React.createElement("label", { className: "", style: { flex: 1, marginBottom: 0 }, htmlFor: labelId }, _this.renderContent(obItem, index))));
+            return jsx_runtime_1.jsx("li", __assign({ className: classnames_1.default(className) }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center px-3" }, { children: [jsx_runtime_1.jsx("input", { ref: function (input) { if (input)
+                                _this.inputItems[labelId] = input; }, className: "", type: "checkbox", value: "", id: labelId, defaultChecked: selected, onChange: function (e) {
+                                _this.onSelect(item, e.target.checked);
+                            } }, void 0),
+                        jsx_runtime_1.jsx("label", __assign({ className: "", style: { flex: 1, marginBottom: 0 }, htmlFor: labelId }, { children: _this.renderContent(obItem, index) }), void 0)] }), void 0) }), void 0);
         });
         mobx_1.makeObservable(_this, {
             _items: mobx_1.observable

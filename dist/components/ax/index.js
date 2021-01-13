@@ -15,7 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.A = exports.Ax = void 0;
-var react_1 = __importDefault(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
 var nav_1 = require("../nav");
 // 如果是web方式，用webNav方式route网页
@@ -25,7 +25,7 @@ var Ax = function (axProps) {
     if (nav_1.nav.isWebNav === true) {
         var aClassName = axProps.aClassName;
         if (!href)
-            return react_1.default.createElement("span", { className: "text-danger" }, "Error: href not defined in Ax");
+            return jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "Error: href not defined in Ax" }), void 0);
         var onAxClick = function (evt) {
             evt.preventDefault();
             var ret;
@@ -38,7 +38,7 @@ var Ax = function (axProps) {
             }
             return ret;
         };
-        return react_1.default.createElement("a", __assign({}, axProps, { className: classnames_1.default(className, aClassName), onClick: onAxClick }), children);
+        return jsx_runtime_1.jsx("a", __assign({}, axProps, { className: classnames_1.default(className, aClassName), onClick: onAxClick }, { children: children }), void 0);
     }
     else {
         var naClassName = axProps.naClassName;
@@ -48,7 +48,7 @@ var Ax = function (axProps) {
                 return false;
             };
         }
-        return react_1.default.createElement("span", { className: classnames_1.default(className, 'cursor-pointer', naClassName), onClick: onClick }, children);
+        return jsx_runtime_1.jsx("span", __assign({ className: classnames_1.default(className, 'cursor-pointer', naClassName), onClick: onClick }, { children: children }), void 0);
     }
 };
 exports.Ax = Ax;
@@ -57,7 +57,7 @@ exports.Ax = Ax;
 var A = function (props) {
     var children = props.children;
     if (nav_1.nav.isWebNav === false) {
-        return react_1.default.createElement("a", __assign({}, props), children);
+        return jsx_runtime_1.jsx("a", __assign({}, props, { children: children }), void 0);
     }
     var href = props.href;
     //if (nav.testing === true) href += '#test';
@@ -66,7 +66,7 @@ var A = function (props) {
         nav_1.nav.navigate(href);
         return false;
     };
-    return react_1.default.createElement("a", __assign({}, props, { href: href, onClick: onClick }), children);
+    return jsx_runtime_1.jsx("a", __assign({}, props, { href: href, onClick: onClick }, { children: children }), void 0);
 };
 exports.A = A;
 //# sourceMappingURL=index.js.map

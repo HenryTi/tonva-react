@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -69,6 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ButtonWidget = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var unknown_1 = require("./unknown");
 var widget_1 = require("./widget");
@@ -135,14 +147,10 @@ var ButtonWidget = /** @class */ (function (_super) {
                 content = Templet;
             else
                 content = caption;
-            var button = React.createElement("button", { className: cn, type: "button", disabled: disabled, onClick: _this.onClick }, content || name);
+            var button = jsx_runtime_1.jsx("button", __assign({ className: cn, type: "button", disabled: disabled, onClick: _this.onClick }, { children: content || name }), void 0);
             if (context.inNode === true)
-                return React.createElement(React.Fragment, null,
-                    button,
-                    _this.renderErrors());
-            return React.createElement("div", { className: form.ButtonClass },
-                React.createElement("div", null, _this.renderErrors()),
-                button);
+                return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [button, _this.renderErrors()] }, void 0);
+            return jsx_runtime_1.jsxs("div", __assign({ className: form.ButtonClass }, { children: [jsx_runtime_1.jsx("div", { children: _this.renderErrors() }, void 0), button] }), void 0);
         });
         return _this;
     }

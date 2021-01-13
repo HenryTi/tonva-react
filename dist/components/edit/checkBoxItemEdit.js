@@ -48,12 +48,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CheckBoxItemEdit = void 0;
-var react_1 = __importDefault(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var itemEdit_1 = require("./itemEdit");
 var CheckBoxItemEdit = /** @class */ (function (_super) {
     __extends(CheckBoxItemEdit, _super);
@@ -103,7 +100,7 @@ var CheckBoxItemEdit = /** @class */ (function (_super) {
         var onChange;
         if (readOnly !== true)
             onChange = this.onChange;
-        return react_1.default.createElement("input", { ref: function (r) { return _this.input = r; }, type: "checkbox", defaultChecked: this.value, disabled: disabled, onChange: onChange });
+        return jsx_runtime_1.jsx("input", { ref: function (r) { return _this.input = r; }, type: "checkbox", defaultChecked: this.value, disabled: disabled, onChange: onChange }, void 0);
     };
     CheckBoxItemEdit.prototype.getValue = function (checked) {
         var _a = this.uiItem, trueValue = _a.trueValue, falseValue = _a.falseValue;

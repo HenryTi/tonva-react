@@ -52,8 +52,9 @@ function start(CApp, appConfig, isUserLogin) {
                         html0 = html[0];
                         if (html0) {
                             version = html0 === null || html0 === void 0 ? void 0 : html0.getAttribute('data-version');
-                            if (version)
-                                appConfig.version = version;
+                            if (version) {
+                                //appConfig.version = version;
+                            }
                         }
                     }
                     cApp = new CApp(appConfig);

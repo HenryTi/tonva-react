@@ -8,3 +8,4 @@ export {LocalData} from './local';
 export {env} from './env';
 export {getObjPropIgnoreCase} from './getObjPropIgnoreCase';
 export * from './date';
+export * from './62';

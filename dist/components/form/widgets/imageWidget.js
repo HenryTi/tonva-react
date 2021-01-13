@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -72,6 +83,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageWidget = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var widget_1 = require("./widget");
@@ -113,8 +125,7 @@ var ImageWidget = /** @class */ (function (_super) {
                 cn.push('cursor-pointer');
                 onClick = _this.onClick;
             }
-            return React.createElement("div", { className: classnames_1.default(cn), onClick: onClick },
-                React.createElement(image_1.Image, { src: _this.imageSrc, className: "w-4c h-4c" }));
+            return jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(cn), onClick: onClick }, { children: jsx_runtime_1.jsx(image_1.Image, { src: _this.imageSrc, className: "w-4c h-4c" }, void 0) }), void 0);
         });
         mobx_1.makeObservable(_this, {
             imageSrc: mobx_1.observable,

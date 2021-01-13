@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.autoHideTips = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = __importDefault(require("react"));
 var mobx_react_1 = require("mobx-react");
 function autoHideTips(tips, templet, timeout) {
@@ -24,9 +25,9 @@ function autoHideTips(tips, templet, timeout) {
             }, timeout);
         }
         switch (typeof templet) {
-            case 'undefined': return react_1.default.createElement(react_1.default.Fragment, null, t);
+            case 'undefined': return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: t }, void 0);
             case 'function': return templet(t);
-            case 'string': return react_1.default.createElement(react_1.default.Fragment, null, templet);
+            case 'string': return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: templet }, void 0);
             default: return templet;
         }
     }));

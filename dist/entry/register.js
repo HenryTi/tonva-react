@@ -12,24 +12,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -69,7 +61,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ForgetController = exports.RegisterController = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var components_1 = require("../components");
 var vm_1 = require("../vm");
 var net_1 = require("../net");
@@ -312,15 +304,12 @@ var VAccount = /** @class */ (function (_super) {
     };
     VAccount.prototype.header = function () { return this.controller.accountPageCaption; };
     VAccount.prototype.footer = function () {
-        return React.createElement(components_1.Ax, { href: "/login" }, "\u767B\u5F55");
+        return jsx_runtime_1.jsx(components_1.Ax, __assign({ href: "/login" }, { children: "\u767B\u5F55" }), void 0);
     };
     VAccount.prototype.content = function () {
-        return React.createElement("div", { className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } },
-            tools_1.tonvaTop(),
-            React.createElement("div", { className: "h-3c" }),
-            React.createElement(components_1.Ax, { href: "/login" }, "\u767B\u5F55"),
-            React.createElement(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }),
-            components_1.nav.privacyEntry());
+        return jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: [tools_1.tonvaTop(), jsx_runtime_1.jsx("div", { className: "h-3c" }, void 0),
+                jsx_runtime_1.jsx(components_1.Ax, __assign({ href: "/login" }, { children: "\u767B\u5F55" }), void 0),
+                jsx_runtime_1.jsx(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0), components_1.nav.privacyEntry()] }), void 0);
     };
     return VAccount;
 }(vm_1.VPage));
@@ -388,22 +377,12 @@ var VerifyPage = /** @class */ (function (_super) {
                     break;
                 case 'email':
                     typeText = '邮箱';
-                    extra = React.createElement(React.Fragment, null,
-                        React.createElement("span", { className: "text-danger" }, "\u6CE8\u610F"),
-                        ": \u6709\u53EF\u80FD\u8BEF\u4E3A\u5783\u573E\u90AE\u4EF6\uFF0C\u8BF7\u68C0\u67E5",
-                        React.createElement("br", null));
+                    extra = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "\u6CE8\u610F" }), void 0), ": \u6709\u53EF\u80FD\u8BEF\u4E3A\u5783\u573E\u90AE\u4EF6\uFF0C\u8BF7\u68C0\u67E5", jsx_runtime_1.jsx("br", {}, void 0)] }, void 0);
                     break;
             }
-            return React.createElement(components_1.Page, { header: "\u9A8C\u8BC1\u7801" },
-                React.createElement("div", { className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } },
-                    "\u9A8C\u8BC1\u7801\u5DF2\u7ECF\u53D1\u9001\u5230",
-                    typeText,
-                    React.createElement("br", null),
-                    React.createElement("div", { className: "py-2 px-3 my-2 text-primary bg-light" },
-                        React.createElement("b", null, _this.controller.account)),
-                    extra,
-                    React.createElement("div", { className: "h-1c" }),
-                    React.createElement(components_1.Form, { schema: _this.schema, uiSchema: _this.uiSchema, onButtonClick: _this.onSubmit, onEnter: _this.onEnter, requiredFlag: false })));
+            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u9A8C\u8BC1\u7801" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u9A8C\u8BC1\u7801\u5DF2\u7ECF\u53D1\u9001\u5230", typeText, jsx_runtime_1.jsx("br", {}, void 0),
+                        jsx_runtime_1.jsx("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: jsx_runtime_1.jsx("b", { children: _this.controller.account }, void 0) }), void 0), extra, jsx_runtime_1.jsx("div", { className: "h-1c" }, void 0),
+                        jsx_runtime_1.jsx(components_1.Form, { schema: _this.schema, uiSchema: _this.uiSchema, onButtonClick: _this.onSubmit, onEnter: _this.onEnter, requiredFlag: false }, void 0)] }), void 0) }), void 0);
         };
         return _this;
     }
@@ -445,8 +424,7 @@ var PasswordPage = /** @class */ (function (_super) {
                     case 2:
                         error = _a.sent();
                         if (error !== undefined) {
-                            components_1.nav.push(React.createElement(components_1.Page, { header: "\u6CE8\u518C\u4E0D\u6210\u529F" },
-                                React.createElement("div", { className: "p-5 text-danger" }, error)));
+                            components_1.nav.push(jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u6CE8\u518C\u4E0D\u6210\u529F" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "p-5 text-danger" }, { children: error }), void 0) }), void 0));
                         }
                         _a.label = 3;
                     case 3: return [2 /*return*/, error];
@@ -465,14 +443,10 @@ var PasswordPage = /** @class */ (function (_super) {
             });
         }); };
         _this.page = function () {
-            return React.createElement(components_1.Page, { header: _this.controller.passwordPageCaption },
-                React.createElement("div", { className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } },
-                    "\u6CE8\u518C\u8D26\u53F7",
-                    React.createElement("br", null),
-                    React.createElement("div", { className: "py-2 px-3 my-2 text-primary bg-light" },
-                        React.createElement("b", null, _this.controller.account)),
-                    React.createElement("div", { className: "h-1c" }),
-                    React.createElement(components_1.Form, { schema: _this.schema, uiSchema: _this.uiSchema, onButtonClick: _this.onSubmit, onEnter: _this.onEnter, requiredFlag: false })));
+            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: _this.controller.passwordPageCaption }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u6CE8\u518C\u8D26\u53F7", jsx_runtime_1.jsx("br", {}, void 0),
+                        jsx_runtime_1.jsx("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: jsx_runtime_1.jsx("b", { children: _this.controller.account }, void 0) }), void 0),
+                        jsx_runtime_1.jsx("div", { className: "h-1c" }, void 0),
+                        jsx_runtime_1.jsx(components_1.Form, { schema: _this.schema, uiSchema: _this.uiSchema, onButtonClick: _this.onSubmit, onEnter: _this.onEnter, requiredFlag: false }, void 0)] }), void 0) }), void 0);
         };
         return _this;
     }
@@ -501,32 +475,15 @@ var RegSuccess = /** @class */ (function (_super) {
             var users = _a.users;
             var _b = _this.controller, account = _b.account, successText = _b.successText, login = _b.login;
             if (users === undefined) {
-                return React.createElement(components_1.Page, { header: false },
-                    React.createElement("div", { className: "container w-max-30c" },
-                        React.createElement("div", { className: "my-5" },
-                            React.createElement("div", { className: "py-5" },
-                                "\u8D26\u53F7 ",
-                                React.createElement("strong", { className: "text-primary" },
-                                    account,
-                                    " "),
-                                " ",
-                                successText,
-                                "\uFF01"),
-                            React.createElement("button", { className: "btn btn-success btn-block", type: "button", onClick: function () { return login(undefined); } }, "\u76F4\u63A5\u767B\u5F55"))));
+                return jsx_runtime_1.jsx(components_1.Page, __assign({ header: false }, { children: jsx_runtime_1.jsx("div", __assign({ className: "container w-max-30c" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "my-5" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "py-5" }, { children: ["\u8D26\u53F7 ", jsx_runtime_1.jsxs("strong", __assign({ className: "text-primary" }, { children: [account, " "] }), void 0), " ", successText, "\uFF01"] }), void 0),
+                                jsx_runtime_1.jsx("button", __assign({ className: "btn btn-success btn-block", type: "button", onClick: function () { return login(undefined); } }, { children: "\u76F4\u63A5\u767B\u5F55" }), void 0)] }), void 0) }), void 0) }), void 0);
             }
             else {
-                return React.createElement(components_1.Page, { header: false },
-                    React.createElement("div", { className: "container w-max-30c" },
-                        React.createElement("div", { className: "my-5" },
-                            React.createElement("div", { className: "py-5 text-success" }, successText),
-                            users.map(function (v) {
-                                var name = v.name;
-                                return React.createElement("div", { className: "py-2 cursor-pointer", onClick: function () { return login(name); } },
-                                    "\u767B\u5F55\u8D26\u53F7 ",
-                                    React.createElement("strong", { className: "text-primary" },
-                                        name,
-                                        " "));
-                            }))));
+                return jsx_runtime_1.jsx(components_1.Page, __assign({ header: false }, { children: jsx_runtime_1.jsx("div", __assign({ className: "container w-max-30c" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "my-5" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "py-5 text-success" }, { children: successText }), void 0),
+                                users.map(function (v) {
+                                    var name = v.name;
+                                    return jsx_runtime_1.jsxs("div", __assign({ className: "py-2 cursor-pointer", onClick: function () { return login(name); } }, { children: ["\u767B\u5F55\u8D26\u53F7 ", jsx_runtime_1.jsxs("strong", __assign({ className: "text-primary" }, { children: [name, " "] }), void 0)] }), void 0);
+                                })] }), void 0) }), void 0) }), void 0);
             }
         };
         return _this;

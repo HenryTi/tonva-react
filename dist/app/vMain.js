@@ -12,24 +12,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -69,11 +61,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VStartError = exports.VErrorsPage = exports.VUnitSelect = exports.VUnsupportedUnit = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
+//import * as React from 'react';
 var components_1 = require("../components");
 var vm_1 = require("../vm");
-var net_1 = require("../net");
-var uq_1 = require("../uq");
+//import { UQsMan } from '../uq';
 /*
 export class VAppMain extends VPage<CMainBase> {
     async open(param?:any) {
@@ -110,58 +102,46 @@ var VUnsupportedUnit = /** @class */ (function (_super) {
     __extends(VUnsupportedUnit, _super);
     function VUnsupportedUnit() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.page = function (_a) {
-            var predefinedUnit = _a.predefinedUnit;
+        _this.page = function () {
+            var _a = _this.params, predefinedUnit = _a.predefinedUnit, uqsLoadErrors = _a.uqsLoadErrors;
             var user = components_1.nav.user;
             var userName = user ? user.name : '[未登录]';
-            var _b = uq_1.UQsMan.value, appOwner = _b.appOwner, appName = _b.appName;
-            return React.createElement(components_1.Page, { header: "APP\u65E0\u6CD5\u8FD0\u884C", logout: true },
-                React.createElement("div", { className: "m-3 text-danger container" },
-                    React.createElement("div", { className: "form-group row" },
-                        React.createElement("div", { className: "col-sm-3 font-weight-bold" }, "\u767B\u5F55\u7528\u6237"),
-                        React.createElement("div", { className: "col-sm text-body" }, userName)),
-                    React.createElement("div", { className: "form-group row" },
-                        React.createElement("div", { className: "col-sm-3 font-weight-bold" }, "App"),
-                        React.createElement("div", { className: "col-sm text-body" }, appOwner + "/" + appName)),
-                    React.createElement("div", { className: "form-group row" },
-                        React.createElement("div", { className: "col-sm-3 font-weight-bold" }, "\u9884\u8BBE\u5C0F\u53F7"),
-                        React.createElement("div", { className: "col-sm text-body" }, predefinedUnit || React.createElement("small", { className: "" }, "[\u65E0\u9884\u8BBE\u5C0F\u53F7]"))),
-                    React.createElement("div", { className: "form-group row" },
-                        React.createElement("div", { className: "col-sm-3 font-weight-bold" },
-                            "\u53EF\u80FD\u539F\u56E0",
-                            React.createElement(components_1.FA, { name: "exclamation-triangle" })),
-                        React.createElement("div", { className: "col-sm text-body" },
-                            React.createElement("ul", { className: "p-0" },
-                                React.createElement("li", null,
-                                    "\u6CA1\u6709\u5C0F\u53F7\u8FD0\u884C ",
-                                    appName),
-                                React.createElement("li", null,
-                                    "\u7528\u6237 ",
-                                    React.createElement("b", null, userName),
-                                    " \u6CA1\u6709\u52A0\u5165\u4EFB\u4F55\u4E00\u4E2A\u8FD0\u884C",
-                                    appName,
-                                    "\u7684\u5C0F\u53F7"),
-                                predefinedUnit &&
-                                    React.createElement("li", null,
-                                        "\u9884\u8BBE\u5C0F\u53F7 ",
-                                        React.createElement("b", null, predefinedUnit),
-                                        " \u6CA1\u6709\u8FD0\u884CApp ",
-                                        appName)))),
-                    React.createElement("div", { className: "form-group row" },
-                        React.createElement("div", { className: "col-sm-3 font-weight-bold" },
-                            "\u5C0F\u53F7",
-                            predefinedUnit),
-                        React.createElement("div", { className: "col-sm text-body" },
-                            "\u9884\u8BBE\u5C0F\u53F7\u5B9A\u4E49\u5728 public/unit.json \u6587\u4EF6\u4E2D\u3002 \u5B9A\u4E49\u4E86\u8FD9\u4E2A\u6587\u4EF6\u7684\u7A0B\u5E8F\uFF0C\u53EA\u80FD\u7531url\u76F4\u63A5\u542F\u52A8\u3002 \u7528\u6237\u7B2C\u4E00\u6B21\u8BBF\u95EEapp\u4E4B\u540E\uFF0C\u4F1A\u7F13\u5B58\u5728localStorage\u91CC\u3002",
-                            React.createElement("br", null),
-                            "\u5982\u679C\u8981\u5220\u53BB\u7F13\u5B58\u7684\u9884\u5B9A\u4E49Unit\uFF0Clogout\u7136\u540E\u518Dlogin\u3002"))));
+            //let {appOwner, appName} = UQsMan.value;
+            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "APP\u65E0\u6CD5\u8FD0\u884C", logout: true }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3 text-danger container" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "form-group row" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "\u767B\u5F55\u7528\u6237" }), void 0),
+                                jsx_runtime_1.jsx("div", __assign({ className: "col-sm text-body" }, { children: userName }), void 0)] }), void 0),
+                        jsx_runtime_1.jsxs("div", __assign({ className: "form-group row" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "\u9884\u8BBE\u5C0F\u53F7" }), void 0),
+                                jsx_runtime_1.jsx("div", __assign({ className: "col-sm text-body" }, { children: predefinedUnit || jsx_runtime_1.jsx("small", __assign({ className: "" }, { children: "[\u65E0\u9884\u8BBE\u5C0F\u53F7]" }), void 0) }), void 0)] }), void 0),
+                        uqsLoadErrors && uqsLoadErrors.map(function (v) {
+                            return jsx_runtime_1.jsxs("div", __assign({ className: "form-group row" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "App" }), void 0),
+                                    jsx_runtime_1.jsx("div", __assign({ className: "col-sm text-body" }, { children: v }), void 0)] }), void 0);
+                        }),
+                        jsx_runtime_1.jsxs("div", __assign({ className: "form-group row" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: ["\u5C0F\u53F7", predefinedUnit] }), void 0),
+                                jsx_runtime_1.jsxs("div", __assign({ className: "col-sm text-body" }, { children: ["\u9884\u8BBE\u5C0F\u53F7\u5B9A\u4E49\u5728 public/unit.json \u6587\u4EF6\u4E2D\u3002 \u5B9A\u4E49\u4E86\u8FD9\u4E2A\u6587\u4EF6\u7684\u7A0B\u5E8F\uFF0C\u53EA\u80FD\u7531url\u76F4\u63A5\u542F\u52A8\u3002 \u7528\u6237\u7B2C\u4E00\u6B21\u8BBF\u95EEapp\u4E4B\u540E\uFF0C\u4F1A\u7F13\u5B58\u5728localStorage\u91CC\u3002", jsx_runtime_1.jsx("br", {}, void 0), "\u5982\u679C\u8981\u5220\u53BB\u7F13\u5B58\u7684\u9884\u5B9A\u4E49Unit\uFF0Clogout\u7136\u540E\u518Dlogin\u3002"] }), void 0)] }), void 0)] }), void 0) }), void 0);
         };
         return _this;
+        /*
+        <div className="form-group row">
+            <div className="col-sm-3 font-weight-bold">
+                可能原因<FA name="exclamation-triangle" />
+            </div>
+            <div className="col-sm text-body">
+                <ul className="p-0">
+                    <li>没有小号运行 {appName}</li>
+                    <li>用户 <b>{userName}</b> 没有加入任何一个运行{appName}的小号</li>
+                    {
+                        predefinedUnit &&
+                        <li>预设小号 <b>{predefinedUnit}</b> 没有运行App {appName}</li>
+                    }
+                </ul>
+            </div>
+        </div>
+        */
     }
-    VUnsupportedUnit.prototype.open = function (predefinedUnit) {
+    VUnsupportedUnit.prototype.open = function (params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.openPage(this.page, { predefinedUnit: predefinedUnit });
+                this.params = params;
+                this.openPage(this.page);
                 return [2 /*return*/];
             });
         });
@@ -175,17 +155,17 @@ var VUnitSelect = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.renderRow = function (item, index) {
             var id = item.id, nick = item.nick, name = item.name;
-            return React.createElement(components_1.LMR, { className: "px-3 py-2", right: 'id: ' + id },
-                React.createElement("div", null, nick || name));
+            return jsx_runtime_1.jsx(components_1.LMR, __assign({ className: "px-3 py-2", right: 'id: ' + id }, { children: jsx_runtime_1.jsx("div", { children: nick || name }, void 0) }), void 0);
         };
         _this.onRowClick = function (appUnit) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        net_1.appInFrame.unit = appUnit.id; // 25;
-                        //this.controller.setAppUnit(appUnit);
-                        return [4 /*yield*/, this.controller.start()];
+                    case 0: 
+                    //appInFrame.unit = appUnit.id; // 25;
+                    //this.controller.setAppUnit(appUnit);
+                    return [4 /*yield*/, this.controller.start()];
                     case 1:
+                        //appInFrame.unit = appUnit.id; // 25;
                         //this.controller.setAppUnit(appUnit);
                         _a.sent();
                         return [2 /*return*/];
@@ -193,8 +173,8 @@ var VUnitSelect = /** @class */ (function (_super) {
             });
         }); };
         _this.page = function () {
-            return React.createElement(components_1.Page, { header: "\u9009\u62E9\u5C0F\u53F7", logout: true },
-                React.createElement(components_1.List, { items: _this.controller.appUnits, item: { render: _this.renderRow, onClick: _this.onRowClick } }));
+            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u9009\u62E9\u5C0F\u53F7", logout: true }, { children: jsx_runtime_1.jsx("div", { children: "this.controller.appUnits appUnits removed" }, void 0) }), void 0);
+            // <List items={this.controller.appUnits} item={{render: this.renderRow, onClick: this.onRowClick}}/>
         };
         return _this;
     }
@@ -214,12 +194,9 @@ var VErrorsPage = /** @class */ (function (_super) {
     function VErrorsPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.page = function (errors) {
-            return React.createElement(components_1.Page, { header: "ERROR" },
-                React.createElement("div", { className: "m-3" },
-                    React.createElement("div", { className: "p-3 d-flex justify-content-center align-items-center" },
-                        React.createElement("button", { className: "btn btn-danger", onClick: components_1.nav.resetAll }, "\u91CD\u542F\u7F51\u9875")),
-                    React.createElement("div", null, "Load Uqs \u53D1\u751F\u9519\u8BEF\uFF1A"),
-                    errors.errors.map(function (r, i) { return React.createElement("div", { key: i }, r); })));
+            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "ERROR" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "p-3 d-flex justify-content-center align-items-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-danger", onClick: components_1.nav.resetAll }, { children: "\u91CD\u542F\u7F51\u9875" }), void 0) }), void 0),
+                        jsx_runtime_1.jsx("div", { children: "Load Uqs \u53D1\u751F\u9519\u8BEF\uFF1A" }, void 0),
+                        errors.errors.map(function (r, i) { return jsx_runtime_1.jsx("div", { children: r }, i); })] }), void 0) }), void 0);
         };
         return _this;
     }
@@ -240,8 +217,7 @@ var VStartError = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.page = function (_a) {
             var error = _a.error;
-            return React.createElement(components_1.Page, { header: "App start error!" },
-                React.createElement("pre", null, typeof error === 'string' ? error : error.message));
+            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "App start error!" }, { children: jsx_runtime_1.jsx("pre", { children: typeof error === 'string' ? error : error.message }, void 0) }), void 0);
         };
         return _this;
     }

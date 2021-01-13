@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -72,6 +83,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Form = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_1 = require("mobx");
 var classnames_1 = __importDefault(require("classnames"));
@@ -92,7 +104,7 @@ var Form = /** @class */ (function (_super) {
             _this.calcSelectOrDelete();
         };
         _this.DefaultContainer = function (content) {
-            return React.createElement("form", { className: classnames_1.default(_this.props.className), onSubmit: function (e) { return e.preventDefault(); } }, content);
+            return jsx_runtime_1.jsx("form", __assign({ className: classnames_1.default(_this.props.className), onSubmit: function (e) { return e.preventDefault(); } }, { children: content }), void 0);
         };
         _this.DefaultFieldContainer = function (label, content) {
             var fieldLabelSize = _this.props.fieldLabelSize;
@@ -102,32 +114,26 @@ var Form = /** @class */ (function (_super) {
                     fieldLabelSize = 0;
                 }
                 else {
-                    labelView = React.createElement("label", { className: classnames_1.default('col-sm-' + fieldLabelSize, 'col-form-label') }, label);
+                    labelView = jsx_runtime_1.jsx("label", __assign({ className: classnames_1.default('col-sm-' + fieldLabelSize, 'col-form-label') }, { children: label }), void 0);
                 }
                 var fieldCol = 'col-sm-' + (12 - fieldLabelSize);
-                return React.createElement("div", { className: "form-group row" },
-                    labelView,
-                    React.createElement("div", { className: fieldCol }, content));
+                return jsx_runtime_1.jsxs("div", __assign({ className: "form-group row" }, { children: [labelView, jsx_runtime_1.jsx("div", __assign({ className: fieldCol }, { children: content }), void 0)] }), void 0);
             }
-            return React.createElement("div", { className: "form-group" },
-                label === null ? null : React.createElement("label", { className: "col-form-label" }, label),
-                content);
+            return jsx_runtime_1.jsxs("div", __assign({ className: "form-group" }, { children: [label === null ? null : jsx_runtime_1.jsx("label", __assign({ className: "col-form-label" }, { children: label }), void 0), content] }), void 0);
         };
         _this.DefaultFieldClass = undefined;
         _this.DefaultButtonClass = 'text-center py-2';
         _this.DefaultRes = res_2.resLang(res_1.formRes);
         _this.ArrContainer = function (label, content) {
-            return React.createElement("div", null,
-                React.createElement("div", { className: classnames_1.default('small text-muted text-center bg-light py-1 px-3 mt-4 mb-1') }, label),
-                content);
+            return jsx_runtime_1.jsxs("div", { children: [jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default('small text-muted text-center bg-light py-1 px-3 mt-4 mb-1') }, { children: label }), void 0), content] }, void 0);
         };
         _this.RowContainer = function (content) {
             var cn = classnames_1.default({
                 'py-3': true
             });
-            return React.createElement("div", { className: cn }, content);
+            return jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: content }), void 0);
         };
-        _this.RowSeperator = React.createElement("div", { className: "border border-gray border-top" });
+        _this.RowSeperator = jsx_runtime_1.jsx("div", { className: "border border-gray border-top" }, void 0);
         var schema = props.schema, uiSchema = props.uiSchema, Container = props.Container, FieldContainer = props.FieldContainer, FieldClass = props.FieldClass, ButtonClass = props.ButtonClass, res = props.res;
         _this.Container = Container || _this.DefaultContainer;
         _this.FieldContainer = FieldContainer || _this.DefaultFieldContainer;
@@ -151,7 +157,7 @@ var Form = /** @class */ (function (_super) {
         var children = this.props.children;
         if (children !== undefined) {
             this.formContext = new context_1.FormContext(this, true);
-            return React.createElement(React.Fragment, null, children);
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: children }, void 0);
         }
         var Templet;
         if (this.uiSchema !== undefined) {
@@ -164,9 +170,9 @@ var Form = /** @class */ (function (_super) {
         if (!this.formContext) {
             this.formContext = new context_1.FormContext(this, false);
         }
-        return React.createElement(React.Fragment, null, this.schema.map(function (v, index) {
-            return React.createElement(React.Fragment, { key: index }, widgets_1.factory(_this.formContext, v, children));
-        }));
+        return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: this.schema.map(function (v, index) {
+                return jsx_runtime_1.jsx(React.Fragment, { children: widgets_1.factory(_this.formContext, v, children) }, index);
+            }) }, void 0);
     };
     Form.prototype.initData = function (formData) {
         if (formData === undefined)
@@ -275,9 +281,7 @@ var Form = /** @class */ (function (_super) {
     };
     Form.prototype.render = function () {
         var content = this.renderContent();
-        return React.createElement(context_1.ContextContainer.Provider, { value: this.formContext },
-            React.createElement(this.formContext.renderErrors),
-            this.Container(content));
+        return jsx_runtime_1.jsxs(context_1.ContextContainer.Provider, __assign({ value: this.formContext }, { children: [React.createElement(this.formContext.renderErrors), this.Container(content)] }), void 0);
     };
     Form.prototype.buttonClick = function (buttonName) {
         return __awaiter(this, void 0, void 0, function () {

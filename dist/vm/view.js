@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -56,6 +67,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.View = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var components_1 = require("../components");
 var tool_1 = require("../tool");
@@ -124,18 +136,17 @@ var View = /** @class */ (function () {
     View.prototype.renderUser = function (user, imageClassName, textClassName) {
         var renderUser = function (user) {
             var name = user.name, nick = user.nick, icon = user.icon;
-            return React.createElement(React.Fragment, null,
-                React.createElement(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c mr-2' }),
-                React.createElement("span", { className: textClassName }, nick || name));
+            return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c mr-2' }, void 0),
+                    jsx_runtime_1.jsx("span", __assign({ className: textClassName }, { children: nick || name }), void 0)] }, void 0);
         };
-        return React.createElement(components_1.UserView, { user: user, render: renderUser });
+        return jsx_runtime_1.jsx(components_1.UserView, { user: user, render: renderUser }, void 0);
     };
     View.prototype.renderUserText = function (user) {
         var renderUser = function (user) {
             var name = user.name, nick = user.nick;
-            return React.createElement(React.Fragment, null, nick || name);
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: nick || name }, void 0);
         };
-        return React.createElement(components_1.UserView, { user: user, render: renderUser });
+        return jsx_runtime_1.jsx(components_1.UserView, { user: user, render: renderUser }, void 0);
     };
     View.prototype.renderMe = function (imageClassName, textClassName) {
         var user = this.controller.user;
@@ -149,9 +160,7 @@ var View = /** @class */ (function () {
             this.controller.openPage(React.createElement(view, param), onClosePage);
         }
         else {
-            this.controller.openPage(React.createElement(components_1.Page, { header: "param type error" },
-                "View.openPage param must be object, but here is ",
-                type), onClosePage);
+            this.controller.openPage(jsx_runtime_1.jsxs(components_1.Page, __assign({ header: "param type error" }, { children: ["View.openPage param must be object, but here is ", type] }), void 0), onClosePage);
         }
     };
     View.prototype.replacePage = function (view, param) {

@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -69,6 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EditMeInfo = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_1 = require("mobx");
 var components_1 = require("../components");
@@ -116,8 +128,7 @@ var EditMeInfo = /** @class */ (function (_super) {
         return _this;
     }
     EditMeInfo.prototype.render = function () {
-        return React.createElement(components_1.Page, { header: "\u4E2A\u4EBA\u4FE1\u606F" },
-            React.createElement(components_1.Edit, { schema: this.schema, uiSchema: this.uiSchema, data: this.data, onItemChanged: this.onItemChanged }));
+        return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u4E2A\u4EBA\u4FE1\u606F" }, { children: jsx_runtime_1.jsx(components_1.Edit, { schema: this.schema, uiSchema: this.uiSchema, data: this.data, onItemChanged: this.onItemChanged }, void 0) }), void 0);
     };
     return EditMeInfo;
 }(React.Component));

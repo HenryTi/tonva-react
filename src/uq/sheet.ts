@@ -72,7 +72,7 @@ export class UqSheet<M, V> extends Entity {
         }
         return ret;
     }
-    async save(discription:string, data:M):Promise<SheetSaveReturn> {
+    async save(discription:string, data:M):Promise<SheetSaveReturnV<V>> {
         let {id} = this.uq;
         let params = {app: id, discription: discription, data:data};
         return await new SaveCaller(this, params).request();

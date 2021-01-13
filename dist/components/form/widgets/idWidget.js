@@ -12,24 +12,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -72,11 +64,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IdWidget = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
 var widget_1 = require("./widget");
 var mobx_1 = require("mobx");
-var none = React.createElement("small", { className: "text-muted" }, "[\u65E0]");
+var none = jsx_runtime_1.jsx("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
 var IdWidget = /** @class */ (function (_super) {
     __extends(IdWidget, _super);
     function IdWidget(context, itemSchema, fieldProps, children) {
@@ -154,7 +146,7 @@ var IdWidget = /** @class */ (function (_super) {
                         break;
                 }
             }
-            content = React.createElement(React.Fragment, null, c);
+            content = jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: c }, void 0);
         }
         else if (typeof Templet === 'function') {
             content = Templet(this.value);
@@ -162,9 +154,7 @@ var IdWidget = /** @class */ (function (_super) {
         else {
             content = Templet;
         }
-        return React.createElement(React.Fragment, null,
-            React.createElement("div", { className: classnames_1.default(cn), onClick: this.onClick }, content),
-            this.renderErrors());
+        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(cn), onClick: this.onClick }, { children: content }), void 0), this.renderErrors()] }, void 0);
     };
     return IdWidget;
 }(widget_1.Widget));

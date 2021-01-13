@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -68,6 +79,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var components_1 = require("../components");
 var net_1 = require("../net");
@@ -146,25 +158,17 @@ var Login = /** @class */ (function (_super) {
     }
     */
     Login.prototype.render = function () {
-        var footer = React.createElement("div", null,
-            React.createElement("div", { className: "d-block" },
-                React.createElement("div", { className: 'text-center' },
-                    React.createElement(components_1.Ax, { href: "/register", className: "btn btn-link", style: { margin: '0px auto' } }, "\u6CE8\u518C\u8D26\u53F7")),
-                components_1.nav.privacyEntry()));
+        var footer = jsx_runtime_1.jsx("div", { children: jsx_runtime_1.jsxs("div", __assign({ className: "d-block" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: 'text-center' }, { children: jsx_runtime_1.jsx(components_1.Ax, __assign({ href: "/register", className: "btn btn-link", style: { margin: '0px auto' } }, { children: "\u6CE8\u518C\u8D26\u53F7" }), void 0) }), void 0), components_1.nav.privacyEntry()] }), void 0) }, void 0);
         var header = false;
         if (this.props.withBack === true) {
             header = '登录';
         }
-        return React.createElement(components_1.Page, { header: header, footer: footer },
-            React.createElement("div", { className: "d-flex p-5 flex-column justify-content-center align-items-center" },
-                React.createElement("div", { className: "flex-fill" }),
-                React.createElement("div", { className: "w-20c" },
-                    tools_1.tonvaTop(),
-                    React.createElement("div", { className: "h-2c" }),
-                    React.createElement(components_1.Form, { schema: schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }),
-                    React.createElement(components_1.Ax, { className: "btn btn-link btn-block", href: "/forget" }, "\u5FD8\u8BB0\u5BC6\u7801")),
-                React.createElement("div", { className: "flex-fill" }),
-                React.createElement("div", { className: "flex-fill" })));
+        return jsx_runtime_1.jsx(components_1.Page, __assign({ header: header, footer: footer }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "d-flex p-5 flex-column justify-content-center align-items-center" }, { children: [jsx_runtime_1.jsx("div", { className: "flex-fill" }, void 0),
+                    jsx_runtime_1.jsxs("div", __assign({ className: "w-20c" }, { children: [tools_1.tonvaTop(), jsx_runtime_1.jsx("div", { className: "h-2c" }, void 0),
+                            jsx_runtime_1.jsx(components_1.Form, { schema: schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0),
+                            jsx_runtime_1.jsx(components_1.Ax, __assign({ className: "btn btn-link btn-block", href: "/forget" }, { children: "\u5FD8\u8BB0\u5BC6\u7801" }), void 0)] }), void 0),
+                    jsx_runtime_1.jsx("div", { className: "flex-fill" }, void 0),
+                    jsx_runtime_1.jsx("div", { className: "flex-fill" }, void 0)] }), void 0) }), void 0);
     };
     return Login;
 }(React.Component));

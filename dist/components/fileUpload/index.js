@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -33,6 +44,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileUpload = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var FileUpload = /** @class */ (function (_super) {
     __extends(FileUpload, _super);
@@ -44,12 +56,11 @@ var FileUpload = /** @class */ (function (_super) {
     FileUpload.prototype.onSubmit = function () {
     };
     FileUpload.prototype.render = function () {
-        return React.createElement("form", { onSubmit: this.onSubmit },
-            React.createElement("input", { id: "uname", name: "uname" }),
-            React.createElement("input", { id: "age", name: "age" }),
-            React.createElement("input", { id: "sex", name: "sex" }),
-            React.createElement("input", { type: "file", id: "photo", name: "photo" }),
-            React.createElement("button", { type: "submit" }, "\u63D0\u4EA4"));
+        return jsx_runtime_1.jsxs("form", __assign({ onSubmit: this.onSubmit }, { children: [jsx_runtime_1.jsx("input", { id: "uname", name: "uname" }, void 0),
+                jsx_runtime_1.jsx("input", { id: "age", name: "age" }, void 0),
+                jsx_runtime_1.jsx("input", { id: "sex", name: "sex" }, void 0),
+                jsx_runtime_1.jsx("input", { type: "file", id: "photo", name: "photo" }, void 0),
+                jsx_runtime_1.jsx("button", __assign({ type: "submit" }, { children: "\u63D0\u4EA4" }), void 0)] }), void 0);
     };
     return FileUpload;
 }(React.Component));

@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -36,6 +47,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComponentPropRow = exports.ListPropRow = exports.NumberPropRow = exports.StringPropRow = exports.LabeledPropRow = exports.PropGap = exports.PropBorder = exports.PropRow = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var PropRow = /** @class */ (function () {
@@ -51,9 +63,7 @@ var PropBorder = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     PropBorder.prototype.render = function (key) {
-        return React.createElement("div", { key: '_b_' + key, className: "" },
-            React.createElement("div", { className: "w-100" },
-                React.createElement("div", { style: { borderTop: '1px solid #f0f0f0' } })));
+        return jsx_runtime_1.jsx("div", __assign({ className: "" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "w-100" }, { children: jsx_runtime_1.jsx("div", { style: { borderTop: '1px solid #f0f0f0' } }, void 0) }), void 0) }), '_b_' + key);
     };
     return PropBorder;
 }(PropRow));
@@ -79,7 +89,7 @@ var PropGap = /** @class */ (function (_super) {
                 break;
         }
         var cn = classnames_1.default(w);
-        return React.createElement("div", { key: '_g_' + key, className: cn });
+        return jsx_runtime_1.jsx("div", { className: cn }, '_g_' + key);
     };
     return PropGap;
 }(PropRow));
@@ -110,15 +120,13 @@ var LabeledPropRow = /** @class */ (function (_super) {
             "bg-white": bk === undefined,
             "row": true
         });
-        return React.createElement("div", { key: key, className: cn, onClick: onClick },
-            this.renderLabel(),
-            this.renderProp());
+        return jsx_runtime_1.jsxs("div", __assign({ className: cn, onClick: onClick }, { children: [this.renderLabel(), this.renderProp()] }), key);
     };
     LabeledPropRow.prototype.renderLabel = function () {
         var label = this.prop.label;
         if (label === undefined)
             return null;
-        return React.createElement("label", { className: this.col + '-3 col-form-label' }, label);
+        return jsx_runtime_1.jsx("label", __assign({ className: this.col + '-3 col-form-label' }, { children: label }), void 0);
     };
     LabeledPropRow.prototype.renderProp = function () {
         var label = this.prop.label;
@@ -151,10 +159,10 @@ var LabeledPropRow = /** @class */ (function (_super) {
         }
         var col = this.col + (label === undefined ? '-12' : '-9');
         var cn = classnames_1.default(align, vAlign, col, 'd-flex');
-        return React.createElement("div", { className: cn }, this.renderPropBody());
+        return jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: this.renderPropBody() }), void 0);
     };
     LabeledPropRow.prototype.renderPropBody = function () {
-        return React.createElement("div", { className: "form-control-plaintext" }, this.renderPropContent());
+        return jsx_runtime_1.jsx("div", __assign({ className: "form-control-plaintext" }, { children: this.renderPropContent() }), void 0);
     };
     LabeledPropRow.prototype.renderPropContent = function () {
         return this.content;
@@ -225,11 +233,9 @@ var ListPropRow = /** @class */ (function (_super) {
         var _a = this.prop, list = _a.list, row = _a.row;
         var items = typeof list === 'string' ? this.content : list;
         if (items === undefined)
-            return React.createElement("div", null);
+            return jsx_runtime_1.jsx("div", {}, void 0);
         // new row(item)
-        return React.createElement("div", { className: "w-100" }, items.map(function (item, index) { return React.createElement(React.Fragment, { key: index },
-            index === 0 ? null : React.createElement("div", { style: { width: '100%', borderBottom: '1px solid #f0f0f0' } }),
-            React.createElement(row, item)); }));
+        return jsx_runtime_1.jsx("div", __assign({ className: "w-100" }, { children: items.map(function (item, index) { return jsx_runtime_1.jsxs(React.Fragment, { children: [index === 0 ? null : jsx_runtime_1.jsx("div", { style: { width: '100%', borderBottom: '1px solid #f0f0f0' } }, void 0), React.createElement(row, item)] }, index); }) }), void 0);
     };
     return ListPropRow;
 }(LabeledPropRow));
@@ -283,7 +289,7 @@ var ComponentPropRow = /** @class */ (function (_super) {
         else
             col = 'w-100';
         var cn = classnames_1.default(align, vAlign, col, 'd-flex');
-        return React.createElement("div", { className: cn }, this.renderPropBody());
+        return jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: this.renderPropBody() }), void 0);
     };
     return ComponentPropRow;
 }(LabeledPropRow));

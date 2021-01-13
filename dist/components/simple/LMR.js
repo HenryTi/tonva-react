@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -42,6 +53,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LMR = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_react_1 = require("mobx-react");
 var classnames_1 = __importDefault(require("classnames"));
@@ -55,16 +67,13 @@ var LMR = /** @class */ (function (_super) {
         var _a = this.props, className = _a.className, left = _a.left, children = _a.children, right = _a.right, onClick = _a.onClick;
         var l, r;
         if (left !== undefined)
-            l = React.createElement("header", null, left);
+            l = jsx_runtime_1.jsx("header", { children: left }, void 0);
         if (right !== undefined)
-            r = React.createElement("footer", null, right);
+            r = jsx_runtime_1.jsx("footer", { children: right }, void 0);
         var cursor;
         if (onClick !== undefined)
             cursor = 'cursor-pointer';
-        return React.createElement("div", { className: classnames_1.default('va-lmr', className, cursor), onClick: onClick },
-            l,
-            React.createElement("div", null, children),
-            r);
+        return jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('va-lmr', className, cursor), onClick: onClick }, { children: [l, jsx_runtime_1.jsx("div", { children: children }, void 0), r] }), void 0);
     };
     LMR = __decorate([
         mobx_react_1.observer

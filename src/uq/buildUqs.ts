@@ -1,69 +1,100 @@
 import fs from 'fs';
+import path from 'path';
 import { Action, Book, Query, Sheet, Tuid, UqEnum, UqMan, UQsMan, Map, History, Tag, Pending, Entity, ArrFields, Field } from './index';
 import { nav } from '../components';
 import { AppConfig } from '../app';
 
-//const uqAppPath = 'src/UqApp';
 const red = '\x1b[41m%s\x1b[0m';
 let lastBuildTime:number = 0;
 let gUqOwnerMap:{[key:string]:string};
+const uqTsSrcPath = 'src/UqApp';
 
-export interface UqAppOptions extends Partial<AppConfig> {
-	uqAppName: string;
-	uqAppVersion: string;
-	uqAppUnitId: number;
-	uqAppSrcPath?: string;
-	uqOwnerMap?: {[key:string]: string};
+export interface UqOptions extends Partial<AppConfig> {
+	app?: {
+		name: string;
+		version: string;
+		ownerMap?: {[key:string]: string};
+	}
+	uqs?: {
+		[owner:string]: {[name:string]:string}; // name: version
+	};
 }
 
-export async function uqAppStart(options: UqAppOptions) {
-	let {uqAppName, uqAppVersion: appVersion, uqAppUnitId: appUnitId} = options;
-	process.env.REACT_APP_UNIT = String(appUnitId);
+// 返回每个uq构建时的错误
+async function uqAppStart(options: UqOptions):Promise<string[]> {
+	let {app, uqs, tvs} = options;
+	//process.env.REACT_APP_UNIT = String(appUnitId);
 	nav.forceDevelopment = true;
 	await nav.init();
-	await UQsMan.load(uqAppName, appVersion, undefined);
-}
-export async function buildUqApp(options: UqAppOptions) {
-	let {uqAppSrcPath, uqOwnerMap} = options;
-	if (!uqAppSrcPath) uqAppSrcPath = 'src/UqApp';
-	gUqOwnerMap = uqOwnerMap || {};
-	for (let i in gUqOwnerMap) {
-		gUqOwnerMap[i.toLowerCase()] = gUqOwnerMap[i];
+	let retErrors = await UQsMan.build(options);
+	gUqOwnerMap = UQsMan.uqOwnerMap;
+	return retErrors;
+	/*
+	if (app) {
+		let {name, version, ownerMap} = app;
+		gUqOwnerMap = ownerMap || {};
+		for (let i in gUqOwnerMap) {
+			gUqOwnerMap[i.toLowerCase()] = gUqOwnerMap[i];
+		}
+		return await UQsMan.load(name, version, tvs);
 	}
+	else if (uqs) {
+		let uqNames:{owner:string; name:string; version:string}[] = [];
+		gUqOwnerMap = {};
+		for (let owner in uqs) {
+			let ownerObj = uqs[owner];
+			for (let name in ownerObj) {
+				let v = ownerObj[name];
+				switch (name) {
+					case '$':
+						gUqOwnerMap[owner.toLowerCase()] = v;
+						break;
+					default:
+						uqNames.push({owner, name, version:v});
+						break;
+				}
+			}
+		}
+		if (uqNames.length > 0) {
+			return await UQsMan.loadUqs(uqNames, tvs);
+		}
+	}
+	*/
+	throw new Error('uqOptions must either app or uqs');
+}
+export async function buildUqs(options: UqOptions) {
 	if (lastBuildTime > 0) {
-	//if (Date.now() - lastBuildTime < 30*1000) {
 		console.log(red, 'quit !');
 		return;
 	}
-	if (!fs.existsSync(uqAppSrcPath)) {
-		fs.mkdirSync(uqAppSrcPath);
+	if (!fs.existsSync(uqTsSrcPath)) {
+		fs.mkdirSync(uqTsSrcPath);
 	}
-	let tsAppName = buildTsAppName(options);
-	saveTsFile(uqAppSrcPath, 'appName', tsAppName);
-	let tsAppConfig = buildTsAppConfig(options);
-	saveTsFile(uqAppSrcPath, 'appConfig', tsAppConfig);
+	//buildTsAppName(options);
+	buildTsAppConfig(options);
+	
 	let tsIndex = buildTsIndex();
-	saveTsFile(uqAppSrcPath, 'index', tsIndex);
+	saveTsFile('index', tsIndex);
 	let tsCApp = buildTsCApp();
-	saveTsFileIfNotExists(uqAppSrcPath, 'CApp', tsCApp);
+	saveTsFileIfNotExists('CApp', tsCApp);
 	let tsCBase = buildTsCBase();
-	saveTsFile(uqAppSrcPath, 'CBase', tsCBase);
+	saveTsFile('CBase', tsCBase);
 	let tsVMain = buildTsVMain();
-	saveTsFileIfNotExists(uqAppSrcPath, 'VMain', tsVMain, 'tsx');
+	saveTsFileIfNotExists('VMain', tsVMain, 'tsx');
 
-	saveTsFile(uqAppSrcPath, 'uqs', '');
-	fs.unlinkSync(uqAppSrcPath + '/uqs.ts');
-	await buildUqsFolder(uqAppSrcPath + '/uqs', options);
+	saveTsFile('uqs', '');
+	fs.unlinkSync(uqTsSrcPath + '/uqs.ts');
+	await buildUqsFolder(uqTsSrcPath + '/uqs', options);
 };
 
-function saveTsFileIfNotExists(uqAppSrcPath:string, fileName:string, content:string, suffix:string = 'ts') {
-	let tsFile = `${uqAppSrcPath}/${fileName}.${suffix}`;
+function saveTsFileIfNotExists(fileName:string, content:string, suffix:string = 'ts') {
+	let tsFile = `${uqTsSrcPath}/${fileName}.${suffix}`;
 	if (fs.existsSync(tsFile) === true) return;
-	saveTsFile(uqAppSrcPath, fileName, content, suffix);
+	saveTsFile(fileName, content, suffix);
 }
-function saveTsFile(uqAppSrcPath:string, fileName:string, content:string, suffix:string = 'ts') {
-	let srcFile = `${uqAppSrcPath}/${fileName}.${suffix}.txt`;
-	let tsFile = `${uqAppSrcPath}/${fileName}.${suffix}`;
+function saveTsFile(fileName:string, content:string, suffix:string = 'ts') {
+	let srcFile = `${uqTsSrcPath}/${fileName}.${suffix}.txt`;
+	let tsFile = `${uqTsSrcPath}/${fileName}.${suffix}`;
 	if (!fs.existsSync(srcFile)) {
 		if (fs.existsSync(tsFile)) {
 			fs.renameSync(tsFile, srcFile);
@@ -73,8 +104,8 @@ function saveTsFile(uqAppSrcPath:string, fileName:string, content:string, suffix
 	lastBuildTime = Date.now();
 	console.log(red, `${tsFile} is built`);
 }
-function overrideTsFile(uqAppSrcPath:string, fileName:string, content:string, suffix:string = 'ts') {
-	let tsFile = `${uqAppSrcPath}/${fileName}.${suffix}`;
+function overrideTsFile(path:string, fileName:string, content:string, suffix:string = 'ts') {
+	let tsFile = `${path}/${fileName}.${suffix}`;
 	fs.writeFileSync(tsFile, content);
 	lastBuildTime = Date.now();
 	console.log(red, `${tsFile} is built`);
@@ -82,32 +113,53 @@ function overrideTsFile(uqAppSrcPath:string, fileName:string, content:string, su
 function buildTsHeader() {
 	return `//=== UqApp builder created on ${new Date()} ===//`;
 }
-function buildTsAppName(options: UqAppOptions):string {
-	let {uqAppName, appName} = options;
-	return `${buildTsHeader()}
-export const appName = '${uqAppName || appName}';
+function buildTsAppName(options: UqOptions):void {
+	let {app} = options;
+	if (app) {
+		let tsAppName = `${buildTsHeader()}
+export const appName = '${app.name}';
 `;
+		saveTsFile('appName', tsAppName);
+	}
 }
-function buildTsAppConfig(options: UqAppOptions):string {
-	let {version, noUnit, tvs, oem, htmlTitle} = options;
+function buildTsAppConfig(options: UqOptions):void {
+	let {app, uqs, noUnit, tvs, oem, htmlTitle} = options;
 	function toString(s:string) {
 		if (s === undefined) return;
 		if (s === null) return null;
 		return `'${s}'`;
 	}
-	return `${buildTsHeader()}
+	function toAppString():string {
+		if (!app) return undefined;
+		let {name, version} = app;
+		return `{ name: ${name}, version: ${version} }`;
+	}
+	function toUqsString(): string {
+		if (!uqs) return undefined;
+		let ret = '{\n';
+		for (let owner in uqs) {
+			ret += `\t\t"${owner}": {\n`;
+			let ownerObj = uqs[owner];
+			for (let name in ownerObj) {
+				ret += `\t\t\t"${name}": "${ownerObj[name]}",\n`;
+			}
+			ret += `\t\t},\n`
+		}
+		return ret + '\t}';
+	}
+	let ts = `${buildTsHeader()}
 import { AppConfig } from "tonva-react";
-import { appName } from "./appName";
 
 export const appConfig: AppConfig = {
-    appName: appName,
-	version: ${toString(version)},
+	app: ${toAppString()},
+	uqs: ${toUqsString()},
 	noUnit: ${noUnit},
     tvs: ${JSON.stringify(tvs)},
 	oem: ${toString(oem)},
 	htmlTitle: ${toString(htmlTitle)},
 };
 `;
+	saveTsFile('appConfig', ts);
 }
 function buildTsIndex():string {
 	return `${buildTsHeader()}
@@ -127,7 +179,7 @@ export class CApp extends CUqApp {
 		this.openVPage(VMain, undefined, this.dispose);
 	}
 }
-`;	
+`;
 }
 function buildTsCBase():string {
 	return `${buildTsHeader()}
@@ -179,8 +231,8 @@ export class VMain extends VPage<CApp> {
 `;
 }
 
-async function buildUqsFolder(uqsFolder:string, options: UqAppOptions) {
-	await uqAppStart(options);
+async function buildUqsFolder(uqsFolder:string, options: UqOptions) {
+	let uqErrors = await uqAppStart(options);
 
 	let uqsMan = UQsMan.value;
 	let coll = uqsMan.getUqCollection();
@@ -193,9 +245,9 @@ async function buildUqsFolder(uqsFolder:string, options: UqAppOptions) {
 		uqs.push(coll[i]);
 	}
 	
-	if (!uqsMan.id) {
-		let error = options.uqAppName + ' not defined!';
-		throw new Error(error);
+	if (uqErrors) {
+		//let error = options.uqAppName + ' not defined!';
+		throw new Error(uqErrors.join('\n'));
 	}
 
 	for (let uq of uqs) {
@@ -206,11 +258,22 @@ async function buildUqsFolder(uqsFolder:string, options: UqAppOptions) {
 	if (!fs.existsSync(uqsFolder)) {
 		fs.mkdirSync(uqsFolder);
 	}
+	else {
+		fs.readdir(uqsFolder, (err, files) => {
+			if (err) throw err;
+		  
+			for (const file of files) {
+			  fs.unlink(path.join(uqsFolder, file), err => {
+				if (err) throw err;
+			  });
+			}
+		});		
+	}
 	let tsUqsIndexHeader = buildTsHeader();
 	let tsUqsIndexContent = `\n\nexport interface UQs {`;
 	let tsUqsExports = '\n\n';
 	for (let uq of uqs) {
-		let {uqOwner, uqName} = uq;
+		let {uqOwner, uqName, enumArr} = uq;
 		let o1 = getUqOwnerName(uqOwner);
 		let n1 = getUqName(uqName);
 		let tsUq = buildTsUq(uq);
@@ -219,12 +282,14 @@ async function buildUqsFolder(uqsFolder:string, options: UqAppOptions) {
 		tsUqsIndexHeader += `\nimport { ${o1}${n1} } from './${o1}${n1}';`;
 		tsUqsIndexContent += `\n\t${o1}${n1}: ${o1}${n1}.Uq${o1}${n1};`;
 
-		tsUqsExports += `\nexport {`; 
-		for (let enm of uq.enumArr) {
-			let enmName = `${capitalCaseString(enm.sName)}`;
-			tsUqsExports += `\n\t${enmName} as ${o1}${n1}${enmName},`;
+		if (enumArr.length > 0) {
+			tsUqsExports += `\nexport {`; 
+			for (let enm of uq.enumArr) {
+				let enmName = `${capitalCaseString(enm.sName)}`;
+				tsUqsExports += `\n\t${enmName} as ${o1}${n1}${enmName},`;
+			}
+			tsUqsExports += `\n} from './${o1}${n1}';`;
 		}
-		tsUqsExports += `\n} from './${o1}${n1}';`;
 	}
 
 	overrideTsFile(uqsFolder, 'index', 
@@ -279,7 +344,6 @@ function uqEntityInterface<T extends Entity>(entity: T, buildInterface: (entity:
 	if (name.indexOf('$') > 0) return '';
 	let entityCode = buildInterface(entity);
 	if (!entityCode) return '';
-	//return uqFirstLine(entity) + 
 	return '\n' + entityCode + '\n';
 }
 
@@ -345,24 +409,22 @@ function buildUQ(uq:UqMan) {
 	uq.tagArr.forEach(v => ts += uqEntityInterface<Tag>(v, buildTagInterface));
 
 	ts += `\n\nexport interface Uq${getUqOwnerName(uqOwner)}${getUqName(uqName)} {`;
+	ts += `\n\t$name: string;`
 	function appendArr<T extends Entity>(arr:T[], type:string, tsBuild: (v:T) => string) {
 		if (arr.length === 0) return;
-		if (importFirst === true) {
-			importFirst = false;
-		}
-		else {
-			tsImport += ', ';
-		}
-		tsImport += 'Uq' + type;
+		let tsLen = ts.length;
 		arr.forEach(v => ts += tsBuild(v));
+		if (ts.length - tsLen > 0) {
+			if (importFirst === true) {
+				importFirst = false;
+			}
+			else {
+				tsImport += ', ';
+			}
+			tsImport += 'Uq' + type;
+		}
 	}
 	appendArr<Tuid>(uq.tuidArr, 'Tuid', v => uqBlock<Tuid>(v, buildTuid));
-	/*
-	uq.tuidArr.forEach(v => {
-		tsImport += 'UqTuid, ';
-		ts += uqBlock<Tuid>(v, buildTuid);
-	});
-	*/
 	appendArr<Action>(uq.actionArr, 'Action', v => uqBlock<Action>(v, buildAction));
 	appendArr<Sheet>(uq.sheetArr, 'Sheet', v => uqBlock<Sheet>(v, buildSheet));
 	appendArr<Book>(uq.bookArr, 'Book', v => uqBlock<Book>(v, buildBook));
@@ -371,7 +433,7 @@ function buildUQ(uq:UqMan) {
 	appendArr<History>(uq.historyArr, 'History', v => uqBlock<History>(v, buildHistory));
 	appendArr<Pending>(uq.pendingArr, 'Pending', v => uqBlock<Pending>(v, buildPending));
 	appendArr<Tag>(uq.tagArr, 'Tag', v => uqBlock<Tag>(v, buildTag));
-	ts += '\n\n}\n}\n';
+	ts += '\n}\n}\n';
 	tsImport += ' } from "tonva-react";';
 	return tsImport + ts;
 }
@@ -536,39 +598,75 @@ function buildSheetInterface(sheet: Sheet) {
 }
 
 function buildBook(book: Book):string {
-	return;
+	let {sName} = book;
+	let ts = `\t${entityName(sName)}: UqBook<Param${capitalCaseString(sName)}, Result${capitalCaseString(sName)}>;`;
+	return ts;
 }
 
 function buildBookInterface(book: Book):string {
-	return;
+	let {sName, fields, returns} = book;
+	let ts = `export interface Param${capitalCaseString(sName)} {`;
+	ts += buildFields(fields);
+	ts += '\n}\n';
+	ts += buildReturns(book, returns);
+	return ts;
 }
 
 function buildMap(map: Map):string {
-	return;
+	let {sName} = map;
+	let ts = `\t${entityName(sName)}: UqMap;`;
+	return ts;
 }
 
 function buildMapInterface(map: Map):string {
-	return;
+	/*
+	let {sName, fields, returns} = map;
+	let ts = `export interface Param${capitalCaseString(sName)} {`;
+	ts += buildFields(fields);
+	ts += '\n}\n';
+	ts += buildReturns(map, returns);
+	return ts;
+	*/
+	return '';
 }
 
 function buildHistory(history: History):string {
-	return;
+	let {sName} = history;
+	let ts = `\t${entityName(sName)}: UqHistory<Param${capitalCaseString(sName)}, Result${capitalCaseString(sName)}>;`;
+	return ts;
 }
 
 function buildHistoryInterface(history: History):string {
-	return;
+	let {sName, fields, returns} = history;
+	let ts = `export interface Param${capitalCaseString(sName)} {`;
+	ts += buildFields(fields);
+	ts += '\n}\n';
+	ts += buildReturns(history, returns);
+	return ts;
 }
 
 function buildPending(pending: Pending):string {
-	return;
+	let {sName} = pending;
+	let ts = `\t${entityName(sName)}: UqPending<any, any>;`;
+	return ts;
 }
 
 function buildPendingInterface(pending: Pending):string {
-	return;
+	/*
+	let {sName, fields, returns} = pending;
+	let ts = `export interface Param${capitalCaseString(sName)} {`;
+	ts += buildFields(fields);
+	ts += '\n}\n';
+	ts += buildReturns(pending, returns);
+	return ts;
+	*/
+	return '';
 }
 
 function buildTag(tag: Tag):string {
-	return;
+	let {sName} = tag;
+	let ts = `\t${entityName(sName)}: UqTag;`;
+	return ts;
 }
 
 function buildTagInterface(tag: Tag):string {

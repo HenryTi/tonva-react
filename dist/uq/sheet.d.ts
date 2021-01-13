@@ -34,7 +34,7 @@ export declare class UqSheet<M, V> extends Entity {
     setSchema(schema: any): void;
     build(obj: any): void;
     private createSheetState;
-    save(discription: string, data: M): Promise<SheetSaveReturn>;
+    save(discription: string, data: M): Promise<SheetSaveReturnV<V>>;
     saveDebugDirect(discription: string, data: M): Promise<SheetSaveReturn>;
     action(id: number, flow: number, state: string, action: string): Promise<any>;
     actionDebugDirect(id: number, flow: number, state: string, action: string): Promise<any>;

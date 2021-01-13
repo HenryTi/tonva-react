@@ -1,22 +1,14 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -66,7 +58,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Controller = void 0;
-var React = __importStar(require("react"));
+var jsx_runtime_1 = require("react/jsx-runtime");
 var lodash_1 = __importDefault(require("lodash"));
 var components_1 = require("../components");
 var tool_1 = require("../tool");
@@ -229,8 +221,7 @@ var Controller = /** @class */ (function () {
         alert(text);
     };
     Controller.prototype.errorPage = function (header, err) {
-        this.openPage(React.createElement(components_1.Page, { header: "App error!" },
-            React.createElement("pre", null, typeof err === 'string' ? err : err.message)));
+        this.openPage(jsx_runtime_1.jsx(components_1.Page, __assign({ header: "App error!" }, { children: jsx_runtime_1.jsx("pre", { children: typeof err === 'string' ? err : err.message }, void 0) }), void 0));
     };
     Controller.prototype.onMessage = function (message) {
         return;
@@ -410,18 +401,16 @@ var Controller = /** @class */ (function () {
                             };
                             buttons = [];
                             if (ok !== undefined) {
-                                buttons.push(React.createElement("button", { key: "ok", className: "btn btn-primary mr-3", onClick: function () { return close('ok'); } }, ok));
+                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary mr-3", onClick: function () { return close('ok'); } }, { children: ok }), "ok"));
                             }
                             if (yes !== undefined) {
-                                buttons.push(React.createElement("button", { key: "yes", className: "btn btn-success mr-3", onClick: function () { return close('yes'); } }, yes));
+                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-success mr-3", onClick: function () { return close('yes'); } }, { children: yes }), "yes"));
                             }
                             if (no !== undefined) {
-                                buttons.push(React.createElement("button", { key: "no", className: "btn btn-outline-danger mr-3", onClick: function () { return close('no'); } }, no));
+                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-outline-danger mr-3", onClick: function () { return close('no'); } }, { children: no }), "no"));
                             }
-                            this.openPage(React.createElement(components_1.Page, { header: caption || '请确认', back: "close" },
-                                React.createElement("div", { className: classNames || "rounded bg-white m-5 p-3 border" },
-                                    React.createElement("div", { className: "d-flex align-items-center justify-content-center" }, message),
-                                    React.createElement("div", { className: "mt-3 d-flex align-items-center justify-content-center" }, buttons))));
+                            this.openPage(jsx_runtime_1.jsx(components_1.Page, __assign({ header: caption || '请确认', back: "close" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classNames || "rounded bg-white m-5 p-3 border" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "d-flex align-items-center justify-content-center" }, { children: message }), void 0),
+                                        jsx_runtime_1.jsx("div", __assign({ className: "mt-3 d-flex align-items-center justify-content-center" }, { children: buttons }), void 0)] }), void 0) }), void 0));
                             components_1.nav.regConfirmClose(function () { return __awaiter(_this, void 0, void 0, function () {
                                 return __generator(this, function (_a) {
                                     resolve(undefined);

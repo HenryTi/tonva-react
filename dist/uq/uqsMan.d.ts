@@ -1,7 +1,7 @@
 /// <reference types="react" />
-import { LocalMap, LocalCache } from '../tool';
 import { UqData } from '../net';
 import { UqMan } from './uqMan';
+import { AppConfig } from '../app';
 export interface TVs {
     [uqName: string]: {
         [tuidName: string]: (values: any) => JSX.Element;
@@ -10,17 +10,16 @@ export interface TVs {
 export declare class UQsMan {
     static _uqs: any;
     static value: UQsMan;
-    static errors: string[];
-    static load(tonvaAppName: string, version: string, tvs: TVs): Promise<string[]>;
+    static uqOwnerMap: {
+        [key: string]: string;
+    };
+    static build(appConfig: AppConfig): Promise<string[]>;
+    private static load;
+    private static loadUqs;
     private collection;
     private readonly tvs;
-    readonly appOwner: string;
-    readonly appName: string;
-    readonly localMap: LocalMap;
-    readonly localData: LocalCache;
-    id: number;
-    private constructor();
-    addUq(uq: UqMan): void;
+    protected constructor(tvs: TVs);
+    private buildUqs;
     static uq(uqLower: string): UqMan;
     static getUqUserRoles(uqLower: string): Promise<string[]>;
     private buildTVs;

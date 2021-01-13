@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -75,6 +86,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContextContainer = exports.FormContext = exports.RowContext = exports.Context = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 //import { ArrRow } from './arrRow';
 var mobx_1 = require("mobx");
@@ -90,10 +102,7 @@ var Context = /** @class */ (function () {
             var errors = _this.errors;
             if (errors.length === 0)
                 return null;
-            return React.createElement(React.Fragment, null, errors.map(function (err) { return React.createElement("span", { key: err, className: "text-danger inline-block my-1 ml-3" },
-                React.createElement("i", { className: "fa fa-exclamation-circle" }),
-                " \u00A0",
-                err); }));
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: errors.map(function (err) { return jsx_runtime_1.jsxs("span", __assign({ className: "text-danger inline-block my-1 ml-3" }, { children: [jsx_runtime_1.jsx("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }), err); }) }, void 0);
         });
         mobx_1.makeObservable(this, {
             errors: mobx_1.observable,

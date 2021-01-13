@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -53,6 +64,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WebNavScrollView = exports.ScrollView = exports.Scroller = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var react_1 = __importDefault(require("react"));
 var scrollAfter = 20; // 20ms之后，scroll执行
 var Scroller = /** @class */ (function () {
@@ -156,8 +168,7 @@ var ScrollView = /** @class */ (function (_super) {
     }
     ScrollView.prototype.render = function () {
         var _a = this.props, className = _a.className, style = _a.style;
-        return react_1.default.createElement("div", { ref: this.refDiv, className: "tv-page", onScroll: this.onScroll, style: style },
-            react_1.default.createElement("article", { className: className }, this.props.children));
+        return jsx_runtime_1.jsx("div", __assign({ ref: this.refDiv, className: "tv-page", onScroll: this.onScroll, style: style }, { children: jsx_runtime_1.jsx("article", __assign({ className: className }, { children: this.props.children }), void 0) }), void 0);
     };
     return ScrollView;
 }(ScrollViewBase));
@@ -174,17 +185,12 @@ var WebNavScrollView = /** @class */ (function (_super) {
         if (navRawHeader)
             vHeader = navRawHeader;
         else if (navHeader)
-            vHeader = react_1.default.createElement("header", null,
-                react_1.default.createElement("main", null, navHeader));
+            vHeader = jsx_runtime_1.jsx("header", { children: jsx_runtime_1.jsx("main", { children: navHeader }, void 0) }, void 0);
         if (navRawFooter)
             vFooter = navRawFooter;
         else if (navFooter)
-            vFooter = react_1.default.createElement("footer", null,
-                react_1.default.createElement("main", null, navFooter));
-        return react_1.default.createElement("div", { ref: this.refDiv, className: "tv-page-webnav", onScroll: this.onScroll, style: style },
-            vHeader,
-            react_1.default.createElement("article", { className: className }, this.props.children),
-            vFooter);
+            vFooter = jsx_runtime_1.jsx("footer", { children: jsx_runtime_1.jsx("main", { children: navFooter }, void 0) }, void 0);
+        return jsx_runtime_1.jsxs("div", __assign({ ref: this.refDiv, className: "tv-page-webnav", onScroll: this.onScroll, style: style }, { children: [vHeader, jsx_runtime_1.jsx("article", __assign({ className: className }, { children: this.props.children }), void 0), vFooter] }), void 0);
     };
     return WebNavScrollView;
 }(ScrollViewBase));

@@ -1,19 +1,27 @@
 import { nav, t, setGlobalRes, RouteFunc, Hooks, Navigo, NamedRoute } from "../components";
 import { Controller } from '../vm';
 import { UQsMan, TVs } from "../uq";
-import { appInFrame } from "../net";
+//import { appInFrame } from "../net";
 import { centerApi } from "./centerApi";
-import { VUnitSelect, VErrorsPage, VStartError, VUnsupportedUnit } from "./vMain";
+import { /*VUnitSelect, */VErrorsPage, VStartError, VUnsupportedUnit } from "./vMain";
 
 export interface IConstructor<T> {
     new (...args: any[]): T;
 }
 
 export interface AppConfig {
-    appName: string;        // 格式: owner/appName
-    version: string;        // 版本变化，缓存的uqs才会重载
-    tvs: TVs;
-    uqNameMap?: {[uqName:string]: string};      // uqName='owner/uq' 映射到内存简单名字：uq, 可以注明映射，也可以自动。有可能重
+	app?: {
+		name: string;
+		version: string;
+		ownerMap?: {[key:string]: string};
+	}
+	uqs?: {
+		[owner:string]: {[name:string]:string}; // name: version
+	};
+    //appName: string;        // 格式: owner/appName
+    //version: string;        // 版本变化，缓存的uqs才会重载
+    tvs?: TVs;
+    //uqNameMap?: {[uqName:string]: string};      // uqName='owner/uq' 映射到内存简单名字：uq, 可以注明映射，也可以自动。有可能重
     loginTop?: JSX.Element;
     oem?: string;               // 用户注册发送验证码的oem厂家，默认同花
 	privacy?: string;
@@ -29,21 +37,21 @@ export abstract class CAppBase extends Controller {
 	private appConfig: AppConfig;
     protected _uqs: any;
 
-    protected readonly name: string;
-	protected readonly noUnit: boolean;
+    //protected readonly name: string;
+	//protected readonly noUnit: boolean;
 
-    appUnits:any[];
+    //appUnits:any[];
 
     constructor(config?: AppConfig) {
 		super(undefined);
 		this.appConfig = config || (nav.navSettings as AppConfig);
 		if (this.appConfig) {
-			let {appName, noUnit} = this.appConfig;
-			this.name = appName;
-			if (appName === undefined) {
-				throw new Error('appName like "owner/app" must be defined in MainConfig');
+			let {app, uqs} = this.appConfig;
+			//this.name = appName;
+			if (app === undefined && uqs === undefined) {
+				throw new Error('app or uqs must be defined in AppConfig');
 			}
-			this.noUnit = noUnit;
+			//this.noUnit = noUnit;
 		}
     }
 
@@ -91,42 +99,29 @@ export abstract class CAppBase extends Controller {
         try {
 			this.onNavRoutes();
 			if (!this.appConfig) return true;
-			let {appName, version, tvs} = this.appConfig;
-			await UQsMan.load(appName, version, tvs);
+			let retErrors = await UQsMan.build(this.appConfig);
+            if (retErrors !== undefined) {
+                this.openVPage(VErrorsPage, retErrors);
+                return false;
+            }
 			this._uqs = UQsMan._uqs;
             //let retErrors = await this.load();
             //let app = await loadAppUqs(this.appOwner, this.appName);
             // if (isDevelopment === true) {
 			// 这段代码原本打算只是在程序员调试方式下使用，实际上，也可以开放给普通用户，production方式下
-			let retErrors = UQsMan.errors;
-            let {predefinedUnit} = appInFrame;
+			//let retErrors = UQsMan.errors;
+            //let {predefinedUnit} = appInFrame;
             let {user} = nav;
             if (user !== undefined && user.id > 0) {
+				//this.appUnits
+				//this.noUnit
+				/*
 				let result = await centerApi.userAppUnits(UQsMan.value.id);
 				this.appUnits = result;
-				/*
-				// 老版本，只返回一个数组。新版本，返回两个数组。下面做两个数组的判断
-				if (result.length === 0) {
-					this.appUnits = result;
-				}
-				else {
-					if (Array.isArray(result[0]) === true) {
-						this.appUnits = result[0];
-						let result1 = result[1];
-						if (Array.isArray(result1) === true) {
-							this.roleDefines = result1[0]?.roles?.split('\t');
-							if (this.roleDefines === undefined) this.roleDefines = [];
-						}
-					}
-					else {
-						this.appUnits = result;
-					}
-				}
-				*/
 				if (this.noUnit === true) return true;
                 switch (this.appUnits.length) {
                     case 0:
-                        this.showUnsupport(predefinedUnit);
+                        this.showUnsupport(predefinedUnit, retErrors);
 						return false;
                     case 1:
 						let appUnit = this.appUnits[0];
@@ -136,7 +131,7 @@ export abstract class CAppBase extends Controller {
                         if (appUnitId === undefined || appUnitId < 0 || 
                             (predefinedUnit !== undefined && appUnitId !== predefinedUnit))
                         {
-                            this.showUnsupport(predefinedUnit);
+                            this.showUnsupport(predefinedUnit, retErrors);
                             return false;
                         }
                         appInFrame.unit = appUnitId;
@@ -148,11 +143,8 @@ export abstract class CAppBase extends Controller {
                         }
                         this.openVPage(VUnitSelect);
                         return false;
-                }
-            }
-            if (retErrors !== undefined) {
-                this.openVPage(VErrorsPage, retErrors);
-                return false;
+				}
+				*/
             }
             return true;
         }
@@ -179,9 +171,9 @@ export abstract class CAppBase extends Controller {
 
 	protected onNavRoutes() {return;}
 
-    private showUnsupport(predefinedUnit: number) {
+    private showUnsupport(predefinedUnit: number, uqsLoadErrors: string[]) {
         nav.clear();
-        this.openVPage(VUnsupportedUnit, predefinedUnit);
+        this.openVPage(VUnsupportedUnit, {predefinedUnit, uqsLoadErrors});
 	}
 	
 	async getUqRoles(uqName:string):Promise<string[]> {

@@ -83,13 +83,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TonvaView = exports.nav = exports.Nav = exports.NavView = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_1 = require("mobx");
 var lodash_1 = __importDefault(require("lodash"));
 var page_1 = require("./page/page");
 var netToken_1 = require("../net/netToken");
 var fetchErrorView_1 = __importStar(require("./fetchErrorView"));
-var appBridge_1 = require("../net/appBridge");
 var tool_1 = require("../tool");
 var net_1 = require("../net");
 //import { WsBase, wsBridge } from '../net/wsChannel';
@@ -265,7 +265,7 @@ var NavView = /** @class */ (function (_super) {
                         //nav.navigateToLogin();
                         return [2 /*return*/];
                     case 5:
-                        exports.nav.push(React.createElement(fetchErrorView_1.SystemNotifyPage, { message: "\u5355\u636E\u6B63\u5728\u5904\u7406\u4E2D\u3002\u8BF7\u91CD\u65B0\u64CD\u4F5C\uFF01" }));
+                        exports.nav.push(jsx_runtime_1.jsx(fetchErrorView_1.SystemNotifyPage, { message: "\u5355\u636E\u6B63\u5728\u5904\u7406\u4E2D\u3002\u8BF7\u91CD\u65B0\u64CD\u4F5C\uFF01" }, void 0));
                         return [2 /*return*/];
                     case 6:
                         this.setState({
@@ -279,15 +279,9 @@ var NavView = /** @class */ (function (_super) {
     NavView.prototype.showUpgradeUq = function (uq, version) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.show(React.createElement(page_1.Page, { header: false },
-                    React.createElement("div", null,
-                        "UQ\u5347\u7EA7\u4E86\uFF0C\u8BF7\u70B9\u51FB\u6309\u94AE\u5347\u7EA7 ",
-                        React.createElement("br", null),
-                        React.createElement("small", { className: "text-muted" },
-                            uq,
-                            " ver-",
-                            version),
-                        React.createElement("button", { className: "btn btn-primary", onClick: this.upgradeUq }, "\u5347\u7EA7"))));
+                this.show(jsx_runtime_1.jsx(page_1.Page, __assign({ header: false }, { children: jsx_runtime_1.jsxs("div", { children: ["UQ\u5347\u7EA7\u4E86\uFF0C\u8BF7\u70B9\u51FB\u6309\u94AE\u5347\u7EA7 ", jsx_runtime_1.jsx("br", {}, void 0),
+                            jsx_runtime_1.jsxs("small", __assign({ className: "text-muted" }, { children: [uq, " ver-", version] }), void 0),
+                            jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary", onClick: this.upgradeUq }, { children: "\u5347\u7EA7" }), void 0)] }, void 0) }), void 0));
                 return [2 /*return*/];
             });
         });
@@ -451,26 +445,20 @@ var NavView = /** @class */ (function (_super) {
         var elWait = null, elError = null;
         switch (wait) {
             case 1:
-                elWait = React.createElement("div", { className: "va-wait va-wait1" });
+                elWait = jsx_runtime_1.jsx("div", { className: "va-wait va-wait1" }, void 0);
                 break;
             case 2:
-                elWait = React.createElement("div", { className: "va-wait va-wait2" },
-                    React.createElement(loading_1.Loading, null));
+                elWait = jsx_runtime_1.jsx("div", __assign({ className: "va-wait va-wait2" }, { children: jsx_runtime_1.jsx(loading_1.Loading, {}, void 0) }), void 0);
                 break;
         }
         if (fetchError)
-            elError = React.createElement(fetchErrorView_1.default, __assign({ clearError: this.clearError }, fetchError));
+            elError = jsx_runtime_1.jsx(fetchErrorView_1.default, __assign({ clearError: this.clearError }, fetchError), void 0);
         var test = exports.nav.testing === true &&
-            React.createElement("span", { className: "cursor-pointer position-fixed", style: { top: 0, left: '0.2rem', zIndex: 90001 } },
-                React.createElement(simple_1.FA, { className: "text-warning", name: "info-circle" }));
-        return React.createElement(React.Fragment, null,
-            stack.map(function (item, index) {
-                var key = item.key, view = item.view;
-                return React.createElement("div", { key: key, style: index < top ? { visibility: 'hidden', position: 'absolute' } : undefined }, view);
-            }),
-            elWait,
-            elError,
-            test);
+            jsx_runtime_1.jsx("span", __assign({ className: "cursor-pointer position-fixed", style: { top: 0, left: '0.2rem', zIndex: 90001 } }, { children: jsx_runtime_1.jsx(simple_1.FA, { className: "text-warning", name: "info-circle" }, void 0) }), void 0);
+        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [stack.map(function (item, index) {
+                    var key = item.key, view = item.view;
+                    return jsx_runtime_1.jsx("div", __assign({ style: index < top ? { visibility: 'hidden', position: 'absolute' } : undefined }, { children: view }), key);
+                }), elWait, elError, test] }, void 0);
     };
     NavView.prototype.refresh = function () {
         this.setState({ stack: this.stack });
@@ -547,24 +535,22 @@ var Nav = /** @class */ (function () {
         }
         */
         this.isWebNav = false;
-        this.backIcon = React.createElement("i", { className: "fa fa-angle-left" });
-        this.closeIcon = React.createElement("i", { className: "fa fa-close" });
+        this.backIcon = jsx_runtime_1.jsx("i", { className: "fa fa-angle-left" }, void 0);
+        this.closeIcon = jsx_runtime_1.jsx("i", { className: "fa fa-close" }, void 0);
         this.showPrivacyPage = function () {
             var privacy = _this.getPrivacyContent();
             if (privacy) {
                 _this.privacyPage(privacy);
             }
             else {
-                exports.nav.push(React.createElement(page_1.Page, { header: "\u9690\u79C1\u653F\u7B56" },
-                    React.createElement("div", { className: "p-3" }, "AppConfig \u4E2D\u6CA1\u6709\u5B9A\u4E49 privacy\u3002\u53EF\u4EE5\u5B9A\u4E49\u4E3A\u5B57\u7B26\u4E32\uFF0C\u6216\u8005url\u3002markdown\u683C\u5F0F")));
+                exports.nav.push(jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u9690\u79C1\u653F\u7B56" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "p-3" }, { children: "AppConfig \u4E2D\u6CA1\u6709\u5B9A\u4E49 privacy\u3002\u53EF\u4EE5\u5B9A\u4E49\u4E3A\u5B57\u7B26\u4E32\uFF0C\u6216\u8005url\u3002markdown\u683C\u5F0F" }), void 0) }), void 0));
             }
         };
         this.privacyPage = function (htmlString) { return __awaiter(_this, void 0, void 0, function () {
             var content;
             return __generator(this, function (_a) {
                 content = { __html: htmlString };
-                exports.nav.push(React.createElement(page_1.Page, { header: "\u9690\u79C1\u653F\u7B56" },
-                    React.createElement("div", { className: "p-3", dangerouslySetInnerHTML: content })));
+                exports.nav.push(jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u9690\u79C1\u653F\u7B56" }, { children: jsx_runtime_1.jsx("div", { className: "p-3", dangerouslySetInnerHTML: content }, void 0) }), void 0));
                 return [2 /*return*/];
             });
         }); };
@@ -606,7 +592,7 @@ var Nav = /** @class */ (function () {
             });
         }); };
         this.resetAll = function () {
-            _this.push(React.createElement(reloadPage_1.ConfirmReloadPage, { confirm: function (ok) {
+            _this.push(jsx_runtime_1.jsx(reloadPage_1.ConfirmReloadPage, { confirm: function (ok) {
                     if (ok === true) {
                         _this.showReloadPage('彻底升级');
                         localStorage.clear();
@@ -620,7 +606,7 @@ var Nav = /** @class */ (function () {
                         _this.pop();
                     }
                     return;
-                } }));
+                } }, void 0));
         };
         mobx_1.makeObservable(this, {
             user: mobx_1.observable
@@ -792,7 +778,7 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.init = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var hash, pos, url, ws, resHost, guest, exHash, appInFrame, predefinedUnit;
+            var url, ws, resHost, guest;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -803,13 +789,6 @@ var Nav = /** @class */ (function () {
                         return [4 /*yield*/, net_1.host.start(this.testing)];
                     case 1:
                         _a.sent();
-                        hash = document.location.hash;
-                        if (hash !== undefined && hash.length > 0) {
-                            pos = appBridge_1.getExHashPos();
-                            if (pos < 0)
-                                pos = undefined;
-                            this.hashParam = hash.substring(1, pos);
-                        }
                         url = net_1.host.url, ws = net_1.host.ws, resHost = net_1.host.resHost;
                         this.centerHost = url;
                         this.resUrl = net_1.resUrlFromHost(resHost);
@@ -827,26 +806,6 @@ var Nav = /** @class */ (function () {
                             throw Error('guest can not be undefined');
                         }
                         exports.nav.setGuest(guest);
-                        exHash = appBridge_1.getExHash();
-                        appInFrame = appBridge_1.setAppInFrame(exHash);
-                        if (exHash !== undefined && window !== window.parent) {
-                            // is in frame
-                            if (appInFrame !== undefined) {
-                                //this.ws = wsBridge;
-                                console.log('this.ws = wsBridge in sub frame');
-                                //nav.user = {id:0} as User;
-                                if (window.self !== window.parent) {
-                                    window.parent.postMessage({ type: 'sub-frame-started', hash: appInFrame.hash }, '*');
-                                }
-                                // 下面这一句，已经移到 appBridge.ts 里面的 initSubWin，也就是响应从main frame获得user之后开始。
-                                //await this.showAppView();
-                                return [2 /*return*/];
-                            }
-                        }
-                        return [4 /*yield*/, this.loadPredefinedUnit()];
-                    case 4:
-                        predefinedUnit = _a.sent();
-                        appInFrame.predefinedUnit = predefinedUnit;
                         return [2 /*return*/];
                 }
             });
@@ -961,8 +920,8 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.setIsWebNav = function () {
         this.isWebNav = true;
-        this.backIcon = React.createElement("i", { className: "fa fa-arrow-left" });
-        this.closeIcon = React.createElement("i", { className: "fa fa-close" });
+        this.backIcon = jsx_runtime_1.jsx("i", { className: "fa fa-arrow-left" }, void 0);
+        this.closeIcon = jsx_runtime_1.jsx("i", { className: "fa fa-close" }, void 0);
     };
     Object.defineProperty(Nav.prototype, "isMobile", {
         get: function () { return isMobile; },
@@ -994,7 +953,7 @@ var Nav = /** @class */ (function () {
                     case 0:
                         onLogined = this.navView.props.onLogined;
                         if (onLogined === undefined) {
-                            exports.nav.push(React.createElement("div", null, "NavView has no prop onLogined"));
+                            exports.nav.push(jsx_runtime_1.jsx("div", { children: "NavView has no prop onLogined" }, void 0));
                             return [2 /*return*/];
                         }
                         exports.nav.clear();
@@ -1095,9 +1054,7 @@ var Nav = /** @class */ (function () {
     Nav.prototype.privacyEntry = function () {
         if (!this.getPrivacyContent())
             return;
-        return React.createElement("div", { className: "text-center" },
-            React.createElement("button", { className: "btn btn-sm btn-link", onClick: this.showPrivacyPage },
-                React.createElement("small", { className: "text-muted" }, "\u9690\u79C1\u653F\u7B56")));
+        return jsx_runtime_1.jsx("div", __assign({ className: "text-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-link", onClick: this.showPrivacyPage }, { children: jsx_runtime_1.jsx("small", __assign({ className: "text-muted" }, { children: "\u9690\u79C1\u653F\u7B56" }), void 0) }), void 0) }), void 0);
     };
     Nav.prototype.getPrivacyContent = function () {
         if (!this.navSettings)
@@ -1154,13 +1111,9 @@ var Nav = /** @class */ (function () {
             var footer;
             var _this = this;
             return __generator(this, function (_a) {
-                footer = React.createElement("div", { className: "text-center justify-content-center" },
-                    React.createElement("button", { className: "btn btn-outline-danger", onClick: this.resetAll }, "\u5347\u7EA7\u8F6F\u4EF6"));
-                exports.nav.push(React.createElement(page_1.Page, { header: "\u5B89\u5168\u9000\u51FA", back: "close", footer: footer },
-                    React.createElement("div", { className: "my-5 mx-1 border border-info bg-white rounded p-3 text-center" },
-                        React.createElement("div", null, "\u9000\u51FA\u5F53\u524D\u8D26\u53F7\u4E0D\u4F1A\u5220\u9664\u4EFB\u4F55\u5386\u53F2\u6570\u636E\uFF0C\u4E0B\u6B21\u767B\u5F55\u4F9D\u7136\u53EF\u4EE5\u4F7F\u7528\u672C\u8D26\u53F7"),
-                        React.createElement("div", { className: "mt-3 text-center" },
-                            React.createElement("button", { className: "btn btn-danger", onClick: function () { return _this.logout(callback); } }, "\u5B89\u5168\u9000\u51FA")))));
+                footer = jsx_runtime_1.jsx("div", __assign({ className: "text-center justify-content-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-outline-danger", onClick: this.resetAll }, { children: "\u5347\u7EA7\u8F6F\u4EF6" }), void 0) }), void 0);
+                exports.nav.push(jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u5B89\u5168\u9000\u51FA", back: "close", footer: footer }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "my-5 mx-1 border border-info bg-white rounded p-3 text-center" }, { children: [jsx_runtime_1.jsx("div", { children: "\u9000\u51FA\u5F53\u524D\u8D26\u53F7\u4E0D\u4F1A\u5220\u9664\u4EFB\u4F55\u5386\u53F2\u6570\u636E\uFF0C\u4E0B\u6B21\u767B\u5F55\u4F9D\u7136\u53EF\u4EE5\u4F7F\u7528\u672C\u8D26\u53F7" }, void 0),
+                            jsx_runtime_1.jsx("div", __assign({ className: "mt-3 text-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-danger", onClick: function () { return _this.logout(callback); } }, { children: "\u5B89\u5168\u9000\u51FA" }), void 0) }), void 0)] }), void 0) }), void 0));
                 return [2 /*return*/];
             });
         });
@@ -1205,7 +1158,7 @@ var Nav = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        net_1.appInFrame.unit = undefined;
+                        //appInFrame.unit = undefined;
                         this.local.logoutClear();
                         this.user = undefined; //{} as User;
                         net_1.logoutApis();
@@ -1235,7 +1188,7 @@ var Nav = /** @class */ (function () {
                     case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../entry/changePassword')); })];
                     case 1:
                         cp = _a.sent();
-                        exports.nav.push(React.createElement(cp.ChangePasswordPage, null));
+                        exports.nav.push(jsx_runtime_1.jsx(cp.ChangePasswordPage, {}, void 0));
                         return [2 /*return*/];
                 }
             });
@@ -1331,32 +1284,35 @@ var Nav = /** @class */ (function () {
     Nav.prototype.confirmBox = function (message) {
         return this.navView.confirmBox(message);
     };
-    Nav.prototype.navToApp = function (url, unitId, apiId, sheetType, sheetId) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (resolve, reject) {
-                        var sheet = _this.centerHost.includes('http://localhost:') === true ? 'sheet_debug' : 'sheet';
-                        var uh = sheetId === undefined ?
-                            appBridge_1.appUrl(url, unitId) :
-                            appBridge_1.appUrl(url, unitId, sheet, [apiId, sheetType, sheetId]);
-                        console.log('navToApp: %s', JSON.stringify(uh));
-                        exports.nav.push(React.createElement("article", { className: 'app-container' },
-                            React.createElement("span", { id: uh.hash, onClick: function () { return _this.back(); } },
-                                React.createElement("i", { className: "fa fa-arrow-left" })),
-                            // eslint-disable-next-line 
-                            React.createElement("iframe", { src: uh.url, title: String(sheetId) })), function () {
-                            resolve();
-                        });
-                    })];
-            });
-        });
-    };
-    Nav.prototype.navToSite = function (url) {
-        // show in new window
-        window.open(url);
-    };
     Object.defineProperty(Nav.prototype, "logs", {
+        /*
+        async navToApp(url: string, unitId: number, apiId?:number, sheetType?:number, sheetId?:number):Promise<void> {
+            return new Promise<void>((resolve, reject) => {
+                let sheet = this.centerHost.includes('http://localhost:') === true? 'sheet_debug':'sheet'
+                let uh = sheetId === undefined?
+                        appUrl(url, unitId) :
+                        appUrl(url, unitId, sheet, [apiId, sheetType, sheetId]);
+                console.log('navToApp: %s', JSON.stringify(uh));
+                nav.push(<article className='app-container'>
+                    <span id={uh.hash} onClick={()=>this.back()} >
+                        <i className="fa fa-arrow-left" />
+                    </span>
+                    {
+                        // eslint-disable-next-line
+                        <iframe src={uh.url} title={String(sheetId)} />
+                    }
+                </article>,
+                ()=> {
+                    resolve();
+                });
+            });
+        }
+    
+        navToSite(url: string) {
+            // show in new window
+            window.open(url);
+        }
+        */
         get: function () { return logs; },
         enumerable: false,
         configurable: true
@@ -1375,7 +1331,7 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.showReloadPage = function (msg) {
         var seconds = -1;
-        this.push(React.createElement(reloadPage_1.ReloadPage, { message: msg, seconds: seconds }));
+        this.push(jsx_runtime_1.jsx(reloadPage_1.ReloadPage, { message: msg, seconds: seconds }, void 0));
         /*
         if (seconds > 0) {
             env.setTimeout(undefined, this.reload, seconds*1000);

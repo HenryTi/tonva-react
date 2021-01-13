@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -42,31 +55,65 @@ var net_1 = require("../net");
 var uqMan_1 = require("./uqMan");
 var components_1 = require("../components");
 var UQsMan = /** @class */ (function () {
-    function UQsMan(tonvaAppName, tvs) {
+    function UQsMan(tvs) {
         this.tvs = tvs || {};
         this.buildTVs();
         this.collection = {};
-        var parts = tonvaAppName.split('/');
-        if (parts.length !== 2) {
-            throw new Error('tonvaApp name must be / separated, owner/app');
-        }
-        this.appOwner = parts[0];
-        this.appName = parts[1];
-        this.localMap = tool_1.env.localDb.map(tonvaAppName);
-        this.localData = this.localMap.child('uqData');
     }
+    UQsMan.build = function (appConfig) {
+        return __awaiter(this, void 0, void 0, function () {
+            var app, uqs, tvs, retErrors, name_1, version, ownerMap, i, uqNames, map, owner, ownerObj, name_2, v;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        app = appConfig.app, uqs = appConfig.uqs, tvs = appConfig.tvs;
+                        if (!app) return [3 /*break*/, 2];
+                        name_1 = app.name, version = app.version, ownerMap = app.ownerMap;
+                        UQsMan.uqOwnerMap = ownerMap || {};
+                        for (i in ownerMap)
+                            ownerMap[i.toLowerCase()] = ownerMap[i];
+                        return [4 /*yield*/, UQsMan.load(name_1, version, tvs)];
+                    case 1:
+                        retErrors = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 2:
+                        if (!uqs) return [3 /*break*/, 4];
+                        uqNames = [];
+                        map = UQsMan.uqOwnerMap = {};
+                        for (owner in uqs) {
+                            ownerObj = uqs[owner];
+                            for (name_2 in ownerObj) {
+                                v = ownerObj[name_2];
+                                if (name_2 === '$') {
+                                    map[owner.toLowerCase()] = v;
+                                    continue;
+                                }
+                                uqNames.push({ owner: owner, name: name_2, version: v });
+                            }
+                        }
+                        return [4 /*yield*/, UQsMan.loadUqs(uqNames, tvs)];
+                    case 3:
+                        retErrors = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 4: throw new Error('either uqs or app must be defined in AppConfig');
+                    case 5: return [2 /*return*/, retErrors];
+                }
+            });
+        });
+    };
+    // 返回 errors, 每个uq一行
     UQsMan.load = function (tonvaAppName, version, tvs) {
         return __awaiter(this, void 0, void 0, function () {
-            var uqsMan, appOwner, appName, localData, uqAppData, _i, _a, uq, id, uqs, retErrors;
+            var uqsMan, appOwner, appName, localData, uqAppData, _i, _a, uq, id, uqs, ownerProfixMap;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        uqsMan = UQsMan.value = new UQsMan(tonvaAppName, tvs);
+                        uqsMan = UQsMan.value = new UQsManApp(tonvaAppName, tvs);
                         appOwner = uqsMan.appOwner, appName = uqsMan.appName;
                         localData = uqsMan.localData;
                         uqAppData = localData.get();
                         if (!(!uqAppData || uqAppData.version !== version)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, net_1.loadAppUqs(appOwner, appName)];
+                        return [4 /*yield*/, loadAppUqs(appOwner, appName)];
                     case 1:
                         uqAppData = _b.sent();
                         if (!uqAppData.id) {
@@ -85,30 +132,60 @@ var UQsMan = /** @class */ (function () {
                     case 2:
                         id = uqAppData.id, uqs = uqAppData.uqs;
                         uqsMan.id = id;
-                        console.error(uqAppData);
-                        return [4 /*yield*/, uqsMan.init(uqs)];
-                    case 3:
-                        _b.sent();
-                        return [4 /*yield*/, uqsMan.load()];
-                    case 4:
-                        retErrors = _b.sent();
+                        return [2 /*return*/, uqsMan.buildUqs(uqs)];
+                }
+            });
+        });
+    };
+    // 返回 errors, 每个uq一行
+    UQsMan.loadUqs = function (uqNames, tvs) {
+        return __awaiter(this, void 0, void 0, function () {
+            var uqsMan, uqs;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uqsMan = UQsMan.value = new UQsMan(tvs);
+                        return [4 /*yield*/, loadUqs(uqNames)];
+                    case 1:
+                        uqs = _a.sent();
+                        return [2 /*return*/, uqsMan.buildUqs(uqs)];
+                }
+            });
+        });
+    };
+    UQsMan.prototype.buildUqs = function (uqDataArr) {
+        return __awaiter(this, void 0, void 0, function () {
+            var retErrors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: 
+                    //let uqsMan: UQsMan = UQsMan.value;
+                    return [4 /*yield*/, this.init(uqDataArr)];
+                    case 1:
+                        //let uqsMan: UQsMan = UQsMan.value;
+                        _a.sent();
+                        return [4 /*yield*/, this.load()];
+                    case 2:
+                        retErrors = _a.sent();
                         if (retErrors.length === 0) {
-                            retErrors.push.apply(retErrors, uqsMan.setTuidImportsLocal());
+                            retErrors.push.apply(retErrors, this.setTuidImportsLocal());
                             if (retErrors.length === 0) {
-                                UQsMan._uqs = uqsMan.buildUQs();
+                                UQsMan._uqs = this.buildUQs();
                                 return [2 /*return*/];
                             }
                         }
-                        UQsMan.errors = retErrors;
-                        return [2 /*return*/];
+                        //UQsMan.errors = retErrors;
+                        return [2 /*return*/, retErrors];
                 }
             });
         });
     };
     // to be removed in the future
-    UQsMan.prototype.addUq = function (uq) {
+    /*
+    addUq(uq: UqMan) {
         this.collection[uq.name] = uq;
-    };
+    }
+    */
     UQsMan.uq = function (uqLower) {
         return UQsMan.value.collection[uqLower];
     };
@@ -164,6 +241,7 @@ var UQsMan = /** @class */ (function () {
                             //this.cUqCollection[uqFullName] = cUq;
                             //this.uqs.addUq(cUq.uq);
                             var uq = new uqMan_1.UqMan(_this, uqData, undefined, _this.tvs[uqFullName] || _this.tvs[uqName]);
+                            uq.ownerProfix = UQsMan.uqOwnerMap[uqOwner.toLowerCase()];
                             _this.collection[uqFullName] = uq;
                             var lower = uqFullName.toLowerCase();
                             if (lower !== uqFullName) {
@@ -181,13 +259,19 @@ var UQsMan = /** @class */ (function () {
     };
     UQsMan.prototype.load = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var retErrors, promises, i, uq, results, _i, results_1, result, retError;
+            var retErrors, promises, lowerUqNames, i, lower, uq, results, _i, results_1, result, retError;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         retErrors = [];
                         promises = [];
+                        lowerUqNames = [];
+                        // collection有小写名字，还有正常名字
                         for (i in this.collection) {
+                            lower = i.toLowerCase();
+                            if (lowerUqNames.indexOf(lower) >= 0)
+                                continue;
+                            lowerUqNames.push(lower);
                             uq = this.collection[i];
                             promises.push(uq.loadEntities());
                         }
@@ -214,21 +298,23 @@ var UQsMan = /** @class */ (function () {
         var _loop_1 = function (i) {
             var uqMan = this_1.collection[i];
             //let n = uqMan.name;
-            var uqName = uqMan.uqName;
+            var uqName = uqMan.uqName, ownerProfix = uqMan.ownerProfix;
             var l = uqName.toLowerCase();
             var uqKey = uqName.split(/[-._]/).join('').toLowerCase();
+            if (ownerProfix)
+                uqKey = ownerProfix + uqKey;
             var entities = uqMan.entities;
             var keys = Object.keys(entities);
             for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
                 var key = keys_1[_i];
                 var entity = entities[key];
-                var name_1 = entity.name;
-                entities[name_1.toLowerCase()] = entity;
+                var name_3 = entity.name;
+                entities[name_3.toLowerCase()] = entity;
             }
             var proxy = uqs[l] = new Proxy(entities, {
                 get: function (target, key, receiver) {
                     var lk = key.toLowerCase();
-                    if (lk === 'uqname') {
+                    if (lk === '$name') {
                         return uqMan.name;
                     }
                     var ret = target[lk];
@@ -272,7 +358,9 @@ var UQsMan = /** @class */ (function () {
         return this.collection;
     };
     UQsMan.prototype.showReload = function (msg) {
-        this.localMap.removeAll();
+        for (var i in this.collection) {
+            this.collection[i].localMap.removeAll();
+        }
         components_1.nav.showReloadPage(msg);
     };
     UQsMan.prototype.setTuidImportsLocal = function () {
@@ -313,4 +401,50 @@ var UQsMan = /** @class */ (function () {
     return UQsMan;
 }());
 exports.UQsMan = UQsMan;
+var UQsManApp = /** @class */ (function (_super) {
+    __extends(UQsManApp, _super);
+    function UQsManApp(tonvaAppName, tvs) {
+        var _this = _super.call(this, tvs) || this;
+        var parts = tonvaAppName.split('/');
+        if (parts.length !== 2) {
+            throw new Error('tonvaApp name must be / separated, owner/app');
+        }
+        _this.appOwner = parts[0];
+        _this.appName = parts[1];
+        _this.localMap = tool_1.env.localDb.map(tonvaAppName);
+        _this.localData = _this.localMap.child('uqData');
+        return _this;
+    }
+    return UQsManApp;
+}(UQsMan));
+function loadAppUqs(appOwner, appName) {
+    return __awaiter(this, void 0, void 0, function () {
+        var centerAppApi, ret;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    centerAppApi = new net_1.CenterAppApi('tv/', undefined);
+                    return [4 /*yield*/, centerAppApi.appUqs(appOwner, appName)];
+                case 1:
+                    ret = _a.sent();
+                    return [2 /*return*/, ret];
+            }
+        });
+    });
+}
+function loadUqs(uqs) {
+    return __awaiter(this, void 0, void 0, function () {
+        var a, centerAppApi, ret;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    centerAppApi = new net_1.CenterAppApi('tv/', undefined);
+                    return [4 /*yield*/, centerAppApi.uqs(uqs)];
+                case 1:
+                    ret = _a.sent();
+                    return [2 /*return*/, ret];
+            }
+        });
+    });
+}
 //# sourceMappingURL=uqsMan.js.map

@@ -50,6 +50,7 @@ var book_1 = require("./book");
 var history_1 = require("./history");
 var map_1 = require("./map");
 var pending_1 = require("./pending");
+var tool_1 = require("../tool");
 var reactBoxId_1 = require("./tuid/reactBoxId");
 var tag_1 = require("./tag/tag");
 var enum_1 = require("./enum");
@@ -111,33 +112,35 @@ var UqMan = /** @class */ (function () {
             this.createBoxId = this.createBoxIdFromTVs;
             this.tvs = tvs || {};
         }
-        var id = uqData.id, uqOwner = uqData.uqOwner, uqName = uqData.uqName, access = uqData.access, newVersion = uqData.newVersion;
+        var id = uqData.id, uqOwner = uqData.uqOwner, uqName = uqData.uqName, /*access, */ newVersion = uqData.newVersion;
         this.newVersion = newVersion;
         this.uqOwner = uqOwner;
         this.uqName = uqName;
         this.id = id;
         this.name = uqOwner + '/' + uqName;
         this.uqVersion = 0;
-        this.localMap = uqs.localMap.map(this.name);
+        //this.localMap = uqs.localMap.map(this.name);
+        this.localMap = tool_1.env.localDb.map(this.name);
         this.localModifyMax = this.localMap.child('$modifyMax');
-        this.localAccess = this.localMap.child('$access');
-        //let hash = document.location.hash;
+        this.localEntities = this.localMap.child('$access');
         var baseUrl = 'tv/';
-        var acc;
+        /*
+        let acc: string[];
         if (access === null || access === undefined || access === '*') {
             acc = [];
         }
         else {
-            acc = access.split(';').map(function (v) { return v.trim(); }).filter(function (v) { return v.length > 0; });
+            acc = access.split(';').map(v => v.trim()).filter(v => v.length > 0);
         }
+        */
         if (this.name === '$$$/$unitx') {
             // 这里假定，点击home link之后，已经设置unit了
             // 调用 UnitxApi会自动搜索绑定 unitx service
-            this.uqApi = new net_1.UnitxApi(net_1.appInFrame.unit);
+            this.uqApi = new net_1.UnitxApi(tool_1.env.unit);
         }
         else {
-            var appOwner = uqs.appOwner, appName = uqs.appName;
-            this.uqApi = new net_1.UqApi(baseUrl, appOwner, appName, uqOwner, uqName, acc, true);
+            //let {appOwner, appName} = uqs;
+            this.uqApi = new net_1.UqApi(baseUrl, /*appOwner, appName, */ uqOwner, uqName /*, acc*/, true);
         }
         this.tuidsCache = new tuid_1.TuidsCache(this);
     }
@@ -203,9 +206,9 @@ var UqMan = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
-                        entities = this.localAccess.get();
+                        entities = this.localEntities.get();
                         if (!!entities) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.uqApi.loadAccess()];
+                        return [4 /*yield*/, this.uqApi.loadEntities()];
                     case 1:
                         entities = _a.sent();
                         _a.label = 2;
@@ -226,7 +229,7 @@ var UqMan = /** @class */ (function () {
         if (entities === undefined) {
             debugger;
         }
-        this.localAccess.set(entities);
+        this.localEntities.set(entities);
         var access = entities.access, tuids = entities.tuids, role = entities.role, version = entities.version;
         this.uqVersion = version;
         this.allRoles = role === null || role === void 0 ? void 0 : role.names;

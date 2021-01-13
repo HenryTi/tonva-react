@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -78,6 +89,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RootTabs = exports.Tabs = exports.TabsView = exports.TabCaptionComponent = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_1 = require("mobx");
 var mobx_react_1 = require("mobx-react");
@@ -107,7 +119,7 @@ var Tab = /** @class */ (function () {
                     this._content = this.page.content();
                 }
                 else {
-                    this._content = React.createElement("div", { className: "p-5" }, "tab \u5E94\u8BE5\u5B9A\u4E49content\u6216\u8005page");
+                    this._content = jsx_runtime_1.jsx("div", __assign({ className: "p-5" }, { children: "tab \u5E94\u8BE5\u5B9A\u4E49content\u6216\u8005page" }), void 0);
                 }
             }
             return this._content;
@@ -143,10 +155,8 @@ var Tab = /** @class */ (function () {
     };
     return Tab;
 }());
-var TabCaptionComponent = function (label, icon, color) { return React.createElement("div", { className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color },
-    React.createElement("div", null,
-        React.createElement("i", { className: 'fa fa-lg fa-' + icon })),
-    React.createElement("small", null, label)); };
+var TabCaptionComponent = function (label, icon, color) { return jsx_runtime_1.jsxs("div", __assign({ className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color }, { children: [jsx_runtime_1.jsx("div", { children: jsx_runtime_1.jsx("i", { className: 'fa fa-lg fa-' + icon }, void 0) }, void 0),
+        jsx_runtime_1.jsx("small", { children: label }, void 0)] }), void 0); };
 exports.TabCaptionComponent = TabCaptionComponent;
 //export const TabCaption = TabCaptionComponent;
 var TabsView = /** @class */ (function () {
@@ -213,78 +223,56 @@ var TabsView = /** @class */ (function () {
                 }
             }
             var cn = classnames_1.default('tv-tabs', _this.tabBg, _this.sep, 'tv-tabs-' + _this.size);
-            var tabs = React.createElement("div", { className: cn }, _this.tabArr.map(function (v, index) {
-                var selected = v.selected, caption = v.caption, notify = v.notify;
-                var notifyCircle;
-                if (notify !== undefined) {
-                    var num = notify.get();
-                    if (num !== undefined) {
-                        if (num > 0)
-                            notifyCircle = React.createElement("u", null, num > 99 ? '99+' : num);
-                        else if (num < 0)
-                            notifyCircle = React.createElement("u", { className: "dot" });
+            var tabs = jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: _this.tabArr.map(function (v, index) {
+                    var selected = v.selected, caption = v.caption, notify = v.notify;
+                    var notifyCircle;
+                    if (notify !== undefined) {
+                        var num = notify.get();
+                        if (num !== undefined) {
+                            if (num > 0)
+                                notifyCircle = jsx_runtime_1.jsx("u", { children: num > 99 ? '99+' : num }, void 0);
+                            else if (num < 0)
+                                notifyCircle = jsx_runtime_1.jsx("u", { className: "dot" }, void 0);
+                        }
                     }
-                }
-                return React.createElement("div", { key: index, onClick: function () { return _this.tabClick(v); }, style: selected === true ? bsCur : bsTab },
-                    React.createElement("div", null,
-                        notifyCircle,
-                        caption(selected)));
-            }));
+                    return jsx_runtime_1.jsx("div", __assign({ onClick: function () { return _this.tabClick(v); }, style: selected === true ? bsCur : bsTab }, { children: jsx_runtime_1.jsxs("div", { children: [notifyCircle, caption(selected)] }, void 0) }), index);
+                }) }), void 0);
             return tabs;
         });
         this.content = mobx_react_1.observer(function () {
             var displayNone = { visibility: 'hidden' };
-            return React.createElement(React.Fragment, null, _this.tabArr.map(function (v, index) {
-                var tabPosition = _this.props.tabPosition;
-                var content = v.content, page = v.page, onScroll = v.onScroll, onScrollTop = v.onScrollTop, onScrollBottom = v.onScrollBottom, className = v.className;
-                var tabs = React.createElement(_this.tabs);
-                var pageHeader, pageFooter;
-                if (page !== undefined) {
-                    pageHeader = page.header();
-                    pageFooter = page.footer();
-                }
-                var header, footer;
-                var visibility = { visibility: 'hidden' };
-                if (tabPosition === 'top') {
-                    header = React.createElement(React.Fragment, null,
-                        React.createElement("section", { className: "tv-page-header" },
-                            React.createElement("header", null,
-                                tabs,
-                                pageHeader)),
-                        React.createElement("header", { style: visibility },
-                            tabs,
-                            pageHeader));
-                    if (pageFooter !== undefined) {
-                        footer = React.createElement(React.Fragment, null,
-                            React.createElement("footer", { style: visibility }, pageFooter),
-                            React.createElement("section", { className: "tv-page-footer" },
-                                React.createElement("footer", null, pageFooter)));
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: _this.tabArr.map(function (v, index) {
+                    var tabPosition = _this.props.tabPosition;
+                    var content = v.content, page = v.page, onScroll = v.onScroll, onScrollTop = v.onScrollTop, onScrollBottom = v.onScrollBottom, className = v.className;
+                    var tabs = React.createElement(_this.tabs);
+                    var pageHeader, pageFooter;
+                    if (page !== undefined) {
+                        pageHeader = page.header();
+                        pageFooter = page.footer();
                     }
-                }
-                else {
-                    if (pageHeader !== undefined) {
-                        header = React.createElement(React.Fragment, null,
-                            React.createElement("section", { className: 'tv-page-header' },
-                                React.createElement("header", null, pageHeader)),
-                            React.createElement("header", { style: visibility }, pageHeader));
+                    var header, footer;
+                    var visibility = { visibility: 'hidden' };
+                    if (tabPosition === 'top') {
+                        header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: "tv-page-header" }, { children: jsx_runtime_1.jsxs("header", { children: [tabs, pageHeader] }, void 0) }), void 0),
+                                jsx_runtime_1.jsxs("header", __assign({ style: visibility }, { children: [tabs, pageHeader] }), void 0)] }, void 0);
+                        if (pageFooter !== undefined) {
+                            footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("footer", __assign({ style: visibility }, { children: pageFooter }), void 0),
+                                    jsx_runtime_1.jsx("section", __assign({ className: "tv-page-footer" }, { children: jsx_runtime_1.jsx("footer", { children: pageFooter }, void 0) }), void 0)] }, void 0);
+                        }
                     }
-                    footer = React.createElement(React.Fragment, null,
-                        React.createElement("footer", { style: visibility },
-                            pageFooter,
-                            tabs),
-                        React.createElement("section", { className: 'tv-page-footer' },
-                            React.createElement("footer", null,
-                                pageFooter,
-                                tabs)));
-                }
-                var style;
-                if (v.selected === false)
-                    style = displayNone;
-                return React.createElement(scrollView_1.ScrollView, { key: index, className: className, style: style, onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom },
-                    header,
-                    content,
-                    footer);
-            }));
+                    else {
+                        if (pageHeader !== undefined) {
+                            header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-header' }, { children: jsx_runtime_1.jsx("header", { children: pageHeader }, void 0) }), void 0),
+                                    jsx_runtime_1.jsx("header", __assign({ style: visibility }, { children: pageHeader }), void 0)] }, void 0);
+                        }
+                        footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsxs("footer", __assign({ style: visibility }, { children: [pageFooter, tabs] }), void 0),
+                                jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-footer' }, { children: jsx_runtime_1.jsxs("footer", { children: [pageFooter, tabs] }, void 0) }), void 0)] }, void 0);
+                    }
+                    var style;
+                    if (v.selected === false)
+                        style = displayNone;
+                    return jsx_runtime_1.jsxs(scrollView_1.ScrollView, __assign({ className: className, style: style, onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom }, { children: [header, content, footer] }), index);
+                }) }, void 0);
         });
         this.props = props;
         var size = props.size, tabs = props.tabs, tabBack = props.tabBg, sep = props.sep, selected = props.selected;
@@ -332,20 +320,17 @@ var TabsView = /** @class */ (function () {
         var header, footer;
         var visibility = { display: 'none' };
         if (tabPosition === 'top') {
-            header = React.createElement("header", null, tabs);
+            header = jsx_runtime_1.jsx("header", { children: tabs }, void 0);
         }
         else {
-            footer = React.createElement("footer", null, tabs);
+            footer = jsx_runtime_1.jsx("footer", { children: tabs }, void 0);
         }
-        return React.createElement(React.Fragment, null,
-            header,
-            this.tabArr.map(function (v, index) {
-                var style;
-                if (v.selected === false)
-                    style = visibility;
-                return React.createElement("div", { key: index, className: classnames_1.default(v.className), style: style }, v.content);
-            }),
-            footer);
+        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [header, this.tabArr.map(function (v, index) {
+                    var style;
+                    if (v.selected === false)
+                        style = visibility;
+                    return jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(v.className), style: style }, { children: v.content }), index);
+                }), footer] }, void 0);
     };
     return TabsView;
 }());

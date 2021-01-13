@@ -69,6 +69,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageItemEdit = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var mobx_react_1 = require("mobx-react");
 var mobx_1 = require("mobx");
@@ -108,7 +109,7 @@ var ImageItemEdit = /** @class */ (function (_super) {
                 </div>;
             }
             */
-            return React.createElement(resUploader_1.ImageUploader, { label: '更改' + _this.label, id: _this.resId, size: size, onSaved: function (resId) { resolve(resId); return; } });
+            return jsx_runtime_1.jsx(resUploader_1.ImageUploader, { label: '更改' + _this.label, id: _this.resId, size: size, onSaved: function (resId) { resolve(resId); return; } }, void 0);
             /*
             return <Page header={'更改' + this.label} right={right}>
                 <div className="my-3 px-3 py-3 bg-white">

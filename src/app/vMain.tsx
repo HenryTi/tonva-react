@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Page, FA, nav, LMR, List } from "../components";
+//import * as React from 'react';
+import { Page, nav, LMR } from "../components";
 import { VPage } from '../vm';
-import { appInFrame } from '../net';
+//import { appInFrame } from '../net';
 import { CAppBase } from "./CAppBase";
-import { UQsMan } from '../uq';
+//import { UQsMan } from '../uq';
 
 /*
 export class VAppMain extends VPage<CMainBase> {
@@ -38,14 +38,17 @@ export class VAppMain extends VPage<CMainBase> {
 }
 */
 export class VUnsupportedUnit extends VPage<CAppBase> {
-    async open(predefinedUnit: number) {
-        this.openPage(this.page, {predefinedUnit:predefinedUnit});
+	private params: {predefinedUnit:number, uqsLoadErrors:string[]};
+    async open(params: {predefinedUnit:number, uqsLoadErrors:string[]}) {
+		this.params = params;
+        this.openPage(this.page);
     }
 
-    private page = ({predefinedUnit}:{predefinedUnit: number}) => {
+    private page = () => {
+		let {predefinedUnit, uqsLoadErrors} = this.params;
         let {user} = nav;
-        let userName:string = user? user.name : '[未登录]';
-        let {appOwner, appName} = UQsMan.value;
+		let userName:string = user? user.name : '[未登录]';
+		//let {appOwner, appName} = UQsMan.value;
         return <Page header="APP无法运行" logout={true}>
             <div className="m-3 text-danger container">
                 <div className="form-group row">
@@ -53,28 +56,17 @@ export class VUnsupportedUnit extends VPage<CAppBase> {
                     <div className="col-sm text-body">{userName}</div>
                 </div>
                 <div className="form-group row">
-                    <div className="col-sm-3 font-weight-bold">App</div>
-                    <div className="col-sm text-body">{`${appOwner}/${appName}`}</div>
-                </div>
-                <div className="form-group row">
                     <div className="col-sm-3 font-weight-bold">预设小号</div>
                     <div className="col-sm text-body">{predefinedUnit || <small className="">[无预设小号]</small>}</div>
                 </div>
-                <div className="form-group row">
-                    <div className="col-sm-3 font-weight-bold">
-                        可能原因<FA name="exclamation-triangle" />
-                    </div>
-                    <div className="col-sm text-body">
-                        <ul className="p-0">
-                            <li>没有小号运行 {appName}</li>
-                            <li>用户 <b>{userName}</b> 没有加入任何一个运行{appName}的小号</li>
-                            {
-                                predefinedUnit && 
-                                <li>预设小号 <b>{predefinedUnit}</b> 没有运行App {appName}</li>
-                            }
-                        </ul>
-                    </div>
-                </div>
+				{
+					uqsLoadErrors && uqsLoadErrors.map(v => {
+						return <div className="form-group row">
+							<div className="col-sm-3 font-weight-bold">App</div>
+							<div className="col-sm text-body">{v}</div>
+						</div>
+					})
+				}
                 <div className="form-group row">
                     <div className="col-sm-3 font-weight-bold">小号{predefinedUnit}</div>
                     <div className="col-sm text-body">
@@ -85,8 +77,25 @@ export class VUnsupportedUnit extends VPage<CAppBase> {
                     </div>
                 </div>
             </div>
-        </Page>;
-    }
+		</Page>;		
+	}
+	/*
+	<div className="form-group row">
+		<div className="col-sm-3 font-weight-bold">
+			可能原因<FA name="exclamation-triangle" />
+		</div>
+		<div className="col-sm text-body">
+			<ul className="p-0">
+				<li>没有小号运行 {appName}</li>
+				<li>用户 <b>{userName}</b> 没有加入任何一个运行{appName}的小号</li>
+				{
+					predefinedUnit && 
+					<li>预设小号 <b>{predefinedUnit}</b> 没有运行App {appName}</li>
+				}
+			</ul>
+		</div>
+	</div>
+	*/
 }
 
 export class VUnitSelect extends VPage<CAppBase> {
@@ -101,16 +110,17 @@ export class VUnitSelect extends VPage<CAppBase> {
         </LMR>;
     }
     private onRowClick = async (appUnit: any) => {
-		appInFrame.unit = appUnit.id; // 25;
+		//appInFrame.unit = appUnit.id; // 25;
 		//this.controller.setAppUnit(appUnit);
         await this.controller.start();
     }
 
     private page = () => {
         return <Page header="选择小号" logout={true}>
-            <List items={this.controller.appUnits} item={{render: this.renderRow, onClick: this.onRowClick}}/>
+			<div>this.controller.appUnits appUnits removed</div>
         </Page>
-    }
+        // <List items={this.controller.appUnits} item={{render: this.renderRow, onClick: this.onRowClick}}/>
+	}
 }
 
 export class VErrorsPage extends VPage<CAppBase> {
