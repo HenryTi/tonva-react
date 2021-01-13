@@ -122,6 +122,7 @@ export class UQsMan {
 	}
 
     private buildTVs() {
+		if (!this.tvs) return;
         for (let i in this.tvs) {
             let uqTVs = this.tvs[i];
             if (uqTVs === undefined) continue;

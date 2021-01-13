@@ -1327,7 +1327,7 @@
         "affectsGlobalScope": false
       },
       "./src/uq/uqsman.ts": {
-        "version": "5b1b55d9180629b2c892481e087f609af423fe034c8ca3b1b093e72fbcba954c",
+        "version": "4a2751185e6513f0ed85746d75efbcde75daecbc123e4f90f66ffb521220348a",
         "signature": "5180a8d853af41f6e866694b8e709c255962e9b2440ed325d696b26a56a470f9",
         "affectsGlobalScope": false
       },

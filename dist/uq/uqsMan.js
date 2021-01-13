@@ -207,6 +207,8 @@ var UQsMan = /** @class */ (function () {
         });
     };
     UQsMan.prototype.buildTVs = function () {
+        if (!this.tvs)
+            return;
         for (var i in this.tvs) {
             var uqTVs = this.tvs[i];
             if (uqTVs === undefined)
