@@ -35,6 +35,12 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -90,9 +96,9 @@ var lodash_1 = __importDefault(require("lodash"));
 var page_1 = require("./page/page");
 var netToken_1 = require("../net/netToken");
 var fetchErrorView_1 = __importStar(require("./fetchErrorView"));
+//import {appUrl, setAppInFrame, getExHash, getExHashPos} from '../net/appBridge';
 var tool_1 = require("../tool");
 var net_1 = require("../net");
-//import { WsBase, wsBridge } from '../net/wsChannel';
 var res_1 = require("../res/res");
 var loading_1 = require("./loading");
 var navigo_1 = require("./navigo");
@@ -103,6 +109,7 @@ require("../css/animation.css");
 var simple_1 = require("./simple");
 var net_2 = require("../net");
 var reloadPage_1 = require("./reloadPage");
+var auth_1 = require("../auth");
 var regEx = new RegExp('Android|webOS|iPhone|iPad|' +
     'BlackBerry|Windows Phone|' +
     'Opera Mini|IEMobile|Mobile', 'i');
@@ -470,7 +477,7 @@ var Nav = /** @class */ (function () {
     function Nav() {
         var _this = this;
         this.local = new tool_1.LocalData();
-        this.user = null;
+        this.user = undefined;
         this.arrs = ['/test', '/test/'];
         this.windowOnError = function (event, source, lineno, colno, error) {
             debugger;
@@ -522,6 +529,7 @@ var Nav = /** @class */ (function () {
                 return [2 /*return*/];
             });
         }); };
+        this.doneSysRoutes = false;
         this.sysRoutes = {
             '/login': this.navLogin,
             '/logout': this.navLogout,
@@ -554,6 +562,7 @@ var Nav = /** @class */ (function () {
                 return [2 /*return*/];
             });
         }); };
+        this.createLogin = auth_1.createLogin;
         this.reload = function () { return __awaiter(_this, void 0, void 0, function () {
             var waiting, registration, plus, webview, webView;
             return __generator(this, function (_a) {
@@ -608,9 +617,6 @@ var Nav = /** @class */ (function () {
                     return;
                 } }, void 0));
         };
-        mobx_1.makeObservable(this, {
-            user: mobx_1.observable
-        });
         var lang = res_1.resOptions.lang, district = res_1.resOptions.district;
         this.language = lang;
         this.culture = district;
@@ -820,17 +826,13 @@ var Nav = /** @class */ (function () {
                         _a.trys.push([0, 7, 8, 9]);
                         window.onerror = this.windowOnError;
                         window.onunhandledrejection = this.windowOnUnhandledRejection;
-                        //window.addEventListener('click', this.windowOnClick);
-                        //window.addEventListener('mousemove', this.windowOnMouseMove);
-                        //window.addEventListener('touchmove', this.windowOnMouseMove);
-                        //window.addEventListener('scroll', this.windowOnScroll);
                         if (isMobile === true) {
                             document.onselectstart = function () { return false; };
                             document.oncontextmenu = function () { return false; };
                         }
                         //window.setInterval(()=>console.error('tick every 5 seconds'), 5000);
                         exports.nav.clear();
-                        exports.nav.onSysNavRoutes();
+                        //nav.onSysNavRoutes();
                         this.startWait();
                         user = this.local.user.get();
                         if (!(user === undefined)) return [3 /*break*/, 5];
@@ -880,9 +882,6 @@ var Nav = /** @class */ (function () {
         }
         return this.navigo.on(args[0], args[1], args[2]);
     };
-    Nav.prototype.onSysNavRoutes = function () {
-        this.onNavRoutes(this.sysRoutes);
-    };
     Nav.prototype.navigateToLogin = function () {
         exports.nav.navigate('/login');
     };
@@ -907,7 +906,19 @@ var Nav = /** @class */ (function () {
     Nav.prototype.onNavRoute = function (navPage) {
         this.on(this.routeFromNavPage(navPage));
     };
+    /*
+    onSysNavRoutes() {
+        this.onNavRoutes(this.sysRoutes);
+    }
+    */
     Nav.prototype.onNavRoutes = function (navPageRoutes) {
+        if (this.doneSysRoutes === false) {
+            this.doneSysRoutes = true;
+            this.internalOnNavRoutes(this.sysRoutes);
+        }
+        this.internalOnNavRoutes(navPageRoutes);
+    };
+    Nav.prototype.internalOnNavRoutes = function (navPageRoutes) {
         if (!navPageRoutes)
             return;
         this.navPageRoutes = lodash_1.default.merge(this.navPageRoutes, navPageRoutes);
@@ -933,8 +944,9 @@ var Nav = /** @class */ (function () {
             alert('Is not in webnav state, cannot navigate to url "' + url + '"');
             return;
         }
-        if (this.testing === true)
+        if (this.testing === true) {
             url += '#test';
+        }
         return this.navigo.navigate(url, absolute);
     };
     Nav.prototype.go = function (showPage, url, absolute) {
@@ -1008,12 +1020,16 @@ var Nav = /** @class */ (function () {
                         exports.nav.clear();
                         if (!(callback !== undefined)) return [3 /*break*/, 1];
                         callback(user);
-                        return [3 /*break*/, 3];
-                    case 1: return [4 /*yield*/, this.showAppView(isUserLogin)];
-                    case 2:
+                        return [3 /*break*/, 4];
+                    case 1:
+                        if (!(this.isWebNav === true)) return [3 /*break*/, 2];
+                        this.navigate('/index');
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, this.showAppView(isUserLogin)];
+                    case 3:
                         _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -1062,45 +1078,33 @@ var Nav = /** @class */ (function () {
         var privacy = this.navSettings.privacy;
         return privacy;
     };
-    /*
-        private async getPrivacy(privacy:string):Promise<string> {
-            const headers = new  Headers({
-                "Content-Type":'text/plain'
-           })
-            let pos = privacy.indexOf('://');
-            if (pos > 0) {
-                let http = privacy.substring(0, pos).toLowerCase();
-                if (http === 'http' || http === 'https') {
-                    try {
-                        let res = await fetch(privacy, {
-                            method:'GET',
-                            headers: headers,
-                        });
-                        let text = await res.text();
-                        return text;
-                    }
-                    catch (err) {
-                        return err.message;
-                    }
+    Nav.prototype.setCreateLogin = function (createLogin) {
+        this.createLogin = createLogin;
+    };
+    Nav.prototype.getLogin = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (this.login)
+                            return [2 /*return*/, this.login];
+                        _a = this;
+                        return [4 /*yield*/, this.createLogin()];
+                    case 1: return [2 /*return*/, _a.login = _b.sent()];
                 }
-            }
-            return privacy;
-        }
-    */
+            });
+        });
+    };
     Nav.prototype.showLogin = function (callback, withBack) {
         return __awaiter(this, void 0, void 0, function () {
-            var lv, loginView;
+            var login;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../entry/login')); })];
+                    case 0: return [4 /*yield*/, this.getLogin()];
                     case 1:
-                        lv = _a.sent();
-                        loginView = React.createElement(lv.default, { withBack: withBack, callback: callback });
-                        if (withBack !== true) {
-                            this.navView.clear();
-                            this.pop();
-                        }
-                        this.navView.push(loginView);
+                        login = _a.sent();
+                        login.showLogin(callback, withBack);
                         return [2 /*return*/];
                 }
             });
@@ -1108,28 +1112,27 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.showLogout = function (callback) {
         return __awaiter(this, void 0, void 0, function () {
-            var footer;
-            var _this = this;
+            var login;
             return __generator(this, function (_a) {
-                footer = jsx_runtime_1.jsx("div", __assign({ className: "text-center justify-content-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-outline-danger", onClick: this.resetAll }, { children: "\u5347\u7EA7\u8F6F\u4EF6" }), void 0) }), void 0);
-                exports.nav.push(jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u5B89\u5168\u9000\u51FA", back: "close", footer: footer }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "my-5 mx-1 border border-info bg-white rounded p-3 text-center" }, { children: [jsx_runtime_1.jsx("div", { children: "\u9000\u51FA\u5F53\u524D\u8D26\u53F7\u4E0D\u4F1A\u5220\u9664\u4EFB\u4F55\u5386\u53F2\u6570\u636E\uFF0C\u4E0B\u6B21\u767B\u5F55\u4F9D\u7136\u53EF\u4EE5\u4F7F\u7528\u672C\u8D26\u53F7" }, void 0),
-                            jsx_runtime_1.jsx("div", __assign({ className: "mt-3 text-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-danger", onClick: function () { return _this.logout(callback); } }, { children: "\u5B89\u5168\u9000\u51FA" }), void 0) }), void 0)] }), void 0) }), void 0));
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getLogin()];
+                    case 1:
+                        login = _a.sent();
+                        login.showLogout(callback);
+                        return [2 /*return*/];
+                }
             });
         });
     };
     Nav.prototype.showRegister = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var lv, c;
+            var login;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../entry/register')); })];
+                    case 0: return [4 /*yield*/, this.getLogin()];
                     case 1:
-                        lv = _a.sent();
-                        c = new lv.RegisterController(undefined);
-                        return [4 /*yield*/, c.start()];
-                    case 2:
-                        _a.sent();
+                        login = _a.sent();
+                        login.showRegister();
                         return [2 /*return*/];
                 }
             });
@@ -1137,16 +1140,13 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.showForget = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var lv, c;
+            var login;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../entry/register')); })];
+                    case 0: return [4 /*yield*/, this.getLogin()];
                     case 1:
-                        lv = _a.sent();
-                        c = new lv.ForgetController(undefined);
-                        return [4 /*yield*/, c.start()];
-                    case 2:
-                        _a.sent();
+                        login = _a.sent();
+                        login.showForget();
                         return [2 /*return*/];
                 }
             });
@@ -1182,13 +1182,13 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.changePassword = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var cp;
+            var login;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../entry/changePassword')); })];
+                    case 0: return [4 /*yield*/, this.getLogin()];
                     case 1:
-                        cp = _a.sent();
-                        exports.nav.push(jsx_runtime_1.jsx(cp.ChangePasswordPage, {}, void 0));
+                        login = _a.sent();
+                        login.showChangePassword();
                         return [2 /*return*/];
                 }
             });
@@ -1294,7 +1294,7 @@ var Nav = /** @class */ (function () {
                         appUrl(url, unitId, sheet, [apiId, sheetType, sheetId]);
                 console.log('navToApp: %s', JSON.stringify(uh));
                 nav.push(<article className='app-container'>
-                    <span id={uh.hash} onClick={()=>this.back()} >
+                    <span id={uh.hash} onClick={()=>this.back()}/>
                         <i className="fa fa-arrow-left" />
                     </span>
                     {
@@ -1361,6 +1361,9 @@ var Nav = /** @class */ (function () {
             });
         });
     };
+    __decorate([
+        mobx_1.observable
+    ], Nav.prototype, "user", void 0);
     return Nav;
 }());
 exports.Nav = Nav;

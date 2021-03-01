@@ -35,8 +35,8 @@ var NumberWidget = /** @class */ (function (_super) {
         var res = this.context.form.res;
         var _a = this.itemSchema, min = _a.min, max = _a.max;
         this.rules.push(this.itemSchema.type === 'integer' ?
-            new rules_1.RuleNum(res, min, max) :
-            new rules_1.RuleInt(res, min, max));
+            new rules_1.RuleInt(res, min, max) :
+            new rules_1.RuleNum(res, min, max));
         /*
         if (this.itemSchema.type === 'integer') {
             this.rules.push(new RuleInt);

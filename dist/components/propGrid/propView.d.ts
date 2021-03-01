@@ -17,6 +17,8 @@ export interface StringProp extends LabeledProp {
 export interface NumberProp extends LabeledProp {
     type: 'number';
     name: string;
+    isInt: boolean;
+    time: boolean;
 }
 export interface FormatProp extends LabeledProp {
     type: 'format';

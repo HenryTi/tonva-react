@@ -152,14 +152,17 @@ var PageItems = /** @class */ (function () {
         });
     };
     PageItems.prototype.reset = function () {
-        this.isFirst = true;
-        this.beforeLoad = true;
-        this.loaded = false;
-        this.param = undefined;
-        this.allLoaded = false;
-        this.pageStart = undefined;
-        this._items.clear();
-        //this.setPageStart(undefined);
+        var _this = this;
+        mobx_1.runInAction(function () {
+            _this.isFirst = true;
+            _this.beforeLoad = true;
+            _this.loaded = false;
+            _this.param = undefined;
+            _this.allLoaded = false;
+            _this.pageStart = undefined;
+            _this._items.clear();
+            //this.setPageStart(undefined);
+        });
     };
     PageItems.prototype.append = function (item) {
         if (this.appendPosition === 'tail')
@@ -315,7 +318,8 @@ var PageItems = /** @class */ (function () {
     };
     PageItems.prototype.more = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var pageSize, ret, len;
+            var pageSize, ret, len, allLoaded;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -325,8 +329,10 @@ var PageItems = /** @class */ (function () {
                             return [2 /*return*/, true];
                         if (this.changing === true)
                             return [2 /*return*/, true];
-                        this.loading = true;
-                        this.changing = true;
+                        mobx_1.runInAction(function () {
+                            _this.loading = true;
+                            _this.changing = true;
+                        });
                         return [4 /*yield*/, this.onLoad()];
                     case 1:
                         _a.sent();
@@ -340,37 +346,25 @@ var PageItems = /** @class */ (function () {
                         return [4 /*yield*/, this.load(this.param, this.pageStart, pageSize)];
                     case 2:
                         ret = _a.sent();
-                        this.loaded = true;
                         len = ret.length;
                         if ((this.isFirst === true && len > this.firstSize) ||
                             (this.isFirst === false && len > this.pageSize)) {
-                            this.allLoaded = false;
+                            allLoaded = false;
                             --len;
                             ret.splice(len, 1);
                         }
                         else {
-                            this.allLoaded = true;
+                            allLoaded = true;
                         }
-                        /*
-                        if (len === 0) {
-                            this.setPageStart(undefined);
-                            this._items.clear();
-                        }
-                        else {
-                            this.setPageStart(ret[len-1]);
-                            if (this.appendPosition === 'tail') {
-                                this._items.push(...ret);
-                            }
-                            else {
-                                this._items.unshift(...ret.reverse());
-                            }
-                        }
-                        */
                         this.setLoaded(ret);
-                        this.isFirst = false;
                         this.onLoaded();
-                        this.changing = false;
-                        this.loading = false;
+                        mobx_1.runInAction(function () {
+                            _this.loaded = true;
+                            _this.allLoaded = allLoaded;
+                            _this.isFirst = false;
+                            _this.changing = false;
+                            _this.loading = false;
+                        });
                         return [2 /*return*/, !this.allLoaded];
                 }
             });

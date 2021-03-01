@@ -6,6 +6,8 @@ export declare const env: {
     params: {
         [key: string]: string;
     };
+    lang: string;
+    district: string;
     isDevelopment: boolean;
     localDb: LocalMap;
     setTimeout: (tag: string, callback: (...args: any[]) => void, ms: number, ...args: any[]) => NodeJS.Timer;

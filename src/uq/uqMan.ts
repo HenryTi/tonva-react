@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import { UqApi, UqData, UnitxApi/*, appInFrame*/ } from '../net';
+import { UqApi, UqData, UnitxApi } from '../net';
 import { Tuid, TuidDiv, TuidImport, TuidInner, TuidBox, TuidsCache } from './tuid';
 import { Action } from './action';
 import { Sheet } from './sheet';
@@ -9,12 +8,15 @@ import { History } from './history';
 import { Map } from './map';
 import { Pending } from './pending';
 import { CreateBoxId, BoxId } from './tuid';
-import { LocalMap, LocalCache, env } from '../tool';
+import { LocalMap, LocalCache, env, capitalCase } from '../tool';
 import { UQsMan } from './uqsMan';
 import { ReactBoxId } from './tuid/reactBoxId';
 import { Tag } from './tag/tag';
 import { UqEnum } from './enum';
 import { Entity } from './entity';
+import { CenterApi, centerApi, UqConfig } from '../app';
+import { ID, IX, IDX } from './ID';
+import { nav } from '../components';
 
 export type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'char' | 'text'
     | 'datetime' | 'date' | 'time' | 'timestamp';
@@ -66,11 +68,170 @@ export interface TuidModify {
     seconds: number;
 }
 
+interface ParamPage {
+	start:number;
+	end?: number;
+	size:number;
+}
+
+export interface ParamIDDetail<M,D> {
+	master: {
+		ID: ID;
+		value: M;
+	};
+	detail: {
+		ID: ID;
+		values: D[];
+	};
+}
+
+export interface RetIDDetail {
+	master: number;
+	detail: number[];
+}
+
+export interface ParamIDNO {
+	ID: ID;
+}
+
+export interface ParamIDDetail2<M,D,D2> extends ParamIDDetail<M, D> {
+	detail2: {
+		ID: ID;
+		values: D2[];
+	};
+}
+
+export interface RetIDDetail2 extends RetIDDetail {
+	detail2: number[];
+}
+
+export interface ParamIDDetail3<M,D,D2,D3> extends ParamIDDetail2<M, D, D2> {
+	detail3: {
+		ID: ID;
+		values: D3[];
+	};
+}
+
+export interface RetIDDetail3 extends RetIDDetail2 {
+	detail3: number[];
+}
+
+export interface ParamIDDetailGet {
+	id: number;
+	master: ID;
+	detail: ID;
+	detail2?: ID;
+	detail3?: ID;
+}
+
+export interface ParamID {
+	IDX: (ID|IDX) | (ID|IDX)[];
+	id: number | number[];
+	page?: ParamPage;
+}
+
+export interface ParamKeyID {
+	ID: ID;
+	key: {[key:string]:string|number};
+	IDX?: (ID|IDX)[];
+	page?: ParamPage;
+}
+
+export interface ParamIX {
+	IX: IX;
+	id: number | number[];
+	IDX?: (ID|IDX)[];
+	page?: ParamPage;
+}
+
+export interface ParamKeyIX {
+	ID: ID;
+	key: {[key:string]:string|number};
+	IX: IX;
+	IDX?: (ID|IDX)[];
+	page?: ParamPage;
+}
+
+export interface ParamIDLog {
+	IDX: (ID|IDX);
+	field: string;
+	id: number;
+	log: 'each' | 'day' | 'week' | 'month' | 'year';
+	timeZone?: number;
+	far?: number;
+	near?: number;
+	page: ParamPage;
+}
+
+export interface ParamIDSum {
+	IDX: IDX;
+	field: string[];
+	id: number|number[];
+	far?: number;				// 以前
+	near?: number;				// 最近
+}
+
+export interface ParamIDxID {
+	ID: ID;
+	IX: IX;
+	ID2: ID;
+	page?: ParamPage;
+}
+
+export interface IDXValue {
+	value: number;
+	time?: number|Date;
+}
+
+export interface ParamIDinIX {
+	ID: ID;
+	id: number;
+	IX: IX;
+	page?: ParamPage;
+}
+
+export interface ParamIDTree {
+	ID: ID;
+	parent: number;
+	key: string|number;
+	level?: number;				// 无值，默认1一级
+	page?: ParamPage;
+}
+
+function IDPath(path:string):string {return path;}
+
+export interface Uq {
+	$: UqMan;
+	IDActs(param:any): Promise<any>;
+	IDDetail<M,D>(param: ParamIDDetail<M,D>): Promise<RetIDDetail>;
+	IDDetail<M,D,D2>(param: ParamIDDetail2<M,D,D2>): Promise<RetIDDetail2>;
+	IDDetail<M,D,D2,D3>(param: ParamIDDetail3<M,D,D2,D3>): Promise<RetIDDetail3>;
+	IDNO(param: ParamIDNO): Promise<string>;
+	IDDetailGet<M,D>(param: ParamIDDetailGet): Promise<[M[], D[]]>;
+	IDDetailGet<M,D,D2>(param: ParamIDDetailGet): Promise<[M[], D[], D2[]]>;
+	IDDetailGet<M,D,D2,D3>(param: ParamIDDetailGet): Promise<[M[], D[], D2[], D3[]]>;
+	ID<T>(param: ParamID): Promise<T[]>;
+	KeyID<T>(param: ParamKeyID): Promise<T[]>;
+	IX<T>(param: ParamIX): Promise<T[]>;
+	IXr<T> (param: ParamIX): Promise<T[]>; // IX id2 反查ID list
+	KeyIX<T>(param: ParamKeyIX): Promise<T[]>;
+	IDLog<T> (param: ParamIDLog): Promise<T[]>;
+	IDSum<T> (param: ParamIDSum): Promise<T[]>;
+	IDxID<T,T2> (param: ParamIDxID): Promise<[T[],T2[]]>; // ID list with IX 对应的子集
+	IDinIX<T>(param:ParamIDinIX): Promise<T&{$in:boolean}[]>;
+	IDTree<T>(param:ParamIDTree): Promise<T[]>;
+}
+
 export class UqMan {
+	private readonly entities: {[name:string]: Entity} = {};
 	private readonly enums: {[name:string]: UqEnum} = {};
-    private readonly actions: {[name:string]: Action} = {};
-    private readonly sheets: {[name:string]: Sheet} = {};
+	private readonly actions: {[name:string]: Action} = {};
     private readonly queries: {[name:string]: Query} = {};
+	private readonly ids: {[name:string]: ID} = {};
+	private readonly idxs: {[name:string]: IDX} = {};
+	private readonly ixs: {[name:string]: IX} = {};
+
+    private readonly sheets: {[name:string]: Sheet} = {};
     private readonly books: {[name:string]: Book} = {};
     private readonly maps: {[name:string]: Map} = {};
     private readonly histories: {[name:string]: History} = {};
@@ -91,7 +252,8 @@ export class UqMan {
 	readonly id: number;
 
     uqVersion: number;
-	ownerProfix: string;
+	//ownerProfix: string;
+	config: UqConfig;
 
     constructor(uqs:UQsMan, uqData: UqData, createBoxId:CreateBoxId, tvs:{[entity:string]:(values:any)=>JSX.Element}) {
         this.createBoxId = createBoxId;
@@ -133,13 +295,11 @@ export class UqMan {
         this.tuidsCache = new TuidsCache(this);
     }
 
-    get entities() {
-        return _.merge({}, 
-            this.actions, this.sheets, this.queries, this.books,
-			this.maps, this.histories, this.pendings, this.tuids,
-			this.tags,
-        );
-    }
+	get center():CenterApi {return centerApi;}
+
+	getID(name:string):ID {return this.ids[name.toLowerCase()];};
+	getIDX(name:string):IDX {return this.idxs[name.toLowerCase()];};
+	getIX(name:string):IX {return this.ixs[name.toLowerCase()];};
 
     private createBoxIdFromTVs:CreateBoxId = (tuid:Tuid, id:number):BoxId =>{
         let {name} = tuid;
@@ -183,9 +343,12 @@ export class UqMan {
 	allRoles: string[];
     readonly tuidArr: Tuid[] = [];
     readonly actionArr: Action[] = [];
+    readonly queryArr: Query[] = [];
+    readonly idArr: ID[] = [];
+    readonly idxArr: IDX[] = [];
+    readonly ixArr: IX[] = [];
     readonly enumArr: UqEnum[] = [];
     readonly sheetArr: Sheet[] = [];
-    readonly queryArr: Query[] = [];
     readonly bookArr: Book[] = [];
     readonly mapArr: Map[] = [];
     readonly historyArr: History[] = [];
@@ -219,7 +382,7 @@ export class UqMan {
 		this.uqVersion = version;
 		this.allRoles = role?.names;
         this.buildTuids(tuids);
-        this.buildAccess(access);
+		this.buildAccess(access);
 	}
 	
     private buildTuids(tuids:any) {
@@ -256,6 +419,9 @@ export class UqMan {
 			this.historyArr,
 			this.pendingArr,
 			this.tagArr,
+			this.idArr,
+			this.idxArr,
+			this.ixArr,
 		];
 		entities.forEach(arr => {
 			arr.forEach(v => {
@@ -286,17 +452,24 @@ export class UqMan {
         this.tuidsCache.cacheTuids(defer);
     }
 
+	private setEntity(name:string, entity:Entity) {
+		this.entities[name] = entity;
+		this.entities[name.toLowerCase()] = entity;
+	}
+
     newEnum(name:string, id:number):UqEnum {
         let enm = this.enums[name];
         if (enm !== undefined) return enm;
-        enm = this.enums[name] = new UqEnum(this, name, id)
+		enm = this.enums[name] = new UqEnum(this, name, id);
+		this.setEntity(name, enm);
         this.enumArr.push(enm);
         return enm;
     }
 	newAction(name:string, id:number):Action {
         let action = this.actions[name];
         if (action !== undefined) return action;
-        action = this.actions[name] = new Action(this, name, id)
+        action = this.actions[name] = new Action(this, name, id);
+		this.setEntity(name, action);
         this.actionArr.push(action);
         return action;
     }
@@ -308,6 +481,7 @@ export class UqMan {
         else
             tuid = new TuidInner(this, name, id);
         this.tuids[name] = tuid;
+		this.setEntity(name, tuid);
         this.tuidArr.push(tuid);
         return tuid;
     }
@@ -315,6 +489,7 @@ export class UqMan {
         let query = this.queries[name];
         if (query !== undefined) return query;
         query = this.queries[name] = new Query(this, name, id)
+		this.setEntity(name, query);
         this.queryArr.push(query);
         return query;
     }
@@ -322,6 +497,7 @@ export class UqMan {
         let book = this.books[name];
         if (book !== undefined) return book;
         book = this.books[name] = new Book(this, name, id);
+		this.setEntity(name, book);
         this.bookArr.push(book);
         return book;
     }
@@ -329,6 +505,7 @@ export class UqMan {
         let map = this.maps[name];
         if (map !== undefined) return map;
         map = this.maps[name] = new Map(this, name, id)
+		this.setEntity(name, map);
         this.mapArr.push(map);
         return map;
     }
@@ -336,6 +513,7 @@ export class UqMan {
         let tag = this.tags[name];
         if (tag !== undefined) return tag;
         tag = this.tags[name] = new Tag(this, name, id)
+		this.setEntity(name, tag);
         this.tagArr.push(tag);
         return tag;
     }
@@ -343,6 +521,7 @@ export class UqMan {
         let history = this.histories[name];
         if (history !== undefined) return;
         history = this.histories[name] = new History(this, name, id)
+		this.setEntity(name, history);
         this.historyArr.push(history);
         return history;
     }
@@ -350,15 +529,44 @@ export class UqMan {
         let pending = this.pendings[name];
         if (pending !== undefined) return;
         pending = this.pendings[name] = new Pending(this, name, id)
+		this.setEntity(name, pending);
         this.pendingArr.push(pending);
         return pending;
     }
-    newSheet(name:string, id:number):Sheet {
+    private newSheet(name:string, id:number):Sheet {
         let sheet = this.sheets[name];
         if (sheet !== undefined) return sheet;
         sheet = this.sheets[name] = new Sheet(this, name, id);
+		this.setEntity(name, sheet);
         this.sheetArr.push(sheet);
         return sheet;
+    }
+    private newID(name:string, id:number):ID {
+		let lName = name.toLowerCase();
+        let idEntity = this.ids[lName];
+        if (idEntity !== undefined) return idEntity;
+        idEntity = this.ids[lName] = new ID(this, name, id);
+		this.setEntity(name, idEntity);
+        this.idArr.push(idEntity);
+        return idEntity;
+    }
+    private newIDX(name:string, id:number):IDX {
+		let lName = name.toLowerCase();
+        let idx = this.idxs[lName];
+        if (idx !== undefined) return idx;
+        idx = this.idxs[lName] = new IDX(this, name, id);
+		this.setEntity(name, idx);
+        this.idxArr.push(idx);
+        return idx;
+    }
+    private newIX(name:string, id:number):IX {
+		let lName = name.toLowerCase();
+        let ix = this.ixs[lName];
+        if (ix !== undefined) return ix;
+        ix = this.ixs[lName] = new IX(this, name, id);
+		this.setEntity(name, ix);
+        this.ixArr.push(ix);
+        return ix;
     }
     private fromType(name:string, type:string) {
         let parts = type.split('|');
@@ -370,7 +578,10 @@ export class UqMan {
                 // Tuid should not be created here!;
                 //let tuid = this.newTuid(name, id);
                 //tuid.sys = false;
-                break;
+				break;
+			case 'id': this.newID(name, id); break;
+			case 'idx': this.newIDX(name, id); break;
+			case 'ix': this.newIX(name, id); break;
             case 'action': this.newAction(name, id); break;
             case 'query': this.newQuery(name, id); break;
             case 'book': this.newBook(name, id); break;
@@ -436,5 +647,289 @@ export class UqMan {
 
     pullModify(modifyMax:number) {
         this.tuidsCache.pullModify(modifyMax);
+	}
+
+	getUqKey() {
+		//let l = this.uqName.toLowerCase();
+		let uqKey:string = this.uqName.split(/[-._]/).join('').toLowerCase();
+		if (this.config) {
+			let {dev} = this.config;
+			uqKey = capitalCase(dev.alias || dev.name) + capitalCase(uqKey);
+		}
+		return uqKey;
+	}
+
+	proxy():any {
+		let ret = new Proxy(this.entities, {
+			get: (target, key, receiver) => {
+				let lk = (key as string).toLowerCase();
+				if (lk === '$') {
+					return this;
+				}
+				let ret = target[lk];
+				if (ret !== undefined) return ret;
+				switch (key) {
+					default: debugger; break;
+					case 'IDActs': return this.IDActs;
+					case 'IDDetail': return this.IDDetail;
+					case 'IDNO': return this.IDNO;
+					case 'IDDetailGet': return this.IDDetailGet;
+					case 'ID': return this.ID;
+					case 'KeyID': return this.KeyID;
+					case 'IX': return this.IX;
+					case 'IXr': return this.IXr;
+					case 'KeyIX': return this.KeyIX;
+					case 'IDLog': return this.IDLog;
+					case 'IDSum': return this.IDSum;
+					case 'IDinIX': return this.IDinIX;
+					case 'IDxID': return this.IDxID;
+					case 'IDTree': return this.IDTree;
+				}
+				let err = `entity ${this.name}.${String(key)} not defined`;
+				console.error(err);
+				this.showReload('UQ错误：' + err);
+				return undefined;
+			}
+		});
+		return ret;
+	}
+
+    private showReload(msg: string) {
+		this.localMap.removeAll();
+		nav.showReloadPage(msg);
     }
+
+	//private coms:any;
+	//private setComs = (coms: any) => {this.coms = coms;}
+	private IDActs = async (param:any): Promise<any> => {
+		// 这边的obj属性序列，也许会不一样
+		let arr:string[] = [];
+		let apiParam:any = {};
+		for (let i in param) {
+			arr.push(i);
+			apiParam[i] = (param[i] as any[]).map(v => {
+				let obj:any = {};
+				for (let j in v) {
+					let val = v[j];
+					if (typeof val === 'object') {
+						let nv:any = {};
+						for (let n in val) {
+							let tv = val[n];
+							if (tv && typeof tv === 'object') {
+								if (n === 'time') {
+									if (Object.prototype.toString.call(tv) === '[object Date]') {
+										tv = (tv as Date).getTime();
+									}
+								}
+								else {
+									let id = tv['id'];
+									tv = id;
+								}
+							}
+							nv[n] = tv;
+						}
+						obj[j] = nv;
+					}
+					else {
+						obj[j] = val;
+					}
+				}
+				return obj;
+			});
+		}
+		apiParam['$'] = arr;
+		let ret = await this.uqApi.post(IDPath('id-acts'), apiParam);
+		let retArr = (ret[0].ret as string).split('\n');
+		let retActs:{[key:string]:number[]} = {};
+		for (let i=0; i<arr.length; i++) {
+			retActs[arr[i]] = ids(retArr[i].split('\t'));
+		}
+		return retActs;
+	}
+
+	private IDDetail = async (param: ParamIDDetail<any, any>): Promise<any> => {
+		let {master, detail, detail2, detail3} = param as unknown as ParamIDDetail3<any, any, any, any>;
+		let postParam:any = {
+			master: {
+				name: entityName(master.ID),
+				value: toScalars(master.value),
+			},
+			detail: {
+				name: entityName(detail.ID),
+				values: detail.values?.map(v => toScalars(v)),
+			},
+		}
+		if (detail2) {
+			postParam.detail2 = {
+				name: entityName(detail2.ID),
+				values: detail2.values?.map(v => toScalars(v)),
+			}
+		}
+		if (detail3) {
+			postParam.detail3 = {
+				name: entityName(detail3.ID),
+				values: detail3.values?.map(v => toScalars(v)),
+			}
+		}
+		let ret = await this.uqApi.post(IDPath('id-detail'), postParam);
+		let val:string = ret[0].ret;
+		let parts = val.split('\n');
+		let items = parts.map(v => v.split('\t'));
+		ret = {
+			master: ids(items[0])[0],
+			detail: ids(items[1]),
+			detail2: ids(items[2]),
+			detail3: ids(items[3]),
+		};
+		return ret;
+	}
+
+	private IDNO = async (param: ParamIDNO): Promise<string> => {
+		let {ID} = param;
+		let ret = await this.uqApi.post(IDPath('id-no'), {ID: entityName(ID)});
+		return ret;
+	}
+
+	private IDDetailGet = async (param: ParamIDDetailGet): Promise<any> => {
+		let {id, master, detail, detail2, detail3} = param;
+		let ret = await this.uqApi.post(IDPath('id-detail-get'), {
+			id,
+			master: entityName(master),
+			detail: entityName(detail),
+			detail2: entityName(detail2),
+			detail3: entityName(detail3),
+		});
+		return ret;
+	}
+
+	//private checkParam(ID:ID, IDX:(ID|IDX)|(ID|IDX)[], IX:IX, id:number|number[], key:{[key:string]:string|number}, page: ParamPage) {
+	//}
+	private IDXToString(p:ID|IDX|((ID|IDX)[])):string|string[] {
+		if (Array.isArray(p) === true) return (p as (ID|IDX)[]).map(v => entityName(v));
+		return entityName(p as ID|IDX);
+	}
+	private ID = async (param: ParamID): Promise<any[]> => {
+		let {IDX} = param;
+		//this.checkParam(null, IDX, null, id, null, page);
+		let ret = await this.uqApi.post(IDPath('id'), {
+			...param,
+			IDX: this.IDXToString(IDX),
+		});
+		return ret;
+	}
+	private KeyID = async (param: ParamKeyID): Promise<any[]> => {
+		let {ID, IDX} = param;
+		//this.checkParam(null, IDX, null, null, key, page);
+		let ret = await this.uqApi.post(IDPath('key-id'), {
+			...param,
+			ID: entityName(ID),
+			IDX: IDX?.map(v => entityName(v)),
+		});
+		return ret;
+	}
+	private IX = async (param: ParamIX): Promise<any[]> => {
+		let {IX, IDX} = param;
+		//this.checkParam(null, IDX, IX, id, null, page);
+		let ret = await this.uqApi.post(IDPath('ix'), {
+			...param,
+			IX: entityName(IX),
+			IDX: IDX?.map(v => entityName(v)),
+		});
+		return ret;
+	}
+	private IXr = async (param: ParamIX): Promise<any[]> => {
+		let {IX, IDX} = param;
+		//this.checkParam(null, IDX, IX, id, null, page);
+		let ret = await this.uqApi.post(IDPath('ixr'), {
+			...param,
+			IX: entityName(IX),
+			IDX: IDX?.map(v => entityName(v)),
+		});
+		return ret;
+	}
+	private KeyIX = async (param: ParamKeyIX): Promise<any[]> => {
+		let {ID, IX, IDX} = param;
+		//this.checkParam(ID, IDX, IX, null, key, page);
+		let ret = await this.uqApi.post(IDPath('key-ix'), {
+			...param,
+			ID: entityName(ID),
+			IX: entityName(IX),
+			IDX: IDX?.map(v => entityName(v)),
+		});
+		return ret;
+	}
+	private IDLog = async (param: ParamIDLog): Promise<any[]> => {
+		let {IDX} = param;
+		//this.checkParam(null, IDX, null, id, null, page);
+		let ret = await this.uqApi.post(IDPath('id-log'), {
+			...param,
+			IDX: entityName(IDX),
+		});
+		return ret;
+	}
+	private IDSum = async (param: ParamIDSum): Promise<any[]> => {
+		let {IDX} = param;
+		//this.checkParam(null, IDX, null, id, null, page);
+		let ret = await this.uqApi.post(IDPath('id-sum'), {
+			...param,
+			IDX: entityName(IDX),
+		});
+		return ret;
+	}
+	private IDinIX = async (param:ParamIDinIX): Promise<any|{$in:boolean}[]> => {
+		let {ID, IX} = param;
+		//this.checkParam(null, IDX, null, id, null, page);
+		let ret = await this.uqApi.post(IDPath('id-in-ix'), {
+			...param,
+			ID: entityName(ID),
+			IX: entityName(IX),
+		});
+		return ret;
+	}
+	private IDxID = async (param:ParamIDxID): Promise<any[]> => {
+		let {ID, IX, ID2} = param;
+		//this.checkParam(null, IDX, null, id, null, page);
+		let ret = await this.uqApi.post(IDPath('id-x-id'), {
+			...param,
+			ID: entityName(ID),
+			IX: entityName(IX),
+			ID2: entityName(ID2),
+		});
+		return ret;
+	}
+
+	private IDTree = async (param:ParamIDTree): Promise<any[]> => {
+		let {ID} = param;
+		let ret = await this.uqApi.post(IDPath('id-tree'), {
+			...param,
+			ID: entityName(ID),
+		});
+		return ret;
+	}
+}
+
+function ids(item:string[]):number[] {
+	if (!item) return;
+	let len = item.length;
+	if (len <= 1) return;
+	let ret:number[] = [];
+	for (let i=0; i<len-1; i++) ret.push(Number(item[i]));
+	return ret;
+}
+
+function entityName(entity:Entity | string): string {
+	if (!entity) return;
+	if (typeof entity === 'string') return entity;
+	return entity.name;
+}
+
+function toScalars(value:any):any {
+	if (!value) return value;
+	let ret:any = {};
+	for (let i in value) {
+		let v = value[i];
+		if (typeof v === 'object') v = v['id'];
+		ret[i] = v;
+	}
+	return ret;
 }

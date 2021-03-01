@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EasyTime = exports.EasyDate = void 0;
 var React = __importStar(require("react"));
-var components_1 = require("../../components");
+var res_1 = require("../../res");
 //type YMD = (year:number, month:number, date:number) => string;
 //type MD = (month:number, date:number) => string;
 var timeRes = {
@@ -58,7 +58,7 @@ var timeRes = {
         tomorrow: 'Tmw',
     }
 };
-components_1.setRes(timeRes, timeRes);
+res_1.setRes(timeRes, timeRes);
 function tt(str) {
     return timeRes[str];
 }

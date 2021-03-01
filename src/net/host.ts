@@ -154,7 +154,6 @@ class Host {
         return `http://${value}/`;
     }
     getUrlOrTest(db:string, url:string, urlTest:string):string {
-		let path:string;
 		if (!urlTest) {
 			urlTest = url;
 			if (!urlTest) {
@@ -164,20 +163,20 @@ class Host {
 		}
 		else if (!url) {
 			url = urlTest;
-			this.testing = true
 		}
+		let testProd:string;
         if (this.testing === true) {
-            if (urlTest !== '-') url = urlTest;
-            path = 'uq/test/' + db + '/';
+			if (urlTest !== '-') url = urlTest;
+			testProd = 'test';
         }
         else {
-            path = 'uq/prod/' + db + '/';
+			testProd = 'prod';
         }
 		url = this.getUrlOrDebug(url);
 		if (url.endsWith('/') === false) {
 			url += '/';
 		}
-        return url + path;
+        return `${url}uq/${testProd}/${db}/`;
     }
 
     async localCheck(urlDebug: string):Promise<boolean> {

@@ -89,16 +89,20 @@ var TextWidget = /** @class */ (function (_super) {
             });
         }); };
         _this.onBlur = function (evt) {
-            _this.onInputChange(evt);
-            _this.checkRules();
-            _this.context.checkContextRules();
-            _this.hasFocus = false;
+            mobx_1.runInAction(function () {
+                _this.onInputChange(evt);
+                _this.checkRules();
+                _this.context.checkContextRules();
+                _this.hasFocus = false;
+            });
         };
         _this.onFocus = function (evt) {
-            _this.clearError();
-            _this.context.removeErrorWidget(_this);
-            _this.context.clearErrors();
-            _this.hasFocus = true;
+            mobx_1.runInAction(function () {
+                _this.clearError();
+                _this.context.removeErrorWidget(_this);
+                _this.context.clearErrors();
+                _this.hasFocus = true;
+            });
         };
         mobx_1.makeObservable(_this, {
             hasFocus: mobx_1.observable,

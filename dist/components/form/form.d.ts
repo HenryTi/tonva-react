@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Schema, ItemSchema } from '../schema';
-import { UiSchema } from '../schema';
+import { Schema, ItemSchema, UiSchema } from '../schema';
 import 'font-awesome/css/font-awesome.min.css';
 import { FormContext, Context } from './context';
 import { FormRes } from '../../res';

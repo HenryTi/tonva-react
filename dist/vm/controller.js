@@ -61,6 +61,7 @@ exports.Controller = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var lodash_1 = __importDefault(require("lodash"));
 var components_1 = require("../components");
+var res_1 = require("../res");
 var tool_1 = require("../tool");
 var net_1 = require("../net");
 var Controller = /** @class */ (function () {
@@ -116,7 +117,8 @@ var Controller = /** @class */ (function () {
         this.afterInit();
     };
     Controller.prototype.internalT = function (str) {
-        return this._t[str];
+        var _a;
+        return (_a = this._t[str]) !== null && _a !== void 0 ? _a : res_1.t(str);
     };
     Object.defineProperty(Controller.prototype, "webNav", {
         get: function () { return undefined; },
@@ -136,7 +138,7 @@ var Controller = /** @class */ (function () {
     Controller.prototype.setRes = function (res) {
         if (res === undefined)
             return;
-        var $lang = components_1.resOptions.$lang, $district = components_1.resOptions.$district;
+        var $lang = res_1.resOptions.$lang, $district = res_1.resOptions.$district;
         lodash_1.default.merge(this._t, res);
         if ($lang !== undefined) {
             var l = res[$lang];

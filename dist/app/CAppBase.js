@@ -51,9 +51,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CAppBase = void 0;
 var components_1 = require("../components");
+var res_1 = require("../res");
 var vm_1 = require("../vm");
 var uq_1 = require("../uq");
-//import { appInFrame } from "../net";
 var centerApi_1 = require("./centerApi");
 var vMain_1 = require("./vMain");
 var CAppBase = /** @class */ (function (_super) {
@@ -80,40 +80,12 @@ var CAppBase = /** @class */ (function (_super) {
         configurable: true
     });
     CAppBase.prototype.internalT = function (str) {
-        return components_1.t(str);
+        return res_1.t(str);
     };
     CAppBase.prototype.setRes = function (res) {
-        components_1.setGlobalRes(res);
+        res_1.setGlobalRes(res);
     };
-    //private appUnit:any;
-    /*
-    private roleDefines: string[];
-    hasRole(role: string|number):boolean {
-        let nRole:number;
-        if (typeof role === 'string') {
-            if (role.length === 0) return false;
-            let index = this.roleDefines.findIndex(v => v === role);
-            if (index < 0) return false;
-            nRole = 1<<index;
-        }
-        else {
-            nRole = role;
-        }
-        return (this.appUnit.roles & nRole) !== 0;
-    }
-    */
-    //setAppUnit(appUnit:any) {
-    //	this.appUnit = appUnit;
-    /*
-    let {roleDefs} = appUnit;
-    if (roleDefs) {
-        this.roleDefines = roleDefs.split('\t');
-    }
-    else {
-        this.roleDefines = [];
-    }
-    */
-    //}
+    CAppBase.prototype.afterBuiltUQs = function (uqs) { };
     CAppBase.prototype.beforeStart = function () {
         return __awaiter(this, void 0, void 0, function () {
             var retErrors, user, err_1;
@@ -132,40 +104,9 @@ var CAppBase = /** @class */ (function (_super) {
                             return [2 /*return*/, false];
                         }
                         this._uqs = uq_1.UQsMan._uqs;
+                        this.afterBuiltUQs(this._uqs);
                         user = components_1.nav.user;
                         if (user !== undefined && user.id > 0) {
-                            //this.appUnits
-                            //this.noUnit
-                            /*
-                            let result = await centerApi.userAppUnits(UQsMan.value.id);
-                            this.appUnits = result;
-                            if (this.noUnit === true) return true;
-                            switch (this.appUnits.length) {
-                                case 0:
-                                    this.showUnsupport(predefinedUnit, retErrors);
-                                    return false;
-                                case 1:
-                                    let appUnit = this.appUnits[0];
-                                    //this.setAppUnit(appUnit);
-                                    let {id} = appUnit;
-                                    let appUnitId = id;
-                                    if (appUnitId === undefined || appUnitId < 0 ||
-                                        (predefinedUnit !== undefined && appUnitId !== predefinedUnit))
-                                    {
-                                        this.showUnsupport(predefinedUnit, retErrors);
-                                        return false;
-                                    }
-                                    appInFrame.unit = appUnitId;
-                                    break;
-                                default:
-                                    if (predefinedUnit>0 && this.appUnits.find(v => v.id===predefinedUnit) !== undefined) {
-                                        appInFrame.unit = predefinedUnit;
-                                        break;
-                                    }
-                                    this.openVPage(VUnitSelect);
-                                    return false;
-                            }
-                            */
                         }
                         return [2 /*return*/, true];
                     case 2:
@@ -203,10 +144,6 @@ var CAppBase = /** @class */ (function (_super) {
         return components_1.nav.on(args[0], args[1], args[2]);
     };
     CAppBase.prototype.onNavRoutes = function () { return; };
-    CAppBase.prototype.showUnsupport = function (predefinedUnit, uqsLoadErrors) {
-        components_1.nav.clear();
-        this.openVPage(vMain_1.VUnsupportedUnit, { predefinedUnit: predefinedUnit, uqsLoadErrors: uqsLoadErrors });
-    };
     CAppBase.prototype.getUqRoles = function (uqName) {
         return __awaiter(this, void 0, void 0, function () {
             var user, userRoles, uq, roles;

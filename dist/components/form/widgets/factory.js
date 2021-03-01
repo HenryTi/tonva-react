@@ -17,15 +17,18 @@ var buttonWidget_1 = require("./buttonWidget");
 var arrComponent_1 = require("./arrComponent");
 var imageWidget_1 = require("./imageWidget");
 var tagWidget_1 = require("./tagWidget");
-var widgetsFactory = {
+;
+var stringWidget = {
+    dataTypes: ['integer', 'number', 'string'],
+    widget: textWidget_1.TextWidget
+};
+var widgetFactories = {
     id: {
         dataTypes: ['id'],
         widget: idWidget_1.IdWidget,
     },
-    text: {
-        dataTypes: ['integer', 'number', 'string'],
-        widget: textWidget_1.TextWidget
-    },
+    text: stringWidget,
+    string: stringWidget,
     textarea: {
         dataTypes: ['string'],
         widget: textareaWidget_1.TextAreaWidget
@@ -139,7 +142,11 @@ function factory(context, itemSchema, children, fieldProps) {
         switch (widgetType) {
             default:
                 if (widgetType !== undefined) {
-                    var widgetFactory = widgetsFactory[widgetType];
+                    var widgetFactory = widgetFactories[widgetType];
+                    if (!widgetFactory) {
+                        debugger;
+                        throw new Error("unknown widget " + widgetType);
+                    }
                     typeWidget = widgetFactory.widget;
                 }
                 if (typeWidget === undefined)

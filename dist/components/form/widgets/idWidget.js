@@ -71,9 +71,9 @@ var mobx_1 = require("mobx");
 var none = jsx_runtime_1.jsx("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
 var IdWidget = /** @class */ (function (_super) {
     __extends(IdWidget, _super);
+    //value:number = null;
     function IdWidget(context, itemSchema, fieldProps, children) {
         var _this = _super.call(this, context, itemSchema, fieldProps, children) || this;
-        _this.value = null;
         _this.onClick = function () { return __awaiter(_this, void 0, void 0, function () {
             var pickId, id;
             var _this = this;
@@ -98,10 +98,12 @@ var IdWidget = /** @class */ (function (_super) {
                 }
             });
         }); };
-        mobx_1.makeObservable(_this, {
-            value: mobx_1.observable,
-        });
         return _this;
+        /*
+        makeObservable(this, {
+            value: observable,
+        })
+        */
     }
     Object.defineProperty(IdWidget.prototype, "ui", {
         get: function () { return this._ui; },
@@ -111,6 +113,9 @@ var IdWidget = /** @class */ (function (_super) {
     ;
     IdWidget.prototype.setReadOnly = function (value) { this.readOnly = value; };
     IdWidget.prototype.setDisabled = function (value) { this.disabled = value; };
+    IdWidget.prototype.setValue = function (value) {
+        _super.prototype.setValue.call(this, value);
+    };
     IdWidget.prototype.render = function () {
         var placeholder, Templet;
         if (this.ui !== undefined) {

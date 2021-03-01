@@ -10,25 +10,21 @@ export interface TVs {
 export declare class UQsMan {
     static _uqs: any;
     static value: UQsMan;
-    static uqOwnerMap: {
-        [key: string]: string;
-    };
     static build(appConfig: AppConfig): Promise<string[]>;
     private static load;
     private static loadUqs;
+    private uqMans;
     private collection;
     private readonly tvs;
     protected constructor(tvs: TVs);
     private buildUqs;
-    static uq(uqLower: string): UqMan;
+    static uq(uqName: string): UqMan;
     static getUqUserRoles(uqLower: string): Promise<string[]>;
     private buildTVs;
     init(uqsData: UqData[]): Promise<void>;
     load(): Promise<string[]>;
     buildUQs(): any;
-    getUqCollection(): {
-        [uqName: string]: UqMan;
-    };
+    getUqMans(): UqMan[];
     private showReload;
     setTuidImportsLocal(): string[];
     private setInner;

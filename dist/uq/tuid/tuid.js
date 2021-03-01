@@ -84,22 +84,22 @@ var UqTuid = /** @class */ (function (_super) {
             case 'number': return id;
         }
     };
-    UqTuid.equ = function (id1, id2) {
+    UqTuid.equ = function (id1, ix) {
         if (id1 === undefined || id1 === null)
             return false;
-        if (id2 === undefined || id2 === null)
+        if (ix === undefined || ix === null)
             return false;
-        return Tuid.idValue(id1) === Tuid.idValue(id2);
+        return Tuid.idValue(id1) === Tuid.idValue(ix);
         /*
         if (typeof id1 === 'object') {
             let id1Id = id1.id;
-            return typeof id2 === 'object'? id1Id === id2.id : id1Id === id2;
+            return typeof ix === 'object'? id1Id === ix.id : id1Id === ix;
         }
-        if (typeof id2 === 'object') {
-            let id2Id = id2.id;
+        if (typeof ix === 'object') {
+            let id2Id = ix.id;
             return typeof id1 === 'object'? id2Id === id1.id : id2Id === id1;
         }
-        return id1 === id2;
+        return id1 === ix;
         */
     };
     UqTuid.prototype.cacheIds = function () { };

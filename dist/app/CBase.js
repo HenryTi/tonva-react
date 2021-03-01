@@ -60,7 +60,7 @@ var CBase = /** @class */ (function (_super) {
     function CBase(cApp) {
         var _this = _super.call(this, cApp.res) || this;
         _this._cApp = cApp;
-        _this._uqs = cApp && cApp.uqs;
+        _this._uqs = cApp === null || cApp === void 0 ? void 0 : cApp.uqs;
         return _this;
     }
     Object.defineProperty(CBase.prototype, "uqs", {

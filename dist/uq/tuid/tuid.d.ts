@@ -31,7 +31,7 @@ export declare abstract class UqTuid<M> extends Entity {
     } | number): number;
     static equ(id1: {
         id: number;
-    } | number, id2: {
+    } | number, ix: {
         id: number;
     } | number): boolean;
     cacheIds(): void;

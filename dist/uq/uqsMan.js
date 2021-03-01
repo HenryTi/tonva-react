@@ -56,43 +56,49 @@ var uqMan_1 = require("./uqMan");
 var components_1 = require("../components");
 var UQsMan = /** @class */ (function () {
     function UQsMan(tvs) {
+        this.uqMans = [];
         this.tvs = tvs || {};
         this.buildTVs();
+        this.uqMans = [];
         this.collection = {};
     }
+    //static uqOwnerMap: {[key:string]:string};
     UQsMan.build = function (appConfig) {
         return __awaiter(this, void 0, void 0, function () {
-            var app, uqs, tvs, retErrors, name_1, version, ownerMap, i, uqNames, map, owner, ownerObj, name_2, v;
+            var app, uqs, tvs, retErrors, name_1, version /*, ownerMap*/;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         app = appConfig.app, uqs = appConfig.uqs, tvs = appConfig.tvs;
                         if (!app) return [3 /*break*/, 2];
-                        name_1 = app.name, version = app.version, ownerMap = app.ownerMap;
-                        UQsMan.uqOwnerMap = ownerMap || {};
-                        for (i in ownerMap)
-                            ownerMap[i.toLowerCase()] = ownerMap[i];
+                        name_1 = app.name, version = app.version;
                         return [4 /*yield*/, UQsMan.load(name_1, version, tvs)];
                     case 1:
+                        //UQsMan.uqOwnerMap = ownerMap || {};
+                        //for (let i in ownerMap) ownerMap[i.toLowerCase()] = ownerMap[i];
                         retErrors = _a.sent();
                         return [3 /*break*/, 5];
                     case 2:
                         if (!uqs) return [3 /*break*/, 4];
-                        uqNames = [];
-                        map = UQsMan.uqOwnerMap = {};
-                        for (owner in uqs) {
-                            ownerObj = uqs[owner];
-                            for (name_2 in ownerObj) {
-                                v = ownerObj[name_2];
-                                if (name_2 === '$') {
-                                    map[owner.toLowerCase()] = v;
-                                    continue;
-                                }
-                                uqNames.push({ owner: owner, name: name_2, version: v });
+                        return [4 /*yield*/, UQsMan.loadUqs(uqs, tvs)];
+                    case 3:
+                        /*
+                        let uqNames:{owner:string; name:string; version:string}[] = [];
+                        //let map:{[owner:string]: string} = UQsMan.uqOwnerMap = {};
+                        for (let uq of uqs) {
+                            //let ownerObj = uqs[owner];
+                            let {dev, name, alias, version:uqVersion, memo} = uq;
+                            for (let name in uq) {
+                                let {name:owner} = dev;
+                                //let v = ownerObj[name];
+                                //if (name === '$') {
+                                //	map[owner.toLowerCase()] = v;
+                                //	continue;
+                                //}
+                                uqNames.push({owner, name, version:uqVersion});
                             }
                         }
-                        return [4 /*yield*/, UQsMan.loadUqs(uqNames, tvs)];
-                    case 3:
+                        */
                         retErrors = _a.sent();
                         return [3 /*break*/, 5];
                     case 4: throw new Error('either uqs or app must be defined in AppConfig');
@@ -104,7 +110,7 @@ var UQsMan = /** @class */ (function () {
     // 返回 errors, 每个uq一行
     UQsMan.load = function (tonvaAppName, version, tvs) {
         return __awaiter(this, void 0, void 0, function () {
-            var uqsMan, appOwner, appName, localData, uqAppData, _i, _a, uq, id, uqs, ownerProfixMap;
+            var uqsMan, appOwner, appName, localData, uqAppData, _i, _a, uq, id, uqs;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -132,62 +138,63 @@ var UQsMan = /** @class */ (function () {
                     case 2:
                         id = uqAppData.id, uqs = uqAppData.uqs;
                         uqsMan.id = id;
+                        //console.error(uqAppData);
+                        //let ownerProfixMap: {[owner: string]: string};
                         return [2 /*return*/, uqsMan.buildUqs(uqs)];
                 }
             });
         });
     };
     // 返回 errors, 每个uq一行
-    UQsMan.loadUqs = function (uqNames, tvs) {
+    UQsMan.loadUqs = function (uqConfigs, tvs) {
         return __awaiter(this, void 0, void 0, function () {
             var uqsMan, uqs;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         uqsMan = UQsMan.value = new UQsMan(tvs);
-                        return [4 /*yield*/, loadUqs(uqNames)];
+                        return [4 /*yield*/, loadUqs(uqConfigs)];
                     case 1:
                         uqs = _a.sent();
-                        return [2 /*return*/, uqsMan.buildUqs(uqs)];
+                        return [2 /*return*/, uqsMan.buildUqs(uqs, uqConfigs)];
                 }
             });
         });
     };
-    UQsMan.prototype.buildUqs = function (uqDataArr) {
+    UQsMan.prototype.buildUqs = function (uqDataArr, uqConfigs) {
         return __awaiter(this, void 0, void 0, function () {
-            var retErrors;
+            var retErrors, _i, uqConfigs_1, uqConfig, dev, name_2, owner, uqLower, uq;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
-                    //let uqsMan: UQsMan = UQsMan.value;
-                    return [4 /*yield*/, this.init(uqDataArr)];
+                    case 0: return [4 /*yield*/, this.init(uqDataArr)];
                     case 1:
-                        //let uqsMan: UQsMan = UQsMan.value;
                         _a.sent();
                         return [4 /*yield*/, this.load()];
                     case 2:
                         retErrors = _a.sent();
-                        if (retErrors.length === 0) {
-                            retErrors.push.apply(retErrors, this.setTuidImportsLocal());
-                            if (retErrors.length === 0) {
-                                UQsMan._uqs = this.buildUQs();
-                                return [2 /*return*/];
+                        if (retErrors.length > 0)
+                            return [2 /*return*/, retErrors];
+                        retErrors.push.apply(retErrors, this.setTuidImportsLocal());
+                        if (retErrors.length > 0)
+                            return [2 /*return*/, retErrors];
+                        if (uqConfigs) {
+                            for (_i = 0, uqConfigs_1 = uqConfigs; _i < uqConfigs_1.length; _i++) {
+                                uqConfig = uqConfigs_1[_i];
+                                dev = uqConfig.dev, name_2 = uqConfig.name;
+                                owner = dev.name;
+                                uqLower = owner.toLowerCase() + '/' + name_2.toLowerCase();
+                                uq = this.collection[uqLower];
+                                uq.config = uqConfig;
                             }
                         }
-                        //UQsMan.errors = retErrors;
-                        return [2 /*return*/, retErrors];
+                        UQsMan._uqs = this.buildUQs();
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    // to be removed in the future
-    /*
-    addUq(uq: UqMan) {
-        this.collection[uq.name] = uq;
-    }
-    */
-    UQsMan.uq = function (uqLower) {
-        return UQsMan.value.collection[uqLower];
+    UQsMan.uq = function (uqName) {
+        return UQsMan.value.collection[uqName.toLowerCase()];
     };
     UQsMan.getUqUserRoles = function (uqLower) {
         return __awaiter(this, void 0, void 0, function () {
@@ -243,12 +250,16 @@ var UQsMan = /** @class */ (function () {
                             //this.cUqCollection[uqFullName] = cUq;
                             //this.uqs.addUq(cUq.uq);
                             var uq = new uqMan_1.UqMan(_this, uqData, undefined, _this.tvs[uqFullName] || _this.tvs[uqName]);
-                            uq.ownerProfix = UQsMan.uqOwnerMap[uqOwner.toLowerCase()];
-                            _this.collection[uqFullName] = uq;
+                            _this.uqMans.push(uq);
+                            //uq.ownerProfix = UQsMan.uqOwnerMap[uqOwner.toLowerCase()];
+                            //this.collection[uqFullName] = uq;
                             var lower = uqFullName.toLowerCase();
+                            _this.collection[lower] = uq;
+                            /*
                             if (lower !== uqFullName) {
-                                _this.collection[lower] = uq;
+                                this.collection[lower] = uq;
                             }
+                            */
                             return uq.init();
                         });
                         return [4 /*yield*/, Promise.all(promiseInits)];
@@ -261,32 +272,31 @@ var UQsMan = /** @class */ (function () {
     };
     UQsMan.prototype.load = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var retErrors, promises, lowerUqNames, i, lower, uq, results, _i, results_1, result, retError;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var retErrors, promises, _i, _a, uqMan, results, _b, results_1, result, retError;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         retErrors = [];
                         promises = [];
-                        lowerUqNames = [];
+                        //let lowerUqNames:string[] = [];
                         // collection有小写名字，还有正常名字
-                        for (i in this.collection) {
-                            lower = i.toLowerCase();
-                            if (lowerUqNames.indexOf(lower) >= 0)
-                                continue;
-                            lowerUqNames.push(lower);
-                            uq = this.collection[i];
-                            promises.push(uq.loadEntities());
+                        //for (let i in this.collection) {
+                        for (_i = 0, _a = this.uqMans; _i < _a.length; _i++) {
+                            uqMan = _a[_i];
+                            //let lower = (i as string).toLowerCase();
+                            //if (lowerUqNames.indexOf(lower) >= 0) continue;
+                            //lowerUqNames.push(lower);
+                            //let uq = this.collection[i];
+                            promises.push(uqMan.loadEntities());
                         }
                         return [4 /*yield*/, Promise.all(promises)];
                     case 1:
-                        results = _a.sent();
-                        console.log('uqsMan.load ', results);
-                        for (_i = 0, results_1 = results; _i < results_1.length; _i++) {
-                            result = results_1[_i];
+                        results = _c.sent();
+                        for (_b = 0, results_1 = results; _b < results_1.length; _b++) {
+                            result = results_1[_b];
                             retError = result;
                             if (retError !== undefined) {
                                 retErrors.push(retError);
-                                continue;
                             }
                         }
                         return [2 /*return*/, retErrors];
@@ -295,48 +305,18 @@ var UQsMan = /** @class */ (function () {
         });
     };
     UQsMan.prototype.buildUQs = function () {
-        var that = this;
+        var _this = this;
+        //let that = this;
         var uqs = {};
-        var _loop_1 = function (i) {
-            var uqMan = this_1.collection[i];
-            //let n = uqMan.name;
-            var uqName = uqMan.uqName, ownerProfix = uqMan.ownerProfix;
-            var l = uqName.toLowerCase();
-            var uqKey = uqName.split(/[-._]/).join('').toLowerCase();
-            if (ownerProfix)
-                uqKey = ownerProfix + uqKey;
-            var entities = uqMan.entities;
-            var keys = Object.keys(entities);
-            for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
-                var key = keys_1[_i];
-                var entity = entities[key];
-                var name_3 = entity.name;
-                entities[name_3.toLowerCase()] = entity;
-            }
-            var proxy = uqs[l] = new Proxy(entities, {
-                get: function (target, key, receiver) {
-                    var lk = key.toLowerCase();
-                    if (lk === '$name') {
-                        return uqMan.name;
-                    }
-                    var ret = target[lk];
-                    if (ret !== undefined)
-                        return ret;
-                    debugger;
-                    var err = "entity " + uqName + "." + String(key) + " not defined";
-                    console.error(err);
-                    that.showReload('UQ错误：' + err);
-                    return undefined;
-                }
-            });
-            if (uqKey !== l)
-                uqs[uqKey] = proxy;
-        };
-        var this_1 = this;
-        for (var i in this.collection) {
-            _loop_1(i);
+        for (var _i = 0, _a = this.uqMans; _i < _a.length; _i++) {
+            var uqMan = _a[_i];
+            var uqKey = uqMan.getUqKey();
+            var lower = uqKey.toLowerCase();
+            var proxy = uqMan.proxy();
+            uqs[uqKey] = proxy;
+            if (lower !== uqKey)
+                uqs[lower] = proxy;
         }
-        //let uqs = this.collection;
         return new Proxy(uqs, {
             get: function (target, key, receiver) {
                 var lk = key.toLowerCase();
@@ -351,26 +331,27 @@ var UQsMan = /** @class */ (function () {
                 }*/
                 debugger;
                 console.error('error in uqs');
-                that.showReload("\u4EE3\u7801\u9519\u8BEF\uFF1A\u65B0\u589E uq " + String(key));
+                _this.showReload("\u4EE3\u7801\u9519\u8BEF\uFF1A\u65B0\u589E uq " + String(key));
                 return undefined;
             },
         });
     };
-    UQsMan.prototype.getUqCollection = function () {
-        return this.collection;
+    UQsMan.prototype.getUqMans = function () {
+        return this.uqMans;
     };
     UQsMan.prototype.showReload = function (msg) {
-        for (var i in this.collection) {
-            this.collection[i].localMap.removeAll();
+        for (var _i = 0, _a = this.uqMans; _i < _a.length; _i++) {
+            var uqMan = _a[_i];
+            uqMan.localMap.removeAll();
         }
         components_1.nav.showReloadPage(msg);
     };
     UQsMan.prototype.setTuidImportsLocal = function () {
         var ret = [];
-        for (var i in this.collection) {
-            var uq = this.collection[i];
-            for (var _i = 0, _a = uq.tuidArr; _i < _a.length; _i++) {
-                var tuid = _a[_i];
+        for (var _i = 0, _a = this.uqMans; _i < _a.length; _i++) {
+            var uqMan = _a[_i];
+            for (var _b = 0, _c = uqMan.tuidArr; _b < _c.length; _b++) {
+                var tuid = _c[_b];
                 if (tuid.isImport === true) {
                     var error = this.setInner(tuid);
                     if (error)
@@ -434,12 +415,17 @@ function loadAppUqs(appOwner, appName) {
         });
     });
 }
-function loadUqs(uqs) {
+function loadUqs(uqConfigs) {
     return __awaiter(this, void 0, void 0, function () {
-        var a, centerAppApi, ret;
+        var uqs, centerAppApi, ret;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    uqs = uqConfigs.map(function (v) {
+                        var dev = v.dev, name = v.name, version = v.version;
+                        var owner = dev.name;
+                        return { owner: owner, name: name, version: version };
+                    });
                     centerAppApi = new net_1.CenterAppApi('tv/', undefined);
                     return [4 /*yield*/, centerAppApi.uqs(uqs)];
                 case 1:

@@ -80,6 +80,7 @@ var Widget = /** @class */ (function () {
             contextErrors: mobx_1.observable,
             hasError: mobx_1.computed,
             visible: mobx_1.observable,
+            value: mobx_1.observable,
         });
         this.context = context;
         var name = itemSchema.name;

@@ -216,7 +216,6 @@ var Host = /** @class */ (function () {
         return "http://" + value + "/";
     };
     Host.prototype.getUrlOrTest = function (db, url, urlTest) {
-        var path;
         if (!urlTest) {
             urlTest = url;
             if (!urlTest) {
@@ -226,21 +225,21 @@ var Host = /** @class */ (function () {
         }
         else if (!url) {
             url = urlTest;
-            this.testing = true;
         }
+        var testProd;
         if (this.testing === true) {
             if (urlTest !== '-')
                 url = urlTest;
-            path = 'uq/test/' + db + '/';
+            testProd = 'test';
         }
         else {
-            path = 'uq/prod/' + db + '/';
+            testProd = 'prod';
         }
         url = this.getUrlOrDebug(url);
         if (url.endsWith('/') === false) {
             url += '/';
         }
-        return url + path;
+        return url + "uq/" + testProd + "/" + db + "/";
     };
     Host.prototype.localCheck = function (urlDebug) {
         return __awaiter(this, void 0, void 0, function () {

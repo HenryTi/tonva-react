@@ -360,10 +360,6 @@ var CenterApiBase = /** @class */ (function (_super) {
     function CenterApiBase() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    /*
-    constructor(path: string, showWaiting?: boolean) {
-        super(path, showWaiting);
-    }*/
     CenterApiBase.prototype.getHttpChannel = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

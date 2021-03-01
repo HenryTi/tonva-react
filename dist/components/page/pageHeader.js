@@ -147,7 +147,7 @@ function renderPageHeader(props, inWebNav) {
                 vBack = jsx_runtime_1.jsx("nav", __assign({ onClick: onBack }, { children: nav_1.nav.backIcon }), void 0);
                 break;
             case 'close':
-                vBack = jsx_runtime_1.jsx("nav", __assign({ onClick: onBack }, { children: nav_1.nav.backIcon }), void 0);
+                vBack = jsx_runtime_1.jsx("nav", __assign({ onClick: onBack }, { children: nav_1.nav.closeIcon }), void 0);
                 break;
         }
     }

@@ -5,19 +5,27 @@ import { TVs } from "../uq";
 export interface IConstructor<T> {
     new (...args: any[]): T;
 }
-export interface AppConfig {
+export interface DevConfig {
+    name: string;
+    alias?: string;
+    memo?: string;
+}
+export interface UqConfig {
+    dev: DevConfig;
+    name: string;
+    alias?: string;
+    version?: string;
+    memo?: string;
+}
+export interface UqsConfig {
     app?: {
+        dev: DevConfig;
         name: string;
-        version: string;
-        ownerMap?: {
-            [key: string]: string;
-        };
+        version?: string;
     };
-    uqs?: {
-        [owner: string]: {
-            [name: string]: string;
-        };
-    };
+    uqs?: UqConfig[];
+}
+export interface AppConfig extends UqsConfig {
     tvs?: TVs;
     loginTop?: JSX.Element;
     oem?: string;
@@ -28,13 +36,14 @@ export interface AppConfig {
 export interface Elements {
     [id: string]: (element: HTMLElement) => void;
 }
-export declare abstract class CAppBase extends Controller {
+export declare abstract class CAppBase<U> extends Controller {
     private appConfig;
-    protected _uqs: any;
+    protected _uqs: U;
     constructor(config?: AppConfig);
-    get uqs(): any;
+    get uqs(): U;
     internalT(str: string): any;
     protected setRes(res: any): void;
+    protected afterBuiltUQs(uqs: any): void;
     protected beforeStart(): Promise<boolean>;
     protected afterStart(): Promise<void>;
     userFromId(userId: number): Promise<any>;
@@ -45,7 +54,6 @@ export declare abstract class CAppBase extends Controller {
         [url: string]: RouteFunc | NamedRoute;
     }): Navigo;
     protected onNavRoutes(): void;
-    private showUnsupport;
     getUqRoles(uqName: string): Promise<string[]>;
     isAdmin(roles: string[]): boolean;
     isRole(roles: string[], role: string): boolean;

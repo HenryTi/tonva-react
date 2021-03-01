@@ -23,5 +23,6 @@ __exportStar(require("./pending"), exports);
 __exportStar(require("./uqsMan"), exports);
 __exportStar(require("./tag/tag"), exports);
 __exportStar(require("./enum"), exports);
-__exportStar(require("./buildUqs"), exports);
+__exportStar(require("./build"), exports);
+__exportStar(require("./ID"), exports);
 //# sourceMappingURL=index.js.map

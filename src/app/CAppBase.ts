@@ -1,23 +1,46 @@
-import { nav, t, setGlobalRes, RouteFunc, Hooks, Navigo, NamedRoute } from "../components";
+import { nav, RouteFunc, Hooks, Navigo, NamedRoute } from "../components";
+import { t, setGlobalRes } from '../res';
 import { Controller } from '../vm';
 import { UQsMan, TVs } from "../uq";
-//import { appInFrame } from "../net";
 import { centerApi } from "./centerApi";
-import { /*VUnitSelect, */VErrorsPage, VStartError, VUnsupportedUnit } from "./vMain";
+import { VErrorsPage, VStartError } from "./vMain";
 
 export interface IConstructor<T> {
     new (...args: any[]): T;
 }
 
-export interface AppConfig {
+export interface DevConfig {
+	name: string;
+	alias?: string;
+	memo?: string;
+}
+
+export interface UqConfig {
+	dev: DevConfig;
+	name: string;
+	alias?: string;	
+	version?: string;
+	memo?: string;
+}
+
+export interface UqsConfig {
+	app?: {
+		dev: DevConfig;
+		name: string;
+		version?: string;
+	};
+	//devs?: DevConfig[];
+	uqs?: UqConfig[];
+}
+
+export interface AppConfig extends UqsConfig {
+	/*
 	app?: {
 		name: string;
 		version: string;
 		ownerMap?: {[key:string]: string};
-	}
-	uqs?: {
-		[owner:string]: {[name:string]:string}; // name: version
 	};
+	*/
     //appName: string;        // 格式: owner/appName
     //version: string;        // 版本变化，缓存的uqs才会重载
     tvs?: TVs;
@@ -33,9 +56,9 @@ export interface Elements {
 	[id:string]: (element: HTMLElement)=>void,
 }
 
-export abstract class CAppBase extends Controller {
+export abstract class CAppBase<U> extends Controller {
 	private appConfig: AppConfig;
-    protected _uqs: any;
+    protected _uqs: U;
 
     //protected readonly name: string;
 	//protected readonly noUnit: boolean;
@@ -55,7 +78,7 @@ export abstract class CAppBase extends Controller {
 		}
     }
 
-    get uqs(): any {return this._uqs;}
+    get uqs(): U {return this._uqs;}
 
 	internalT(str:string):any {
 		return t(str);
@@ -64,37 +87,8 @@ export abstract class CAppBase extends Controller {
 	protected setRes(res:any) {
 		setGlobalRes(res);
 	}
+	protected afterBuiltUQs(uqs: any) {}
 
-	//private appUnit:any;
-	/*
-	private roleDefines: string[];
-	hasRole(role: string|number):boolean {
-		let nRole:number;
-		if (typeof role === 'string') {
-			if (role.length === 0) return false;
-			let index = this.roleDefines.findIndex(v => v === role);
-			if (index < 0) return false;
-			nRole = 1<<index;
-		}
-		else {
-			nRole = role;
-		}
-		return (this.appUnit.roles & nRole) !== 0;
-	}
-	*/
-	//setAppUnit(appUnit:any) {
-	//	this.appUnit = appUnit;
-		/*
-		let {roleDefs} = appUnit;
-		if (roleDefs) {
-			this.roleDefines = roleDefs.split('\t');
-		}
-		else {
-			this.roleDefines = [];
-		}
-		*/
-	//}
-	
     protected async beforeStart():Promise<boolean> {
         try {
 			this.onNavRoutes();
@@ -105,6 +99,7 @@ export abstract class CAppBase extends Controller {
                 return false;
             }
 			this._uqs = UQsMan._uqs;
+			this.afterBuiltUQs(this._uqs);
             //let retErrors = await this.load();
             //let app = await loadAppUqs(this.appOwner, this.appName);
             // if (isDevelopment === true) {
@@ -113,38 +108,6 @@ export abstract class CAppBase extends Controller {
             //let {predefinedUnit} = appInFrame;
             let {user} = nav;
             if (user !== undefined && user.id > 0) {
-				//this.appUnits
-				//this.noUnit
-				/*
-				let result = await centerApi.userAppUnits(UQsMan.value.id);
-				this.appUnits = result;
-				if (this.noUnit === true) return true;
-                switch (this.appUnits.length) {
-                    case 0:
-                        this.showUnsupport(predefinedUnit, retErrors);
-						return false;
-                    case 1:
-						let appUnit = this.appUnits[0];
-						//this.setAppUnit(appUnit);
-						let {id} = appUnit;
-                        let appUnitId = id;
-                        if (appUnitId === undefined || appUnitId < 0 || 
-                            (predefinedUnit !== undefined && appUnitId !== predefinedUnit))
-                        {
-                            this.showUnsupport(predefinedUnit, retErrors);
-                            return false;
-                        }
-                        appInFrame.unit = appUnitId;
-                        break;
-                    default:
-                        if (predefinedUnit>0 && this.appUnits.find(v => v.id===predefinedUnit) !== undefined) {
-                            appInFrame.unit = predefinedUnit;
-                            break;
-                        }
-                        this.openVPage(VUnitSelect);
-                        return false;
-				}
-				*/
             }
             return true;
         }
@@ -171,11 +134,6 @@ export abstract class CAppBase extends Controller {
 
 	protected onNavRoutes() {return;}
 
-    private showUnsupport(predefinedUnit: number, uqsLoadErrors: string[]) {
-        nav.clear();
-        this.openVPage(VUnsupportedUnit, {predefinedUnit, uqsLoadErrors});
-	}
-	
 	async getUqRoles(uqName:string):Promise<string[]> {
 		let {user} = nav;
 		if (!user) return null;

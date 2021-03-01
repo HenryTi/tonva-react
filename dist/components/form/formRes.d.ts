@@ -1,4 +1,4 @@
-import { KeyValueRes, Res } from '../res';
+import { KeyValueRes, Res } from '../../res';
 export interface FormRes extends KeyValueRes {
     required: string;
     number: string;

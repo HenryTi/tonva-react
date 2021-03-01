@@ -12,7 +12,6 @@ export declare abstract class Widget {
     protected _itemSchema: ItemSchema;
     protected _ui: UiItem;
     protected defaultValue: any;
-    protected value: any;
     protected rules: Rule[];
     protected readOnly: boolean;
     protected disabled: boolean;
@@ -20,6 +19,7 @@ export declare abstract class Widget {
     contextErrors: string[];
     get hasError(): boolean;
     visible: boolean;
+    value: any;
     constructor(context: Context, itemSchema: ItemSchema, fieldProps: FieldProps, children: React.ReactNode);
     protected get itemSchema(): ItemSchema;
     protected get ui(): UiItem;

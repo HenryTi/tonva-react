@@ -19,12 +19,13 @@ function isTesting():boolean {
 }
 */
 exports.env = (function () {
-    var _a = initEnv(), unit = _a.unit, testing = _a.testing, params = _a.params;
-    //let localDb = new LocalMap(testing===true? '$$':'$');
+    var _a = initEnv(), unit = _a.unit, testing = _a.testing, params = _a.params, lang = _a.lang, district = _a.district;
     return {
         unit: unit,
         testing: testing,
         params: params,
+        lang: lang,
+        district: district,
         isDevelopment: process.env.NODE_ENV === 'development',
         localDb: new localDb_1.LocalMap(testing === true ? '$$' : '$'),
         setTimeout: function (tag, callback, ms) {
@@ -115,6 +116,20 @@ function initEnv() {
         if (!unit)
             unit = 0;
     }
-    return { unit: unit, testing: testing, params: params };
+    var lang, district;
+    var language = (navigator.languages && navigator.languages[0]) // Chrome / Firefox
+        || navigator.language; // ||   // All browsers
+    //navigator.userLanguage; // IE <= 10
+    if (!language) {
+        lang = 'zh';
+        district = 'CN';
+    }
+    else {
+        var parts = language.split('-');
+        lang = parts[0];
+        if (parts.length > 1)
+            district = parts[1].toUpperCase();
+    }
+    return { unit: unit, testing: testing, params: params, lang: lang, district: district };
 }
 //# sourceMappingURL=env.js.map

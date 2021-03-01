@@ -328,9 +328,12 @@ var Context = /** @class */ (function () {
     });
     ;
     Context.prototype.clearErrors = function () {
-        this.errors.splice(0);
-        this.errorWidgets.splice(0);
-        this.clearContextErrors();
+        var _this = this;
+        mobx_1.runInAction(function () {
+            _this.errors.splice(0);
+            _this.errorWidgets.splice(0);
+            _this.clearContextErrors();
+        });
     };
     __decorate([
         mobx_1.computed
