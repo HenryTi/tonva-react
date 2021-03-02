@@ -1,4 +1,9 @@
-const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+const options:Intl.DateTimeFormatOptions = { 
+	weekday: 'long', 
+	year: 'numeric', 
+	month: 'long', 
+	day: 'numeric' 
+}
 
 export function toLocaleDateString(date:Date) {
 	if (!date) return '';
