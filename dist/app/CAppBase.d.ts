@@ -26,6 +26,7 @@ export interface UqsConfig {
     uqs?: UqConfig[];
 }
 export interface AppConfig extends UqsConfig {
+    version: string;
     tvs?: TVs;
     loginTop?: JSX.Element;
     oem?: string;

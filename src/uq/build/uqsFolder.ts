@@ -1,13 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { nav } from "../../components";
-import { UqsConfig } from "../../app";
+import { AppConfig } from "../../app";
 import { UQsMan } from "../uqsMan";
 import { UqMan } from "../uqMan";
 import { buildTsHeader, getNameFromUq, overrideTsFile } from './tools';
 import { buildTsUqFolder } from './buildTsUqFolder';
 
-export async function buildUqsFolder(uqsFolder:string, options: UqsConfig) {
+export async function buildUqsFolder(uqsFolder:string, options: AppConfig) {
 	let uqErrors = await uqsStart(options);
 
 	let uqsMan = UQsMan.value;
@@ -61,7 +61,7 @@ export async function buildUqsFolder(uqsFolder:string, options: UqsConfig) {
 }
 
 // 返回每个uq构建时的错误
-async function uqsStart(uqsConfig: UqsConfig):Promise<string[]> {
+async function uqsStart(uqsConfig: AppConfig):Promise<string[]> {
 	nav.forceDevelopment = true;
 	await nav.init();
 	let retErrors = await UQsMan.build(uqsConfig);

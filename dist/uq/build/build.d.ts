@@ -1,2 +1,2 @@
-import { UqsConfig } from '../../app';
-export declare function build(options: UqsConfig): Promise<void>;
+import { AppConfig } from '../../app';
+export declare function build(options: AppConfig): Promise<void>;

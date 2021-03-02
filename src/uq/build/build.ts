@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { env } from '../../tool';
-import { UqsConfig } from '../../app';
+import { AppConfig } from '../../app';
 import { lastBuildTime, uqTsSrcPath, red, saveTsFile, saveSrcTsFileIfNotExists } from './tools';
 import { buildUqsFolder } from './uqsFolder';
 import { buildTsIndex } from './tsIndex';
@@ -8,7 +8,7 @@ import { buildTsCApp } from './tsCApp';
 import { buildTsCBase } from './tsCBase';
 import { buildTsVMain } from './tsVMain';
 
-export async function build(options: UqsConfig) {
+export async function build(options: AppConfig) {
 	// 只从test 数据库构建uq ts
 	env.testing = true;
 

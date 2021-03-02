@@ -42,7 +42,7 @@ export interface AppConfig extends UqsConfig {
 	};
 	*/
     //appName: string;        // 格式: owner/appName
-    //version: string;        // 版本变化，缓存的uqs才会重载
+    version: string;        // 版本变化，缓存的uqs才会重载
     tvs?: TVs;
     //uqNameMap?: {[uqName:string]: string};      // uqName='owner/uq' 映射到内存简单名字：uq, 可以注明映射，也可以自动。有可能重
     loginTop?: JSX.Element;
