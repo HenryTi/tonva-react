@@ -123,10 +123,10 @@ var FetchErrorView = /** @class */ (function (_super) {
         else {
             errContent = jsx_runtime_1.jsx("div", { children: error }, void 0);
         }
-        return jsx_runtime_1.jsx("div", { children: jsx_runtime_1.jsx("article", { children: jsx_runtime_1.jsxs("main", __assign({ className: "va-error" }, { children: [jsx_runtime_1.jsx("div", { children: "\u7F51\u7EDC\u51FA\u73B0\u95EE\u9898" }, void 0),
+        return jsx_runtime_1.jsx("div", __assign({ className: "tv-page" }, { children: jsx_runtime_1.jsx("article", { children: jsx_runtime_1.jsxs("main", __assign({ className: "va-error" }, { children: [jsx_runtime_1.jsx("div", { children: "\u7F51\u7EDC\u51FA\u73B0\u95EE\u9898" }, void 0),
                         jsx_runtime_1.jsx("div", { children: "\u70B9\u51FB\u91CD\u65B0\u8BBF\u95EE" }, void 0),
                         jsx_runtime_1.jsxs("div", __assign({ style: { wordWrap: "break-word" } }, { children: ["url: ", url] }), void 0), errContent, jsx_runtime_1.jsxs("div", __assign({ className: "p-3" }, { children: [jsx_runtime_1.jsx("button", __assign({ type: 'button', onClick: this.reApi }, { children: "\u91CD\u65B0API" }), void 0),
-                                jsx_runtime_1.jsx("button", __assign({ type: 'button', onClick: this.close }, { children: "\u5173\u95ED" }), void 0)] }), void 0)] }), void 0) }, void 0) }, void 0);
+                                jsx_runtime_1.jsx("button", __assign({ type: 'button', onClick: this.close }, { children: "\u5173\u95ED" }), void 0)] }), void 0)] }), void 0) }, void 0) }), void 0);
     };
     return FetchErrorView;
 }(React.Component));

@@ -458,8 +458,10 @@ var NavView = /** @class */ (function (_super) {
                 elWait = jsx_runtime_1.jsx("div", __assign({ className: "va-wait va-wait2" }, { children: jsx_runtime_1.jsx(loading_1.Loading, {}, void 0) }), void 0);
                 break;
         }
-        if (fetchError)
+        if (fetchError) {
             elError = jsx_runtime_1.jsx(fetchErrorView_1.default, __assign({ clearError: this.clearError }, fetchError), void 0);
+            ++top;
+        }
         var test = exports.nav.testing === true &&
             jsx_runtime_1.jsx("span", __assign({ className: "cursor-pointer position-fixed", style: { top: 0, left: '0.2rem', zIndex: 90001 } }, { children: jsx_runtime_1.jsx(simple_1.FA, { className: "text-warning", name: "info-circle" }, void 0) }), void 0);
         return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [stack.map(function (item, index) {

@@ -29,7 +29,7 @@ export default class FetchErrorView extends React.Component<FetchErrorProps, nul
         else {
             errContent = <div>{error}</div>;
         }
-        return <div>
+        return <div className="tv-page">
             <article>
 				<main className="va-error">
 					<div>网络出现问题</div>

@@ -143,7 +143,7 @@ export class NavView extends React.Component<Props, NavViewState> {
             }
         }
         this.setState({
-            fetchError: fetchError,
+            fetchError,
         });
     }
 
@@ -354,8 +354,10 @@ export class NavView extends React.Component<Props, NavViewState> {
                 </div>;
                 break;
         }
-        if (fetchError)
+        if (fetchError) {
             elError = <FetchErrorView clearError={this.clearError} {...fetchError} />;
+			++top;
+		}
         let test = nav.testing===true && 
 			<span className="cursor-pointer position-fixed" style={{top:0,left:'0.2rem',zIndex:90001}}>
                 <FA className="text-warning" name="info-circle" />

@@ -4,7 +4,7 @@ import {FA} from './FA';
 export interface IconTextProps {
     icon: string;
     iconClass?: string;
-    text: string;
+    text: string | JSX.Element;
     textClass?: string;
 }
 
