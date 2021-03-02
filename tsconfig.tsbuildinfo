@@ -972,7 +972,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/form/widgets/widget.tsx": {
-        "version": "f0f801659b18cf4fea585ee41e4aa8dc0a86bac67f9f88209813d2f293693447",
+        "version": "96feda1568788c5c356c19509d77b399fcd089d8733d45e78d46de994621bc13",
         "signature": "8785d3a731ebf3cd144bed240d0383461789ea8aed34db52d7c04e8b716cce16",
         "affectsGlobalScope": false
       },
@@ -1027,8 +1027,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/form/widgets/idwidget.tsx": {
-        "version": "c76edd81d83d08674c2e5d77057d911fefeb5c538b1c5b49b5a5bc49312b2978",
-        "signature": "bab8e1aab5ddcff9a344ab534e3b14ae400cfab8f0d24e9467b37e8c23e7a72f",
+        "version": "28f058739d835657df26a5d226c4fbe4e5925044a39214f96bb857388a9e3186",
+        "signature": "9242686e9fd1cedaf221a48efca4fb1284ba844da32cf5e9468a75355c910640",
         "affectsGlobalScope": false
       },
       "./src/components/form/widgets/unknown.tsx": {
@@ -2832,8 +2832,6 @@
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/@types/react/jsx-runtime.d.ts",
         "./node_modules/mobx/dist/mobx.d.ts",
-        "./src/components/form/context.tsx",
-        "./src/components/form/field.tsx",
         "./src/components/form/widgets/widget.tsx",
         "./src/components/schema/index.ts"
       ],
@@ -4908,9 +4906,6 @@
         "./src/components/schema/index.ts"
       ],
       "./src/components/form/widgets/idwidget.tsx": [
-        "./node_modules/@types/react/index.d.ts",
-        "./src/components/form/context.tsx",
-        "./src/components/form/field.tsx",
         "./src/components/form/widgets/widget.tsx",
         "./src/components/schema/index.ts"
       ],

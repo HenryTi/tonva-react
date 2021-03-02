@@ -59,6 +59,7 @@ var Widget = /** @class */ (function () {
         this.errors = [];
         this.contextErrors = [];
         this.visible = null;
+        this.value = null;
         this.onInputChange = function (evt) {
             _this.changeValue(evt.target.value, true);
         };

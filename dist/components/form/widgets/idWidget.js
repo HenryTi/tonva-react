@@ -71,9 +71,8 @@ var mobx_1 = require("mobx");
 var none = jsx_runtime_1.jsx("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
 var IdWidget = /** @class */ (function (_super) {
     __extends(IdWidget, _super);
-    //value:number = null;
-    function IdWidget(context, itemSchema, fieldProps, children) {
-        var _this = _super.call(this, context, itemSchema, fieldProps, children) || this;
+    function IdWidget() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.onClick = function () { return __awaiter(_this, void 0, void 0, function () {
             var pickId, id;
             var _this = this;
@@ -99,11 +98,6 @@ var IdWidget = /** @class */ (function (_super) {
             });
         }); };
         return _this;
-        /*
-        makeObservable(this, {
-            value: observable,
-        })
-        */
     }
     Object.defineProperty(IdWidget.prototype, "ui", {
         get: function () { return this._ui; },

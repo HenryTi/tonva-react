@@ -2,25 +2,13 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Widget } from './widget';
 import { UiIdItem, TempletType, ItemSchema } from '../../schema';
-import { makeObservable, observable, runInAction } from 'mobx';
-import { Context } from '../context';
-import { FieldProps } from '../field';
+import { runInAction } from 'mobx';
 
 const none = <small className="text-muted">[无]</small>;
 
 export class IdWidget extends Widget {
     protected get ui(): UiIdItem {return this._ui as UiIdItem};
-	//value:number = null;
 
-	constructor(context:Context, itemSchema:ItemSchema, fieldProps:FieldProps, children: React.ReactNode) {
-		super(context, itemSchema, fieldProps, children);
-		/*
-		makeObservable(this, {
-			value: observable,
-		})
-		*/
-	}
-	
     setReadOnly(value:boolean) {this.readOnly = value}
     setDisabled(value:boolean) {this.disabled = value}    
 
