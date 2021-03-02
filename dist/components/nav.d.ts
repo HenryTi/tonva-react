@@ -61,6 +61,7 @@ export interface NavSettings {
     oem?: string;
     loginTop?: JSX.Element;
     privacy?: string;
+    htmlTitle?: string;
 }
 export declare class Nav {
     private navView;

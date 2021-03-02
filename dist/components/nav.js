@@ -761,6 +761,18 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.setSettings = function (settings) {
         this.navSettings = settings;
+        var htmlTitle = settings.htmlTitle;
+        if (htmlTitle) {
+            document.title = htmlTitle;
+        }
+        var html = document.getElementsByTagName('html');
+        var html0 = html[0];
+        if (html0) {
+            var version = html0 === null || html0 === void 0 ? void 0 : html0.getAttribute('data-version');
+            if (version) {
+                //appConfig.version = version;
+            }
+        }
     };
     Object.defineProperty(Nav.prototype, "oem", {
         get: function () {

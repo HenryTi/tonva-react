@@ -384,6 +384,7 @@ export interface NavSettings {
     oem?: string;
     loginTop?: JSX.Element;
     privacy?: string;
+	htmlTitle?: string;
 }
 
 export class Nav {
@@ -494,7 +495,19 @@ export class Nav {
 
     setSettings(settings?: NavSettings) {
         this.navSettings = settings;
-    }
+		let {htmlTitle} = settings;
+		if (htmlTitle) {
+			document.title = htmlTitle;
+		}
+		let html = document.getElementsByTagName('html');
+		let html0 = html[0];
+		if (html0) {
+			let version = html0?.getAttribute('data-version');
+			if (version) {
+				//appConfig.version = version;
+			}
+		}		
+	}
 
     get oem():string {
         return this.navSettings && this.navSettings.oem;

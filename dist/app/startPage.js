@@ -40,22 +40,10 @@ exports.startPage = void 0;
 var components_1 = require("../components");
 function startPage(CApp, appConfig) {
     return __awaiter(this, void 0, void 0, function () {
-        var htmlTitle, html, html0, version, cApp;
+        var cApp;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    htmlTitle = appConfig.htmlTitle;
-                    if (htmlTitle) {
-                        document.title = htmlTitle;
-                    }
-                    html = document.getElementsByTagName('html');
-                    html0 = html[0];
-                    if (html0) {
-                        version = html0 === null || html0 === void 0 ? void 0 : html0.getAttribute('data-version');
-                        if (version) {
-                            //appConfig.version = version;
-                        }
-                    }
                     components_1.nav.setSettings(appConfig);
                     cApp = new CApp(appConfig);
                     cApp.init();
