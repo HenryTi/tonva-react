@@ -767,7 +767,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/fetcherrorview.tsx": {
-        "version": "1f88a9aa13eeaee09ea5ebb4bf7d32bdc6532a946f77a578f99e89eb891374f7",
+        "version": "d62df4deb7d6ad7469c0f8d04e60897205ab17b027dd469ba488144a10ba6546",
         "signature": "7f15c95d45eb5ded5f329374f9b4f131386d5ded00427f61460627070a03048e",
         "affectsGlobalScope": false
       },

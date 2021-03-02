@@ -31,7 +31,7 @@ export default class FetchErrorView extends React.Component<FetchErrorProps, nul
         }
         return <div className="tv-page">
             <article>
-				<main className="va-error">
+				<main className="va-error p-3">
 					<div>网络出现问题</div>
 					<div>点击重新访问</div>
 					<div style={{wordWrap:"break-word"}}>url: {url}</div>
