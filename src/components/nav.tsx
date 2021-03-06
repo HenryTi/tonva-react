@@ -30,12 +30,6 @@ const regEx = new RegExp('Android|webOS|iPhone|iPad|' +
     'i');
 const isMobile = regEx.test(navigator.userAgent);
 
-/*
-export const mobileHeaderStyle = isMobile? {
-    minHeight:  '3em'
-} : undefined;
-*/
-//const logo = require('../img/logo.svg');
 let logMark: number;
 const logs:string[] = [];
 export type NavPage = (params:any) => Promise<void>;
@@ -44,6 +38,7 @@ export interface Props
 {
     onLogined: (isUserLogin?:boolean)=>Promise<void>;
     notLogined?: ()=>Promise<void>;
+	userPassword?: () => Promise<{user:string; password:string}>;
 };
 let stackKey = 1;
 export interface StackItem {
@@ -599,15 +594,30 @@ export class Nav {
             
             let user: User = this.local.user.get();
             if (user === undefined) {
-                let {notLogined} = this.navView.props;
-                if (notLogined !== undefined) {
-                    await notLogined();
-                }
-                else {
-                    await nav.showLogin(undefined);
-					//nav.navigateToLogin();
-                }
-                return;
+                let {userPassword} = this.navView.props;
+				if (userPassword) {
+					let ret = await userPassword();
+					if (ret) {
+						let {user:userName, password} = ret;
+						let logindUser = await userApi.login({
+							user: userName,
+							pwd: password,
+							guest: nav.guest,
+						});
+						user = logindUser;
+					}
+				}
+				if (user === undefined) {
+					let {notLogined} = this.navView.props;
+					if (notLogined !== undefined) {
+						await notLogined();
+					}
+					else {
+						await nav.showLogin(undefined);
+						//nav.navigateToLogin();
+					}
+					return;
+				}
             }
 
             await nav.logined(user);
@@ -659,13 +669,14 @@ export class Nav {
 		nav.navigate('/login');
 	}
 
-	openSysPage(url: string) {
+	openSysPage(url: string):boolean {
 		let navPage: NavPage = this.sysRoutes[url];
 		if (navPage === undefined) {
-			alert(url + ' is not defined in sysRoutes');
-			return;
+			//alert(url + ' is not defined in sysRoutes');
+			return false;
 		}
 		navPage(undefined);
+		return true;
 	}
 
 	private navPageRoutes: {[url:string]: NavPage};
