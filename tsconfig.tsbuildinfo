@@ -732,7 +732,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/page/tabs.tsx": {
-        "version": "b5841398451cd560d0cdd428b14c3243c7068b08c5d509cac28952f636635e92",
+        "version": "1aff739ef9bf58e86ae898d87b08879bb51b9face5b22fac2754b5587c19ba6d",
         "signature": "932160d6358985cf42f1f9e2e88074d7dfafd543f792bb5c3f94aa0894f95fd7",
         "affectsGlobalScope": false
       },
@@ -767,7 +767,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/fetcherrorview.tsx": {
-        "version": "d62df4deb7d6ad7469c0f8d04e60897205ab17b027dd469ba488144a10ba6546",
+        "version": "2294b30213ec75dbf91fd0fe30eac3ab7e12297a15af59a04bbce4b713102e66",
         "signature": "7f15c95d45eb5ded5f329374f9b4f131386d5ded00427f61460627070a03048e",
         "affectsGlobalScope": false
       },

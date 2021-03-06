@@ -37,7 +37,7 @@ export default class FetchErrorView extends React.Component<FetchErrorProps, nul
 					<div style={{wordWrap:"break-word"}}>url: {url}</div>
 					{errContent}
 					<div className="p-3 text-center">
-					<button className="btn btn-primary mr-5" type='button' onClick={this.close}>关闭</button>
+					<button className="btn btn-primary mr-3" type='button' onClick={this.close}>关闭</button>
 						<button className="btn btn-outline-primary" type='button' onClick={this.reApi}>重试</button>
 					</div>
 				</main>

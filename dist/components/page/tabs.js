@@ -313,6 +313,9 @@ var TabsView = /** @class */ (function () {
             selectedTab: mobx_1.observable,
             tabArr: mobx_1.observable,
         });
+        setTimeout(function () {
+            _this.tabClick(_this.selectedTab);
+        }, 100);
     }
     TabsView.prototype.render = function () {
         var tabPosition = this.props.tabPosition;
@@ -341,10 +344,12 @@ var Tabs = /** @class */ (function (_super) {
     function Tabs(props) {
         var _this = _super.call(this, props) || this;
         _this.tabsView = new TabsView(props);
-        setTimeout(function () {
-            _this.tabsView.tabClick(undefined);
-        }, 100);
         return _this;
+        /*
+        setTimeout(() => {
+            this.tabsView.tabClick(undefined);
+        }, 100);
+        */
     }
     Tabs.prototype.render = function () {
         return this.tabsView.render();
@@ -361,10 +366,12 @@ var RootTabs = /** @class */ (function (_super) {
     function RootTabs(props) {
         var _this = _super.call(this, props) || this;
         _this.tabsView = new TabsView(props);
-        setTimeout(function () {
-            _this.tabsView.tabClick(undefined);
-        }, 100);
         return _this;
+        /*
+        setTimeout(() => {
+            this.tabsView.tabClick(undefined);
+        }, 100);
+        */
     }
     RootTabs.prototype.render = function () {
         return React.createElement(this.tabsView.content);
