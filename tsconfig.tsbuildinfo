@@ -1237,8 +1237,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/searchbox.tsx": {
-        "version": "956fbd084e09d59c8adae5e35492ff052a23c5d3dc004276f119f42f272a8e41",
-        "signature": "3b2630065845eb5929618aa42bbf8148d5afc3e9a7e2f6583bd0f7124e9b1d75",
+        "version": "b725bfa16a1cc604dedb859d2f029800d0a4c2ef68b1d0b67ddbf69599138099",
+        "signature": "b353d18df2e26709fb20d937b6a1ecb9f1ec89436ac2198be88061dc8977e185",
         "affectsGlobalScope": false
       },
       "./src/components/usericon.tsx": {
@@ -3266,6 +3266,7 @@
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/react/index.d.ts",
         "./node_modules/@types/react/jsx-runtime.d.ts",
+        "./node_modules/mobx-react/dist/index.d.ts",
         "./node_modules/mobx/dist/mobx.d.ts"
       ],
       "./src/components/simple/badge.tsx": [

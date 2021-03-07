@@ -20,5 +20,5 @@ export declare class SearchBox extends React.Component<SearchBoxProps> {
     private onChange;
     private onSubmit;
     clear(): void;
-    render(): JSX.Element;
+    render(): React.FunctionComponentElement<{}>;
 }
