@@ -1237,7 +1237,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/searchbox.tsx": {
-        "version": "b725bfa16a1cc604dedb859d2f029800d0a4c2ef68b1d0b67ddbf69599138099",
+        "version": "586185218013bab0b9243286eca9db8dd3920a183340fb29ab5b7e97d91e8378",
         "signature": "b353d18df2e26709fb20d937b6a1ecb9f1ec89436ac2198be88061dc8977e185",
         "affectsGlobalScope": false
       },

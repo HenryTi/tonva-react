@@ -40,8 +40,10 @@ export class SearchBox extends React.Component<SearchBoxProps> { //}, SearchBoxS
             this.key = this.key.trim();
             if (this.key === '') this.key = undefined;
         }
+		console.log('key = ' + this.key);
         if (this.props.allowEmptySearch !== true) {
             this.disabled = !this.key;
+			console.log('disabled = ' + this.disabled);
         }
     }
     private onSubmit = async (evt: React.FormEvent<any>) => {

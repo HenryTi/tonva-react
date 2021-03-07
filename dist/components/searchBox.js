@@ -105,8 +105,10 @@ var SearchBox = /** @class */ (function (_super) {
                 if (_this.key === '')
                     _this.key = undefined;
             }
+            console.log('key = ' + _this.key);
             if (_this.props.allowEmptySearch !== true) {
                 _this.disabled = !_this.key;
+                console.log('disabled = ' + _this.disabled);
             }
         };
         _this.onSubmit = function (evt) { return __awaiter(_this, void 0, void 0, function () {
