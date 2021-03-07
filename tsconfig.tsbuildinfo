@@ -1237,8 +1237,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/searchbox.tsx": {
-        "version": "586185218013bab0b9243286eca9db8dd3920a183340fb29ab5b7e97d91e8378",
-        "signature": "b353d18df2e26709fb20d937b6a1ecb9f1ec89436ac2198be88061dc8977e185",
+        "version": "efc3ce3d320183fbe8457917c6d31f27a60c9fc2682bcbdcc96aa82a252660e9",
+        "signature": "67406ab54786c5294e2ccba72c598aa3601e9f77eb62764f470ca674a6dc5a78",
         "affectsGlobalScope": false
       },
       "./src/components/usericon.tsx": {
@@ -1453,7 +1453,7 @@
       },
       "./src/uq/uqman.ts": {
         "version": "a135382ac692f2552e936df25b89751de1c177c473ff4a86506014826a728e02",
-        "signature": "8668675818e125fd2beb41e2cdc537f6e4fd2abef85ddb9c85ade4aca9b5061d",
+        "signature": "b7ac333266be35b217c7fd11609406f73881dd0a87a37193e512bfb589258e15",
         "affectsGlobalScope": false
       },
       "./src/uq/build/tools.ts": {

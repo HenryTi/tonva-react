@@ -86,18 +86,15 @@ exports.SearchBox = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
-var mobx_1 = require("mobx");
-var mobx_react_1 = require("mobx-react");
 /*
 export interface SearchBoxState {
     disabled: boolean;
 }*/
 var SearchBox = /** @class */ (function (_super) {
     __extends(SearchBox, _super);
-    function SearchBox(props) {
-        var _this = _super.call(this, props) || this;
+    function SearchBox() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.key = null;
-        _this.disabled = true;
         _this.onChange = function (evt) {
             _this.key = evt.target.value;
             if (_this.key !== undefined) {
@@ -107,8 +104,7 @@ var SearchBox = /** @class */ (function (_super) {
             }
             console.log('key = ' + _this.key);
             if (_this.props.allowEmptySearch !== true) {
-                _this.disabled = !_this.key;
-                console.log('disabled = ' + _this.disabled);
+                _this.input.disabled = !_this.key;
             }
         };
         _this.onSubmit = function (evt) { return __awaiter(_this, void 0, void 0, function () {
@@ -133,9 +129,6 @@ var SearchBox = /** @class */ (function (_super) {
                 }
             });
         }); };
-        mobx_1.makeObservable(_this, {
-            disabled: mobx_1.observable
-        });
         return _this;
     }
     SearchBox.prototype.clear = function () {
@@ -144,26 +137,24 @@ var SearchBox = /** @class */ (function (_super) {
     };
     SearchBox.prototype.render = function () {
         var _this = this;
-        return React.createElement(mobx_react_1.observer(function () {
-            var _a = _this.props, className = _a.className, inputClassName = _a.inputClassName, onFocus = _a.onFocus, label = _a.label, placeholder = _a.placeholder, buttonText = _a.buttonText, maxLength = _a.maxLength, size = _a.size;
-            var inputSize;
-            switch (size) {
-                default:
-                case 'sm':
-                    inputSize = 'input-group-sm';
-                    break;
-                case 'md':
-                    inputSize = 'input-group-md';
-                    break;
-                case 'lg':
-                    inputSize = 'input-group-lg';
-                    break;
-            }
-            return jsx_runtime_1.jsx("form", __assign({ className: className, onSubmit: _this.onSubmit }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default("input-group", inputSize) }, { children: [label && jsx_runtime_1.jsx("div", __assign({ className: "input-group-addon align-self-center mr-2" }, { children: label }), void 0),
-                        jsx_runtime_1.jsx("input", { ref: function (v) { return _this.input = v; }, onChange: _this.onChange, type: "text", name: "key", onFocus: onFocus, className: classnames_1.default('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: _this.props.initKey, maxLength: maxLength }, void 0),
-                        jsx_runtime_1.jsx("div", __assign({ className: "input-group-append" }, { children: jsx_runtime_1.jsxs("button", __assign({ className: "btn btn-primary", type: "submit", disabled: _this.disabled }, { children: [jsx_runtime_1.jsx("i", { className: 'fa fa-search' }, void 0),
-                                    jsx_runtime_1.jsx("i", { className: "fa" }, void 0), buttonText] }), void 0) }), void 0)] }), void 0) }), void 0);
-        }));
+        var _a = this.props, className = _a.className, inputClassName = _a.inputClassName, onFocus = _a.onFocus, label = _a.label, placeholder = _a.placeholder, buttonText = _a.buttonText, maxLength = _a.maxLength, size = _a.size;
+        var inputSize;
+        switch (size) {
+            default:
+            case 'sm':
+                inputSize = 'input-group-sm';
+                break;
+            case 'md':
+                inputSize = 'input-group-md';
+                break;
+            case 'lg':
+                inputSize = 'input-group-lg';
+                break;
+        }
+        return jsx_runtime_1.jsx("form", __assign({ className: className, onSubmit: this.onSubmit }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default("input-group", inputSize) }, { children: [label && jsx_runtime_1.jsx("div", __assign({ className: "input-group-addon align-self-center mr-2" }, { children: label }), void 0),
+                    jsx_runtime_1.jsx("input", { ref: function (v) { return _this.input = v; }, onChange: this.onChange, type: "text", name: "key", onFocus: onFocus, className: classnames_1.default('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }, void 0),
+                    jsx_runtime_1.jsx("div", __assign({ className: "input-group-append" }, { children: jsx_runtime_1.jsxs("button", __assign({ className: "btn btn-primary", type: "submit", disabled: true }, { children: [jsx_runtime_1.jsx("i", { className: 'fa fa-search' }, void 0),
+                                jsx_runtime_1.jsx("i", { className: "fa" }, void 0), buttonText] }), void 0) }), void 0)] }), void 0) }), void 0);
     };
     return SearchBox;
 }(React.Component));

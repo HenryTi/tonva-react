@@ -15,10 +15,8 @@ export interface SearchBoxProps {
 export declare class SearchBox extends React.Component<SearchBoxProps> {
     private input;
     private key;
-    disabled: boolean;
-    constructor(props: SearchBoxProps);
     private onChange;
     private onSubmit;
     clear(): void;
-    render(): React.FunctionComponentElement<{}>;
+    render(): JSX.Element;
 }
