@@ -109,7 +109,7 @@ require("../css/animation.css");
 var simple_1 = require("./simple");
 var net_2 = require("../net");
 var reloadPage_1 = require("./reloadPage");
-var auth_1 = require("../auth");
+var createLogin_1 = require("../auth/createLogin");
 var regEx = new RegExp('Android|webOS|iPhone|iPad|' +
     'BlackBerry|Windows Phone|' +
     'Opera Mini|IEMobile|Mobile', 'i');
@@ -558,7 +558,7 @@ var Nav = /** @class */ (function () {
                 return [2 /*return*/];
             });
         }); };
-        this.createLogin = auth_1.createLogin;
+        this.createLogin = createLogin_1.createLogin;
         this.reload = function () { return __awaiter(_this, void 0, void 0, function () {
             var waiting, registration, plus, webview, webView;
             return __generator(this, function (_a) {

@@ -135,3 +135,4 @@ export class CForget extends CRegBase {
         return;
     }
 }
+
