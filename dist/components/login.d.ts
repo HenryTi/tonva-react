@@ -6,3 +6,4 @@ export interface Login {
     showForget(): void;
     showChangePassword(): void;
 }
+export declare function createLogin(): Promise<Login>;

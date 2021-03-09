@@ -21,8 +21,8 @@ import { FA } from './simple';
 import { userApi } from '../net';
 import { ReloadPage, ConfirmReloadPage } from './reloadPage';
 import { PageWebNav } from './page';
-import { Login } from './login';
-import { createLogin } from '../auth/createLogin';
+import { createLogin, Login } from './login';
+//import { createLogin } from '../auth/createLogin';
 
 const regEx = new RegExp('Android|webOS|iPhone|iPad|' +
     'BlackBerry|Windows Phone|'  +

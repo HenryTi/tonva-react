@@ -7,3 +7,8 @@ export interface Login {
 	showForget():void
 	showChangePassword():void
 }
+
+export async function createLogin():Promise<Login> {
+	let importCLogin = await import('../auth/CLogin');
+	return new importCLogin.CLogin(undefined);
+}
