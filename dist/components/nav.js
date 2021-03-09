@@ -1154,29 +1154,17 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.showRegister = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var login;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getLogin()];
-                    case 1:
-                        login = _a.sent();
-                        login.showRegister();
-                        return [2 /*return*/];
-                }
+                login_1.showRegister();
+                return [2 /*return*/];
             });
         });
     };
     Nav.prototype.showForget = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var login;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getLogin()];
-                    case 1:
-                        login = _a.sent();
-                        login.showForget();
-                        return [2 /*return*/];
-                }
+                login_1.showForget();
+                return [2 /*return*/];
             });
         });
     };

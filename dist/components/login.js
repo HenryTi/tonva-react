@@ -55,7 +55,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createLogin = void 0;
+exports.showForget = exports.showRegister = exports.createLogin = void 0;
 function createLogin() {
     return __awaiter(this, void 0, void 0, function () {
         var importCLogin;
@@ -70,4 +70,36 @@ function createLogin() {
     });
 }
 exports.createLogin = createLogin;
+function showRegister() {
+    return __awaiter(this, void 0, void 0, function () {
+        var importCRegister, c;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../auth/register/CRegister')); })];
+                case 1:
+                    importCRegister = _a.sent();
+                    c = new importCRegister.CRegister(undefined);
+                    c.start();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.showRegister = showRegister;
+function showForget() {
+    return __awaiter(this, void 0, void 0, function () {
+        var importCRegister, c;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../auth/register/CRegister')); })];
+                case 1:
+                    importCRegister = _a.sent();
+                    c = new importCRegister.CForget(undefined);
+                    c.start();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.showForget = showForget;
 //# sourceMappingURL=login.js.map

@@ -31,7 +31,7 @@ export class CLogin extends Controller implements Login {
 			nav.logout(callback);
 		});
 	}
-
+	/*
 	async showRegister() {
 		let cRegister = new (await import('./register')).CRegister(this.res);
 		await cRegister.start();
@@ -41,6 +41,7 @@ export class CLogin extends Controller implements Login {
 		let cForget = new (await import('./register')).CForget(this.res);
 		await cForget.start();
 	}
+	*/
 
 	protected getVChangePassword():new (cLogin:CLogin) => VPage<CLogin> {
 		return VChangePassword;
