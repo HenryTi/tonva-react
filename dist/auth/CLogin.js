@@ -12,6 +12,25 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -56,7 +75,6 @@ var VLogout_1 = require("./VLogout");
 var VLogin_1 = require("./VLogin");
 var net_1 = require("../net");
 var VChangePassword_1 = require("./VChangePassword");
-var register_1 = require("./register");
 var CLogin = /** @class */ (function (_super) {
     __extends(CLogin, _super);
     function CLogin() {
@@ -112,13 +130,16 @@ var CLogin = /** @class */ (function (_super) {
     };
     CLogin.prototype.showRegister = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var cRegister;
+            var importRegister, cRegister;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        cRegister = new register_1.CRegister(this.res);
-                        return [4 /*yield*/, cRegister.start()];
+                        importRegister = Promise.resolve().then(function () { return __importStar(require('./register')); });
+                        return [4 /*yield*/, importRegister];
                     case 1:
+                        cRegister = new (_a.sent()).CRegister(this.res);
+                        return [4 /*yield*/, cRegister.start()];
+                    case 2:
                         _a.sent();
                         return [2 /*return*/];
                 }
@@ -127,13 +148,16 @@ var CLogin = /** @class */ (function (_super) {
     };
     CLogin.prototype.showForget = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var cForget;
+            var importRegister, cForget;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        cForget = new register_1.CForget(this.res);
-                        return [4 /*yield*/, cForget.start()];
+                        importRegister = Promise.resolve().then(function () { return __importStar(require('./register')); });
+                        return [4 /*yield*/, importRegister];
                     case 1:
+                        cForget = new (_a.sent()).CForget(this.res);
+                        return [4 /*yield*/, cForget.start()];
+                    case 2:
                         _a.sent();
                         return [2 /*return*/];
                 }

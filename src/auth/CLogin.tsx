@@ -5,7 +5,6 @@ import { VLogout } from './VLogout';
 import { VLogin } from './VLogin';
 import { CenterAppApi, userApi } from '../net';
 import { VChangePassword } from './VChangePassword';
-import { CRegister, CForget } from './register';
 
 export class CLogin extends Controller implements Login {
 	protected async internalStart() {
@@ -34,12 +33,14 @@ export class CLogin extends Controller implements Login {
 	}
 
 	async showRegister() {
-		let cRegister = new CRegister(this.res);
+		let importRegister = import('./register');
+		let cRegister = new (await importRegister).CRegister(this.res);
 		await cRegister.start();
 	}
 
 	async showForget() {
-		let cForget = new CForget(this.res);
+		let importRegister = import('./register');
+		let cForget = new (await importRegister).CForget(this.res);
 		await cForget.start();
 	}
 

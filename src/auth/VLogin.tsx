@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {nav, Form, Schema, UiSchema, UiTextItem, UiPasswordItem, Context, UiButton, StringSchema, Ax} from '../components';
+import {Form, Schema, UiSchema, UiTextItem, UiPasswordItem, Context, UiButton, StringSchema, Ax} from '../components';
 import { tonvaTop, getSender } from './tools';
 import { CLogin } from './CLogin';
 import { VPage } from '../vm';
@@ -80,7 +80,7 @@ export class VLogin extends VPage<CLogin> {
 					requiredFlag={false} />
 				{/*onClick={() => this.clickForget()}*/}
 				<div className="text-center">
-					<Ax className="btn btn-link btn-block mr-3" href="/forget">
+					<Ax className="btn btn-link mr-3" href="/forget">
 						忘记密码
 					</Ax>
 					<Ax href="/register" className="btn btn-link" style={{margin:'0px auto'}}>
