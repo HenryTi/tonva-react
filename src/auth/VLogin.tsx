@@ -80,10 +80,10 @@ export class VLogin extends VPage<CLogin> {
 					requiredFlag={false} />
 				{/*onClick={() => this.clickForget()}*/}
 				<div className="text-center">
-					<Ax className="btn btn-link mr-3" href="/forget">
+					<Ax className="btn btn-link" href="/forget">
 						忘记密码
 					</Ax>
-					<Ax href="/register" className="btn btn-link" style={{margin:'0px auto'}}>
+					<Ax href="/register" className="btn btn-link">
 						注册账号
 					</Ax>
 				</div>

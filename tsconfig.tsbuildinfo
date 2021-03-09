@@ -897,7 +897,7 @@
         "affectsGlobalScope": false
       },
       "./src/auth/vlogin.tsx": {
-        "version": "db2de89828b92839b92fec34b4be65125f7a866ad402d7ba47176a7407d5ef19",
+        "version": "096de325ba61c1828b8a281f62f7b24bb32bb76da9f3fa968954c70e22dd046e",
         "signature": "651400d05f38bb2b8b853cb09b85f6eee9d2af5b021fc57096652ac2c9f7dc46",
         "affectsGlobalScope": false
       },
@@ -907,8 +907,8 @@
         "affectsGlobalScope": false
       },
       "./src/auth/register/vstart.tsx": {
-        "version": "cc218bc919a41fd1736ecb798e373af5cccd4da34eeefc3e77b837fcbda1f564",
-        "signature": "d74f3ab8c98a38122c2a51db4b9462015f57a8637ba58b9371c1d2ac7f337e75",
+        "version": "420e2018fa8e55af34c60e98442fb502d0ed051197c99362e599569fc033406f",
+        "signature": "4be36a29e5c91f3f4329ea7e534474ec77147b86913406f941b316bef926f496",
         "affectsGlobalScope": false
       },
       "./src/auth/register/vverify.tsx": {
