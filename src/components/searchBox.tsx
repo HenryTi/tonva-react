@@ -1,7 +1,5 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { makeObservable, observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 export interface SearchBoxProps {
     className?: string;
@@ -74,7 +72,7 @@ export class SearchBox extends React.Component<SearchBoxProps> { //}, SearchBoxS
 				<div className="input-group-append">
 					<button className="btn btn-primary"
 						type="submit"
-						disabled={true}>
+						disabled={this.props.allowEmptySearch !== true}>
 						<i className='fa fa-search' />
 						<i className="fa"/>
 						{buttonText}

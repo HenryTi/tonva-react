@@ -12,6 +12,6 @@ export declare class VLogin extends VPage<CLogin> {
     private onSubmit;
     private onEnter;
     header(): false | "登录";
-    footer(): JSX.Element;
+    footer(): any;
     content(): JSX.Element;
 }

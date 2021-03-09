@@ -153,7 +153,7 @@ var SearchBox = /** @class */ (function (_super) {
         }
         return jsx_runtime_1.jsx("form", __assign({ className: className, onSubmit: this.onSubmit }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default("input-group", inputSize) }, { children: [label && jsx_runtime_1.jsx("div", __assign({ className: "input-group-addon align-self-center mr-2" }, { children: label }), void 0),
                     jsx_runtime_1.jsx("input", { ref: function (v) { return _this.input = v; }, onChange: this.onChange, type: "text", name: "key", onFocus: onFocus, className: classnames_1.default('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }, void 0),
-                    jsx_runtime_1.jsx("div", __assign({ className: "input-group-append" }, { children: jsx_runtime_1.jsxs("button", __assign({ className: "btn btn-primary", type: "submit", disabled: true }, { children: [jsx_runtime_1.jsx("i", { className: 'fa fa-search' }, void 0),
+                    jsx_runtime_1.jsx("div", __assign({ className: "input-group-append" }, { children: jsx_runtime_1.jsxs("button", __assign({ className: "btn btn-primary", type: "submit", disabled: this.props.allowEmptySearch !== true }, { children: [jsx_runtime_1.jsx("i", { className: 'fa fa-search' }, void 0),
                                 jsx_runtime_1.jsx("i", { className: "fa" }, void 0), buttonText] }), void 0) }), void 0)] }), void 0) }), void 0);
     };
     return SearchBox;

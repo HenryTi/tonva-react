@@ -38,9 +38,11 @@ export const Ax = (axProps: AxProps) => {
 		let {naClassName} = axProps;
 		if (!onClick) {
 			onClick = () => {
-				nav.openSysPage(href); //.navigate(href);
-				return false;
-			}
+				if (nav.openSysPage(href) === false) {
+					nav.navigate(href);
+			   };
+			   return false;
+		   }
 		}
 		return <span className={classNames(className, 'cursor-pointer', naClassName)} onClick={onClick}>{children}</span>;
 	}

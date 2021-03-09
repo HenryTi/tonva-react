@@ -55,6 +55,8 @@ export class VLogin extends VPage<CLogin> {
 	}
 
 	footer() {
+		return null;
+		/*
         return <div className="d-block">
             <div className='text-center'>
                 <Ax href="/register" className="btn btn-link" style={{margin:'0px auto'}}>
@@ -63,6 +65,7 @@ export class VLogin extends VPage<CLogin> {
             </div>
             {nav.privacyEntry()}
         </div>;
+		*/
 	}
 
 	content() {
@@ -76,9 +79,14 @@ export class VLogin extends VPage<CLogin> {
 					onEnter={this.onEnter}
 					requiredFlag={false} />
 				{/*onClick={() => this.clickForget()}*/}
-				<Ax className="btn btn-link btn-block" href="/forget">
-					忘记密码
-				</Ax>
+				<div className="text-center">
+					<Ax className="btn btn-link btn-block mr-3" href="/forget">
+						忘记密码
+					</Ax>
+					<Ax href="/register" className="btn btn-link" style={{margin:'0px auto'}}>
+						注册账号
+					</Ax>
+				</div>
 			</div>
 			<div className="flex-fill" />
 			<div className="flex-fill" />
