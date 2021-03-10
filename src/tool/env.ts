@@ -1,22 +1,15 @@
 import { from62 } from './62';
 import { LocalMap } from './localDb';
 
-/*
-// 如果路径上有独立的test单词，则是test环境
-// 这段代码移到下面 initEnv 去了
-function isTesting():boolean {
-	let ret = /(\btest\b)/i.test(document.location.href);
-	return ret;
-}
-*/
 export const env = (function () {
-	let {unit, testing, params, lang, district} = initEnv();
+	let {unit, testing, params, lang, district, timeZone} = initEnv();
     return {
 		unit,
 		testing,
 		params,
 		lang, 
 		district,
+		timeZone,
         isDevelopment: process.env.NODE_ENV === 'development',
         localDb: new LocalMap(testing===true? '$$':'$'),
         setTimeout: (tag:string, callback: (...args: any[]) => void, ms: number, ...args: any[]):NodeJS.Timer => {
@@ -35,11 +28,12 @@ export const env = (function () {
 }());
 
 function initEnv(): {
-	unit:number; 
-	testing:boolean; 
-	params:{[key:string]:string}; 
-	lang:string; 
-	district:string;}
+	unit: number; 
+	testing: boolean; 
+	params: {[key:string]: string}; 
+	lang: string; 
+	district: string;
+	timeZone: number;}
 {
 	let pl     = /\+/g,  // Regex for replacing addition symbol with a space
         search = /([^&=]+)=?([^&]*)/g,
@@ -121,5 +115,6 @@ function initEnv(): {
         lang = parts[0];
         if (parts.length > 1) district = parts[1].toUpperCase();
     }
-	return {unit, testing, params, lang, district};
+	let timeZone = -new Date().getTimezoneOffset() / 60;
+	return {unit, testing, params, lang, district, timeZone};
 }

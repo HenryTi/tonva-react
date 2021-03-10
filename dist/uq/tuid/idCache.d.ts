@@ -4,7 +4,6 @@ import { TuidInner, TuidDiv } from './tuid';
 export declare class IdCache {
     private queue;
     private cache;
-    private loading;
     protected localArr: LocalArr;
     protected waitingIds: number[];
     protected tuidInner: TuidInner;
@@ -19,13 +18,13 @@ export declare class IdCache {
     cacheValue(val: any): boolean;
     protected getIdFromObj(val: any): number;
     cacheIds(): Promise<void>;
-    private cacheIdValues;
+    protected cacheIdValues(tuidValues: any[]): void;
     modifyIds(ids: any[]): Promise<void>;
-    protected divName: string;
     protected loadIds(): Promise<any[]>;
     protected unpackTuidIds(values: string[]): any[];
     protected cacheTuidFieldValues(tuidValue: any): void;
     assureObj(id: number): Promise<void>;
+    protected loadTuidIds(netIds: number[]): Promise<any[]>;
     private loadTuidIdsOrLocal;
 }
 export declare class IdDivCache extends IdCache {
@@ -36,4 +35,5 @@ export declare class IdDivCache extends IdCache {
     protected getIdFromObj(val: any): number;
     protected unpackTuidIds(values: string[]): any[];
     protected cacheTuidFieldValues(tuidValue: any): void;
+    protected loadTuidIds(netIds: number[]): Promise<any[]>;
 }

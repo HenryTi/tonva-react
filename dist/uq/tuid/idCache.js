@@ -48,22 +48,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IdDivCache = exports.IdCache = void 0;
 var mobx_1 = require("mobx");
-var util_1 = require("util");
 var lodash_1 = __importDefault(require("lodash"));
 var maxCacheSize = 1000;
 var IdCache = /** @class */ (function () {
     function IdCache(tuidLocal) {
         this.queue = []; // 每次使用，都排到队头
         this.cache = mobx_1.observable.map({}, { deep: false }); // 已经缓冲的
-        this.loading = false;
         this.waitingIds = []; // 等待loading的
-        this.divName = undefined;
         this.tuidInner = tuidLocal;
         this.initLocalArr();
     }
@@ -73,8 +77,10 @@ var IdCache = /** @class */ (function () {
     IdCache.prototype.useId = function (id, defer) {
         if (!id)
             return;
-        if (util_1.isNumber(id) === false)
+        if (typeof id !== 'number') {
+            console.error('id cache ' + id + ' is not number');
             return;
+        }
         if (this.cache.has(id) === true) {
             this.moveToHead(id);
             return;
@@ -108,6 +114,22 @@ var IdCache = /** @class */ (function () {
         this.queue.push(id);
         return;
     };
+    /*
+    protected removeWaiting(id:number) {
+        let index = this.waitingIds.findIndex(v => v === id);
+        this.waitingIds.splice(index, 1);
+    }
+    
+    protected clearWaiting() {
+        this.waitingIds.splice(0, this.waitingIds.length);
+    }
+    
+    protected removeLoading(id:number) {
+        if (this.loadingIds === undefined) return;
+        let index = this.loadingIds.findIndex(v => v === id);
+        this.loadingIds.splice(index, 1);
+    }
+    */
     IdCache.prototype.moveToHead = function (id) {
         var index = this.queue.findIndex(function (v) { return v === id; });
         this.queue.splice(index, 1);
@@ -145,9 +167,12 @@ var IdCache = /** @class */ (function () {
         var id = this.getIdFromObj(val);
         if (id === undefined)
             return false;
-        var index = this.waitingIds.findIndex(function (v) { return v === id; });
-        if (index >= 0)
-            this.waitingIds.splice(index, 1);
+        /*
+        let index = this.waitingIds.findIndex(v => v === id);
+        if (index>=0) this.waitingIds.splice(index, 1);
+        */
+        //this.removeWaiting(id);
+        //this.removeLoading(id);
         this.cache.set(id, val);
         return true;
     };
@@ -157,16 +182,16 @@ var IdCache = /** @class */ (function () {
             var tuidValues;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        if (this.waitingIds.length === 0)
-                            return [2 /*return*/];
-                        return [4 /*yield*/, this.loadIds()];
+                    case 0: return [4 /*yield*/, this.loadIds()];
                     case 1:
                         tuidValues = _a.sent();
+                        /*
                         if (tuidValues === undefined || tuidValues.length === 0) {
-                            this.waitingIds.splice(0, this.waitingIds.length);
-                            return [2 /*return*/];
+                            //this.waitingIds.splice(0, this.waitingIds.length);
+                            this.clearWaiting();
+                            return;
                         }
+                        */
                         this.cacheIdValues(tuidValues);
                         return [2 /*return*/];
                 }
@@ -211,17 +236,20 @@ var IdCache = /** @class */ (function () {
     };
     IdCache.prototype.loadIds = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var ret;
+            var loadingIds, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (this.loading === true)
+                        if (this.waitingIds.length === 0)
                             return [2 /*return*/];
-                        this.loading = true;
-                        return [4 /*yield*/, this.loadTuidIdsOrLocal(this.waitingIds)];
+                        loadingIds = __spreadArrays(this.waitingIds);
+                        //this.clearWaiting();
+                        this.waitingIds = [];
+                        return [4 /*yield*/, this.loadTuidIdsOrLocal(loadingIds)];
                     case 1:
                         ret = _a.sent();
-                        this.loading = false;
+                        //this.loading = false;
+                        //this.loadingIds = undefined;
                         return [2 /*return*/, ret];
                 }
             });
@@ -255,6 +283,19 @@ var IdCache = /** @class */ (function () {
             });
         });
     };
+    IdCache.prototype.loadTuidIds = function (netIds) {
+        return __awaiter(this, void 0, void 0, function () {
+            var netRet;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.tuidInner.loadTuidIds(undefined, netIds)];
+                    case 1:
+                        netRet = _a.sent();
+                        return [2 /*return*/, netRet];
+                }
+            });
+        });
+    };
     IdCache.prototype.loadTuidIdsOrLocal = function (ids) {
         return __awaiter(this, void 0, void 0, function () {
             var ret, netIds, _i, ids_1, id, value, len, netRet, _loop_1, this_1, i, i;
@@ -274,8 +315,9 @@ var IdCache = /** @class */ (function () {
                                 ret.push(value);
                         }
                         len = netIds.length;
-                        if (!(len > 0)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.tuidInner.loadTuidIds(this.divName, netIds)];
+                        if (len === 0)
+                            return [2 /*return*/, ret];
+                        return [4 /*yield*/, this.loadTuidIds(netIds)];
                     case 1:
                         netRet = _a.sent();
                         _loop_1 = function (i) {
@@ -300,8 +342,7 @@ var IdCache = /** @class */ (function () {
                         for (i = 0; i < len; i++) {
                             this.localArr.setItem(netIds[i], '');
                         }
-                        _a.label = 2;
-                    case 2: return [2 /*return*/, ret];
+                        return [2 /*return*/, ret];
                 }
             });
         });
@@ -328,6 +369,19 @@ var IdDivCache = /** @class */ (function (_super) {
     };
     IdDivCache.prototype.cacheTuidFieldValues = function (tuidValue) {
         this.div.cacheTuidFieldValues(tuidValue);
+    };
+    IdDivCache.prototype.loadTuidIds = function (netIds) {
+        return __awaiter(this, void 0, void 0, function () {
+            var netRet;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.tuidInner.loadTuidIds(this.divName, netIds)];
+                    case 1:
+                        netRet = _a.sent();
+                        return [2 /*return*/, netRet];
+                }
+            });
+        });
     };
     return IdDivCache;
 }(IdCache));

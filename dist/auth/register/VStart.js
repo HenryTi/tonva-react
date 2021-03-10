@@ -133,7 +133,7 @@ var VStart = /** @class */ (function (_super) {
     VStart.prototype.content = function () {
         return jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: [tools_1.tonvaTop(), jsx_runtime_1.jsx("div", { className: "h-3c" }, void 0),
                 jsx_runtime_1.jsx(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0),
-                jsx_runtime_1.jsx("div", __assign({ className: "text-center" }, { children: jsx_runtime_1.jsx(components_1.Ax, __assign({ href: "/login", className: "text-primary py-3" }, { children: "\u5DF2\u6709\u8D26\u53F7\uFF0C\u76F4\u63A5\u767B\u5F55" }), void 0) }), void 0), components_1.nav.privacyEntry()] }), void 0);
+                jsx_runtime_1.jsx("div", __assign({ className: "text-center py-3" }, { children: jsx_runtime_1.jsx(components_1.Ax, __assign({ href: "/login", className: "text-primary" }, { children: "\u5DF2\u6709\u8D26\u53F7\uFF0C\u76F4\u63A5\u767B\u5F55" }), void 0) }), void 0), components_1.nav.privacyEntry()] }), void 0);
     };
     return VStart;
 }(vm_1.VPage));

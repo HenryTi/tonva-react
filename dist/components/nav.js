@@ -1036,9 +1036,10 @@ var Nav = /** @class */ (function () {
         });
     };
     Nav.prototype.internalLogined = function (user, callback, isUserLogin) {
+        var _a;
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         net_1.logoutApis();
                         console.log("logined: %s", JSON.stringify(user));
@@ -1055,9 +1056,12 @@ var Nav = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 2: return [4 /*yield*/, this.showAppView(isUserLogin)];
                     case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [2 /*return*/];
+                        _b.sent();
+                        _b.label = 4;
+                    case 4: return [4 /*yield*/, ((_a = this.actionAfterLogin) === null || _a === void 0 ? void 0 : _a.call(this))];
+                    case 5:
+                        _b.sent();
+                        return [2 /*return*/];
                 }
             });
         });
@@ -1169,10 +1173,11 @@ var Nav = /** @class */ (function () {
         });
     };
     Nav.prototype.logout = function (callback) {
+        var _a;
         return __awaiter(this, void 0, void 0, function () {
             var guest;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         //appInFrame.unit = undefined;
                         this.local.logoutClear();
@@ -1185,13 +1190,15 @@ var Nav = /** @class */ (function () {
                         if (!(callback === undefined)) return [3 /*break*/, 2];
                         return [4 /*yield*/, exports.nav.start()];
                     case 1:
-                        _a.sent();
+                        _b.sent();
                         return [3 /*break*/, 4];
                     case 2: return [4 /*yield*/, callback()];
                     case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [2 /*return*/];
+                        _b.sent();
+                        _b.label = 4;
+                    case 4:
+                        (_a = this.actionAfterLogout) === null || _a === void 0 ? void 0 : _a.call(this);
+                        return [2 /*return*/];
                 }
             });
         });

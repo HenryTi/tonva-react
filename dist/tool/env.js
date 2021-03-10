@@ -10,22 +10,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.env = void 0;
 var _62_1 = require("./62");
 var localDb_1 = require("./localDb");
-/*
-// 如果路径上有独立的test单词，则是test环境
-// 这段代码移到下面 initEnv 去了
-function isTesting():boolean {
-    let ret = /(\btest\b)/i.test(document.location.href);
-    return ret;
-}
-*/
 exports.env = (function () {
-    var _a = initEnv(), unit = _a.unit, testing = _a.testing, params = _a.params, lang = _a.lang, district = _a.district;
+    var _a = initEnv(), unit = _a.unit, testing = _a.testing, params = _a.params, lang = _a.lang, district = _a.district, timeZone = _a.timeZone;
     return {
         unit: unit,
         testing: testing,
         params: params,
         lang: lang,
         district: district,
+        timeZone: timeZone,
         isDevelopment: process.env.NODE_ENV === 'development',
         localDb: new localDb_1.LocalMap(testing === true ? '$$' : '$'),
         setTimeout: function (tag, callback, ms) {
@@ -130,6 +123,7 @@ function initEnv() {
         if (parts.length > 1)
             district = parts[1].toUpperCase();
     }
-    return { unit: unit, testing: testing, params: params, lang: lang, district: district };
+    var timeZone = -new Date().getTimezoneOffset() / 60;
+    return { unit: unit, testing: testing, params: params, lang: lang, district: district, timeZone: timeZone };
 }
 //# sourceMappingURL=env.js.map
