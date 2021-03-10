@@ -49,9 +49,10 @@ var tsCApp_1 = require("./tsCApp");
 var tsCBase_1 = require("./tsCBase");
 var tsVMain_1 = require("./tsVMain");
 var context_1 = require("./context");
+var tsApp_1 = require("./tsApp");
 function build(options, uqSrcPath) {
     return __awaiter(this, void 0, void 0, function () {
-        var buildContext, uqTsSrcPath, tsIndex, tsCApp, tsCBase, tsVMain;
+        var buildContext, uqTsSrcPath, tsIndex, tsCApp, tsCBase, tsVMain, tsApp;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,6 +75,8 @@ function build(options, uqSrcPath) {
                     tools_1.saveTsFile(buildContext, 'CBase', tsCBase);
                     tsVMain = tsVMain_1.buildTsVMain();
                     tools_1.saveSrcTsFileIfNotExists(buildContext, 'VMain', 'tsx', tsVMain);
+                    tsApp = tsApp_1.buildTsApp();
+                    tools_1.saveSrcTsFileIfNotExists(buildContext, 'App', 'tsx', tsApp);
                     tools_1.saveTsFile(buildContext, 'uqs', '');
                     fs_1.default.unlinkSync(uqTsSrcPath + '/uqs.ts');
                     return [4 /*yield*/, uqsFolder_1.buildUqsFolder(uqTsSrcPath + '/uqs', options)];

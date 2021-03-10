@@ -8,6 +8,7 @@ import { buildTsCApp } from './tsCApp';
 import { buildTsCBase } from './tsCBase';
 import { buildTsVMain } from './tsVMain';
 import { BuildContext } from './context';
+import { buildTsApp } from './tsApp';
 
 export async function build(options: AppConfig, uqSrcPath: string) {
 	let buildContext = new BuildContext(uqSrcPath);
@@ -33,6 +34,8 @@ export async function build(options: AppConfig, uqSrcPath: string) {
 	saveTsFile(buildContext, 'CBase', tsCBase);
 	let tsVMain = buildTsVMain();
 	saveSrcTsFileIfNotExists(buildContext, 'VMain', 'tsx', tsVMain);
+	let tsApp = buildTsApp();
+	saveSrcTsFileIfNotExists(buildContext, 'App', 'tsx', tsApp);
 
 	saveTsFile(buildContext, 'uqs', '');
 	fs.unlinkSync(uqTsSrcPath + '/uqs.ts');

@@ -1482,7 +1482,7 @@
         "affectsGlobalScope": false
       },
       "./src/uq/build/tsindex.ts": {
-        "version": "99b9218cb2f48ba5823768fd7aed6c0d3bee9165950e6591f79677928e5710c0",
+        "version": "2ac75e933db09036300550cabdf2a398fae119f987519e162facccf6a8bbf53f",
         "signature": "ae3962080ea8cbccd2f9fcd59d7552f8e98fd4f06507582f121af57807a70038",
         "affectsGlobalScope": false
       },
@@ -1501,8 +1501,13 @@
         "signature": "640e0335c885e5c7456b9ec06a004b5975b492fb6220ae329c7c73ac28470a95",
         "affectsGlobalScope": false
       },
+      "./src/uq/build/tsapp.ts": {
+        "version": "aeda1a60ba95a4660984190d50d377827efecbf29e03eef337bd8a89830d16e8",
+        "signature": "6ef09c4f8f10ebc892d8b8bfe6a873d89c7769ff5cc66b73a2a363dcf7bdfa65",
+        "affectsGlobalScope": false
+      },
       "./src/uq/build/build.ts": {
-        "version": "137cc0155641cfa9209add17279f23e71363d359b5da7f8312499e0b9b361d26",
+        "version": "e8cc7862a567dd73adead9e500e18ff674559b9a73ef04d8a906b78cbd4faf9b",
         "signature": "efa2903c874c6e758f3727bc8730e070c309426470846e7cb651e6808301b4be",
         "affectsGlobalScope": false
       },
@@ -3675,6 +3680,7 @@
         "./src/tool/index.ts",
         "./src/uq/build/context.ts",
         "./src/uq/build/tools.ts",
+        "./src/uq/build/tsapp.ts",
         "./src/uq/build/tscapp.ts",
         "./src/uq/build/tscbase.ts",
         "./src/uq/build/tsindex.ts",
@@ -3738,6 +3744,12 @@
         "./src/tool/index.ts",
         "./src/uq/build/context.ts",
         "./src/uq/uqman.ts"
+      ],
+      "./src/uq/build/tsapp.ts": [
+        "./node_modules/@types/node/base.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/react/jsx-runtime.d.ts",
+        "./src/uq/build/tools.ts"
       ],
       "./src/uq/build/tscapp.ts": [
         "./node_modules/@types/node/base.d.ts",
@@ -5741,6 +5753,7 @@
       "./src/uq/build/fielditem.ts",
       "./src/uq/build/index.ts",
       "./src/uq/build/tools.ts",
+      "./src/uq/build/tsapp.ts",
       "./src/uq/build/tscapp.ts",
       "./src/uq/build/tscbase.ts",
       "./src/uq/build/tsindex.ts",
