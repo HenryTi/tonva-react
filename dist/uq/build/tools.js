@@ -3,23 +3,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getNameFromUq = exports.entityName = exports.buildTsHeader = exports.saveTsFileIfNotExists = exports.overrideTsFile = exports.saveTsFile = exports.saveSrcTsFileIfNotExists = exports.uqTsSrcPath = exports.lastBuildTime = exports.red = void 0;
+exports.getNameFromUq = exports.entityName = exports.buildTsHeader = exports.saveTsFileIfNotExists = exports.overrideTsFile = exports.saveTsFile = exports.saveSrcTsFileIfNotExists = exports.lastBuildTime = exports.red = void 0;
 var fs_1 = __importDefault(require("fs"));
 var tool_1 = require("../../tool");
 exports.red = '\x1b[41m%s\x1b[0m';
 exports.lastBuildTime = 0;
-exports.uqTsSrcPath = 'src/UqApp';
-function saveSrcTsFileIfNotExists(fileName, suffix, content) {
-    var tsFilePath = exports.uqTsSrcPath + "/" + fileName + "." + suffix;
+//export const uqTsSrcPath = 'src/UqApp';
+function saveSrcTsFileIfNotExists(context, fileName, suffix, content) {
+    var tsFilePath = context.uqTsSrcPath + "/" + fileName + "." + suffix;
     saveTsFileIfNotExists(tsFilePath, content);
     //if (fs.existsSync(tsFile) === true) return;
     //saveTsFile(fileName, content, suffix);
 }
 exports.saveSrcTsFileIfNotExists = saveSrcTsFileIfNotExists;
-function saveTsFile(fileName, content, suffix) {
+function saveTsFile(context, fileName, content, suffix) {
     if (suffix === void 0) { suffix = 'ts'; }
-    var srcFile = exports.uqTsSrcPath + "/" + fileName + "." + suffix + ".txt";
-    var tsFile = exports.uqTsSrcPath + "/" + fileName + "." + suffix;
+    var uqTsSrcPath = context.uqTsSrcPath;
+    var srcFile = uqTsSrcPath + "/" + fileName + "." + suffix + ".txt";
+    var tsFile = uqTsSrcPath + "/" + fileName + "." + suffix;
     if (!fs_1.default.existsSync(srcFile)) {
         if (fs_1.default.existsSync(tsFile)) {
             fs_1.default.renameSync(tsFile, srcFile);

@@ -48,32 +48,35 @@ var tsIndex_1 = require("./tsIndex");
 var tsCApp_1 = require("./tsCApp");
 var tsCBase_1 = require("./tsCBase");
 var tsVMain_1 = require("./tsVMain");
-function build(options) {
+var context_1 = require("./context");
+function build(options, uqSrcPath) {
     return __awaiter(this, void 0, void 0, function () {
-        var tsIndex, tsCApp, tsCBase, tsVMain;
+        var buildContext, uqTsSrcPath, tsIndex, tsCApp, tsCBase, tsVMain;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    buildContext = new context_1.BuildContext(uqSrcPath);
                     // 只从test 数据库构建uq ts
                     tool_1.env.testing = true;
                     if (tools_1.lastBuildTime > 0) {
                         console.log(tools_1.red, 'quit !');
                         return [2 /*return*/];
                     }
-                    if (!fs_1.default.existsSync(tools_1.uqTsSrcPath)) {
-                        fs_1.default.mkdirSync(tools_1.uqTsSrcPath);
+                    uqTsSrcPath = buildContext.uqTsSrcPath;
+                    if (!fs_1.default.existsSync(uqTsSrcPath)) {
+                        fs_1.default.mkdirSync(uqTsSrcPath);
                     }
                     tsIndex = tsIndex_1.buildTsIndex();
-                    tools_1.saveTsFile('index', tsIndex);
+                    tools_1.saveTsFile(buildContext, 'index', tsIndex);
                     tsCApp = tsCApp_1.buildTsCApp();
-                    tools_1.saveSrcTsFileIfNotExists('CApp', 'ts', tsCApp);
+                    tools_1.saveSrcTsFileIfNotExists(buildContext, 'CApp', 'ts', tsCApp);
                     tsCBase = tsCBase_1.buildTsCBase();
-                    tools_1.saveTsFile('CBase', tsCBase);
+                    tools_1.saveTsFile(buildContext, 'CBase', tsCBase);
                     tsVMain = tsVMain_1.buildTsVMain();
-                    tools_1.saveSrcTsFileIfNotExists('VMain', 'tsx', tsVMain);
-                    tools_1.saveTsFile('uqs', '');
-                    fs_1.default.unlinkSync(tools_1.uqTsSrcPath + '/uqs.ts');
-                    return [4 /*yield*/, uqsFolder_1.buildUqsFolder(tools_1.uqTsSrcPath + '/uqs', options)];
+                    tools_1.saveSrcTsFileIfNotExists(buildContext, 'VMain', 'tsx', tsVMain);
+                    tools_1.saveTsFile(buildContext, 'uqs', '');
+                    fs_1.default.unlinkSync(uqTsSrcPath + '/uqs.ts');
+                    return [4 /*yield*/, uqsFolder_1.buildUqsFolder(uqTsSrcPath + '/uqs', options)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

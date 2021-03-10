@@ -1,9 +1,9 @@
 import { UqMan } from "../uqMan";
+import { BuildContext } from './context';
 export declare const red = "\u001B[41m%s\u001B[0m";
 export declare let lastBuildTime: number;
-export declare const uqTsSrcPath = "src/UqApp";
-export declare function saveSrcTsFileIfNotExists(fileName: string, suffix: string, content: string): void;
-export declare function saveTsFile(fileName: string, content: string, suffix?: string): void;
+export declare function saveSrcTsFileIfNotExists(context: BuildContext, fileName: string, suffix: string, content: string): void;
+export declare function saveTsFile(context: BuildContext, fileName: string, content: string, suffix?: string): void;
 export declare function overrideTsFile(path: string, content: string): void;
 export declare function saveTsFileIfNotExists(tsFilePath: string, content: string): void;
 export declare function buildTsHeader(): string;

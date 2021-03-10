@@ -1,18 +1,20 @@
 import fs from 'fs';
 import { capitalCase } from "../../tool";
 import { UqMan } from "../uqMan";
+import { BuildContext } from './context';
 
 export const red = '\x1b[41m%s\x1b[0m';
 export let lastBuildTime:number = 0;
-export const uqTsSrcPath = 'src/UqApp';
+//export const uqTsSrcPath = 'src/UqApp';
 
-export function saveSrcTsFileIfNotExists(fileName:string, suffix:string, content:string) {
-	let tsFilePath = `${uqTsSrcPath}/${fileName}.${suffix}`;
+export function saveSrcTsFileIfNotExists(context:BuildContext, fileName:string, suffix:string, content:string) {
+	let tsFilePath = `${context.uqTsSrcPath}/${fileName}.${suffix}`;
 	saveTsFileIfNotExists(tsFilePath, content);
 	//if (fs.existsSync(tsFile) === true) return;
 	//saveTsFile(fileName, content, suffix);
 }
-export function saveTsFile(fileName:string, content:string, suffix:string = 'ts') {
+export function saveTsFile(context:BuildContext, fileName:string, content:string, suffix:string = 'ts') {
+	let {uqTsSrcPath} = context;
 	let srcFile = `${uqTsSrcPath}/${fileName}.${suffix}.txt`;
 	let tsFile = `${uqTsSrcPath}/${fileName}.${suffix}`;
 	if (!fs.existsSync(srcFile)) {

@@ -1,14 +1,16 @@
 import fs from 'fs';
 import { env } from '../../tool';
 import { AppConfig } from '../../app';
-import { lastBuildTime, uqTsSrcPath, red, saveTsFile, saveSrcTsFileIfNotExists } from './tools';
+import { lastBuildTime, red, saveTsFile, saveSrcTsFileIfNotExists } from './tools';
 import { buildUqsFolder } from './uqsFolder';
 import { buildTsIndex } from './tsIndex';
 import { buildTsCApp } from './tsCApp';
 import { buildTsCBase } from './tsCBase';
 import { buildTsVMain } from './tsVMain';
+import { BuildContext } from './context';
 
-export async function build(options: AppConfig) {
+export async function build(options: AppConfig, uqSrcPath: string) {
+	let buildContext = new BuildContext(uqSrcPath);
 	// 只从test 数据库构建uq ts
 	env.testing = true;
 
@@ -16,6 +18,7 @@ export async function build(options: AppConfig) {
 		console.log(red, 'quit !');
 		return;
 	}
+	let {uqTsSrcPath} = buildContext;
 	if (!fs.existsSync(uqTsSrcPath)) {
 		fs.mkdirSync(uqTsSrcPath);
 	}
@@ -23,15 +26,15 @@ export async function build(options: AppConfig) {
 	//buildTsAppConfig(options);
 	
 	let tsIndex = buildTsIndex();
-	saveTsFile('index', tsIndex);
+	saveTsFile(buildContext, 'index', tsIndex);
 	let tsCApp = buildTsCApp();
-	saveSrcTsFileIfNotExists('CApp', 'ts', tsCApp);
+	saveSrcTsFileIfNotExists(buildContext, 'CApp', 'ts', tsCApp);
 	let tsCBase = buildTsCBase();
-	saveTsFile('CBase', tsCBase);
+	saveTsFile(buildContext, 'CBase', tsCBase);
 	let tsVMain = buildTsVMain();
-	saveSrcTsFileIfNotExists('VMain', 'tsx', tsVMain);
+	saveSrcTsFileIfNotExists(buildContext, 'VMain', 'tsx', tsVMain);
 
-	saveTsFile('uqs', '');
+	saveTsFile(buildContext, 'uqs', '');
 	fs.unlinkSync(uqTsSrcPath + '/uqs.ts');
 	await buildUqsFolder(uqTsSrcPath + '/uqs', options);
 };

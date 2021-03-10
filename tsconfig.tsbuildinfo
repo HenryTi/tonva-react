@@ -1446,9 +1446,14 @@
         "signature": "8668675818e125fd2beb41e2cdc537f6e4fd2abef85ddb9c85ade4aca9b5061d",
         "affectsGlobalScope": false
       },
+      "./src/uq/build/context.ts": {
+        "version": "d533e2ec01d9c76079f58bccc2489fe756b301dfde1e651014e544934d9875cf",
+        "signature": "7df9967cc22fe9e6c5b454019a2b13a32efa6ff347a205ada217e616f3fb80c0",
+        "affectsGlobalScope": false
+      },
       "./src/uq/build/tools.ts": {
-        "version": "c9b53e1cb7073c3925e00c27a50a38e30df2f8ad3e829622f7c7ba8fc5cfa733",
-        "signature": "0ba1e448db4f2e124fff5aefa0b45050ad4d7875ba891e0d4b06695adcf845ab",
+        "version": "2ce52e5a4a8ce03a55bc7df6a02bd16799f268706d3942fcdf39fc409c182dc9",
+        "signature": "251845bb3be0810b71d9e2d72c25d7fe4276b2463cf1c4c21a107abad02b4cc9",
         "affectsGlobalScope": false
       },
       "./src/uq/tag/index.ts": {
@@ -1497,8 +1502,8 @@
         "affectsGlobalScope": false
       },
       "./src/uq/build/build.ts": {
-        "version": "8b10c30a0338df008043d98e7bc70ecd1e7826837ef1508501d06d55a1673c00",
-        "signature": "b9e6c6a50cea8424fc120b18123381d5d32711e1bd727b0e06bcaf7800797623",
+        "version": "137cc0155641cfa9209add17279f23e71363d359b5da7f8312499e0b9b361d26",
+        "signature": "efa2903c874c6e758f3727bc8730e070c309426470846e7cb651e6808301b4be",
         "affectsGlobalScope": false
       },
       "./src/uq/build/index.ts": {
@@ -3668,6 +3673,7 @@
         "./node_modules/@types/react/jsx-runtime.d.ts",
         "./src/app/index.ts",
         "./src/tool/index.ts",
+        "./src/uq/build/context.ts",
         "./src/uq/build/tools.ts",
         "./src/uq/build/tscapp.ts",
         "./src/uq/build/tscbase.ts",
@@ -3707,6 +3713,11 @@
         "./src/uq/tuid/index.ts",
         "./src/uq/uqman.ts"
       ],
+      "./src/uq/build/context.ts": [
+        "./node_modules/@types/node/base.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/react/jsx-runtime.d.ts"
+      ],
       "./src/uq/build/fielditem.ts": [
         "./node_modules/@types/node/base.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
@@ -3725,6 +3736,7 @@
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/react/jsx-runtime.d.ts",
         "./src/tool/index.ts",
+        "./src/uq/build/context.ts",
         "./src/uq/uqman.ts"
       ],
       "./src/uq/build/tscapp.ts": [
@@ -5279,6 +5291,7 @@
         "./src/uq/build/build.ts"
       ],
       "./src/uq/build/tools.ts": [
+        "./src/uq/build/context.ts",
         "./src/uq/uqman.ts"
       ],
       "./src/uq/build/uqsfolder.ts": [
@@ -5724,6 +5737,7 @@
       "./src/uq/build/build.ts",
       "./src/uq/build/buildtsuqfolder.ts",
       "./src/uq/build/builduq.ts",
+      "./src/uq/build/context.ts",
       "./src/uq/build/fielditem.ts",
       "./src/uq/build/index.ts",
       "./src/uq/build/tools.ts",
