@@ -579,7 +579,7 @@ export class Nav {
 		nav.setGuest(guest);
 	}
 
-	private onfocus = () => {
+	reloadUser = () => {
 		let user: User = this.local.user.get();
 		let curUser = nav.user;
 		console.log('window onfocus storage user', user, 'curUser', curUser);
@@ -593,10 +593,7 @@ export class Nav {
         try {
 			window.onerror = this.windowOnError;
             window.onunhandledrejection = this.windowOnUnhandledRejection;
-			console.log('set window focus');
-			//window.focus = this.onfocus;
-			window.onfocus = this.onfocus;
-			//document.onfocus = this.onfocus;
+			window.onfocus = this.reloadUser;
             if (isMobile === true) {
                 document.onselectstart = function() {return false;}
                 document.oncontextmenu = function() {return false;}
