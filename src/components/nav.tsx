@@ -595,8 +595,8 @@ export class Nav {
             window.onunhandledrejection = this.windowOnUnhandledRejection;
 			console.log('set window focus');
 			//window.focus = this.onfocus;
-			//window.onfocus = this.onfocus;
-			document.onfocus = this.onfocus;
+			window.onfocus = this.onfocus;
+			//document.onfocus = this.onfocus;
             if (isMobile === true) {
                 document.onselectstart = function() {return false;}
                 document.oncontextmenu = function() {return false;}
