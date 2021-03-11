@@ -579,10 +579,24 @@ export class Nav {
 		nav.setGuest(guest);
 	}
 
+	private onfocus = () => {
+		let user: User = this.local.user.get();
+		let curUser = nav.user;
+		console.log('window onfocus storage user', user, 'curUser', curUser);
+		if (user === undefined && curUser === undefined) return;
+		if (user && curUser && user.id === curUser.id) return;
+		if (!user) nav.logout();
+		else nav.logined(user)
+	}
+
     async start() {
         try {
 			window.onerror = this.windowOnError;
             window.onunhandledrejection = this.windowOnUnhandledRejection;
+			console.log('set window focus');
+			window.focus = this.onfocus;
+			window.onfocus = this.onfocus;
+			document.onfocus = this.onfocus;
             if (isMobile === true) {
                 document.onselectstart = function() {return false;}
                 document.oncontextmenu = function() {return false;}

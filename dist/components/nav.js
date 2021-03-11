@@ -496,6 +496,19 @@ var Nav = /** @class */ (function () {
         this.windowOnScroll = function (ev) {
             console.log('scroll event');
         };
+        this.onfocus = function () {
+            var user = _this.local.user.get();
+            var curUser = exports.nav.user;
+            console.log('window onfocus storage user', user, 'curUser', curUser);
+            if (user === undefined && curUser === undefined)
+                return;
+            if (user && curUser && user.id === curUser.id)
+                return;
+            if (!user)
+                exports.nav.logout();
+            else
+                exports.nav.logined(user);
+        };
         this.navLogin = function (params) { return __awaiter(_this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
@@ -835,6 +848,10 @@ var Nav = /** @class */ (function () {
                         _a.trys.push([0, 10, 11, 12]);
                         window.onerror = this.windowOnError;
                         window.onunhandledrejection = this.windowOnUnhandledRejection;
+                        console.log('set window focus');
+                        window.focus = this.onfocus;
+                        window.onfocus = this.onfocus;
+                        document.onfocus = this.onfocus;
                         if (isMobile === true) {
                             document.onselectstart = function () { return false; };
                             document.oncontextmenu = function () { return false; };

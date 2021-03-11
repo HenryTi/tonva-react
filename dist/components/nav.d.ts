@@ -98,6 +98,7 @@ export declare class Nav {
     private windowOnScroll;
     forceDevelopment: boolean;
     init(): Promise<void>;
+    private onfocus;
     start(): Promise<void>;
     resolveRoute(): void;
     on(routeFunc: RouteFunc, hooks?: Hooks): Navigo;
