@@ -23,8 +23,8 @@ function buildUQ(uq, uqAlias) {
     uq.idArr.forEach(function (v) { return ts += uqEntityInterface(v, buildIDInterface); });
     uq.idxArr.forEach(function (v) { return ts += uqEntityInterface(v, buildIDXInterface); });
     uq.ixArr.forEach(function (v) { return ts += uqEntityInterface(v, buildIXInterface); });
-    ts += buildIDActInterface(uq);
-    ts += "\n\nexport interface UqExt extends Uq {\n\tIDActs(param:ParamIDActs): Promise<any>;\n";
+    ts += buildActsInterface(uq);
+    ts += "\n\nexport interface UqExt extends Uq {\n\tActs(param:ParamActs): Promise<any>;\n";
     function appendArr(arr, type, tsBuild) {
         if (arr.length === 0)
             return;
@@ -388,8 +388,8 @@ function buildIXInterface(ix) {
     ts += '\n}';
     return ts;
 }
-function buildIDActInterface(uq) {
-    var ts = "\nexport interface ParamIDActs {";
+function buildActsInterface(uq) {
+    var ts = "\nexport interface ParamActs {";
     uq.idArr.forEach(function (v) {
         var sName = v.sName;
         ts += "\n\t" + tool_1.camelCase(sName) + "?: " + tool_1.capitalCase(sName) + "[];";

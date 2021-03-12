@@ -1442,8 +1442,8 @@
         "affectsGlobalScope": false
       },
       "./src/uq/uqman.ts": {
-        "version": "50396878aefe8b8264fd9661f548050e2b7878a89f4dccf9fd454c100c85c12b",
-        "signature": "472856fa47398fe3802a5f19f471d0eef91c9cb44323ac0d23c7f3656b2332d3",
+        "version": "a87a39708c22cb8c40c93d88c411c3a6c4ced2c05581f29d87d43abdf806f606",
+        "signature": "23310fe858fbf04921b2b937652bd4f7b4049ea5a86a416b71b2c89cdd398309",
         "affectsGlobalScope": false
       },
       "./src/uq/build/context.ts": {
@@ -1462,7 +1462,7 @@
         "affectsGlobalScope": false
       },
       "./src/uq/build/builduq.ts": {
-        "version": "cefbd0d1ced2ca3bbaf52235221cc87a14b5789f31c526f6069ddce5970051ff",
+        "version": "28d2fe99bdf2abaf8c297c92c627992b6eb476177cce72bf0456ed762209a78a",
         "signature": "18f8f9a0764c4e0b26f07ad2e5572c3b174886bd245eb0289b064eb95d9fb9dc",
         "affectsGlobalScope": false
       },

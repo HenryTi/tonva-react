@@ -40,11 +40,11 @@ import { IDXValue, Uq`;
 	uq.idxArr.forEach(v => ts += uqEntityInterface<IDX>(v, buildIDXInterface));
 	uq.ixArr.forEach(v => ts += uqEntityInterface<IX>(v, buildIXInterface));
 
-	ts += buildIDActInterface(uq);
+	ts += buildActsInterface(uq);
 
 	ts += `
 \nexport interface UqExt extends Uq {
-	IDActs(param:ParamIDActs): Promise<any>;
+	Acts(param:ParamActs): Promise<any>;
 `;
 	function appendArr<T extends Entity>(arr:T[], type:string, tsBuild: (v:T) => string) {
 		if (arr.length === 0) return;
@@ -410,8 +410,8 @@ function buildIXInterface(ix: IX):string {
 	return ts;
 }
 
-function buildIDActInterface(uq: UqMan) {
-	let ts = `\nexport interface ParamIDActs {`;
+function buildActsInterface(uq: UqMan) {
+	let ts = `\nexport interface ParamActs {`;
 	uq.idArr.forEach(v => {
 		let {sName} = v;
 		ts += `\n\t${camelCase(sName)}?: ${capitalCase(sName)}[];`;

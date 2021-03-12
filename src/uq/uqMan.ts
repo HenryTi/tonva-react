@@ -208,10 +208,11 @@ function IDPath(path:string):string {return path;}
 
 export interface Uq {
 	$: UqMan;
-	IDActs(param:any): Promise<any>;
-	IDDetail<M,D>(param: ParamActDetail<M,D>): Promise<RetActDetail>;
-	IDDetail<M,D,D2>(param: ParamActDetail2<M,D,D2>): Promise<RetActDetail2>;
-	IDDetail<M,D,D2,D3>(param: ParamActDetail3<M,D,D2,D3>): Promise<RetActDetail3>;
+	Acts(param:any): Promise<any>;
+	ActIX<T>(param: ParamActIX<T>): Promise<number[]>;
+	ActDetail<M,D>(param: ParamActDetail<M,D>): Promise<RetActDetail>;
+	ActDetail<M,D,D2>(param: ParamActDetail2<M,D,D2>): Promise<RetActDetail2>;
+	ActDetail<M,D,D2,D3>(param: ParamActDetail3<M,D,D2,D3>): Promise<RetActDetail3>;
 	IDNO(param: ParamIDNO): Promise<string>;
 	IDDetailGet<M,D>(param: ParamIDDetailGet): Promise<[M[], D[]]>;
 	IDDetailGet<M,D,D2>(param: ParamIDDetailGet): Promise<[M[], D[], D2[]]>;
