@@ -64,7 +64,7 @@ function createLogin() {
                 case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../auth/CLogin')); })];
                 case 1:
                     importCLogin = _a.sent();
-                    return [2 /*return*/, new importCLogin.CLogin(undefined)];
+                    return [2 /*return*/, new importCLogin.CLogin()];
             }
         });
     });
@@ -78,7 +78,7 @@ function showRegister() {
                 case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../auth/register/CRegister')); })];
                 case 1:
                     importCRegister = _a.sent();
-                    c = new importCRegister.CRegister(undefined);
+                    c = new importCRegister.CRegister();
                     c.start();
                     return [2 /*return*/];
             }
@@ -94,7 +94,7 @@ function showForget() {
                 case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('../auth/register/CRegister')); })];
                 case 1:
                     importCRegister = _a.sent();
-                    c = new importCRegister.CForget(undefined);
+                    c = new importCRegister.CForget();
                     c.start();
                     return [2 /*return*/];
             }

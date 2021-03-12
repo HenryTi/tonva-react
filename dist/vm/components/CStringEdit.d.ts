@@ -12,7 +12,7 @@ export declare class CStringEdit extends Controller {
     newValue: string;
     isChanged: boolean;
     error: string;
-    constructor(res: any);
+    constructor();
     protected internalStart(): Promise<void>;
     render(value: string, props?: CStringEditProps): React.FunctionComponentElement<{}>;
     protected renderValue(): JSX.Element;

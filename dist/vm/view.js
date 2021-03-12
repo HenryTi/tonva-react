@@ -74,8 +74,6 @@ var tool_1 = require("../tool");
 var View = /** @class */ (function () {
     function View(controller) {
         this.controller = controller;
-        this.res = controller.res;
-        this.x = controller.x;
         this.t = controller.t;
     }
     Object.defineProperty(View.prototype, "isDev", {

@@ -58,19 +58,14 @@ var centerApi_1 = require("./centerApi");
 var vMain_1 = require("./vMain");
 var CAppBase = /** @class */ (function (_super) {
     __extends(CAppBase, _super);
-    //protected readonly name: string;
-    //protected readonly noUnit: boolean;
-    //appUnits:any[];
     function CAppBase(config) {
-        var _this = _super.call(this, undefined) || this;
+        var _this = _super.call(this) || this;
         _this.appConfig = config || components_1.nav.navSettings;
         if (_this.appConfig) {
             var _a = _this.appConfig, app = _a.app, uqs = _a.uqs;
-            //this.name = appName;
             if (app === undefined && uqs === undefined) {
                 throw new Error('app or uqs must be defined in AppConfig');
             }
-            //this.noUnit = noUnit;
         }
         return _this;
     }

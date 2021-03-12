@@ -61,21 +61,14 @@ export abstract class CAppBase<U> extends Controller {
 	private appConfig: AppConfig;
     protected _uqs: U;
 
-    //protected readonly name: string;
-	//protected readonly noUnit: boolean;
-
-    //appUnits:any[];
-
     constructor(config?: AppConfig) {
-		super(undefined);
+		super();
 		this.appConfig = config || (nav.navSettings as AppConfig);
 		if (this.appConfig) {
 			let {app, uqs} = this.appConfig;
-			//this.name = appName;
 			if (app === undefined && uqs === undefined) {
 				throw new Error('app or uqs must be defined in AppConfig');
 			}
-			//this.noUnit = noUnit;
 		}
     }
 

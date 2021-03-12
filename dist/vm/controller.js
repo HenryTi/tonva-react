@@ -65,9 +65,10 @@ var res_1 = require("../res");
 var tool_1 = require("../tool");
 var net_1 = require("../net");
 var Controller = /** @class */ (function () {
-    function Controller(res) {
+    function Controller() {
         var _this = this;
-        this._t = {};
+        this.res = {};
+        this.t = function (str) { return _this.internalT(str) || str; };
         this.isDev = tool_1.env.isDevelopment;
         //private disposer:()=>void;
         this.dispose = function () {
@@ -86,9 +87,6 @@ var Controller = /** @class */ (function () {
                 }
             });
         }); };
-        this.res = res || {};
-        this.x = this.res.x || {};
-        this.t = function (str) { return _this.internalT(str) || str; };
     }
     Object.defineProperty(Controller.prototype, "user", {
         get: function () { return components_1.nav.user; },
@@ -118,7 +116,7 @@ var Controller = /** @class */ (function () {
     };
     Controller.prototype.internalT = function (str) {
         var _a;
-        return (_a = this._t[str]) !== null && _a !== void 0 ? _a : res_1.t(str);
+        return (_a = this.res[str]) !== null && _a !== void 0 ? _a : res_1.t(str);
     };
     Object.defineProperty(Controller.prototype, "webNav", {
         get: function () { return undefined; },
@@ -139,14 +137,14 @@ var Controller = /** @class */ (function () {
         if (res === undefined)
             return;
         var $lang = res_1.resOptions.$lang, $district = res_1.resOptions.$district;
-        lodash_1.default.merge(this._t, res);
+        lodash_1.default.merge(this.res, res);
         if ($lang !== undefined) {
             var l = res[$lang];
             if (l !== undefined) {
-                lodash_1.default.merge(this._t, l);
+                lodash_1.default.merge(this.res, l);
                 var d = l[$district];
                 if (d !== undefined) {
-                    lodash_1.default.merge(this._t, d);
+                    lodash_1.default.merge(this.res, d);
                 }
             }
         }

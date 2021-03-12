@@ -58,7 +58,7 @@ var vm_1 = require("../vm");
 var CBase = /** @class */ (function (_super) {
     __extends(CBase, _super);
     function CBase(cApp) {
-        var _this = _super.call(this, cApp.res) || this;
+        var _this = _super.call(this) || this;
         _this._cApp = cApp;
         _this._uqs = cApp === null || cApp === void 0 ? void 0 : cApp.uqs;
         return _this;

@@ -10,17 +10,17 @@ export interface Login {
 
 export async function createLogin():Promise<Login> {
 	let importCLogin = await import('../auth/CLogin');
-	return new importCLogin.CLogin(undefined);
+	return new importCLogin.CLogin();
 }
 
 export async function showRegister():Promise<void> {
 	let importCRegister = await import('../auth/register/CRegister');
-	let c = new importCRegister.CRegister(undefined);
+	let c = new importCRegister.CRegister();
 	c.start();
 }
 
 export async function showForget():Promise<void> {
 	let importCRegister = await import('../auth/register/CRegister');
-	let c = new importCRegister.CForget(undefined);
+	let c = new importCRegister.CForget();
 	c.start();
 }

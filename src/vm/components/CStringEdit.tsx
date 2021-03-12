@@ -21,8 +21,8 @@ export class CStringEdit extends Controller {
 	isChanged: boolean = null;
 	error: string = null;
 
-	constructor(res:any) {
-		super(res);
+	constructor() {
+		super();
 		makeObservable(this, {
 			value: observable,
 			newValue: observable,

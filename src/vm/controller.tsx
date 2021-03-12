@@ -25,10 +25,8 @@ export interface WebNav<C extends Controller> {
 }
 
 export abstract class Controller {
-    readonly res: any;
-	readonly x: any;
-	private _t: any = {};
-	readonly t: (str:string)=>any;
+	private res: any = {};
+	readonly t = (str: string): string|JSX.Element => this.internalT(str) || str;
     icon: string|JSX.Element;
     label:string;
 	readonly isDev:boolean = env.isDevelopment;
@@ -39,11 +37,6 @@ export abstract class Controller {
         if (user === undefined) return false;
         return user.id > 0;
     }
-    constructor(res:any) {
-        this.res = res || {};
-		this.x = this.res.x || {};
-		this.t = (str:string):any => this.internalT(str) || str;
-	}
 
 	protected beforeInit() {}
 	protected afterInit() {}
@@ -55,7 +48,7 @@ export abstract class Controller {
 	}
 
 	internalT(str:string):any {
-		return this._t[str] ?? t(str);
+		return this.res[str] ?? t(str);
 	}
 
 	get webNav(): WebNav<any> {return undefined;}
@@ -72,14 +65,14 @@ export abstract class Controller {
 	protected setRes(res:any) {
 		if (res === undefined) return;
 		let {$lang, $district} = resOptions;
-		_.merge(this._t, res);
+		_.merge(this.res, res);
 		if ($lang !== undefined) {
 			let l = res[$lang];
 			if (l !== undefined) {
-				_.merge(this._t, l);
+				_.merge(this.res, l);
 				let d = l[$district];
 				if (d !== undefined) {
-					_.merge(this._t, d);
+					_.merge(this.res, d);
 				}
 			}
 		}		

@@ -12,8 +12,6 @@ export abstract class View<C extends Controller> {
 
     constructor(controller: C) {
         this.controller = controller;
-        this.res = controller.res;
-		this.x = controller.x;
 		this.t = controller.t;
     }
 

@@ -73,8 +73,8 @@ var mobx_1 = require("mobx");
 var mobx_react_1 = require("mobx-react");
 var CStringEdit = /** @class */ (function (_super) {
     __extends(CStringEdit, _super);
-    function CStringEdit(res) {
-        var _this = _super.call(this, res) || this;
+    function CStringEdit() {
+        var _this = _super.call(this) || this;
         _this.props = {
             label: '编辑'
         };

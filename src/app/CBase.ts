@@ -7,7 +7,7 @@ export abstract class CBase<A extends CAppBase<U>, U> extends Controller {
     protected readonly _cApp: A;
 
     constructor(cApp: any) {
-        super(cApp.res);
+        super();
         this._cApp = cApp;
         this._uqs = cApp?.uqs;
 	}
