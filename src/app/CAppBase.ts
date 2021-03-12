@@ -78,7 +78,7 @@ export abstract class CAppBase<U> extends Controller {
 		return t(str);
 	}
 	
-	protected setRes(res:any) {
+	setRes(res:any) {
 		setGlobalRes(res);
 	}
 	protected afterBuiltUQs(uqs: any) {}

@@ -862,8 +862,8 @@
         "affectsGlobalScope": false
       },
       "./src/vm/controller.tsx": {
-        "version": "b8cdccaed76fd4650b67704817d01e0eaf15861f0e70862ba38a6e177a50775d",
-        "signature": "df49f8f91875cb38622dcd75d489471cc7472170816ba196ab630a80da7c84a6",
+        "version": "da7fedd7937c37d12daea8b209f271cf866569cf22c294ceac48b9ea04e23c2a",
+        "signature": "56acdc88b77b0f7b8b07eddad8e215619a2eab501a18ed63023e4184a3a8e148",
         "affectsGlobalScope": false
       },
       "./src/vm/components/cstringedit.tsx": {
@@ -1367,8 +1367,8 @@
         "affectsGlobalScope": false
       },
       "./src/app/cappbase.ts": {
-        "version": "98b070c9fd97a2192025b55386cc9759c31d90fb18131c057ce3e3f5d91475a8",
-        "signature": "b99edf66451e7d5d5ba8d3fe6bb59715269d7eeb2df06565d7cfa0f476e49cc6",
+        "version": "557c1f12ec32f681cf1c391e07edad49a6f07e49d880123bd759075890456983",
+        "signature": "7355b3b1563068a3dacc37685e65c5d3e3bfd3f71b4617d62128dda3f99d03d2",
         "affectsGlobalScope": false
       },
       "./src/app/start.ts": {
@@ -4011,7 +4011,6 @@
         "./node_modules/@types/lodash/index.d.ts",
         "./node_modules/@types/node/base.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
-        "./node_modules/@types/react/index.d.ts",
         "./node_modules/@types/react/jsx-runtime.d.ts",
         "./src/components/index.ts",
         "./src/net/index.ts",

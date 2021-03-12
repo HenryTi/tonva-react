@@ -149,6 +149,7 @@ var Controller = /** @class */ (function () {
             }
         }
     };
+    Controller.prototype.getRes = function () { return this.res; };
     Controller.prototype.onDispose = function () {
     };
     Object.defineProperty(Controller.prototype, "timeZone", {

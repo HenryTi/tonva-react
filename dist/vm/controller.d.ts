@@ -19,7 +19,7 @@ export interface WebNav<C extends Controller> {
     renderPageHeader?: (props: PageHeaderProps) => JSX.Element;
 }
 export declare abstract class Controller {
-    private res;
+    protected res: any;
     readonly t: (str: string) => string | JSX.Element;
     icon: string | JSX.Element;
     label: string;
@@ -36,7 +36,8 @@ export declare abstract class Controller {
     getPageWebNav(): PageWebNav;
     get isWebNav(): boolean;
     navigate(url: string): void;
-    protected setRes(res: any): void;
+    setRes(res: any): void;
+    getRes(): any;
     private receiveHandlerId;
     protected dispose: () => void;
     protected onDispose(): void;

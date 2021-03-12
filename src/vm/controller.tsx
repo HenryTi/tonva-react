@@ -1,4 +1,3 @@
-import * as React from 'react';
 import _ from 'lodash';
 import {nav, Page, PageHeaderProps, PageWebNav} from '../components';
 import {resOptions, t} from '../res';
@@ -25,7 +24,7 @@ export interface WebNav<C extends Controller> {
 }
 
 export abstract class Controller {
-	private res: any = {};
+	protected res: any = {};
 	readonly t = (str: string): string|JSX.Element => this.internalT(str) || str;
     icon: string|JSX.Element;
     label:string;
@@ -62,7 +61,7 @@ export abstract class Controller {
 		nav.navigate(url);
 	}
 	
-	protected setRes(res:any) {
+	setRes(res: any) {
 		if (res === undefined) return;
 		let {$lang, $district} = resOptions;
 		_.merge(this.res, res);
@@ -77,6 +76,7 @@ export abstract class Controller {
 			}
 		}		
 	}
+	getRes():any {return this.res;}
 
     private receiveHandlerId:number;
     //private disposer:()=>void;
