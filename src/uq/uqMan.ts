@@ -74,7 +74,13 @@ interface ParamPage {
 	size:number;
 }
 
-export interface ParamIDDetail<M,D> {
+export interface ParamActIX<T> {
+	IX: IX;
+	ID?: ID;
+	values: {id:number, id2:number|T}[];
+}
+
+export interface ParamActDetail<M,D> {
 	master: {
 		ID: ID;
 		value: M;
@@ -85,35 +91,35 @@ export interface ParamIDDetail<M,D> {
 	};
 }
 
-export interface RetIDDetail {
+export interface RetActDetail {
 	master: number;
 	detail: number[];
 }
 
-export interface ParamIDNO {
-	ID: ID;
-}
-
-export interface ParamIDDetail2<M,D,D2> extends ParamIDDetail<M, D> {
+export interface ParamActDetail2<M,D,D2> extends ParamActDetail<M, D> {
 	detail2: {
 		ID: ID;
 		values: D2[];
 	};
 }
 
-export interface RetIDDetail2 extends RetIDDetail {
+export interface RetActDetail2 extends RetActDetail {
 	detail2: number[];
 }
 
-export interface ParamIDDetail3<M,D,D2,D3> extends ParamIDDetail2<M, D, D2> {
+export interface ParamActDetail3<M,D,D2,D3> extends ParamActDetail2<M, D, D2> {
 	detail3: {
 		ID: ID;
 		values: D3[];
 	};
 }
 
-export interface RetIDDetail3 extends RetIDDetail2 {
+export interface RetActDetail3 extends RetActDetail2 {
 	detail3: number[];
+}
+
+export interface ParamIDNO {
+	ID: ID;
 }
 
 export interface ParamIDDetailGet {
@@ -203,9 +209,9 @@ function IDPath(path:string):string {return path;}
 export interface Uq {
 	$: UqMan;
 	IDActs(param:any): Promise<any>;
-	IDDetail<M,D>(param: ParamIDDetail<M,D>): Promise<RetIDDetail>;
-	IDDetail<M,D,D2>(param: ParamIDDetail2<M,D,D2>): Promise<RetIDDetail2>;
-	IDDetail<M,D,D2,D3>(param: ParamIDDetail3<M,D,D2,D3>): Promise<RetIDDetail3>;
+	IDDetail<M,D>(param: ParamActDetail<M,D>): Promise<RetActDetail>;
+	IDDetail<M,D,D2>(param: ParamActDetail2<M,D,D2>): Promise<RetActDetail2>;
+	IDDetail<M,D,D2,D3>(param: ParamActDetail3<M,D,D2,D3>): Promise<RetActDetail3>;
 	IDNO(param: ParamIDNO): Promise<string>;
 	IDDetailGet<M,D>(param: ParamIDDetailGet): Promise<[M[], D[]]>;
 	IDDetailGet<M,D,D2>(param: ParamIDDetailGet): Promise<[M[], D[], D2[]]>;
@@ -670,8 +676,9 @@ export class UqMan {
 				if (ret !== undefined) return ret;
 				switch (key) {
 					default: debugger; break;
-					case 'IDActs': return this.IDActs;
-					case 'IDDetail': return this.IDDetail;
+					case 'Acts': return this.Acts;
+					case 'ActIX': return this.ActIX;
+					case 'IDDetail': return this.ActDetail;
 					case 'IDNO': return this.IDNO;
 					case 'IDDetailGet': return this.IDDetailGet;
 					case 'ID': return this.ID;
@@ -701,7 +708,7 @@ export class UqMan {
 
 	//private coms:any;
 	//private setComs = (coms: any) => {this.coms = coms;}
-	private IDActs = async (param:any): Promise<any> => {
+	private Acts = async (param:any): Promise<any> => {
 		// 这边的obj属性序列，也许会不一样
 		let arr:string[] = [];
 		let apiParam:any = {};
@@ -738,7 +745,7 @@ export class UqMan {
 			});
 		}
 		apiParam['$'] = arr;
-		let ret = await this.uqApi.post(IDPath('id-acts'), apiParam);
+		let ret = await this.uqApi.post(IDPath('acts'), apiParam);
 		let retArr = (ret[0].ret as string).split('\n');
 		let retActs:{[key:string]:number[]} = {};
 		for (let i=0; i<arr.length; i++) {
@@ -747,8 +754,19 @@ export class UqMan {
 		return retActs;
 	}
 
-	private IDDetail = async (param: ParamIDDetail<any, any>): Promise<any> => {
-		let {master, detail, detail2, detail3} = param as unknown as ParamIDDetail3<any, any, any, any>;
+	private ActIX = async (param: ParamActIX<any>): Promise<number[]> => {
+		let {IX, ID, values} = param;
+		let apiParam:any = {
+			IX: entityName(IX),
+			ID: entityName(ID),
+			values,
+		};
+		let ret = await this.uqApi.post(IDPath('act-ix'), apiParam);
+		return (ret[0].ret as string).split('\t').map(v => Number(v));
+	}
+
+	private ActDetail = async (param: ParamActDetail<any, any>): Promise<any> => {
+		let {master, detail, detail2, detail3} = param as unknown as ParamActDetail3<any, any, any, any>;
 		let postParam:any = {
 			master: {
 				name: entityName(master.ID),
@@ -771,7 +789,7 @@ export class UqMan {
 				values: detail3.values?.map(v => toScalars(v)),
 			}
 		}
-		let ret = await this.uqApi.post(IDPath('id-detail'), postParam);
+		let ret = await this.uqApi.post(IDPath('act-detail'), postParam);
 		let val:string = ret[0].ret;
 		let parts = val.split('\n');
 		let items = parts.map(v => v.split('\t'));

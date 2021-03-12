@@ -2,6 +2,7 @@
 import { RouteFunc, Hooks, Navigo, NamedRoute } from "../components";
 import { Controller } from '../vm';
 import { TVs } from "../uq";
+import { User } from "../tool";
 export interface IConstructor<T> {
     new (...args: any[]): T;
 }
@@ -58,4 +59,5 @@ export declare abstract class CAppBase<U> extends Controller {
     getUqRoles(uqName: string): Promise<string[]>;
     isAdmin(roles: string[]): boolean;
     isRole(roles: string[], role: string): boolean;
+    protected onChangeLogin(user: User): Promise<void>;
 }

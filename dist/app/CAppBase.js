@@ -120,8 +120,11 @@ var CAppBase = /** @class */ (function (_super) {
     };
     CAppBase.prototype.afterStart = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 components_1.nav.resolveRoute();
+                components_1.nav.onChangeLogin = function (user) { return _this.onChangeLogin(user); };
+                this.onChangeLogin(this.user);
                 return [2 /*return*/];
             });
         });
@@ -179,6 +182,9 @@ var CAppBase = /** @class */ (function (_super) {
             return false;
         role = role.toLowerCase();
         return roles.indexOf(role) >= 0;
+    };
+    CAppBase.prototype.onChangeLogin = function (user) {
+        return;
     };
     return CAppBase;
 }(vm_1.Controller));

@@ -4,6 +4,7 @@ import { Controller } from '../vm';
 import { UQsMan, TVs } from "../uq";
 import { centerApi } from "./centerApi";
 import { VErrorsPage, VStartError } from "./vMain";
+import { User } from "../tool";
 
 export interface IConstructor<T> {
     new (...args: any[]): T;
@@ -118,6 +119,8 @@ export abstract class CAppBase<U> extends Controller {
     }
 	protected async afterStart():Promise<void> {
 		nav.resolveRoute();
+		nav.onChangeLogin = (user:User) => this.onChangeLogin(user);
+		this.onChangeLogin(this.user);
 	}
 
     async userFromId(userId:number):Promise<any> {
@@ -159,5 +162,9 @@ export abstract class CAppBase<U> extends Controller {
 		if (!roles) return false;
 		role = role.toLowerCase();
 		return roles.indexOf(role) >= 0;
+	}
+
+	protected onChangeLogin(user: User):Promise<void> {
+		return;
 	}
 }

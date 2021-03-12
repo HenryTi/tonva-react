@@ -49,7 +49,15 @@ interface ParamPage {
     end?: number;
     size: number;
 }
-export interface ParamIDDetail<M, D> {
+export interface ParamActIX<T> {
+    IX: IX;
+    ID?: ID;
+    values: {
+        id: number;
+        id2: number | T;
+    }[];
+}
+export interface ParamActDetail<M, D> {
     master: {
         ID: ID;
         value: M;
@@ -59,30 +67,30 @@ export interface ParamIDDetail<M, D> {
         values: D[];
     };
 }
-export interface RetIDDetail {
+export interface RetActDetail {
     master: number;
     detail: number[];
 }
-export interface ParamIDNO {
-    ID: ID;
-}
-export interface ParamIDDetail2<M, D, D2> extends ParamIDDetail<M, D> {
+export interface ParamActDetail2<M, D, D2> extends ParamActDetail<M, D> {
     detail2: {
         ID: ID;
         values: D2[];
     };
 }
-export interface RetIDDetail2 extends RetIDDetail {
+export interface RetActDetail2 extends RetActDetail {
     detail2: number[];
 }
-export interface ParamIDDetail3<M, D, D2, D3> extends ParamIDDetail2<M, D, D2> {
+export interface ParamActDetail3<M, D, D2, D3> extends ParamActDetail2<M, D, D2> {
     detail3: {
         ID: ID;
         values: D3[];
     };
 }
-export interface RetIDDetail3 extends RetIDDetail2 {
+export interface RetActDetail3 extends RetActDetail2 {
     detail3: number[];
+}
+export interface ParamIDNO {
+    ID: ID;
 }
 export interface ParamIDDetailGet {
     id: number;
@@ -162,9 +170,9 @@ export interface ParamIDTree {
 export interface Uq {
     $: UqMan;
     IDActs(param: any): Promise<any>;
-    IDDetail<M, D>(param: ParamIDDetail<M, D>): Promise<RetIDDetail>;
-    IDDetail<M, D, D2>(param: ParamIDDetail2<M, D, D2>): Promise<RetIDDetail2>;
-    IDDetail<M, D, D2, D3>(param: ParamIDDetail3<M, D, D2, D3>): Promise<RetIDDetail3>;
+    IDDetail<M, D>(param: ParamActDetail<M, D>): Promise<RetActDetail>;
+    IDDetail<M, D, D2>(param: ParamActDetail2<M, D, D2>): Promise<RetActDetail2>;
+    IDDetail<M, D, D2, D3>(param: ParamActDetail3<M, D, D2, D3>): Promise<RetActDetail3>;
     IDNO(param: ParamIDNO): Promise<string>;
     IDDetailGet<M, D>(param: ParamIDDetailGet): Promise<[M[], D[]]>;
     IDDetailGet<M, D, D2>(param: ParamIDDetailGet): Promise<[M[], D[], D2[]]>;
@@ -279,8 +287,9 @@ export declare class UqMan {
     getUqKey(): string;
     proxy(): any;
     private showReload;
-    private IDActs;
-    private IDDetail;
+    private Acts;
+    private ActIX;
+    private ActDetail;
     private IDNO;
     private IDDetailGet;
     private IDXToString;

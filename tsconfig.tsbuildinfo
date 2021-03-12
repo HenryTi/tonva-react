@@ -932,8 +932,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/nav.tsx": {
-        "version": "39b0a14c823d2b2e6a056a14762721a4f0bf7a92c869d6e6a7a1fd610779ba41",
-        "signature": "5aee37c5eeb7c7b0110b113a8ef0e3df777e5e822a128a0349a7645aa73c65ab",
+        "version": "4e7bedea7eb1b7c1b43da61b7a1ae86873a7eee5adbc890e81fe1cff88a17e8c",
+        "signature": "e67c9dcab29f12087af5445853aec8fc372c4b77d45304338905d83a2127469d",
         "affectsGlobalScope": false
       },
       "./src/components/schema/schema.ts": {
@@ -1367,8 +1367,8 @@
         "affectsGlobalScope": false
       },
       "./src/app/cappbase.ts": {
-        "version": "07219474af13e34639ed2a806565819614700ba523af9456f89fc70c8e33a355",
-        "signature": "e33a4e53e007ae1f3907067fe953d9c94998731f8e6ffe75f4e78c47674221fb",
+        "version": "340815a3420f896ad80de1faa95953216e1699a6673800fc1bd69586830df0c9",
+        "signature": "b99edf66451e7d5d5ba8d3fe6bb59715269d7eeb2df06565d7cfa0f476e49cc6",
         "affectsGlobalScope": false
       },
       "./src/app/start.ts": {
@@ -1442,8 +1442,8 @@
         "affectsGlobalScope": false
       },
       "./src/uq/uqman.ts": {
-        "version": "a135382ac692f2552e936df25b89751de1c177c473ff4a86506014826a728e02",
-        "signature": "8668675818e125fd2beb41e2cdc537f6e4fd2abef85ddb9c85ade4aca9b5061d",
+        "version": "50396878aefe8b8264fd9661f548050e2b7878a89f4dccf9fd454c100c85c12b",
+        "signature": "472856fa47398fe3802a5f19f471d0eef91c9cb44323ac0d23c7f3656b2332d3",
         "affectsGlobalScope": false
       },
       "./src/uq/build/context.ts": {
@@ -2340,6 +2340,7 @@
         "./src/app/vmain.tsx",
         "./src/components/index.ts",
         "./src/res/index.ts",
+        "./src/tool/index.ts",
         "./src/uq/index.ts",
         "./src/vm/index.ts"
       ],
@@ -4715,6 +4716,7 @@
       ],
       "./src/app/cappbase.ts": [
         "./src/components/index.ts",
+        "./src/tool/index.ts",
         "./src/uq/index.ts",
         "./src/vm/index.ts"
       ],

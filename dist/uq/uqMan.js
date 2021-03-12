@@ -127,7 +127,7 @@ var UqMan = /** @class */ (function () {
         this.tagArr = [];
         //private coms:any;
         //private setComs = (coms: any) => {this.coms = coms;}
-        this.IDActs = function (param) { return __awaiter(_this, void 0, void 0, function () {
+        this.Acts = function (param) { return __awaiter(_this, void 0, void 0, function () {
             var arr, apiParam, i, ret, retArr, retActs, i;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -167,7 +167,7 @@ var UqMan = /** @class */ (function () {
                             });
                         }
                         apiParam['$'] = arr;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-acts'), apiParam)];
+                        return [4 /*yield*/, this.uqApi.post(IDPath('acts'), apiParam)];
                     case 1:
                         ret = _a.sent();
                         retArr = ret[0].ret.split('\n');
@@ -179,7 +179,25 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
-        this.IDDetail = function (param) { return __awaiter(_this, void 0, void 0, function () {
+        this.ActIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            var IX, ID, values, apiParam, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IX = param.IX, ID = param.ID, values = param.values;
+                        apiParam = {
+                            IX: entityName(IX),
+                            ID: entityName(ID),
+                            values: values,
+                        };
+                        return [4 /*yield*/, this.uqApi.post(IDPath('act-ix'), apiParam)];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret[0].ret.split('\t').map(function (v) { return Number(v); })];
+                }
+            });
+        }); };
+        this.ActDetail = function (param) { return __awaiter(_this, void 0, void 0, function () {
             var _a, master, detail, detail2, detail3, postParam, ret, val, parts, items;
             var _b, _c, _d;
             return __generator(this, function (_e) {
@@ -208,7 +226,7 @@ var UqMan = /** @class */ (function () {
                                 values: (_d = detail3.values) === null || _d === void 0 ? void 0 : _d.map(function (v) { return toScalars(v); }),
                             };
                         }
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-detail'), postParam)];
+                        return [4 /*yield*/, this.uqApi.post(IDPath('act-detail'), postParam)];
                     case 1:
                         ret = _e.sent();
                         val = ret[0].ret;
@@ -875,8 +893,9 @@ var UqMan = /** @class */ (function () {
                     default:
                         debugger;
                         break;
-                    case 'IDActs': return _this.IDActs;
-                    case 'IDDetail': return _this.IDDetail;
+                    case 'Acts': return _this.Acts;
+                    case 'ActIX': return _this.ActIX;
+                    case 'IDDetail': return _this.ActDetail;
                     case 'IDNO': return _this.IDNO;
                     case 'IDDetailGet': return _this.IDDetailGet;
                     case 'ID': return _this.ID;
