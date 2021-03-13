@@ -1,4 +1,4 @@
 export * from './ui';
 export * from './fieldItem';
 export * from './fieldUI';
-export * from './formUI';
+export * from './IDUI';

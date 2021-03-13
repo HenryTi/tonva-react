@@ -1426,14 +1426,14 @@
         "signature": "2fd84e74567552633e5d9ef087901268bc5fad00b277780322cb7305876eddbd",
         "affectsGlobalScope": false
       },
-      "./src/ui/formui.ts": {
-        "version": "d70e400e371334ed795b9dab7f40171ab64ce07d750ea322c90fa6bc552e30b3",
-        "signature": "91e6aada9752f68a3b605276f7b6ae2d2510f3915f8694560ec2039158d557c7",
+      "./src/ui/idui.ts": {
+        "version": "01339b4ab126f1454c752f142b14372a88e43600e77c34eb1b157b50fe8291e0",
+        "signature": "b3553cdde9bb088ece65b64fc8c74646559c79805b9c7d06762659bc9e067c85",
         "affectsGlobalScope": false
       },
       "./src/ui/index.ts": {
-        "version": "aa4ec19fc0c9af8ecb4aefb379fbb4a17c2c81fb886f7df16560c1a06a39fa47",
-        "signature": "aa4ec19fc0c9af8ecb4aefb379fbb4a17c2c81fb886f7df16560c1a06a39fa47",
+        "version": "bd91947f1f32d394325bbcdd07a51b306155f0f1ac011eefe538f823aadc091f",
+        "signature": "bd91947f1f32d394325bbcdd07a51b306155f0f1ac011eefe538f823aadc091f",
         "affectsGlobalScope": false
       },
       "./src/uq/id.ts": {
@@ -1443,7 +1443,7 @@
       },
       "./src/uq/uqman.ts": {
         "version": "a87a39708c22cb8c40c93d88c411c3a6c4ced2c05581f29d87d43abdf806f606",
-        "signature": "23310fe858fbf04921b2b937652bd4f7b4049ea5a86a416b71b2c89cdd398309",
+        "signature": "d43da111315afe7023c28d635f4f0895f7915e507ace63c8b918ffdf3e9d6f00",
         "affectsGlobalScope": false
       },
       "./src/uq/build/context.ts": {
@@ -3631,7 +3631,7 @@
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/react/jsx-runtime.d.ts"
       ],
-      "./src/ui/formui.ts": [
+      "./src/ui/idui.ts": [
         "./node_modules/@types/node/base.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/react/jsx-runtime.d.ts",
@@ -3644,7 +3644,7 @@
         "./node_modules/@types/react/jsx-runtime.d.ts",
         "./src/ui/fielditem.ts",
         "./src/ui/fieldui.ts",
-        "./src/ui/formui.ts",
+        "./src/ui/idui.ts",
         "./src/ui/ui.ts"
       ],
       "./src/ui/ui.ts": [
@@ -5264,14 +5264,14 @@
         "./src/ui/fieldui.ts",
         "./src/uq/index.ts"
       ],
-      "./src/ui/formui.ts": [
+      "./src/ui/idui.ts": [
         "./src/ui/fielditem.ts",
         "./src/uq/index.ts"
       ],
       "./src/ui/index.ts": [
         "./src/ui/fielditem.ts",
         "./src/ui/fieldui.ts",
-        "./src/ui/formui.ts",
+        "./src/ui/idui.ts",
         "./src/ui/ui.ts"
       ],
       "./src/ui/ui.ts": [
@@ -5741,7 +5741,7 @@
       "./src/types/images.d.ts",
       "./src/ui/fielditem.ts",
       "./src/ui/fieldui.ts",
-      "./src/ui/formui.ts",
+      "./src/ui/idui.ts",
       "./src/ui/index.ts",
       "./src/ui/ui.ts",
       "./src/uq/action.ts",

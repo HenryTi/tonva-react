@@ -13,5 +13,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./ui"), exports);
 __exportStar(require("./fieldItem"), exports);
 __exportStar(require("./fieldUI"), exports);
-__exportStar(require("./formUI"), exports);
+__exportStar(require("./IDUI"), exports);
 //# sourceMappingURL=index.js.map
