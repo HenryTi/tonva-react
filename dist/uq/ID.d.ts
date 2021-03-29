@@ -1,30 +1,24 @@
-import { Res } from "../res";
+import { TFunc } from "../res";
 import { Entity } from "./entity";
-import { Render, UI, FieldItems } from '../ui';
-export declare class UqID<M> extends Entity {
-    get typeName(): string;
-    readonly fieldItems: FieldItems;
+import { Render, UI } from '../ui';
+export declare abstract class IDXEntity<M> extends Entity {
     readonly ui: UI;
     readonly render: Render<M>;
-    readonly res: Res<any>;
+    readonly t: TFunc;
+}
+export declare class UqID<M> extends IDXEntity<M> {
+    get typeName(): string;
+    NO(): Promise<string>;
 }
 export declare class ID extends UqID<any> {
 }
-export declare class UqIDX<M> extends Entity {
+export declare class UqIDX<M> extends IDXEntity<M> {
     get typeName(): string;
-    readonly fieldItems: FieldItems;
-    readonly ui: UI;
-    readonly render: Render<M>;
-    readonly res: Res<any>;
 }
 export declare class IDX extends UqIDX<any> {
 }
-export declare class UqIX<M> extends Entity {
+export declare class UqIX<M> extends IDXEntity<M> {
     get typeName(): string;
-    readonly fieldItems: FieldItems;
-    readonly ui: UI;
-    readonly render: Render<M>;
-    readonly res: Res<any>;
 }
 export declare class IX extends UqIX<any> {
 }

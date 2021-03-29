@@ -14,7 +14,7 @@ export declare abstract class Widget {
     protected defaultValue: any;
     protected rules: Rule[];
     protected readOnly: boolean;
-    protected disabled: boolean;
+    disabled: boolean;
     errors: string[];
     contextErrors: string[];
     get hasError(): boolean;

@@ -115,8 +115,8 @@ var Controller = /** @class */ (function () {
         this.afterInit();
     };
     Controller.prototype.internalT = function (str) {
-        var _a;
-        return (_a = this.res[str]) !== null && _a !== void 0 ? _a : res_1.t(str);
+        var _a, _b;
+        return (_b = (_a = this.res) === null || _a === void 0 ? void 0 : _a[str]) !== null && _b !== void 0 ? _b : res_1.t(str);
     };
     Object.defineProperty(Controller.prototype, "webNav", {
         get: function () { return undefined; },
@@ -234,11 +234,6 @@ var Controller = /** @class */ (function () {
     Controller.prototype.beforeStart = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                /*
-                console.log('this.receiveHandlerId = nav.registerReceiveHandler(this.onMessageReceive);');
-                this.receiveHandlerId = nav.registerReceiveHandler(this.onMessageReceive);
-                console.log('return true');
-                */
                 return [2 /*return*/, true];
             });
         });
@@ -263,7 +258,6 @@ var Controller = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        //this.disposer = this.dispose;
                         this.registerReceiveHandler();
                         return [4 /*yield*/, this.beforeStart()];
                     case 1:

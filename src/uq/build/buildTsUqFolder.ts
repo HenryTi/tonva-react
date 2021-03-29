@@ -14,7 +14,6 @@ export function buildTsUqFolder(uq: UqMan, uqsFolder:string, uqAlias:string) {
 	}
 	let tsUq = buildTsHeader();
 	tsUq += buildUQ(uq, uqAlias);
-	//overrideTsFile(uqFolder, uqAlias, tsUq);
 	overrideTsFile(`${uqFolder}/${uqAlias}.ts`, tsUq);
 	saveTsIndexAndRender(uqFolder, uq, uqAlias);
 }
@@ -27,7 +26,7 @@ function saveTsIndexAndRender(uqFolder:string, uq: UqMan, uqAlias:string) {
 		imports += `\nimport * as ${cName} from './${cName}.ui';`;
 		sets += `\n	Object.assign(uq.${cName}, ${cName});`;
 
-		let tsUI = `import { Res, UI } from "tonva-react";
+		let tsUI = `import { Res, setRes, TFunc, UI } from "tonva-react";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from "tonva-react";
 import { ${cName} } from "./${uqAlias}";
@@ -37,7 +36,7 @@ const fields = {
 };
 /*==fields==*/
 
-export const fieldArr: FieldItem[] = [
+const fieldArr: FieldItem[] = [
 ];
 
 export const ui: UI = {
@@ -46,19 +45,24 @@ export const ui: UI = {
 	fields,
 };
 
-export const res: Res<any> = {
+const resRaw: Res<any> = {
 	zh: {
 	},
 	en: {
 	}
 };
+const res: any = {};
+setRes(res, resRaw);
+
+export const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {
+	return res[str as string] ?? str;
+}
 
 export function render(item: ${cName}):JSX.Element {
 	return <>{JSON.stringify(item)}</>;
 };
 `;
 
-		//let path = `${uqFolder}/${file}.${suffix}`;
 		let path = `${uqFolder}/${cName}.ui.tsx`;
 		saveTsFileIfNotExists(path, tsUI);
 
@@ -92,7 +96,7 @@ export * from './${uqAlias}';
 
 function buildFields(i:ID|IDX|IX):{[name:string]:FieldItem} {
 	switch (i.typeName) {
-		case 'id': return buildIDFields(i);
+		case 'id': return buildIDFields(i as ID);
 		case 'idx': return buildIDXFields(i);
 		case 'ix': return buildIXFields(i);
 	}
@@ -136,7 +140,7 @@ function buildIXFields(IX:IX):{[name:string]:FieldItem} {
 function buildFieldArr(i:ID|IDX|IX):string {
 	let ts = 'export const fieldArr: FieldItem[] = [\n\t';
 	switch (i.typeName) {
-		case 'id': ts += buildIDFieldArr(i); break;
+		case 'id': ts += buildIDFieldArr(i as ID); break;
 		case 'idx': ts += buildIDXFieldArr(i); break;
 		case 'ix': ts += buildIXFieldArr(i); break;
 	}
@@ -167,8 +171,8 @@ function buildIXFieldArr(i:IX):string {
 	let ts = '';
 	for (let f of schema.fields) {
 		let {name} = f;
+		if (name === 'ix') continue;
 		if (name === 'id') continue;
-		if (name === 'id2') continue;
 		ts += `fields.${name}, `;
 	}
 	return ts;
@@ -185,7 +189,7 @@ function replaceTsFileFields(path: string, fields:{[name:string]:FieldItem}) {
 			let lBrace = text.indexOf('{', start + startStr.length);
 			let rBrace = text.lastIndexOf('}', end);
 			let oldText = text.substring(lBrace, rBrace+1);
-			let fieldsText = buildFieldsText(fields, oldText);
+			let fieldsText = buildFieldsFromOldText(fields, oldText);
 			text = text.substring(0, start)
 				+ startStr + '\nconst fields = {'
 				+ fieldsText
@@ -197,7 +201,7 @@ function replaceTsFileFields(path: string, fields:{[name:string]:FieldItem}) {
 }
 
 const fieldItemReplaceProps = ['label', 'placeholder', 'widget', 'type'];
-function buildFieldsText(fields:{[name:string]:FieldItem}, oldText:string):string {
+function buildFieldsFromOldText(fields:{[name:string]:FieldItem}, oldText:string):string {
 	let ret = '';
 	for (let i in fields) {
 		let field = fields[i];
@@ -222,6 +226,7 @@ function setFieldOldProp(field:FieldItem, text:string) {
 	fieldItemReplaceProps.forEach(v => {
 		let prop = obj[v];
 		if (!prop) return;
+		if (v === 'type') return; // 这个是由新的schema决定的
 		(field as any)[v] = prop;
 	});
 }

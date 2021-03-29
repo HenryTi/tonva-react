@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {observable} from 'mobx';
+import {makeObservable, observable} from 'mobx';
 import _ from 'lodash';
 import {User, Guest/*, UserInNav*/} from '../tool/user';
 import {Page} from './page/page';
@@ -393,19 +393,20 @@ export interface NavSettings {
 
 export class Nav {
     private navView:NavView;
-    //private ws: WsBase;
 	private wsHost: string;
     private local: LocalData = new LocalData();
 	private navigo: Navigo;
-	//isRouting: boolean = false;
 	navSettings: NavSettings;
-    @observable user: User/*InNav*/ = undefined;
+    user: User = null;
     testing: boolean;
     language: string;
     culture: string;
     resUrl: string;
 
     constructor() {
+		makeObservable(this, {
+			user: observable,
+		});
         let {lang, district} = resOptions;
         this.language = lang;
         this.culture = district;
@@ -591,7 +592,6 @@ export class Nav {
 	reloadUser = () => {
 		let user: User = this.local.user.get();
 		let curUser = nav.user;
-		console.log('window onfocus storage user', user, 'curUser', curUser);
 		if (user === undefined && curUser === undefined) return;
 		if (user && curUser && user.id === curUser.id) return;
 		if (!user) nav.logout();
@@ -817,7 +817,6 @@ export class Nav {
 
 	private async internalLogined(user: User, callback: (user:User)=>Promise<void>, isUserLogin:boolean) {
         logoutApis();
-        console.log("logined: %s", JSON.stringify(user));
         this.user = user;
         this.saveLocalUser();
 		netToken.set(user.id, user.token);

@@ -54,34 +54,6 @@ function logoutUqTokens() {
     }
 }
 exports.logoutUqTokens = logoutUqTokens;
-/*
-export interface AppInFrame {
-    hash: string;
-    //unit: number;       // unit id
-    page?: string;
-    param?: string[];
-    predefinedUnit?: number;  // 比如像Cart这样的应用，直接让用户访问的，就需要在unit.json里面定义unitName
-}
-const appsInFrame:{[key:string]:AppInFrame} = {};
-*/
-/*
-class AppInFrameClass implements AppInFrame {
-    hash: string;
-    private _unit: number;
-    get unit(): number {return this._unit;}       // unit id
-    set unit(val:number) { this._unit=val;}
-    page?: string;
-    param?: string[];
-}
-
-export let appInFrame:AppInFrame = new AppInFrameClass();
-*/
-/* {
-    hash: undefined,
-    get unit():number {return } undefined, //debugUnitId,
-    page: undefined;
-    param: undefined,
-}*/
 function isBridged() {
     return window.self !== window.parent;
 }
@@ -94,6 +66,8 @@ window.addEventListener('message', function (evt) {
             switch (_c.label) {
                 case 0:
                     message = evt.data;
+                    if (!message)
+                        return [2 /*return*/];
                     _b = message.type;
                     switch (_b) {
                         case 'sub-frame-started': return [3 /*break*/, 1];

@@ -56,6 +56,7 @@ var mobx_react_1 = require("mobx-react");
 var Widget = /** @class */ (function () {
     function Widget(context, itemSchema, fieldProps, children) {
         var _this = this;
+        this.disabled = false;
         this.errors = [];
         this.contextErrors = [];
         this.visible = null;
@@ -82,6 +83,7 @@ var Widget = /** @class */ (function () {
             hasError: mobx_1.computed,
             visible: mobx_1.observable,
             value: mobx_1.observable,
+            disabled: mobx_1.observable,
         });
         this.context = context;
         var name = itemSchema.name;
@@ -199,8 +201,6 @@ var Widget = /** @class */ (function () {
     Widget.prototype.setValue = function (value) {
         if (this.isChanging === true)
             return;
-        //this.setDataValue(value);
-        //this.setElementValue(value);
         this.changeValue(value, false);
     };
     Widget.prototype.getValue = function () {
@@ -210,7 +210,9 @@ var Widget = /** @class */ (function () {
     Widget.prototype.getDisabled = function () { return this.disabled; };
     Widget.prototype.getVisible = function () { return this.visible; };
     Widget.prototype.setReadOnly = function (value) { this.readOnly = value; };
-    Widget.prototype.setDisabled = function (value) { this.disabled = value; };
+    Widget.prototype.setDisabled = function (value) {
+        this.disabled = value;
+    };
     Widget.prototype.setVisible = function (value) { this.visible = value; };
     Widget.prototype.changeValue = function (newValue, fromElement) {
         var prev = this.value;

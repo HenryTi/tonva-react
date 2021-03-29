@@ -32,7 +32,7 @@ export class ButtonWidget extends Widget {
 
     private observerRender = observer(() => {
         let {name, type} = this.itemSchema;
-        let Templet:TempletType, cn:string, caption:string;
+        let Templet:TempletType, cn:string, caption:string|JSX.Element;
         if (this.ui !== undefined) {
             let {widget:widgetType} = this.ui;
             if (widgetType !== 'button') return Unknown(type, widgetType, ['button']);
@@ -42,7 +42,7 @@ export class ButtonWidget extends Widget {
         }
         let {form, hasError} = this.context;
         let context = this.context;
-        let disabled = type==='submit' && hasError;
+        let disabled = (type==='submit' && hasError) || this.disabled;
         let content:any;
         if (this.children !== undefined) content = this.children;
         else if (typeof Templet === 'function') content = Templet();

@@ -14,6 +14,7 @@ export interface SearchBoxProps {
 }
 export declare class SearchBox extends React.Component<SearchBoxProps> {
     private input;
+    private button;
     private key;
     private onChange;
     private onSubmit;

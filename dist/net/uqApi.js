@@ -328,7 +328,6 @@ var centerHost;
 function setCenterUrl(url) {
     console.log('setCenterUrl %s', url);
     centerHost = url;
-    //centerToken = undefined;
     centerChannel = undefined;
     centerChannelUI = undefined;
 }
@@ -338,7 +337,6 @@ var loginedUserId = 0;
 function setCenterToken(userId, t) {
     loginedUserId = userId;
     exports.centerToken = t;
-    console.log('setCenterToken %s', t);
     centerChannel = undefined;
     centerChannelUI = undefined;
 }

@@ -14,7 +14,7 @@ export interface UiItem {
     readOnly?: boolean;
     disabled?: boolean;
     visible?: boolean;
-    label?: string;
+    label?: string | JSX.Element;
     labelHide?: boolean;
     className?: string;
     onChanging?: ChangingHandler;
@@ -24,6 +24,7 @@ export interface UiItem {
     discription?: (string | JSX.Element | (() => JSX.Element));
     discriptionClassName?: string;
     defaultValue?: any;
+    hiden?: boolean;
 }
 export interface UiCustom extends UiItem {
     widget: 'custom';
@@ -33,10 +34,11 @@ export interface UiImageItem extends UiItem {
     widget: 'image';
     size: 'sm' | 'lg';
 }
+export declare type PickId = (context: Context, name: string, value: number) => Promise<any>;
 export interface UiIdItem extends UiItem {
     widget: 'id';
     placeholder?: string | JSX.Element;
-    pickId?: (context: Context, name: string, value: number) => Promise<any>;
+    pickId?: PickId;
 }
 export interface UiInputItem extends UiItem {
     placeholder?: string;

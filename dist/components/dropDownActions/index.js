@@ -84,7 +84,7 @@ var DropdownActions = /** @class */ (function (_super) {
     };
     DropdownActions.prototype.render = function () {
         var _this = this;
-        var _a = this.props, icon = _a.icon, actions = _a.actions, isRight = _a.isRight, className = _a.className, itemIconClass = _a.itemIconClass, itemCaptionClass = _a.itemCaptionClass;
+        var _a = this.props, icon = _a.icon, content = _a.content, actions = _a.actions, isRight = _a.isRight, className = _a.className, containerClass = _a.containerClass, itemIconClass = _a.itemIconClass, itemCaptionClass = _a.itemCaptionClass;
         if (isRight === undefined)
             isRight = true;
         var hasIcon = actions.some(function (v) {
@@ -96,7 +96,8 @@ var DropdownActions = /** @class */ (function (_super) {
         //isOpen={this.state.dropdownOpen} toggle={this.toggle}
         var cn = className || 'cursor-pointer dropdown-toggle btn btn-sm';
         //if (className) cn += className;
-        return jsx_runtime_1.jsxs("div", __assign({ className: 'dropdown' }, { children: [jsx_runtime_1.jsx("button", __assign({ ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle }, { children: jsx_runtime_1.jsx("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) }, void 0) }), void 0),
+        return jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('dropdown', containerClass) }, { children: [jsx_runtime_1.jsxs("button", __assign({ ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle }, { children: [icon !== null && jsx_runtime_1.jsx("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) }, void 0),
+                        content && jsx_runtime_1.jsx("span", __assign({ className: "ml-1" }, { children: content }), void 0)] }), void 0),
                 jsx_runtime_1.jsx("div", __assign({ ref: function (v) { return _this.menu = v; }, className: classnames_1.default({ "dropdown-menu": true, "dropdown-menu-right": isRight, "show": dropdownOpen }) }, { children: actions.map(function (v, index) {
                         if (!v) {
                             return jsx_runtime_1.jsx("div", { className: "dropdown-divider" }, index);
@@ -108,6 +109,8 @@ var DropdownActions = /** @class */ (function (_super) {
                         if (hasIcon === true) {
                             if (icon !== undefined)
                                 icon = 'fa-' + icon;
+                            if (!iconClass)
+                                iconClass = 'text-info';
                             i = jsx_runtime_1.jsx("i", { className: classnames_1.default('mr-2', 'fa', icon, 'fa-fw', iconClass || itemIconClass), "aria-hidden": true }, void 0);
                         }
                         if (action === undefined)

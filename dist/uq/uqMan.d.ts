@@ -15,8 +15,8 @@ import { Tag } from './tag/tag';
 import { UqEnum } from './enum';
 import { CenterApi, UqConfig } from '../app';
 import { ID, IX, IDX } from './ID';
-export declare type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'char' | 'text' | 'datetime' | 'date' | 'time' | 'timestamp';
-export declare function fieldDefaultValue(type: FieldType): "" | 0 | "2000-1-1" | "0:00";
+export declare type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text' | 'datetime' | 'date' | 'time' | 'timestamp';
+export declare function fieldDefaultValue(type: FieldType): 0 | "" | "2000-1-1" | "0:00";
 export interface Field {
     name: string;
     type: FieldType;
@@ -53,9 +53,15 @@ export interface ParamActIX<T> {
     IX: IX;
     ID?: ID;
     values: {
-        id: number;
-        id2: number | T;
+        ix: number;
+        id: number | T;
     }[];
+}
+export interface ParamActIXSort {
+    IX: IX;
+    ix: number;
+    id: number;
+    after: number;
 }
 export interface ParamActDetail<M, D> {
     master: {
@@ -114,7 +120,8 @@ export interface ParamKeyID {
 }
 export interface ParamIX {
     IX: IX;
-    id: number | number[];
+    IX1?: IX;
+    ix: number | number[];
     IDX?: (ID | IDX)[];
     page?: ParamPage;
 }
@@ -153,6 +160,7 @@ export interface ParamIDxID {
 export interface IDXValue {
     value: number;
     time?: number | Date;
+    act: '=' | '+';
 }
 export interface ParamIDinIX {
     ID: ID;
@@ -171,6 +179,7 @@ export interface Uq {
     $: UqMan;
     Acts(param: any): Promise<any>;
     ActIX<T>(param: ParamActIX<T>): Promise<number[]>;
+    ActIXSort(param: ParamActIXSort): Promise<void>;
     ActDetail<M, D>(param: ParamActDetail<M, D>): Promise<RetActDetail>;
     ActDetail<M, D, D2>(param: ParamActDetail2<M, D, D2>): Promise<RetActDetail2>;
     ActDetail<M, D, D2, D3>(param: ParamActDetail3<M, D, D2, D3>): Promise<RetActDetail3>;
@@ -208,6 +217,7 @@ export declare class UqMan {
     private readonly tuidsCache;
     private readonly localEntities;
     private readonly tvs;
+    proxy: any;
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
     readonly tuids: {
@@ -286,10 +296,11 @@ export declare class UqMan {
     buildArrFieldsTuid(arrFields: ArrFields[], mainFields: Field[]): void;
     pullModify(modifyMax: number): void;
     getUqKey(): string;
-    proxy(): any;
+    createProxy(): any;
     private showReload;
     private Acts;
     private ActIX;
+    private ActIXSort;
     private ActDetail;
     private IDNO;
     private IDDetailGet;

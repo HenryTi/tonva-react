@@ -18,7 +18,7 @@ import { CenterApi, centerApi, UqConfig } from '../app';
 import { ID, IX, IDX } from './ID';
 import { nav } from '../components';
 
-export type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'char' | 'text'
+export type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text'
     | 'datetime' | 'date' | 'time' | 'timestamp';
 
 export function fieldDefaultValue(type:FieldType) {
@@ -28,6 +28,8 @@ export function fieldDefaultValue(type:FieldType) {
         case 'int':
         case 'bigint':
         case 'dec':
+		case 'float':
+		case 'double':
             return 0;
         case 'char':
         case 'text':
@@ -77,7 +79,14 @@ interface ParamPage {
 export interface ParamActIX<T> {
 	IX: IX;
 	ID?: ID;
-	values: {id:number, id2:number|T}[];
+	values: {ix:number, id:number|T}[];
+}
+
+export interface ParamActIXSort {
+	IX: IX;
+	ix: number;
+	id: number;					// id to be moved
+	after: number;				// insert after id. if before first, then 0
 }
 
 export interface ParamActDetail<M,D> {
@@ -145,7 +154,8 @@ export interface ParamKeyID {
 
 export interface ParamIX {
 	IX: IX;
-	id: number | number[];
+	IX1?: IX;
+	ix: number | number[];
 	IDX?: (ID|IDX)[];
 	page?: ParamPage;
 }
@@ -187,6 +197,7 @@ export interface ParamIDxID {
 export interface IDXValue {
 	value: number;
 	time?: number|Date;
+	act: '='|'+';
 }
 
 export interface ParamIDinIX {
@@ -210,6 +221,7 @@ export interface Uq {
 	$: UqMan;
 	Acts(param:any): Promise<any>;
 	ActIX<T>(param: ParamActIX<T>): Promise<number[]>;
+	ActIXSort(param: ParamActIXSort): Promise<void>;
 	ActDetail<M,D>(param: ParamActDetail<M,D>): Promise<RetActDetail>;
 	ActDetail<M,D,D2>(param: ParamActDetail2<M,D,D2>): Promise<RetActDetail2>;
 	ActDetail<M,D,D2,D3>(param: ParamActDetail3<M,D,D2,D3>): Promise<RetActDetail3>;
@@ -220,7 +232,7 @@ export interface Uq {
 	ID<T>(param: ParamID): Promise<T[]>;
 	KeyID<T>(param: ParamKeyID): Promise<T[]>;
 	IX<T>(param: ParamIX): Promise<T[]>;
-	IXr<T> (param: ParamIX): Promise<T[]>; // IX id2 反查ID list
+	IXr<T> (param: ParamIX): Promise<T[]>; // IX id 反查IX list
 	KeyIX<T>(param: ParamKeyIX): Promise<T[]>;
 	IDLog<T> (param: ParamIDLog): Promise<T[]>;
 	IDSum<T> (param: ParamIDSum): Promise<T[]>;
@@ -247,6 +259,7 @@ export class UqMan {
     private readonly tuidsCache: TuidsCache;
     private readonly localEntities: LocalCache;
     private readonly tvs:{[entity:string]:(values:any)=>JSX.Element};
+	proxy: any;
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
     readonly tuids: {[name:string]: Tuid} = {};
@@ -666,7 +679,7 @@ export class UqMan {
 		return uqKey;
 	}
 
-	proxy():any {
+	createProxy():any {
 		let ret = new Proxy(this.entities, {
 			get: (target, key, receiver) => {
 				let lk = (key as string).toLowerCase();
@@ -679,6 +692,7 @@ export class UqMan {
 					default: debugger; break;
 					case 'Acts': return this.Acts;
 					case 'ActIX': return this.ActIX;
+					case 'ActIXSort': return this.ActIXSort;
 					case 'IDDetail': return this.ActDetail;
 					case 'IDNO': return this.IDNO;
 					case 'IDDetailGet': return this.IDDetailGet;
@@ -699,6 +713,7 @@ export class UqMan {
 				return undefined;
 			}
 		});
+		this.proxy = ret;
 		return ret;
 	}
 
@@ -764,6 +779,17 @@ export class UqMan {
 		};
 		let ret = await this.uqApi.post(IDPath('act-ix'), apiParam);
 		return (ret[0].ret as string).split('\t').map(v => Number(v));
+	}
+
+	private ActIXSort = async (param: ParamActIXSort): Promise<void> => {
+		let {IX, ix, id, after} = param;
+		let apiParam:any = {
+			IX: entityName(IX),
+			ix,
+			id,
+			after,
+		};
+		await this.uqApi.post(IDPath('act-ix-sort'), apiParam);
 	}
 
 	private ActDetail = async (param: ParamActDetail<any, any>): Promise<any> => {
@@ -847,21 +873,23 @@ export class UqMan {
 		return ret;
 	}
 	private IX = async (param: ParamIX): Promise<any[]> => {
-		let {IX, IDX} = param;
+		let {IX, IX1, IDX} = param;
 		//this.checkParam(null, IDX, IX, id, null, page);
 		let ret = await this.uqApi.post(IDPath('ix'), {
 			...param,
 			IX: entityName(IX),
+			IX1: entityName(IX1),
 			IDX: IDX?.map(v => entityName(v)),
 		});
 		return ret;
 	}
 	private IXr = async (param: ParamIX): Promise<any[]> => {
-		let {IX, IDX} = param;
+		let {IX, IX1, IDX} = param;
 		//this.checkParam(null, IDX, IX, id, null, page);
 		let ret = await this.uqApi.post(IDPath('ixr'), {
 			...param,
 			IX: entityName(IX),
+			IX1: entityName(IX1),
 			IDX: IDX?.map(v => entityName(v)),
 		});
 		return ret;

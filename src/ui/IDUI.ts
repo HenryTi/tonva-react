@@ -1,7 +1,15 @@
 import { ID, IDX } from "../uq";
-import { FieldItem } from "./fieldItem";
+import { FieldCustoms } from "./fieldItem";
 
-export interface IDUI {
+interface IDUIBase {
+	fieldCustoms?: FieldCustoms;
+	t?: any;
+}
+
+export interface IDUI extends IDUIBase {
+	ID: ID;
+}
+
+export interface IDXUI extends IDUIBase {
 	ID: ID|IDX;
-	fields: {[name:string]:Partial<FieldItem>};
 }

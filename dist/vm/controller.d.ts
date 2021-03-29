@@ -20,9 +20,9 @@ export interface WebNav<C extends Controller> {
 }
 export declare abstract class Controller {
     protected res: any;
-    readonly t: (str: string) => string | JSX.Element;
+    t: (str: string) => string | JSX.Element;
     icon: string | JSX.Element;
-    label: string;
+    label: string | JSX.Element;
     readonly isDev: boolean;
     pageWebNav: PageWebNav;
     get user(): User;

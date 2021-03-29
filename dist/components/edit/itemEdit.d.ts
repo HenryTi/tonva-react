@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ItemSchema, UiItem } from '../schema';
 import { Edit } from './edit';
 export declare abstract class ItemEdit {
@@ -8,12 +9,12 @@ export declare abstract class ItemEdit {
     protected _uiItem: UiItem;
     get uiItem(): UiItem;
     value: any;
-    label: string;
+    label: string | JSX.Element;
     get editInRow(): boolean;
     protected newValue: any;
     error: string;
     isChanged: boolean;
-    constructor(edit: Edit, itemSchema: ItemSchema, uiItem: UiItem, label: string, value: any);
+    constructor(edit: Edit, itemSchema: ItemSchema, uiItem: UiItem, label: string | JSX.Element, value: any);
     init(): void;
     start(): Promise<any>;
     protected abstract internalStart(): Promise<any>;

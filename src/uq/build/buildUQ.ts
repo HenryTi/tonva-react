@@ -38,6 +38,7 @@ import { IDXValue, Uq`;
 	uq.tagArr.forEach(v => ts += uqEntityInterface<Tag>(v, buildTagInterface));
 	uq.idArr.forEach(v => ts += uqEntityInterface<ID>(v, buildIDInterface));
 	uq.idxArr.forEach(v => ts += uqEntityInterface<IDX>(v, buildIDXInterface));
+	uq.idxArr.forEach(v => ts += uqEntityInterface<IDX>(v, buildIDXActParamInterface));	
 	uq.ixArr.forEach(v => ts += uqEntityInterface<IX>(v, buildIXInterface));
 
 	ts += buildActsInterface(uq);
@@ -107,6 +108,8 @@ const fieldTypeMap:{[type:string]:string} = {
 	"smallint": "number",
 	"tinyint": "number",
 	"dec": "number",
+	"float": "number",
+	"double": "number",
 };
 const sysFields = ['id', 'master', 'row', 'no', '$create', '$owner'];
 function buildField(field: Field, isInID:boolean, indent:number = 1) {
@@ -372,15 +375,48 @@ function buildIDXInterface(idx: IDX):string {
 		let {name, type} = field;
 		let s = fieldTypeMap[type];
 		if (!s) s = 'any';
-		let exField = (exFields as any[]).find(v => v.field === name);
 		ts += `\n${'\t'.repeat(indent)}${name}`;
-		if (exField) {
-			ts += `?: ${s}|IDXValue;`;
+		if (name !== 'id') ts += '?';
+		ts += `: ${s};`;
+	}
+
+	let hasTrack:boolean = false;
+	let hasMemo:boolean = false;
+	if (exFields) {
+		for (let exField of exFields) {
+			let {track, memo} = exField;
+			if (track === true) hasTrack = true;
+			if (memo === true) hasMemo = true;
 		}
-		else {
-			if (name !== 'id') ts += '?';
-			ts += `: ${s};`;
-		}
+	}
+	if (hasTrack === true) {
+		ts += `\n\t$track?: number;`;
+	}
+	if (hasMemo === true) {
+		ts += `\n\t$memo?: string;`;
+	}
+	ts += '\n}';
+	return ts;
+}
+
+function buildIDXActParamInterface(idx: IDX):string {
+	let {sName, fields, schema} = idx;
+	let {exFields} = schema;
+	let ts = `export interface ActParam${capitalCase(sName)} {`;
+	let indent = 1;
+	for (let field of fields) {
+		let {name, type} = field;
+		let s = fieldTypeMap[type];
+		if (!s) s = 'any';
+		ts += `\n${'\t'.repeat(indent)}${name}`;
+		if (name !== 'id') ts += '?';
+		//let exField = (exFields as any[])?.find(v => v.name === name);
+		//if (exField) {
+			ts += `: ${s}|IDXValue;`;
+		//}
+		//else {
+		//	ts += `: ${s};`;
+		//}
 	}
 
 	let hasTrack:boolean = false;
@@ -418,7 +454,7 @@ function buildActsInterface(uq: UqMan) {
 	});
 	uq.idxArr.forEach(v => {
 		let {sName} = v;
-		ts += `\n\t${camelCase(sName)}?: ${capitalCase(sName)}[];`;
+		ts += `\n\t${camelCase(sName)}?: ActParam${capitalCase(sName)}[];`;
 	});
 	uq.ixArr.forEach(v => {
 		let {sName} = v;

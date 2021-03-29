@@ -527,6 +527,8 @@ var Entity = /** @class */ (function () {
             case 'int':
             case 'bigint':
             case 'dec':
+            case 'float':
+            case 'double':
                 return Number(v);
             case 'id':
                 var id = Number(v);

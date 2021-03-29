@@ -137,7 +137,7 @@ var ButtonWidget = /** @class */ (function (_super) {
             }
             var _b = _this.context, form = _b.form, hasError = _b.hasError;
             var context = _this.context;
-            var disabled = type === 'submit' && hasError;
+            var disabled = (type === 'submit' && hasError) || _this.disabled;
             var content;
             if (_this.children !== undefined)
                 content = _this.children;

@@ -106,14 +106,23 @@ var Form = /** @class */ (function (_super) {
             return jsx_runtime_1.jsx("form", __assign({ className: classnames_1.default(_this.props.className), onSubmit: function (e) { return e.preventDefault(); } }, { children: content }), void 0);
         };
         _this.DefaultFieldContainer = function (label, content) {
-            var fieldLabelSize = _this.props.fieldLabelSize;
+            var _a = _this.props, fieldLabelSize = _a.fieldLabelSize, fieldLabelAlign = _a.fieldLabelAlign;
             if (fieldLabelSize > 0) {
                 var labelView = void 0;
                 if (label === null) {
                     fieldLabelSize = 0;
                 }
                 else {
-                    labelView = jsx_runtime_1.jsx("label", __assign({ className: classnames_1.default('col-sm-' + fieldLabelSize, 'col-form-label') }, { children: label }), void 0);
+                    var cnAlign = void 0;
+                    switch (fieldLabelAlign) {
+                        case 'right':
+                            cnAlign = 'text-sm-right';
+                            break;
+                        case 'center':
+                            cnAlign = 'text-sm-center';
+                            break;
+                    }
+                    labelView = jsx_runtime_1.jsx("label", __assign({ className: classnames_1.default('col-sm-' + fieldLabelSize, 'col-form-label', cnAlign) }, { children: label }), void 0);
                 }
                 var fieldCol = 'col-sm-' + (12 - fieldLabelSize);
                 return jsx_runtime_1.jsxs("div", __assign({ className: "form-group row" }, { children: [labelView, jsx_runtime_1.jsx("div", __assign({ className: fieldCol }, { children: content }), void 0)] }), void 0);

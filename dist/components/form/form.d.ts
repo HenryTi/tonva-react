@@ -13,6 +13,7 @@ export interface FormProps {
     onButtonClick?: FormButtonClick;
     onEnter?: InputEnter;
     fieldLabelSize?: number;
+    fieldLabelAlign?: 'left' | 'center' | 'right';
     requiredFlag?: boolean;
     beforeShow?: (formContext: FormContext) => void;
     res?: FormRes;
@@ -28,7 +29,7 @@ export declare class Form extends React.Component<FormProps> {
     };
     readonly uiSchema: UiSchema;
     readonly res?: FormRes;
-    protected formContext: FormContext;
+    formContext: FormContext;
     private disposer;
     readonly data: any;
     readonly Container: (content: JSX.Element) => JSX.Element;

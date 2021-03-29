@@ -138,7 +138,9 @@ function factory(context, itemSchema, children, fieldProps) {
         typeWidget = getTypeWidget(type);
     }
     else {
-        var widgetType = ui.widget;
+        var widgetType = ui.widget, hiden = ui.hiden;
+        if (hiden === true)
+            return null;
         switch (widgetType) {
             default:
                 if (widgetType !== undefined) {

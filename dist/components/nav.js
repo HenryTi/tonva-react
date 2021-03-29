@@ -35,12 +35,6 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -478,7 +472,7 @@ var Nav = /** @class */ (function () {
     function Nav() {
         var _this = this;
         this.local = new tool_1.LocalData();
-        this.user = undefined;
+        this.user = null;
         this.arrs = ['/test', '/test/'];
         this.windowOnError = function (event, source, lineno, colno, error) {
             debugger;
@@ -503,7 +497,6 @@ var Nav = /** @class */ (function () {
         this.reloadUser = function () {
             var user = _this.local.user.get();
             var curUser = exports.nav.user;
-            console.log('window onfocus storage user', user, 'curUser', curUser);
             if (user === undefined && curUser === undefined)
                 return;
             if (user && curUser && user.id === curUser.id)
@@ -631,6 +624,9 @@ var Nav = /** @class */ (function () {
                     return;
                 } }, void 0));
         };
+        mobx_1.makeObservable(this, {
+            user: mobx_1.observable,
+        });
         var lang = res_1.resOptions.lang, district = res_1.resOptions.district;
         this.language = lang;
         this.culture = district;
@@ -1060,7 +1056,6 @@ var Nav = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         net_1.logoutApis();
-                        console.log("logined: %s", JSON.stringify(user));
                         this.user = user;
                         this.saveLocalUser();
                         netToken_1.netToken.set(user.id, user.token);
@@ -1402,9 +1397,6 @@ var Nav = /** @class */ (function () {
             });
         });
     };
-    __decorate([
-        mobx_1.observable
-    ], Nav.prototype, "user", void 0);
     return Nav;
 }());
 exports.Nav = Nav;

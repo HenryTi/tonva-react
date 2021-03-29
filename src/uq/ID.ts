@@ -1,38 +1,36 @@
-import { Res } from "../res";
+import { TFunc } from "../res";
 import { Entity } from "./entity";
-import { Render, UI, FieldItems} from '../ui';
+import { Render, UI } from '../ui';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export class UqID<M> extends Entity {
-	get typeName() {return 'id'}
-	readonly fieldItems: FieldItems;
+export abstract class IDXEntity<M> extends Entity {
 	readonly ui: UI;
 	readonly render: Render<M>;
-	readonly res: Res<any>;
+	readonly t: TFunc;
+}
+
+export class UqID<M> extends IDXEntity<M> {
+	get typeName() {return 'id'}
+	async NO(): Promise<string> {
+		let ret = await this.uqApi.post('id-no', {ID:this.name});
+		return ret;
+	};
 }
 
 export class ID extends UqID<any> {	
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export class UqIDX<M> extends Entity {
+export class UqIDX<M> extends IDXEntity<M> {
 	get typeName() {return 'idx'}
-	readonly fieldItems: FieldItems;
-	readonly ui: UI;
-	readonly render: Render<M>;
-	readonly res: Res<any>;
 }
 
 export class IDX extends UqIDX<any> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export class UqIX<M> extends Entity {
+export class UqIX<M> extends IDXEntity<M> {
 	get typeName() {return 'ix'}
-	readonly fieldItems: FieldItems;
-	readonly ui: UI;
-	readonly render: Render<M>;
-	readonly res: Res<any>;
 }
 
 export class IX extends UqIX<any> {

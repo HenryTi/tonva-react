@@ -37,19 +37,17 @@ var NumberWidget = /** @class */ (function (_super) {
         this.rules.push(this.itemSchema.type === 'integer' ?
             new rules_1.RuleInt(res, min, max) :
             new rules_1.RuleNum(res, min, max));
-        /*
-        if (this.itemSchema.type === 'integer') {
-            this.rules.push(new RuleInt);
-        }
-        let {min, max} = this.itemSchema;
-        if (min !== undefined) this.rules.push(new RuleMin(min));
-        if (max !== undefined) this.rules.push(new RuleMax(max));
-        */
     };
     NumberWidget.prototype.parse = function (value) {
-        if (value === undefined || value === null)
-            return;
-        return Number(value);
+        switch (typeof value) {
+            default: return;
+            case 'undefined': return;
+            case 'number': return value;
+            case 'string':
+                if (value.trim().length === 0)
+                    return;
+                return Number(value);
+        }
     };
     return NumberWidget;
 }(textWidget_1.TextWidget));

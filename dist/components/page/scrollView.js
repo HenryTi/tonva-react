@@ -83,6 +83,7 @@ var Scroller = /** @class */ (function () {
 }());
 exports.Scroller = Scroller;
 var scrollTimeGap = 100;
+var scrollEdgeGap = 30;
 var ScrollViewBase = /** @class */ (function (_super) {
     __extends(ScrollViewBase, _super);
     function ScrollViewBase() {
@@ -110,7 +111,7 @@ var ScrollViewBase = /** @class */ (function (_super) {
                     onScroll(e);
                 el = e.target;
                 scroller = new Scroller(el);
-                if (el.scrollTop < 30) {
+                if (el.scrollTop < scrollEdgeGap) {
                     if (onScrollTop !== undefined) {
                         topTime = new Date().getTime();
                         if (topTime - this.topTime > scrollTimeGap) {
@@ -128,8 +129,7 @@ var ScrollViewBase = /** @class */ (function (_super) {
                         }
                     }
                 }
-                if (el.scrollTop + el.offsetHeight > el.scrollHeight - 30) {
-                    //this.eachChild(this, 'bottom');
+                if (el.scrollTop + el.offsetHeight > el.scrollHeight - scrollEdgeGap) {
                     if (onScrollBottom !== undefined) {
                         bottomTime = new Date().getTime();
                         if (bottomTime - this.bottomTime > scrollTimeGap) {

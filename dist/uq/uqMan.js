@@ -71,6 +71,8 @@ function fieldDefaultValue(type) {
         case 'int':
         case 'bigint':
         case 'dec':
+        case 'float':
+        case 'double':
             return 0;
         case 'char':
         case 'text':
@@ -197,6 +199,25 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
+        this.ActIXSort = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            var IX, ix, id, after, apiParam;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IX = param.IX, ix = param.ix, id = param.id, after = param.after;
+                        apiParam = {
+                            IX: entityName(IX),
+                            ix: ix,
+                            id: id,
+                            after: after,
+                        };
+                        return [4 /*yield*/, this.uqApi.post(IDPath('act-ix-sort'), apiParam)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        }); };
         this.ActDetail = function (param) { return __awaiter(_this, void 0, void 0, function () {
             var _a, master, detail, detail2, detail3, postParam, ret, val, parts, items;
             var _b, _c, _d;
@@ -301,12 +322,12 @@ var UqMan = /** @class */ (function () {
             });
         }); };
         this.IX = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IX, IDX, ret;
+            var IX, IX1, IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        IX = param.IX, IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('ix'), __assign(__assign({}, param), { IX: entityName(IX), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
+                        IX = param.IX, IX1 = param.IX1, IDX = param.IDX;
+                        return [4 /*yield*/, this.uqApi.post(IDPath('ix'), __assign(__assign({}, param), { IX: entityName(IX), IX1: entityName(IX1), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
                     case 1:
                         ret = _a.sent();
                         return [2 /*return*/, ret];
@@ -314,12 +335,12 @@ var UqMan = /** @class */ (function () {
             });
         }); };
         this.IXr = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IX, IDX, ret;
+            var IX, IX1, IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        IX = param.IX, IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('ixr'), __assign(__assign({}, param), { IX: entityName(IX), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
+                        IX = param.IX, IX1 = param.IX1, IDX = param.IDX;
+                        return [4 /*yield*/, this.uqApi.post(IDPath('ixr'), __assign(__assign({}, param), { IX: entityName(IX), IX1: entityName(IX1), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
                     case 1:
                         ret = _a.sent();
                         return [2 /*return*/, ret];
@@ -878,7 +899,7 @@ var UqMan = /** @class */ (function () {
         }
         return uqKey;
     };
-    UqMan.prototype.proxy = function () {
+    UqMan.prototype.createProxy = function () {
         var _this = this;
         var ret = new Proxy(this.entities, {
             get: function (target, key, receiver) {
@@ -895,6 +916,7 @@ var UqMan = /** @class */ (function () {
                         break;
                     case 'Acts': return _this.Acts;
                     case 'ActIX': return _this.ActIX;
+                    case 'ActIXSort': return _this.ActIXSort;
                     case 'IDDetail': return _this.ActDetail;
                     case 'IDNO': return _this.IDNO;
                     case 'IDDetailGet': return _this.IDDetailGet;
@@ -915,6 +937,7 @@ var UqMan = /** @class */ (function () {
                 return undefined;
             }
         });
+        this.proxy = ret;
         return ret;
     };
     UqMan.prototype.showReload = function (msg) {

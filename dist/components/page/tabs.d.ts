@@ -47,7 +47,7 @@ declare class Tab {
     get content(): JSX.Element;
     shown(): Promise<void>;
 }
-export declare const TabCaptionComponent: (label: string, icon: string, color: string) => JSX.Element;
+export declare const TabCaptionComponent: (label: string | JSX.Element, icon: string, color: string) => JSX.Element;
 export declare class TabsView {
     private props;
     private size;

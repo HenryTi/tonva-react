@@ -8,9 +8,11 @@ export interface DropdownAction {
 }
 export interface DropdownActionsProps {
     icon?: string;
+    content?: string | JSX.Element;
     actions: DropdownAction[];
     isRight?: boolean;
     className?: string;
+    containerClass?: string;
     itemIconClass?: string;
     itemCaptionClass?: string;
 }

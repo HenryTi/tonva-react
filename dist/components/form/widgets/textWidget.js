@@ -55,8 +55,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextWidget = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
-var widget_1 = require("./widget");
 var mobx_1 = require("mobx");
+var widget_1 = require("./widget");
 var TextWidget = /** @class */ (function (_super) {
     __extends(TextWidget, _super);
     function TextWidget(context, itemSchema, fieldProps, children) {
@@ -121,7 +121,17 @@ var TextWidget = /** @class */ (function (_super) {
         this.input.value = value;
     };
     Object.defineProperty(TextWidget.prototype, "placeholder", {
-        get: function () { return (this.ui && this.ui.placeholder) || this.name; },
+        get: function () {
+            if (this.ui) {
+                var placeholder = this.ui.placeholder;
+                if (placeholder)
+                    return placeholder;
+                var label = this.ui.label;
+                if (label)
+                    return label;
+            }
+            return this.name;
+        },
         enumerable: false,
         configurable: true
     });
@@ -153,7 +163,7 @@ var TextWidget = /** @class */ (function (_super) {
         else {
             cn['required-item'] = this.itemSchema.required === true;
         }
-        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("input", { ref: function (input) { return _this.input = input; }, className: classnames_1.default(this.className, cn), type: this.inputType, defaultValue: this.value, onChange: function (evt) { return _this.onChange(evt); }, placeholder: this.placeholder, readOnly: this.readOnly, disabled: this.disabled, onKeyDown: this.onKeyDown, onFocus: this.onFocus, onBlur: this.onBlur, maxLength: this.itemSchema.maxLength }, void 0), this.renderErrors()] }, void 0);
+        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("input", { ref: function (input) { return _this.input = input; }, className: classnames_1.default(this.className, cn), type: this.inputType, defaultValue: this.value, onChange: function (evt) { return _this.onChange(evt); }, placeholder: typeof this.placeholder === 'string' ? this.placeholder : undefined, readOnly: this.readOnly, disabled: this.disabled, onKeyDown: this.onKeyDown, onFocus: this.onFocus, onBlur: this.onBlur, maxLength: this.itemSchema.maxLength }, void 0), this.renderErrors()] }, void 0);
     };
     return TextWidget;
 }(widget_1.Widget));

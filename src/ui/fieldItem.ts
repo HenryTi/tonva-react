@@ -1,4 +1,4 @@
-import { ChangedHandler, ChangingHandler } from "../components";
+import { ChangedHandler, ChangingHandler, PickId } from "../components";
 import { ID } from "../uq";
 import { FieldUIType } from "./fieldUI";
 
@@ -9,15 +9,16 @@ export interface FieldItem {
 	name: string;
 	type: FieldItemType;
 	ID?: ID;
-	label?: string;
+	label?: string|JSX.Element;
 	isKey?: boolean;
     required?: boolean;
 	widget?: FieldUIType;
     className?: string;
-	defaultValue?: string;
+	defaultValue?: string | number;
     onChanging?: ChangingHandler;
 	onChanged?: ChangedHandler;
 	readOnly?: boolean;
+	hiden?: boolean;
 }
 
 export interface FieldItemObject extends FieldItem {
@@ -26,7 +27,7 @@ export interface FieldItemObject extends FieldItem {
 
 export interface FieldItemId extends FieldItem {
     type: 'id';
-	pickId: (values:any) => Promise<any>;
+	pickId: PickId;
 	render: (values:any) => JSX.Element;
 }
 
@@ -76,3 +77,4 @@ export interface FieldItemButton extends FieldItem {
 }
 
 export type FieldItems = FieldItem[];
+export type FieldCustoms = {[name:string]:Partial<FieldItem>};

@@ -22,6 +22,7 @@ function buildUQ(uq, uqAlias) {
     uq.tagArr.forEach(function (v) { return ts += uqEntityInterface(v, buildTagInterface); });
     uq.idArr.forEach(function (v) { return ts += uqEntityInterface(v, buildIDInterface); });
     uq.idxArr.forEach(function (v) { return ts += uqEntityInterface(v, buildIDXInterface); });
+    uq.idxArr.forEach(function (v) { return ts += uqEntityInterface(v, buildIDXActParamInterface); });
     uq.ixArr.forEach(function (v) { return ts += uqEntityInterface(v, buildIXInterface); });
     ts += buildActsInterface(uq);
     ts += "\n\nexport interface UqExt extends Uq {\n\tActs(param:ParamActs): Promise<any>;\n";
@@ -91,6 +92,8 @@ var fieldTypeMap = {
     "smallint": "number",
     "tinyint": "number",
     "dec": "number",
+    "float": "number",
+    "double": "number",
 };
 var sysFields = ['id', 'master', 'row', 'no', '$create', '$owner'];
 function buildField(field, isInID, indent) {
@@ -340,31 +343,65 @@ function buildIDXInterface(idx) {
     var exFields = schema.exFields;
     var ts = "export interface " + tool_1.capitalCase(sName) + " {";
     var indent = 1;
-    var _loop_2 = function (field) {
+    for (var _i = 0, fields_4 = fields; _i < fields_4.length; _i++) {
+        var field = fields_4[_i];
         var name_2 = field.name, type = field.type;
         var s = fieldTypeMap[type];
         if (!s)
             s = 'any';
-        var exField = exFields.find(function (v) { return v.field === name_2; });
         ts += "\n" + '\t'.repeat(indent) + name_2;
-        if (exField) {
-            ts += "?: " + s + "|IDXValue;";
-        }
-        else {
-            if (name_2 !== 'id')
-                ts += '?';
-            ts += ": " + s + ";";
-        }
-    };
-    for (var _i = 0, fields_4 = fields; _i < fields_4.length; _i++) {
-        var field = fields_4[_i];
-        _loop_2(field);
+        if (name_2 !== 'id')
+            ts += '?';
+        ts += ": " + s + ";";
     }
     var hasTrack = false;
     var hasMemo = false;
     if (exFields) {
         for (var _a = 0, exFields_1 = exFields; _a < exFields_1.length; _a++) {
             var exField = exFields_1[_a];
+            var track = exField.track, memo = exField.memo;
+            if (track === true)
+                hasTrack = true;
+            if (memo === true)
+                hasMemo = true;
+        }
+    }
+    if (hasTrack === true) {
+        ts += "\n\t$track?: number;";
+    }
+    if (hasMemo === true) {
+        ts += "\n\t$memo?: string;";
+    }
+    ts += '\n}';
+    return ts;
+}
+function buildIDXActParamInterface(idx) {
+    var sName = idx.sName, fields = idx.fields, schema = idx.schema;
+    var exFields = schema.exFields;
+    var ts = "export interface ActParam" + tool_1.capitalCase(sName) + " {";
+    var indent = 1;
+    for (var _i = 0, fields_5 = fields; _i < fields_5.length; _i++) {
+        var field = fields_5[_i];
+        var name_3 = field.name, type = field.type;
+        var s = fieldTypeMap[type];
+        if (!s)
+            s = 'any';
+        ts += "\n" + '\t'.repeat(indent) + name_3;
+        if (name_3 !== 'id')
+            ts += '?';
+        //let exField = (exFields as any[])?.find(v => v.name === name);
+        //if (exField) {
+        ts += ": " + s + "|IDXValue;";
+        //}
+        //else {
+        //	ts += `: ${s};`;
+        //}
+    }
+    var hasTrack = false;
+    var hasMemo = false;
+    if (exFields) {
+        for (var _a = 0, exFields_2 = exFields; _a < exFields_2.length; _a++) {
+            var exField = exFields_2[_a];
             var track = exField.track, memo = exField.memo;
             if (track === true)
                 hasTrack = true;
@@ -396,7 +433,7 @@ function buildActsInterface(uq) {
     });
     uq.idxArr.forEach(function (v) {
         var sName = v.sName;
-        ts += "\n\t" + tool_1.camelCase(sName) + "?: " + tool_1.capitalCase(sName) + "[];";
+        ts += "\n\t" + tool_1.camelCase(sName) + "?: ActParam" + tool_1.capitalCase(sName) + "[];";
     });
     uq.ixArr.forEach(function (v) {
         var sName = v.sName;

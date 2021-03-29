@@ -74,31 +74,12 @@ var UQsMan = /** @class */ (function () {
                         name_1 = app.name, version = app.version;
                         return [4 /*yield*/, UQsMan.load(name_1, version, tvs)];
                     case 1:
-                        //UQsMan.uqOwnerMap = ownerMap || {};
-                        //for (let i in ownerMap) ownerMap[i.toLowerCase()] = ownerMap[i];
                         retErrors = _a.sent();
                         return [3 /*break*/, 5];
                     case 2:
                         if (!uqs) return [3 /*break*/, 4];
                         return [4 /*yield*/, UQsMan.loadUqs(uqs, tvs)];
                     case 3:
-                        /*
-                        let uqNames:{owner:string; name:string; version:string}[] = [];
-                        //let map:{[owner:string]: string} = UQsMan.uqOwnerMap = {};
-                        for (let uq of uqs) {
-                            //let ownerObj = uqs[owner];
-                            let {dev, name, alias, version:uqVersion, memo} = uq;
-                            for (let name in uq) {
-                                let {name:owner} = dev;
-                                //let v = ownerObj[name];
-                                //if (name === '$') {
-                                //	map[owner.toLowerCase()] = v;
-                                //	continue;
-                                //}
-                                uqNames.push({owner, name, version:uqVersion});
-                            }
-                        }
-                        */
                         retErrors = _a.sent();
                         return [3 /*break*/, 5];
                     case 4: throw new Error('either uqs or app must be defined in AppConfig');
@@ -312,7 +293,7 @@ var UQsMan = /** @class */ (function () {
             var uqMan = _a[_i];
             var uqKey = uqMan.getUqKey();
             var lower = uqKey.toLowerCase();
-            var proxy = uqMan.proxy();
+            var proxy = uqMan.createProxy();
             uqs[uqKey] = proxy;
             if (lower !== uqKey)
                 uqs[lower] = proxy;

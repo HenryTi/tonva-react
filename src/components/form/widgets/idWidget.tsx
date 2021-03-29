@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { Widget } from './widget';
-import { UiIdItem, TempletType, ItemSchema } from '../../schema';
+import { UiIdItem, TempletType } from '../../schema';
 import { runInAction } from 'mobx';
 
 const none = <small className="text-muted">[无]</small>;

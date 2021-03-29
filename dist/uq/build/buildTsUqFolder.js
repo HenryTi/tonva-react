@@ -23,7 +23,6 @@ function buildTsUqFolder(uq, uqsFolder, uqAlias) {
     }
     var tsUq = tools_1.buildTsHeader();
     tsUq += buildUQ_1.buildUQ(uq, uqAlias);
-    //overrideTsFile(uqFolder, uqAlias, tsUq);
     tools_1.overrideTsFile(uqFolder + "/" + uqAlias + ".ts", tsUq);
     saveTsIndexAndRender(uqFolder, uq, uqAlias);
 }
@@ -36,8 +35,7 @@ function saveTsIndexAndRender(uqFolder, uq, uqAlias) {
         var cName = tool_1.capitalCase(i.name);
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
         sets += "\n\tObject.assign(uq." + cName + ", " + cName + ");";
-        var tsUI = "import { Res, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nexport const fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nexport const res: Res<any> = {\n\tzh: {\n\t},\n\ten: {\n\t}\n};\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
-        //let path = `${uqFolder}/${file}.${suffix}`;
+        var tsUI = "import { Res, setRes, TFunc, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\tzh: {\n\t},\n\ten: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
         var path = uqFolder + "/" + cName + ".ui.tsx";
         tools_1.saveTsFileIfNotExists(path, tsUI);
         var fields = buildFields(i);
@@ -159,9 +157,9 @@ function buildIXFieldArr(i) {
     for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
         var f = _a[_i];
         var name_6 = f.name;
-        if (name_6 === 'id')
+        if (name_6 === 'ix')
             continue;
-        if (name_6 === 'id2')
+        if (name_6 === 'id')
             continue;
         ts += "fields." + name_6 + ", ";
     }
@@ -178,7 +176,7 @@ function replaceTsFileFields(path, fields) {
             var lBrace = text.indexOf('{', start + startStr.length);
             var rBrace = text.lastIndexOf('}', end);
             var oldText = text.substring(lBrace, rBrace + 1);
-            var fieldsText = buildFieldsText(fields, oldText);
+            var fieldsText = buildFieldsFromOldText(fields, oldText);
             text = text.substring(0, start)
                 + startStr + '\nconst fields = {'
                 + fieldsText
@@ -189,7 +187,7 @@ function replaceTsFileFields(path, fields) {
     }
 }
 var fieldItemReplaceProps = ['label', 'placeholder', 'widget', 'type'];
-function buildFieldsText(fields, oldText) {
+function buildFieldsFromOldText(fields, oldText) {
     var ret = '';
     for (var i in fields) {
         var field = fields[i];
@@ -218,6 +216,8 @@ function setFieldOldProp(field, text) {
         var prop = obj[v];
         if (!prop)
             return;
+        if (v === 'type')
+            return; // 这个是由新的schema决定的
         field[v] = prop;
     });
 }

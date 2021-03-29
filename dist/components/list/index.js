@@ -118,7 +118,6 @@ var List = /** @class */ (function (_super) {
             loading = function () { return jsx_runtime_1.jsx("i", { className: "fa fa-spinner fa-spin fa-2x fa-fw text-info" }, void 0); };
         if (none === undefined)
             none = List_1.res.none;
-        //this.listBase.selectedItems = selectedItems;
         var _b = this.listBase, items = _b.items, isLoading = _b.loading;
         function staticRow(row, type) {
             if (!row)

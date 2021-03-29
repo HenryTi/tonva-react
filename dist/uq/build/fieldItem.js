@@ -23,6 +23,8 @@ function buildFieldItem(field, isKey) {
             widget = 'updown';
             break;
         case 'dec':
+        case 'float':
+        case 'double':
             $FieldItemType = 'FieldItemNum';
             fieldItemType = 'number';
             widget = 'number';

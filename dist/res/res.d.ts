@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export interface KeyValueRes {
     [key: string]: any;
 }
@@ -16,4 +17,5 @@ export declare function setResOptions(lang: string, district: string): void;
 export declare function resLang<T extends KeyValueRes>(res: Res<T>): T;
 export declare function setRes(target: any, res: any): (str: string) => any;
 export declare function setGlobalRes(res: any): void;
-export declare function t(str: string): any;
+export declare function t(str: string): string | JSX.Element;
+export declare type TFunc = (str: string | JSX.Element) => string | JSX.Element;
