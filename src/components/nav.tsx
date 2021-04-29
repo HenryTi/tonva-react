@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {makeObservable, observable} from 'mobx';
+import {makeObservable, observable, toJS} from 'mobx';
 import _ from 'lodash';
 import {User, Guest/*, UserInNav*/} from '../tool/user';
 import {Page} from './page/page';
@@ -21,7 +21,7 @@ import { userApi } from '../net';
 import { ReloadPage, ConfirmReloadPage } from './reloadPage';
 import { PageWebNav } from './page';
 import { createLogin, Login, showForget, showRegister } from './login';
-//import { createLogin } from '../auth/createLogin';
+//import { createLogin } from '../auth';
 
 const regEx = new RegExp('Android|webOS|iPhone|iPad|' +
     'BlackBerry|Windows Phone|'  +
@@ -49,7 +49,7 @@ export interface StackItem {
 }
 export interface NavViewState {
 	notSupportedBrowser: boolean;
-    stack: StackItem[];
+	stack: StackItem[];
     wait: 0|1|2;
     fetchError: FetchError
 }
@@ -68,7 +68,7 @@ export class NavView extends React.Component<Props, NavViewState> {
 		let notSupportedBrowser = notSupportedBrowsers.findIndex(v => v === browser) >= 0;
         this.state = {
 			notSupportedBrowser,
-            stack: this.stack,
+			stack: this.stack,
             wait: 0,
             fetchError: undefined
         };
@@ -592,6 +592,7 @@ export class Nav {
 	reloadUser = () => {
 		let user: User = this.local.user.get();
 		let curUser = nav.user;
+		console.log('window onfocus storage user', user, 'curUser', toJS(curUser));
 		if (user === undefined && curUser === undefined) return;
 		if (user && curUser && user.id === curUser.id) return;
 		if (!user) nav.logout();
@@ -817,13 +818,14 @@ export class Nav {
 
 	private async internalLogined(user: User, callback: (user:User)=>Promise<void>, isUserLogin:boolean) {
         logoutApis();
+        console.log("logined: %s", JSON.stringify(user));
         this.user = user;
         this.saveLocalUser();
 		netToken.set(user.id, user.token);
 		nav.clear();
 
         if (callback !== undefined) //this.loginCallbacks.has)
-            callback(user);
+            await callback(user);
             //this.loginCallbacks.call(user);
         else if (this.isWebNav === true) {
 			this.navigate('/index');
@@ -845,11 +847,6 @@ export class Nav {
     async userLogined(user: User, callback?: (user:User)=>Promise<void>) {
 		await this.internalLogined(user, callback, true);
     }
-
-    //wsConnect() {
-        //let ws:WSChannel = this.ws = new WSChannel(this.wsHost, this.user.token);
-        //ws.connect();
-    //}
 
     loginTop(defaultTop:JSX.Element) {
         return (this.navSettings && this.navSettings.loginTop) || defaultTop;
@@ -921,20 +918,18 @@ export class Nav {
 	}
 
     async logout(callback?:()=>Promise<void>) { //notShowLogin?:boolean) {
-        //appInFrame.unit = undefined;
         this.local.logoutClear();
         this.user = undefined; //{} as User;
         logoutApis();
         let guest = this.local.guest.get();
         setCenterToken(0, guest && guest.token);
-		//this.ws = undefined;
 		this.clear();
         if (callback === undefined)
             await nav.start();
         else
             await callback();
 		this.onChangeLogin?.(undefined);
-	}
+    }
 
     async changePassword() {
 		let login = await this.getLogin();
