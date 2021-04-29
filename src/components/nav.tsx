@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {makeObservable, observable, toJS} from 'mobx';
+import {makeObservable, observable} from 'mobx';
 import _ from 'lodash';
 import {User, Guest/*, UserInNav*/} from '../tool/user';
 import {Page} from './page/page';
@@ -21,13 +21,6 @@ import { userApi } from '../net';
 import { ReloadPage, ConfirmReloadPage } from './reloadPage';
 import { PageWebNav } from './page';
 import { createLogin, Login, showForget, showRegister } from './login';
-//import { createLogin } from '../auth';
-
-const regEx = new RegExp('Android|webOS|iPhone|iPad|' +
-    'BlackBerry|Windows Phone|'  +
-    'Opera Mini|IEMobile|Mobile' , 
-    'i');
-const isMobile = regEx.test(navigator.userAgent);
 
 let logMark: number;
 const logs:string[] = [];
@@ -49,7 +42,7 @@ export interface StackItem {
 }
 export interface NavViewState {
 	notSupportedBrowser: boolean;
-	stack: StackItem[];
+    stack: StackItem[];
     wait: 0|1|2;
     fetchError: FetchError
 }
@@ -68,7 +61,7 @@ export class NavView extends React.Component<Props, NavViewState> {
 		let notSupportedBrowser = notSupportedBrowsers.findIndex(v => v === browser) >= 0;
         this.state = {
 			notSupportedBrowser,
-			stack: this.stack,
+            stack: this.stack,
             wait: 0,
             fetchError: undefined
         };
@@ -592,7 +585,6 @@ export class Nav {
 	reloadUser = () => {
 		let user: User = this.local.user.get();
 		let curUser = nav.user;
-		console.log('window onfocus storage user', user, 'curUser', toJS(curUser));
 		if (user === undefined && curUser === undefined) return;
 		if (user && curUser && user.id === curUser.id) return;
 		if (!user) nav.logout();
@@ -604,7 +596,7 @@ export class Nav {
 			window.onerror = this.windowOnError;
             window.onunhandledrejection = this.windowOnUnhandledRejection;
 			window.onfocus = this.reloadUser;
-            if (isMobile === true) {
+            if (env.isMobile === true) {
                 document.onselectstart = function() {return false;}
                 document.oncontextmenu = function() {return false;}
             }
@@ -743,12 +735,6 @@ export class Nav {
 		this.on(navOns);
 	}
 
-	/*
-	get isWebNav():boolean { 
-		if (!this.navigo) return false;
-		return !isMobile;
-	}
-	*/
 	isWebNav:boolean = false;
 	backIcon = <i className="fa fa-angle-left" />;
 	closeIcon = <i className="fa fa-close" />;
@@ -759,8 +745,6 @@ export class Nav {
 	}
 
 	pageWebNav: PageWebNav;
-
-	get isMobile():boolean {return isMobile;}
 
 	navigate(url:string, absolute?:boolean) {
 		if (!this.navigo) {
@@ -818,7 +802,6 @@ export class Nav {
 
 	private async internalLogined(user: User, callback: (user:User)=>Promise<void>, isUserLogin:boolean) {
         logoutApis();
-        console.log("logined: %s", JSON.stringify(user));
         this.user = user;
         this.saveLocalUser();
 		netToken.set(user.id, user.token);
@@ -918,7 +901,7 @@ export class Nav {
 	}
 
     async logout(callback?:()=>Promise<void>) { //notShowLogin?:boolean) {
-        this.local.logoutClear();
+		this.local.logoutClear();
         this.user = undefined; //{} as User;
         logoutApis();
         let guest = this.local.guest.get();
@@ -929,7 +912,7 @@ export class Nav {
         else
             await callback();
 		this.onChangeLogin?.(undefined);
-    }
+	}
 
     async changePassword() {
 		let login = await this.getLogin();
