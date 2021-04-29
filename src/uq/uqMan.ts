@@ -50,7 +50,7 @@ export interface Field {
     null?: boolean;
     size?: number;
     owner?: string;
-    _tuid: TuidBox;
+    _tuid?: TuidBox;
 }
 export interface ArrFields {
     name: string;
@@ -79,7 +79,8 @@ interface ParamPage {
 export interface ParamActIX<T> {
 	IX: IX;
 	ID?: ID;
-	values: {ix:number, id:number|T}[];
+	IXs?:{IX:IX, ix:number}[];				// 一次写入多个IX
+	values: {ix:number, xi:number|T}[];
 }
 
 export interface ParamActIXSort {
@@ -142,6 +143,7 @@ export interface ParamIDDetailGet {
 export interface ParamID {
 	IDX: (ID|IDX) | (ID|IDX)[];
 	id: number | number[];
+	order?: 'asc' | 'desc',
 	page?: ParamPage;
 }
 
@@ -197,7 +199,7 @@ export interface ParamIDxID {
 export interface IDXValue {
 	value: number;
 	time?: number|Date;
-	act: '='|'+';
+	setAdd: '='|'+';
 }
 
 export interface ParamIDinIX {
@@ -670,11 +672,10 @@ export class UqMan {
 	}
 
 	getUqKey() {
-		//let l = this.uqName.toLowerCase();
 		let uqKey:string = this.uqName.split(/[-._]/).join('').toLowerCase();
 		if (this.config) {
-			let {dev} = this.config;
-			uqKey = capitalCase(dev.alias || dev.name) + capitalCase(uqKey);
+			let {dev, alias} = this.config;
+			uqKey = capitalCase(dev.alias || dev.name) + capitalCase(alias??uqKey);
 		}
 		return uqKey;
 	}
@@ -771,10 +772,11 @@ export class UqMan {
 	}
 
 	private ActIX = async (param: ParamActIX<any>): Promise<number[]> => {
-		let {IX, ID, values} = param;
+		let {IX, ID, values, IXs} = param;
 		let apiParam:any = {
 			IX: entityName(IX),
 			ID: entityName(ID),
+			IXs: IXs?.map(v => ({IX:entityName(v.IX), ix:v.ix})),
 			values,
 		};
 		let ret = await this.uqApi.post(IDPath('act-ix'), apiParam);

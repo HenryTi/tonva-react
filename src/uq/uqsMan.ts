@@ -14,17 +14,16 @@ export interface TVs {
 export class UQsMan {
 	static _uqs: any;
 	static value: UQsMan;
-	//static uqOwnerMap: {[key:string]:string};
 
 	static async build(appConfig: AppConfig) {
-		let {app, uqs, tvs} = appConfig;
+		let {app, uqs, tvs, version} = appConfig;
 		let retErrors:string[];
 		if (app) {
-		let {name, version/*, ownerMap*/} = app;
+			let {name, version} = app;
 			retErrors = await UQsMan.load(name, version, tvs);
 		}
 		else if (uqs) {
-			retErrors = await UQsMan.loadUqs(uqs, tvs);
+			retErrors = await UQsMan.loadUqs(uqs, version, tvs);
 		}
 		else {
 			throw new Error('either uqs or app must be defined in AppConfig');
@@ -54,14 +53,14 @@ export class UQsMan {
 		uqsMan.id = id;
 		//console.error(uqAppData);
 		//let ownerProfixMap: {[owner: string]: string};
-		return uqsMan.buildUqs(uqs);
+		return uqsMan.buildUqs(uqs, version);
 	}
 
 	// 返回 errors, 每个uq一行
-	private static async loadUqs(uqConfigs: UqConfig[], tvs:TVs):Promise<string[]> {
+	private static async loadUqs(uqConfigs: UqConfig[], version:string, tvs:TVs):Promise<string[]> {
 		let uqsMan = UQsMan.value = new UQsMan(tvs);
 		let uqs = await loadUqs(uqConfigs);
-		return uqsMan.buildUqs(uqs, uqConfigs);
+		return uqsMan.buildUqs(uqs, version, uqConfigs);
 	}
 
 	private uqMans: UqMan[] = [];
@@ -75,17 +74,28 @@ export class UQsMan {
         this.collection = {};
     }
 
-	private async buildUqs(uqDataArr:UqData[], uqConfigs?:UqConfig[]):Promise<string[]> {
+	private async buildUqs(uqDataArr:UqData[], version:string, uqConfigs?:UqConfig[]):Promise<string[]> {
         await this.init(uqDataArr);
+
+		let localMap = env.localDb.map('$app');
+		let localCacheVersion = localMap.child('version');
+		let cacheVersion = localCacheVersion.get();
+		if (version !== cacheVersion) {
+			for (let uqMan of this.uqMans) {
+				uqMan.localMap.removeAll();
+			}
+			localCacheVersion.set(version);
+		}
+
         let retErrors = await this.load();
 		if (retErrors.length > 0) return retErrors;
 		retErrors.push(...this.setTuidImportsLocal());
 		if (retErrors.length > 0) return retErrors;
 		if (uqConfigs) {
 			for (let uqConfig of uqConfigs) {
-				let {dev, name} = uqConfig;
-				let {name:owner} = dev;
-				let uqLower = owner.toLowerCase() + '/' + name.toLowerCase();
+				let {dev, name, alias} = uqConfig;
+				let {name:owner, alias:ownerAlias} = dev;
+				let uqLower = (ownerAlias??owner).toLowerCase() + '/' + (alias??name).toLowerCase();
 				let uq = this.collection[uqLower];
 				uq.config = uqConfig;
 			}
@@ -124,23 +134,14 @@ export class UQsMan {
 
     async init(uqsData:UqData[]):Promise<void> {
         let promiseInits: PromiseLike<void>[] = uqsData.map(uqData => {
-			let {uqOwner, uqName} = uqData;
+			let {uqOwner, ownerAlias, uqName, uqAlias} = uqData;
+			if (uqAlias) uqName = uqAlias;
+			if (ownerAlias) uqOwner = ownerAlias;
 			let uqFullName = uqOwner + '/' + uqName;
-			//let uqUI = this.ui.uqs[uqFullName] as UqUI || {};
-			//let cUq = this.newCUq(uqData, uqUI);
-			//this.cUqCollection[uqFullName] = cUq;
-			//this.uqs.addUq(cUq.uq);
 			let uq = new UqMan(this, uqData, undefined, this.tvs[uqFullName] || this.tvs[uqName]);
 			this.uqMans.push(uq);
-			//uq.ownerProfix = UQsMan.uqOwnerMap[uqOwner.toLowerCase()];
-			//this.collection[uqFullName] = uq;
 			let lower = uqFullName.toLowerCase();
 			this.collection[lower] = uq;
-			/*
-			if (lower !== uqFullName) {
-				this.collection[lower] = uq;
-			}
-			*/
 			return uq.init();
 		});
         await Promise.all(promiseInits);
@@ -193,7 +194,7 @@ export class UQsMan {
                 }*/
                 debugger;
                 console.error('error in uqs');
-                this.showReload(`代码错误：新增 uq ${String(key)}`);
+                this.showReload(`新增 uq ${String(key)}`);
                 return undefined;
             },
         });
@@ -272,14 +273,19 @@ async function loadAppUqs(appOwner:string, appName:string): Promise<UqAppData> {
 }
 
 async function loadUqs(uqConfigs: UqConfig[]): Promise<UqData[]> {
-	let uqs: {owner:string; name:string; version:string}[] = uqConfigs.map(
+	let uqs: {owner:string; ownerAlias: string; name:string; alias:string; version:string}[] = uqConfigs.map(
 		v => {
-			let {dev, name, version} =v;
-			let {name:owner} = dev;
-			return {owner, name, version};
+			let {dev, name, version, alias} =v;
+			let {name:owner, alias:ownerAlias} = dev;
+			return {owner, ownerAlias, name, version, alias};
 		}
 	);
     let centerAppApi = new CenterAppApi('tv/', undefined);
-    let ret = await centerAppApi.uqs(uqs);
+    let ret:UqData[] = await centerAppApi.uqs(uqs);
+	for (let i=0; i<uqs.length; i++) {
+		let {ownerAlias, alias} = uqs[i];
+		ret[i].ownerAlias = ownerAlias;
+		ret[i].uqAlias = alias;
+	}
     return ret;
 }
