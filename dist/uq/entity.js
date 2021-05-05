@@ -157,9 +157,12 @@ var Entity = /** @class */ (function () {
     };
     Entity.prototype.buildFieldsTuid = function () {
         var _a = this.schema, fields = _a.fields, arrs = _a.arrs, returns = _a.returns;
-        this.uq.buildFieldTuid(this.fields = fields);
-        this.uq.buildArrFieldsTuid(this.arrFields = arrs, fields);
-        this.uq.buildArrFieldsTuid(this.returns = returns, fields);
+        this.fields = fields;
+        this.uq.buildFieldTuid(fields);
+        this.arrFields = arrs;
+        this.uq.buildArrFieldsTuid(arrs, fields);
+        this.returns = returns;
+        this.uq.buildArrFieldsTuid(arrs, fields);
     };
     Entity.prototype.schemaStringify = function () {
         return JSON.stringify(this.schema, function (key, value) {

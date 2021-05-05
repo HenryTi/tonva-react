@@ -35,7 +35,7 @@ function saveTsIndexAndRender(uqFolder, uq, uqAlias) {
         var cName = tool_1.capitalCase(i.name);
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
         sets += "\n\tObject.assign(uq." + cName + ", " + cName + ");";
-        var tsUI = "import { Res, setRes, TFunc, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\tzh: {\n\t},\n\ten: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
+        var tsUI = "import { Res, setRes, TFunc, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
         var path = uqFolder + "/" + cName + ".ui.tsx";
         tools_1.saveTsFileIfNotExists(path, tsUI);
         var fields = buildFields(i);
@@ -49,7 +49,7 @@ function saveTsIndexAndRender(uqFolder, uq, uqAlias) {
             end: tsImportFieldItemsEnd,
             content: tsImportFieldItemsBegin + tsImportFieldItems + tsImportFieldItemsEnd,
         });
-        replaceTsFileString(path, { begin: 'export const fieldArr: FieldItem[] = [\n', end: '\n];\n', content: tsFieldArr });
+        replaceTsFileString(path, { begin: '\nconst fieldArr: FieldItem[] = [\n', end: '\n];\n', content: tsFieldArr });
     }
     var tsIndex = "import { UqExt as Uq } from './" + uqAlias + "';" + imports + "\n\nexport function setUI(uq: Uq) {" + sets + "\n}\nexport * from './" + uqAlias + "';\n";
     tools_1.overrideTsFile(uqFolder + "/index.ts", tsIndex);
@@ -113,7 +113,7 @@ function buildIXFields(IX) {
 }
 ;
 function buildFieldArr(i) {
-    var ts = 'export const fieldArr: FieldItem[] = [\n\t';
+    var ts = '\nconst fieldArr: FieldItem[] = [\n\t';
     switch (i.typeName) {
         case 'id':
             ts += buildIDFieldArr(i);

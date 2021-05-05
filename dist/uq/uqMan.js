@@ -61,7 +61,6 @@ var tool_1 = require("../tool");
 var reactBoxId_1 = require("./tuid/reactBoxId");
 var tag_1 = require("./tag/tag");
 var enum_1 = require("./enum");
-var app_1 = require("../app");
 var ID_1 = require("./ID");
 var components_1 = require("../components");
 function fieldDefaultValue(type) {
@@ -182,14 +181,15 @@ var UqMan = /** @class */ (function () {
             });
         }); };
         this.ActIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IX, ID, values, apiParam, ret;
+            var IX, ID, values, IXs, apiParam, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        IX = param.IX, ID = param.ID, values = param.values;
+                        IX = param.IX, ID = param.ID, values = param.values, IXs = param.IXs;
                         apiParam = {
                             IX: entityName(IX),
                             ID: entityName(ID),
+                            IXs: IXs === null || IXs === void 0 ? void 0 : IXs.map(function (v) { return ({ IX: entityName(v.IX), ix: v.ix }); }),
                             values: values,
                         };
                         return [4 /*yield*/, this.uqApi.post(IDPath('act-ix'), apiParam)];
@@ -259,6 +259,19 @@ var UqMan = /** @class */ (function () {
                             detail2: ids(items[2]),
                             detail3: ids(items[3]),
                         };
+                        return [2 /*return*/, ret];
+                }
+            });
+        }); };
+        this.QueryID = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            var ID, IX, IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID, IX = param.IX, IDX = param.IDX;
+                        return [4 /*yield*/, this.uqApi.post(IDPath('query-id'), __assign(__assign({}, param), { ID: entityName(ID), IX: IX === null || IX === void 0 ? void 0 : IX.map(function (v) { return entityName(v); }), IDX: this.IDXToString(IDX) }))];
+                    case 1:
+                        ret = _a.sent();
                         return [2 /*return*/, ret];
                 }
             });
@@ -462,11 +475,6 @@ var UqMan = /** @class */ (function () {
         }
         this.tuidsCache = new tuid_1.TuidsCache(this);
     }
-    Object.defineProperty(UqMan.prototype, "center", {
-        get: function () { return app_1.centerApi; },
-        enumerable: false,
-        configurable: true
-    });
     UqMan.prototype.getID = function (name) { return this.ids[name.toLowerCase()]; };
     ;
     UqMan.prototype.getIDX = function (name) { return this.idxs[name.toLowerCase()]; };
@@ -891,11 +899,10 @@ var UqMan = /** @class */ (function () {
         this.tuidsCache.pullModify(modifyMax);
     };
     UqMan.prototype.getUqKey = function () {
-        //let l = this.uqName.toLowerCase();
         var uqKey = this.uqName.split(/[-._]/).join('').toLowerCase();
         if (this.config) {
-            var dev = this.config.dev;
-            uqKey = tool_1.capitalCase(dev.alias || dev.name) + tool_1.capitalCase(uqKey);
+            var _a = this.config, dev = _a.dev, alias = _a.alias;
+            uqKey = tool_1.capitalCase(dev.alias || dev.name) + tool_1.capitalCase(alias !== null && alias !== void 0 ? alias : uqKey);
         }
         return uqKey;
     };
@@ -917,6 +924,7 @@ var UqMan = /** @class */ (function () {
                     case 'Acts': return _this.Acts;
                     case 'ActIX': return _this.ActIX;
                     case 'ActIXSort': return _this.ActIXSort;
+                    case 'QueryID': return _this.QueryID;
                     case 'IDDetail': return _this.ActDetail;
                     case 'IDNO': return _this.IDNO;
                     case 'IDDetailGet': return _this.IDDetailGet;

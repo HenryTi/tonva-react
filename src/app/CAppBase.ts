@@ -2,7 +2,7 @@ import { nav, RouteFunc, Hooks, Navigo, NamedRoute } from "../components";
 import { t, setGlobalRes } from '../res';
 import { Controller } from '../vm';
 import { UQsMan, TVs } from "../uq";
-import { centerApi } from "./centerApi";
+import { centerApi } from "../net";
 import { VErrorsPage, VStartError } from "./vMain";
 import { User } from "../tool";
 

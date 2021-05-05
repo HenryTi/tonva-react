@@ -128,7 +128,6 @@ export declare class Nav {
     closeIcon: JSX.Element;
     setIsWebNav(): void;
     pageWebNav: PageWebNav;
-    get isMobile(): boolean;
     navigate(url: string, absolute?: boolean): Navigo;
     go(showPage: () => void, url: string, absolute?: boolean): void;
     showAppView(isUserLogin?: boolean): Promise<void>;

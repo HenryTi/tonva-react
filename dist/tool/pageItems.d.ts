@@ -45,4 +45,5 @@ export declare abstract class PageItems<T> {
     more(): Promise<boolean>;
     private setLoaded;
     findItem(item: any): T;
+    removeItem(item: any): T;
 }

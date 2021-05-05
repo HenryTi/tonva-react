@@ -95,7 +95,7 @@ var fieldTypeMap = {
     "float": "number",
     "double": "number",
 };
-var sysFields = ['id', 'master', 'row', 'no', '$create', '$owner'];
+var sysFields = ['id', 'master', 'row', 'no', '$create', '$update', '$owner'];
 function buildField(field, isInID, indent) {
     if (indent === void 0) { indent = 1; }
     var name = field.name, type = field.type;
@@ -354,6 +354,7 @@ function buildIDXInterface(idx) {
             ts += '?';
         ts += ": " + s + ";";
     }
+    ts += "\n\t$act?: number;";
     var hasTrack = false;
     var hasMemo = false;
     if (exFields) {
@@ -389,14 +390,9 @@ function buildIDXActParamInterface(idx) {
         ts += "\n" + '\t'.repeat(indent) + name_3;
         if (name_3 !== 'id')
             ts += '?';
-        //let exField = (exFields as any[])?.find(v => v.name === name);
-        //if (exField) {
         ts += ": " + s + "|IDXValue;";
-        //}
-        //else {
-        //	ts += `: ${s};`;
-        //}
     }
+    ts += "\n\t$act?: number;";
     var hasTrack = false;
     var hasMemo = false;
     if (exFields) {

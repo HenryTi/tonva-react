@@ -394,9 +394,15 @@ var PageItems = /** @class */ (function () {
         if (index < 0)
             return;
         return this._items[index];
-        //let oldItem = this._items[index];
-        //let oid = this.getPageId(oldItem);
-        //if (pid === oid) return oldItem;
+    };
+    PageItems.prototype.removeItem = function (item) {
+        var _this = this;
+        var pid = this.getPageId(item);
+        var index = lodash_1.default.findIndex(this._items, function (v) { return _this.getPageId(v) === pid; });
+        if (index < 0)
+            return;
+        var ret = this._items.splice(index, 1);
+        return ret[0];
     };
     return PageItems;
 }());

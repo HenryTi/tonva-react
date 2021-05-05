@@ -54,7 +54,7 @@ var components_1 = require("../components");
 var res_1 = require("../res");
 var vm_1 = require("../vm");
 var uq_1 = require("../uq");
-var centerApi_1 = require("./centerApi");
+var net_1 = require("../net");
 var vMain_1 = require("./vMain");
 var CAppBase = /** @class */ (function (_super) {
     __extends(CAppBase, _super);
@@ -128,7 +128,7 @@ var CAppBase = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, centerApi_1.centerApi.userFromId(userId)];
+                    case 0: return [4 /*yield*/, net_1.centerApi.userFromId(userId)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

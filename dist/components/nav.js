@@ -103,11 +103,6 @@ var simple_1 = require("./simple");
 var net_2 = require("../net");
 var reloadPage_1 = require("./reloadPage");
 var login_1 = require("./login");
-//import { createLogin } from '../auth/createLogin';
-var regEx = new RegExp('Android|webOS|iPhone|iPad|' +
-    'BlackBerry|Windows Phone|' +
-    'Opera Mini|IEMobile|Mobile', 'i');
-var isMobile = regEx.test(navigator.userAgent);
 var logMark;
 var logs = [];
 ;
@@ -543,12 +538,6 @@ var Nav = /** @class */ (function () {
             '/register': this.navRegister,
             '/forget': this.navForget,
         };
-        /*
-        get isWebNav():boolean {
-            if (!this.navigo) return false;
-            return !isMobile;
-        }
-        */
         this.isWebNav = false;
         this.backIcon = jsx_runtime_1.jsx("i", { className: "fa fa-angle-left" }, void 0);
         this.closeIcon = jsx_runtime_1.jsx("i", { className: "fa fa-close" }, void 0);
@@ -849,7 +838,7 @@ var Nav = /** @class */ (function () {
                         window.onerror = this.windowOnError;
                         window.onunhandledrejection = this.windowOnUnhandledRejection;
                         window.onfocus = this.reloadUser;
-                        if (isMobile === true) {
+                        if (tool_1.env.isMobile === true) {
                             document.onselectstart = function () { return false; };
                             document.oncontextmenu = function () { return false; };
                         }
@@ -976,11 +965,6 @@ var Nav = /** @class */ (function () {
         this.backIcon = jsx_runtime_1.jsx("i", { className: "fa fa-arrow-left" }, void 0);
         this.closeIcon = jsx_runtime_1.jsx("i", { className: "fa fa-close" }, void 0);
     };
-    Object.defineProperty(Nav.prototype, "isMobile", {
-        get: function () { return isMobile; },
-        enumerable: false,
-        configurable: true
-    });
     Nav.prototype.navigate = function (url, absolute) {
         if (!this.navigo) {
             alert('Is not in webnav state, cannot navigate to url "' + url + '"');
@@ -1060,19 +1044,21 @@ var Nav = /** @class */ (function () {
                         this.saveLocalUser();
                         netToken_1.netToken.set(user.id, user.token);
                         exports.nav.clear();
-                        if (!(callback !== undefined)) return [3 /*break*/, 1];
-                        callback(user);
-                        return [3 /*break*/, 4];
+                        if (!(callback !== undefined)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, callback(user)];
                     case 1:
-                        if (!(this.isWebNav === true)) return [3 /*break*/, 2];
-                        this.navigate('/index');
-                        return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, this.showAppView(isUserLogin)];
-                    case 3:
                         _b.sent();
-                        _b.label = 4;
-                    case 4: return [4 /*yield*/, ((_a = this.onChangeLogin) === null || _a === void 0 ? void 0 : _a.call(this, this.user))];
-                    case 5:
+                        return [3 /*break*/, 5];
+                    case 2:
+                        if (!(this.isWebNav === true)) return [3 /*break*/, 3];
+                        this.navigate('/index');
+                        return [3 /*break*/, 5];
+                    case 3: return [4 /*yield*/, this.showAppView(isUserLogin)];
+                    case 4:
+                        _b.sent();
+                        _b.label = 5;
+                    case 5: return [4 /*yield*/, ((_a = this.onChangeLogin) === null || _a === void 0 ? void 0 : _a.call(this, this.user))];
+                    case 6:
                         _b.sent();
                         return [2 /*return*/];
                 }
@@ -1105,10 +1091,6 @@ var Nav = /** @class */ (function () {
             });
         });
     };
-    //wsConnect() {
-    //let ws:WSChannel = this.ws = new WSChannel(this.wsHost, this.user.token);
-    //ws.connect();
-    //}
     Nav.prototype.loginTop = function (defaultTop) {
         return (this.navSettings && this.navSettings.loginTop) || defaultTop;
     };
@@ -1192,13 +1174,11 @@ var Nav = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        //appInFrame.unit = undefined;
                         this.local.logoutClear();
                         this.user = undefined; //{} as User;
                         net_1.logoutApis();
                         guest = this.local.guest.get();
                         net_1.setCenterToken(0, guest && guest.token);
-                        //this.ws = undefined;
                         this.clear();
                         if (!(callback === undefined)) return [3 /*break*/, 2];
                         return [4 /*yield*/, exports.nav.start()];

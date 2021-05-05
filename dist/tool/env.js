@@ -11,7 +11,7 @@ exports.env = void 0;
 var _62_1 = require("./62");
 var localDb_1 = require("./localDb");
 exports.env = (function () {
-    var _a = initEnv(), unit = _a.unit, testing = _a.testing, params = _a.params, lang = _a.lang, district = _a.district, timeZone = _a.timeZone;
+    var _a = initEnv(), unit = _a.unit, testing = _a.testing, params = _a.params, lang = _a.lang, district = _a.district, timeZone = _a.timeZone, isMobile = _a.isMobile;
     return {
         unit: unit,
         testing: testing,
@@ -21,6 +21,7 @@ exports.env = (function () {
         timeZone: timeZone,
         browser: detectBrowser(),
         isDevelopment: process.env.NODE_ENV === 'development',
+        isMobile: isMobile,
         localDb: new localDb_1.LocalMap(testing === true ? '$$' : '$'),
         setTimeout: function (tag, callback, ms) {
             var args = [];
@@ -125,7 +126,11 @@ function initEnv() {
             district = parts[1].toUpperCase();
     }
     var timeZone = -new Date().getTimezoneOffset() / 60;
-    return { unit: unit, testing: testing, params: params, lang: lang, district: district, timeZone: timeZone };
+    var regEx = new RegExp('Android|webOS|iPhone|iPad|' +
+        'BlackBerry|Windows Phone|' +
+        'Opera Mini|IEMobile|Mobile', 'i');
+    var isMobile = regEx.test(navigator.userAgent);
+    return { unit: unit, testing: testing, params: params, lang: lang, district: district, timeZone: timeZone, isMobile: isMobile };
 }
 function detectBrowser() {
     if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) >= 0)

@@ -8,6 +8,9 @@ export declare abstract class IDXEntity<M> extends Entity {
 }
 export declare class UqID<M> extends IDXEntity<M> {
     get typeName(): string;
+    create: boolean;
+    update: boolean;
+    owner: boolean;
     NO(): Promise<string>;
 }
 export declare class ID extends UqID<any> {

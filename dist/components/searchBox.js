@@ -86,6 +86,7 @@ exports.SearchBox = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
+var tool_1 = require("../tool");
 /*
 export interface SearchBoxState {
     disabled: boolean;
@@ -157,7 +158,10 @@ var SearchBox = /** @class */ (function (_super) {
                 inputSize = 'input-group-lg';
                 break;
         }
-        return jsx_runtime_1.jsx("form", __assign({ className: className, onSubmit: this.onSubmit }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default("input-group", inputSize) }, { children: [label && jsx_runtime_1.jsx("div", __assign({ className: "input-group-addon align-self-center mr-2" }, { children: label }), void 0),
+        var autoComplete;
+        if (tool_1.env.isMobile === true)
+            autoComplete = 'off';
+        return jsx_runtime_1.jsx("form", __assign({ className: className, onSubmit: this.onSubmit, autoComplete: autoComplete }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default("input-group", inputSize) }, { children: [label && jsx_runtime_1.jsx("div", __assign({ className: "input-group-addon align-self-center mr-2" }, { children: label }), void 0),
                     jsx_runtime_1.jsx("input", { ref: function (v) { return _this.input = v; }, onChange: this.onChange, type: "text", name: "key", onFocus: onFocus, className: classnames_1.default('form-control', inputClassName || 'border-primary'), placeholder: placeholder, defaultValue: this.props.initKey, maxLength: maxLength }, void 0),
                     jsx_runtime_1.jsx("div", __assign({ className: "input-group-append" }, { children: jsx_runtime_1.jsxs("button", __assign({ ref: function (v) { return _this.button = v; }, className: "btn btn-primary", type: "submit", disabled: this.props.allowEmptySearch !== true }, { children: [jsx_runtime_1.jsx("i", { className: 'fa fa-search' }, void 0),
                                 jsx_runtime_1.jsx("i", { className: "fa" }, void 0), buttonText] }), void 0) }), void 0)] }), void 0) }), void 0);

@@ -13,7 +13,7 @@ import { LocalMap, LocalCache } from '../tool';
 import { UQsMan } from './uqsMan';
 import { Tag } from './tag/tag';
 import { UqEnum } from './enum';
-import { CenterApi, UqConfig } from '../app';
+import { UqConfig } from '../app';
 import { ID, IX, IDX } from './ID';
 export declare type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text' | 'datetime' | 'date' | 'time' | 'timestamp';
 export declare function fieldDefaultValue(type: FieldType): 0 | "" | "2000-1-1" | "0:00";
@@ -25,7 +25,7 @@ export interface Field {
     null?: boolean;
     size?: number;
     owner?: string;
-    _tuid: TuidBox;
+    _tuid?: TuidBox;
 }
 export interface ArrFields {
     name: string;
@@ -52,9 +52,13 @@ interface ParamPage {
 export interface ParamActIX<T> {
     IX: IX;
     ID?: ID;
+    IXs?: {
+        IX: IX;
+        ix: number;
+    }[];
     values: {
         ix: number;
-        id: number | T;
+        xi: number | T;
     }[];
 }
 export interface ParamActIXSort {
@@ -95,6 +99,22 @@ export interface ParamActDetail3<M, D, D2, D3> extends ParamActDetail2<M, D, D2>
 export interface RetActDetail3 extends RetActDetail2 {
     detail3: number[];
 }
+export interface ParamQueryID {
+    ID?: ID;
+    IX?: (IX | string)[];
+    IDX?: (ID | IDX)[];
+    id?: number | number[];
+    key?: {
+        [key: string]: string | number;
+    };
+    ix?: number;
+    idx?: number | number[];
+    keyx?: {
+        [key: string]: string | number;
+    };
+    page?: ParamPage;
+    order?: 'desc' | 'asc';
+}
 export interface ParamIDNO {
     ID: ID;
 }
@@ -108,14 +128,17 @@ export interface ParamIDDetailGet {
 export interface ParamID {
     IDX: (ID | IDX) | (ID | IDX)[];
     id: number | number[];
+    order?: 'asc' | 'desc';
     page?: ParamPage;
 }
 export interface ParamKeyID {
     ID: ID;
+    IDX?: (ID | IDX)[];
+    IX?: IX[];
     key: {
         [key: string]: string | number;
     };
-    IDX?: (ID | IDX)[];
+    ix?: number;
     page?: ParamPage;
 }
 export interface ParamIX {
@@ -160,7 +183,7 @@ export interface ParamIDxID {
 export interface IDXValue {
     value: number;
     time?: number | Date;
-    act: '=' | '+';
+    setAdd: '=' | '+';
 }
 export interface ParamIDinIX {
     ID: ID;
@@ -183,6 +206,7 @@ export interface Uq {
     ActDetail<M, D>(param: ParamActDetail<M, D>): Promise<RetActDetail>;
     ActDetail<M, D, D2>(param: ParamActDetail2<M, D, D2>): Promise<RetActDetail2>;
     ActDetail<M, D, D2, D3>(param: ParamActDetail3<M, D, D2, D3>): Promise<RetActDetail3>;
+    QueryID<T>(param: ParamQueryID): Promise<T[]>;
     IDNO(param: ParamIDNO): Promise<string>;
     IDDetailGet<M, D>(param: ParamIDDetailGet): Promise<[M[], D[]]>;
     IDDetailGet<M, D, D2>(param: ParamIDDetailGet): Promise<[M[], D[], D2[]]>;
@@ -235,7 +259,6 @@ export declare class UqMan {
     constructor(uqs: UQsMan, uqData: UqData, createBoxId: CreateBoxId, tvs: {
         [entity: string]: (values: any) => JSX.Element;
     });
-    get center(): CenterApi;
     getID(name: string): ID;
     getIDX(name: string): IDX;
     getIX(name: string): IX;
@@ -302,6 +325,7 @@ export declare class UqMan {
     private ActIX;
     private ActIXSort;
     private ActDetail;
+    private QueryID;
     private IDNO;
     private IDDetailGet;
     private IDXToString;

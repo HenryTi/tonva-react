@@ -11,6 +11,7 @@ export declare const env: {
     timeZone: number;
     browser: string;
     isDevelopment: boolean;
+    isMobile: boolean;
     localDb: LocalMap;
     setTimeout: (tag: string, callback: (...args: any[]) => void, ms: number, ...args: any[]) => NodeJS.Timer;
     clearTimeout: (handle: NodeJS.Timer) => void;
