@@ -932,7 +932,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/nav.tsx": {
-        "version": "e2fa584be222ca5dbbba45d9b8c8fe9c568e5aaa9acca9fd374099ac7ea30101",
+        "version": "a7a27892b0161266644eafdf94355c7e6b2da047fc652955729a8793bc805160",
         "signature": "92f0d13c7413ec1b97f3423b5824240244c871c36a8857c991391fa02c5441f2",
         "affectsGlobalScope": false
       },
@@ -1242,7 +1242,7 @@
         "affectsGlobalScope": false
       },
       "./src/net/appbridge.ts": {
-        "version": "2789f15b8b0d2706973d4b4065d132918880924b30a1ce09126fb8028c4ac770",
+        "version": "33512c78ce5115760cd7ecbef6ca7c5682aaccf266c600ac1fc100adb3345723",
         "signature": "34a6da7474b232c6790d0e51d72c257d327b1e9dfe37a5d8e2dcfacb263179e2",
         "affectsGlobalScope": false
       },
@@ -1252,7 +1252,7 @@
         "affectsGlobalScope": false
       },
       "./src/net/httpchannel.ts": {
-        "version": "c96ebad181d86b8f293d66997cf7b1e4db0d4eeb8e2db521b676bcba8fed67c1",
+        "version": "5fbffd5e30f8f4dd5f4086a51a518e186b1045c1125a1f7c070bcbb60943dba5",
         "signature": "d125da73ca83240d376595f71a9a5b7eec83020f9010ab93edebfbe9d7aee0e1",
         "affectsGlobalScope": false
       },
