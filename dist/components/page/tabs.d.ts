@@ -8,7 +8,7 @@ export interface TabProp {
     caption: TabCaption;
     content?: () => JSX.Element;
     page?: IVPage;
-    notify?: IObservableValue<number>;
+    notify?: IObservableValue<number> | number;
     load?: () => Promise<void>;
     onShown?: () => Promise<void>;
     isSelected?: boolean;
@@ -35,7 +35,7 @@ declare class Tab {
     caption: TabCaption;
     contentBuilder: () => JSX.Element;
     page: IVPage;
-    notify: IObservableValue<number>;
+    notify: IObservableValue<number> | number;
     load?: () => Promise<void>;
     onShown?: () => Promise<void>;
     onScroll?: () => void;

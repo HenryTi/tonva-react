@@ -46,6 +46,8 @@ export declare abstract class CAppBase<U> extends Controller {
     internalT(str: string): any;
     setRes(res: any): void;
     protected afterBuiltUQs(uqs: any): void;
+    private uqsUser;
+    protected initUQs(): Promise<any>;
     protected beforeStart(): Promise<boolean>;
     protected afterStart(): Promise<void>;
     userFromId(userId: number): Promise<any>;

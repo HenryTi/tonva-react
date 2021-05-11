@@ -162,7 +162,7 @@ var Entity = /** @class */ (function () {
         this.arrFields = arrs;
         this.uq.buildArrFieldsTuid(arrs, fields);
         this.returns = returns;
-        this.uq.buildArrFieldsTuid(arrs, fields);
+        this.uq.buildArrFieldsTuid(returns, fields);
     };
     Entity.prototype.schemaStringify = function () {
         return JSON.stringify(this.schema, function (key, value) {

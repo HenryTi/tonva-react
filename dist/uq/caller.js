@@ -106,7 +106,6 @@ var EntityCaller = /** @class */ (function (_super) {
                         this.entity.uq.pullModify($modify);
                         if ($uq === undefined) {
                             ret = this.xresult(res);
-                            //if (ret === undefined) debugger;
                             return [2 /*return*/, ret];
                         }
                         return [4 /*yield*/, this.retry($uq)];

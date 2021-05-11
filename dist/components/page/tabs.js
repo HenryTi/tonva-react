@@ -227,7 +227,7 @@ var TabsView = /** @class */ (function () {
                     var selected = v.selected, caption = v.caption, notify = v.notify;
                     var notifyCircle;
                     if (notify !== undefined) {
-                        var num = notify.get();
+                        var num = typeof notify === 'number' ? notify : notify.get();
                         if (num !== undefined) {
                             if (num > 0)
                                 notifyCircle = jsx_runtime_1.jsx("u", { children: num > 99 ? '99+' : num }, void 0);

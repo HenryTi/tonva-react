@@ -60,6 +60,7 @@ var CAppBase = /** @class */ (function (_super) {
     __extends(CAppBase, _super);
     function CAppBase(config) {
         var _this = _super.call(this) || this;
+        _this.uqsUser = '';
         _this.appConfig = config || components_1.nav.navSettings;
         if (_this.appConfig) {
             var _a = _this.appConfig, app = _a.app, uqs = _a.uqs;
@@ -81,28 +82,58 @@ var CAppBase = /** @class */ (function (_super) {
         res_1.setGlobalRes(res);
     };
     CAppBase.prototype.afterBuiltUQs = function (uqs) { };
+    CAppBase.prototype.initUQs = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, retErrors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.appConfig)
+                            return [2 /*return*/];
+                        user = components_1.nav.user;
+                        if (user === this.uqsUser)
+                            return [2 /*return*/];
+                        this.uqsUser = user;
+                        net_1.logoutApis();
+                        return [4 /*yield*/, uq_1.UQsMan.build(this.appConfig)];
+                    case 1:
+                        retErrors = _a.sent();
+                        this._uqs = uq_1.UQsMan._uqs;
+                        this.afterBuiltUQs(this._uqs);
+                        return [2 /*return*/, retErrors];
+                }
+            });
+        });
+    };
     CAppBase.prototype.beforeStart = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var retErrors, user, err_1;
+            var retErrors, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         this.onNavRoutes();
-                        if (!this.appConfig)
-                            return [2 /*return*/, true];
-                        return [4 /*yield*/, uq_1.UQsMan.build(this.appConfig)];
+                        return [4 /*yield*/, this.initUQs()];
                     case 1:
                         retErrors = _a.sent();
+                        // UQsMan.errors;
                         if (retErrors !== undefined) {
                             this.openVPage(vMain_1.VErrorsPage, retErrors);
                             return [2 /*return*/, false];
                         }
-                        this._uqs = uq_1.UQsMan._uqs;
-                        this.afterBuiltUQs(this._uqs);
-                        user = components_1.nav.user;
+                        //this._uqs = UQsMan._uqs;
+                        //this.afterBuiltUQs(this._uqs);
+                        //let retErrors = await this.load();
+                        //let app = await loadAppUqs(this.appOwner, this.appName);
+                        // if (isDevelopment === true) {
+                        // 这段代码原本打算只是在程序员调试方式下使用，实际上，也可以开放给普通用户，production方式下
+                        //let retErrors = UQsMan.errors;
+                        //let {predefinedUnit} = appInFrame;
+                        /*
+                        let {user} = nav;
                         if (user !== undefined && user.id > 0) {
                         }
+                        */
                         return [2 /*return*/, true];
                     case 2:
                         err_1 = _a.sent();

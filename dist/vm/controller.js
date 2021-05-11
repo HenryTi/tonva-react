@@ -96,7 +96,7 @@ var Controller = /** @class */ (function () {
     Object.defineProperty(Controller.prototype, "isLogined", {
         get: function () {
             var user = components_1.nav.user;
-            if (user === undefined)
+            if (!user)
                 return false;
             return user.id > 0;
         },

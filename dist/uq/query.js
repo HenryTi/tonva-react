@@ -215,7 +215,7 @@ var UqQuery = /** @class */ (function (_super) {
     UqQuery.prototype.setSchema = function (schema) {
         _super.prototype.setSchema.call(this, schema);
         var returns = schema.returns;
-        //this.returns = returns;
+        this.returns = returns;
         this.isPaged = returns && returns.find(function (v) { return v.name === '$page'; }) !== undefined;
     };
     UqQuery.prototype.resetPage = function (size, params) {

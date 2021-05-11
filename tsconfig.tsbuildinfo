@@ -607,8 +607,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/navigo.ts": {
-        "version": "48d276d49ce3c0fc305e481c35b09fdf7295672b4bfdb6438322197ac796b382",
-        "signature": "cd7a3e096007604d26013977b7eccc53fafa920415b8097679338152f03f6852",
+        "version": "a138b9597d7b0808af16e11dcf7b7f2df703727c18240fc6a2f9c438e6f1bb12",
+        "signature": "61f8bf2577a8d7d68a9812bf3d5210c3978f393e7ecfd196eb7b15fabe3a9be2",
         "affectsGlobalScope": false
       },
       "./node_modules/mobx-react-lite/dist/utils/assertenvironment.d.ts": {
@@ -732,8 +732,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/page/tabs.tsx": {
-        "version": "854b5757fe3b4e9b4e7492929adc931924f3bb1bd08484d3cfb6492e8a9d277f",
-        "signature": "a7cd393927287311761a828c627df35fb15d1b00fe947fd414a855be61a6b7cf",
+        "version": "8b5912a66f79374ade07e378906de00fc13144ebfa740b11db127983b413fddb",
+        "signature": "932cf63883c478b0b7ad4354a4ce1dc12dc62fdc2189414b578474b50bb8b340",
         "affectsGlobalScope": false
       },
       "./src/components/page/page.tsx": {
@@ -862,7 +862,7 @@
         "affectsGlobalScope": false
       },
       "./src/vm/controller.tsx": {
-        "version": "5072afb20ec2a799cb9a6a399c81679042be014674f816b7b50c2a7a8d14b327",
+        "version": "c1b6c3159150d913a3d51c21a277a5150d97e860d80f77f05db3d20f3fa5f3be",
         "signature": "3cadfeed3b017523af3964ea0d76df4a20e58bc094eecf77eafdf8b6c4fd90c9",
         "affectsGlobalScope": false
       },
@@ -932,7 +932,7 @@
         "affectsGlobalScope": false
       },
       "./src/components/nav.tsx": {
-        "version": "a7a27892b0161266644eafdf94355c7e6b2da047fc652955729a8793bc805160",
+        "version": "4749e1a23abc6d7dc40b85b77ebbe204377e0c2f619f11797ba430dc14b7f4c8",
         "signature": "92f0d13c7413ec1b97f3423b5824240244c871c36a8857c991391fa02c5441f2",
         "affectsGlobalScope": false
       },
@@ -1147,8 +1147,8 @@
         "affectsGlobalScope": false
       },
       "./src/components/form/index.ts": {
-        "version": "31144f2faec365ac154c9897c0704c8d8d13c1b27c7d30b824d9ddc76b4eb73b",
-        "signature": "a3f93fa096c839777cedd9106e79a830ed3c686e01c1de9585d24c2c6facc3c6",
+        "version": "71cb264de5f35047bb6aac061860ac1e31cf2c029d3e711c35088f3170e43a49",
+        "signature": "163242bdae0e7db67a1900b15a61fe522a7b6ba7759d16cf31addfc38fd08e7f",
         "affectsGlobalScope": false
       },
       "./src/components/edit/index.tsx": {
@@ -1287,7 +1287,7 @@
         "affectsGlobalScope": false
       },
       "./src/uq/entity.ts": {
-        "version": "76588c034a5107a16364b96f82fabb9618aa7e17f2736611ae1b97c0704d36c5",
+        "version": "b01db017b9fbee1790c8e77e8cc12dc0b22ff324151f27c783968f14f29d7fea",
         "signature": "95c43843ac1658a39c12649d7a9046893c95d241ed8969c8b8f02f42399d28e0",
         "affectsGlobalScope": false
       },
@@ -1297,12 +1297,12 @@
         "affectsGlobalScope": false
       },
       "./src/uq/query.ts": {
-        "version": "ca5c36c253337b8a75e0390138272b6c0e0bcd3b0dfe30690fef4d9fd710a510",
+        "version": "80a5b122c0fd74a1d4658c2f1346ea0aef86de980bfabee0b37798cfc201caa0",
         "signature": "186f977fb2e95e22d57f50d44eae20dfbd6edf1613b059193b76a5e46f247b3b",
         "affectsGlobalScope": false
       },
       "./src/uq/caller.ts": {
-        "version": "fdb7232d98956f0335aceb07f82dbf755b4e9120eb86a8d019e74ea6d7028619",
+        "version": "5884b127e779545133623f1485906531949387da5bc28d175917b378014dc7ca",
         "signature": "39b0f79414c06cfbccfc3b331f6766dfcac0264c310fdf8513f313f48eb27d23",
         "affectsGlobalScope": false
       },
@@ -1367,8 +1367,8 @@
         "affectsGlobalScope": false
       },
       "./src/app/cappbase.ts": {
-        "version": "974cdbfde3244e8e47ed769c34ee8fd806cb315efb8f544fd080a1e0289670cb",
-        "signature": "7355b3b1563068a3dacc37685e65c5d3e3bfd3f71b4617d62128dda3f99d03d2",
+        "version": "b6dcbc597ff3c2b5ad865545dba592c58e81674bcc231c0f27ae46d5f116e74a",
+        "signature": "6ab6aa6dc86df9a11ced341246ecced44fdfe62615362ab6f63270b927643419",
         "affectsGlobalScope": false
       },
       "./src/app/start.ts": {
@@ -1392,7 +1392,7 @@
         "affectsGlobalScope": false
       },
       "./src/uq/uqsman.ts": {
-        "version": "bd7010ea5fb8a070bf8dde1ee834835a149cc8857ebb9231c7f2b2a03a72d2a4",
+        "version": "85507882ab0f4d27d3cb3b5c82b11329c50b6cc8517eff712cd44dd0b155f8d1",
         "signature": "b8866d303b98809504580b125a8f3e2a1f9fa83ec9511005c0148c31906cb4cd",
         "affectsGlobalScope": false
       },
@@ -1443,7 +1443,7 @@
       },
       "./src/uq/uqman.ts": {
         "version": "eed11cebcc74203bf7097485e1d77497750a2d01ce429b02cb4da8ad11616ef6",
-        "signature": "e357f828ab920e9b5de83d1271cd9afa45d110f5d69a3ae6e074f487e3daa58b",
+        "signature": "b3d48d893459882cbbdded9fdb1bdeb2a3dece308cfc71abcb62e4523b1f114a",
         "affectsGlobalScope": false
       },
       "./src/uq/build/context.ts": {

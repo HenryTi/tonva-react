@@ -492,14 +492,16 @@ var Nav = /** @class */ (function () {
         this.reloadUser = function () {
             var user = _this.local.user.get();
             var curUser = exports.nav.user;
-            if (user === undefined && curUser === undefined)
+            if (!user && !curUser)
                 return;
-            if (user && curUser && user.id === curUser.id)
+            if ((user === null || user === void 0 ? void 0 : user.id) === (curUser === null || curUser === void 0 ? void 0 : curUser.id))
                 return;
-            if (!user)
+            if (!user) {
                 exports.nav.logout();
-            else
+            }
+            else {
                 exports.nav.logined(user);
+            }
         };
         this.navLogin = function (params) { return __awaiter(_this, void 0, void 0, function () {
             var _this = this;

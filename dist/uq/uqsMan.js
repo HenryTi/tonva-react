@@ -64,14 +64,14 @@ var UQsMan = /** @class */ (function () {
     }
     UQsMan.build = function (appConfig) {
         return __awaiter(this, void 0, void 0, function () {
-            var app, uqs, tvs, version, retErrors, name_1, version_1;
+            var app, uqs, tvs, version, retErrors, dev, name_1, version_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         app = appConfig.app, uqs = appConfig.uqs, tvs = appConfig.tvs, version = appConfig.version;
                         if (!app) return [3 /*break*/, 2];
-                        name_1 = app.name, version_1 = app.version;
-                        return [4 /*yield*/, UQsMan.load(name_1, version_1, tvs)];
+                        dev = app.dev, name_1 = app.name, version_1 = app.version;
+                        return [4 /*yield*/, UQsMan.load(dev.name + "/" + name_1, version_1, tvs)];
                     case 1:
                         retErrors = _a.sent();
                         return [3 /*break*/, 5];
@@ -227,19 +227,22 @@ var UQsMan = /** @class */ (function () {
     };
     UQsMan.prototype.init = function (uqsData) {
         return __awaiter(this, void 0, void 0, function () {
-            var promiseInits;
-            var _this = this;
+            var promiseInits, _i, uqsData_1, uqData, uqOwner, ownerAlias, uqName, uqAlias, uqFullName, uq, lower;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        promiseInits = uqsData.map(function (uqData) {
-                            var uqOwner = uqData.uqOwner, ownerAlias = uqData.ownerAlias, uqName = uqData.uqName, uqAlias = uqData.uqAlias;
-                            // 原名加入collection
-                            var uqFullName = uqOwner + '/' + uqName;
-                            var uq = new uqMan_1.UqMan(_this, uqData, undefined, _this.tvs[uqFullName] || _this.tvs[uqName]);
-                            _this.uqMans.push(uq);
-                            var lower = uqFullName.toLowerCase();
-                            _this.collection[lower] = uq;
+                        promiseInits = [];
+                        for (_i = 0, uqsData_1 = uqsData; _i < uqsData_1.length; _i++) {
+                            uqData = uqsData_1[_i];
+                            uqOwner = uqData.uqOwner, ownerAlias = uqData.ownerAlias, uqName = uqData.uqName, uqAlias = uqData.uqAlias;
+                            uqFullName = uqOwner + '/' + uqName;
+                            if (this.collection[uqFullName]) {
+                                continue;
+                            }
+                            uq = new uqMan_1.UqMan(this, uqData, undefined, this.tvs[uqFullName] || this.tvs[uqName]);
+                            this.uqMans.push(uq);
+                            lower = uqFullName.toLowerCase();
+                            this.collection[lower] = uq;
                             // 别名加入collection
                             if (uqAlias)
                                 uqName = uqAlias;
@@ -247,9 +250,9 @@ var UQsMan = /** @class */ (function () {
                                 uqOwner = ownerAlias;
                             uqFullName = uqOwner + '/' + uqName;
                             lower = uqFullName.toLowerCase();
-                            _this.collection[lower] = uq;
-                            return uq.init();
-                        });
+                            this.collection[lower] = uq;
+                            promiseInits.push(uq.init());
+                        }
                         return [4 /*yield*/, Promise.all(promiseInits)];
                     case 1:
                         _a.sent();

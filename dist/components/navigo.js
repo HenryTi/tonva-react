@@ -172,12 +172,19 @@ var Navigo = /** @class */ (function () {
         var split = url.split(hash);
         return split.length < 2 || split[1] === '';
     };
+    Navigo.prototype.onlyOneHashTest = function (url) {
+        var p = url.indexOf('#test');
+        if (p < 0)
+            return url;
+        return url.replaceAll('#test', '') + '#test';
+    };
     Navigo.prototype.navigate = function (path, absolute) {
         if (absolute === void 0) { absolute = false; }
         var to;
         path = path || '';
         if (this._usePushState) {
             to = (!absolute ? this._getRoot() + '/' : '') + path.replace(/^\/+/, '/');
+            //to = this.onlyOneHashTest(to);
             to = to.replace(/([^:])(\/{2,})/g, '$1/');
             this._historyUpdate({}, '', to);
             this.resolve();

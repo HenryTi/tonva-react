@@ -229,12 +229,19 @@ export class Navigo {
 		this._listen();
 		this.updatePageLinks();
 	}
-  
+
+	private onlyOneHashTest(url: string):string {
+		let p = url.indexOf('#test');
+		if (p < 0) return url;
+		return url.replaceAll('#test', '') + '#test';
+	}
+
 	navigate(path:string, absolute:boolean = false):Navigo {
 		let to:string;
 		path = path || '';
 		if (this._usePushState) {
 			to = (!absolute ? this._getRoot() + '/' : '') + path.replace(/^\/+/, '/');
+			//to = this.onlyOneHashTest(to);
 			to = to.replace(/([^:])(\/{2,})/g, '$1/');
 			this._historyUpdate({}, '', to);
 			this.resolve();
