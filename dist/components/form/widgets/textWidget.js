@@ -138,6 +138,7 @@ var TextWidget = /** @class */ (function (_super) {
     TextWidget.prototype.internalOnKeyDown = function (evt) {
     };
     TextWidget.prototype.onChange = function (evt) {
+        this.onInputChange(evt);
     };
     TextWidget.prototype.setReadOnly = function (value) {
         if (this.input === null)

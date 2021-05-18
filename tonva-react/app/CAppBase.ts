@@ -35,6 +35,8 @@ export interface UqsConfig {
 }
 
 export interface AppConfig extends UqsConfig {
+	
+	
 	/*
 	app?: {
 		name: string;

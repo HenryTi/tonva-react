@@ -63,7 +63,6 @@ export declare class Navigo {
     private _historyUpdateMethod;
     private timout;
     constructor(r?: string, useHash?: boolean, hash?: string);
-    private onlyOneHashTest;
     navigate(path: string, absolute?: boolean): Navigo;
     on(routeFunc: RouteFunc, hooks?: Hooks): Navigo;
     on(url: string, routeFunc: RouteFunc, hooks?: Hooks): Navigo;

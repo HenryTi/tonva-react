@@ -873,10 +873,6 @@ var UqMan = /** @class */ (function () {
                 return "continue";
             var div = t.div(arr || tuid);
             f._tuid = div && div.buildTuidDivBox(ownerField);
-            if (f._tuid === undefined) {
-                debugger;
-                throw new Error("owner field " + owner + " is not tuid");
-            }
         };
         var this_1 = this;
         for (var _a = 0, fields_2 = fields; _a < fields_2.length; _a++) {

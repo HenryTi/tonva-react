@@ -99,9 +99,9 @@ var RadioItemEdit = /** @class */ (function (_super) {
             var resolve = props.resolve;
             var name = _this.itemSchema.name;
             var list = _this.uiItem.list;
-            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center", disabled: !_this.isChanged, onClick: function () {
+            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: function () {
                     _this.verifyValue();
-                    if (_this.error === undefined)
+                    if (!_this.error)
                         resolve(_this.newValue);
                 } }, { children: "\u4FDD\u5B58" }), void 0);
             var content = list ?

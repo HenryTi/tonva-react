@@ -8,9 +8,11 @@ export interface TVs {
     };
 }
 export declare class UQsMan {
+    private static isBuildingUQ;
     static _uqs: any;
     static value: UQsMan;
     static build(appConfig: AppConfig): Promise<string[]>;
+    static buildUQs(uqsConfig: AppConfig): Promise<string[]>;
     private static load;
     private static loadUqs;
     private uqMans;

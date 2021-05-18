@@ -105,7 +105,7 @@ var TextAreaItemEdit = /** @class */ (function (_super) {
             var resolve = props.resolve;
             var onSave = function () {
                 _this.verifyValue();
-                if (_this.error === undefined) {
+                if (!_this.error) {
                     var val = _this.newValue;
                     resolve(val);
                 }

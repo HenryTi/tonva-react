@@ -50,7 +50,7 @@ var tsCBase_1 = require("./tsCBase");
 var tsVMain_1 = require("./tsVMain");
 var context_1 = require("./context");
 var tsApp_1 = require("./tsApp");
-function build(options, uqSrcPath) {
+function build(appConfig, uqSrcPath) {
     return __awaiter(this, void 0, void 0, function () {
         var buildContext, uqTsSrcPath, tsIndex, tsCApp, tsCBase, tsVMain, tsApp;
         return __generator(this, function (_a) {
@@ -79,7 +79,7 @@ function build(options, uqSrcPath) {
                     tools_1.saveSrcTsFileIfNotExists(buildContext, 'App', 'tsx', tsApp);
                     tools_1.saveTsFile(buildContext, 'uqs', '');
                     fs_1.default.unlinkSync(uqTsSrcPath + '/uqs.ts');
-                    return [4 /*yield*/, uqsFolder_1.buildUqsFolder(uqTsSrcPath + '/uqs', options)];
+                    return [4 /*yield*/, uqsFolder_1.buildUqsFolder(uqTsSrcPath + '/uqs', appConfig)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

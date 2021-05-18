@@ -76,10 +76,12 @@ var UqTuid = /** @class */ (function (_super) {
     UqTuid.prototype.getIdFromObj = function (obj) { return obj[this.idName]; };
     UqTuid.prototype.stopCache = function () { this.noCache = true; };
     UqTuid.idValue = function (id) {
-        switch (typeof id) {
+        var t = typeof id;
+        switch (t) {
             default:
                 debugger;
-                throw new Error('unknown id');
+                throw new Error('unknown id type: ' + t);
+            case 'undefined': return undefined;
             case 'object': return id.id;
             case 'number': return id;
         }
@@ -700,11 +702,17 @@ var TuidImport = /** @class */ (function (_super) {
         return _this;
     }
     TuidImport.prototype.setFrom = function (tuidLocal) { this.tuidLocal = tuidLocal; };
-    TuidImport.prototype.useId = function (id) { this.tuidLocal.useId(id); };
-    TuidImport.prototype.boxId = function (id) { return this.tuidLocal.boxId(id); };
-    TuidImport.prototype.valueFromId = function (id) { return this.tuidLocal.valueFromId(id); };
+    TuidImport.prototype.useId = function (id) { var _a; (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.useId(id); };
+    TuidImport.prototype.boxId = function (id) {
+        var _a;
+        if (!this.tuidLocal)
+            debugger;
+        return (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.boxId(id);
+    };
+    TuidImport.prototype.valueFromId = function (id) { var _a; return (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.valueFromId(id); };
     TuidImport.prototype.resetCache = function (id) {
-        this.tuidLocal.resetCache(id);
+        var _a;
+        (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.resetCache(id);
     };
     TuidImport.prototype.assureBox = function (id) {
         return __awaiter(this, void 0, void 0, function () {
@@ -719,11 +727,11 @@ var TuidImport = /** @class */ (function (_super) {
         });
     };
     Object.defineProperty(TuidImport.prototype, "hasDiv", {
-        get: function () { return this.tuidLocal.hasDiv; },
+        get: function () { var _a; return (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.hasDiv; },
         enumerable: false,
         configurable: true
     });
-    TuidImport.prototype.div = function (name) { return this.tuidLocal.div(name); };
+    TuidImport.prototype.div = function (name) { var _a; return (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.div(name); };
     TuidImport.prototype.loadMain = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var ret;

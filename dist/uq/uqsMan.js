@@ -87,6 +87,25 @@ var UQsMan = /** @class */ (function () {
             });
         });
     };
+    UQsMan.buildUQs = function (uqsConfig) {
+        return __awaiter(this, void 0, void 0, function () {
+            var uqs, tvs, version, retErrors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uqs = uqsConfig.uqs, tvs = uqsConfig.tvs, version = uqsConfig.version;
+                        if (!uqs) return [3 /*break*/, 2];
+                        UQsMan.isBuildingUQ = true;
+                        return [4 /*yield*/, UQsMan.loadUqs(uqs, version, tvs)];
+                    case 1:
+                        retErrors = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2: throw new Error('either uqs or app must be defined in AppConfig');
+                    case 3: return [2 /*return*/, retErrors];
+                }
+            });
+        });
+    };
     // 返回 errors, 每个uq一行
     UQsMan.load = function (tonvaAppName, version, tvs) {
         return __awaiter(this, void 0, void 0, function () {
@@ -118,9 +137,11 @@ var UQsMan = /** @class */ (function () {
                     case 2:
                         id = uqAppData.id, uqs = uqAppData.uqs;
                         uqsMan.id = id;
-                        //console.error(uqAppData);
-                        //let ownerProfixMap: {[owner: string]: string};
-                        return [2 /*return*/, uqsMan.buildUqs(uqs, version)];
+                        return [4 /*yield*/, uqsMan.buildUqs(uqs, version)];
+                    case 3: 
+                    //console.error(uqAppData);
+                    //let ownerProfixMap: {[owner: string]: string};
+                    return [2 /*return*/, _b.sent()];
                 }
             });
         });
@@ -136,7 +157,8 @@ var UQsMan = /** @class */ (function () {
                         return [4 /*yield*/, loadUqs(uqConfigs)];
                     case 1:
                         uqs = _a.sent();
-                        return [2 /*return*/, uqsMan.buildUqs(uqs, version, uqConfigs)];
+                        return [4 /*yield*/, uqsMan.buildUqs(uqs, version, uqConfigs)];
+                    case 2: return [2 /*return*/, _a.sent()];
                 }
             });
         });
@@ -164,7 +186,9 @@ var UQsMan = /** @class */ (function () {
                         retErrors = _c.sent();
                         if (retErrors.length > 0)
                             return [2 /*return*/, retErrors];
-                        retErrors.push.apply(retErrors, this.setTuidImportsLocal());
+                        if (UQsMan.isBuildingUQ === false) {
+                            retErrors.push.apply(retErrors, this.setTuidImportsLocal());
+                        }
                         if (retErrors.length > 0)
                             return [2 /*return*/, retErrors];
                         if (uqConfigs) {
@@ -372,6 +396,7 @@ var UQsMan = /** @class */ (function () {
         }
         tuidImport.setFrom(tuid);
     };
+    UQsMan.isBuildingUQ = false;
     return UQsMan;
 }());
 exports.UQsMan = UQsMan;

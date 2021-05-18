@@ -46,19 +46,20 @@ var components_1 = require("../../components");
 var uqsMan_1 = require("../uqsMan");
 var tools_1 = require("./tools");
 var buildTsUqFolder_1 = require("./buildTsUqFolder");
-function buildUqsFolder(uqsFolder, options) {
+function buildUqsFolder(uqsFolder, appConfig) {
     return __awaiter(this, void 0, void 0, function () {
-        var uqErrors, uqsMan, uqMans, promiseArr, _i, uqMans_1, uq, files, _a, files_1, file, fullPath, tsUqsIndexHeader, tsUqsIndexContent, tsUqsIndexReExport, tsUqsUI, _b, uqMans_2, uq, _c, o1, n1, uqAlias;
+        var uqErrors, uqsMan, uqMans, promiseArr, _i, uqMans_1, uq, tsUqsIndexHeader, tsUqsIndexContent, uqsIndexFile, indexText, p1, pe, tsUqsIndexReExport, tsUqsUI, _a, uqMans_2, uq, _b, o1, n1, uqAlias, files, _c, files_1, file, fullPath;
         return __generator(this, function (_d) {
             switch (_d.label) {
-                case 0: return [4 /*yield*/, uqsStart(options)];
+                case 0: return [4 /*yield*/, uqsStart(appConfig)];
                 case 1:
                     uqErrors = _d.sent();
                     uqsMan = uqsMan_1.UQsMan.value;
                     uqMans = uqsMan.getUqMans();
                     promiseArr = [];
                     if (uqErrors) {
-                        throw new Error(uqErrors.join('\n'));
+                        console.error(uqErrors.join('\n'));
+                        //throw new Error(uqErrors.join('\n'));
                     }
                     for (_i = 0, uqMans_1 = uqMans; _i < uqMans_1.length; _i++) {
                         uq = uqMans_1[_i];
@@ -67,14 +68,39 @@ function buildUqsFolder(uqsFolder, options) {
                     return [4 /*yield*/, Promise.all(promiseArr)];
                 case 2:
                     _d.sent();
+                    tsUqsIndexHeader = '';
+                    uqsIndexFile = uqsFolder + "/index.ts";
+                    if (fs_1.default.existsSync(uqsIndexFile) === true) {
+                        indexText = fs_1.default.readFileSync(uqsIndexFile, 'utf8');
+                        p1 = indexText.indexOf('///###import AppUQs###///');
+                        pe = indexText.indexOf('\n', p1);
+                        tsUqsIndexHeader = indexText.substring(0, pe + 1);
+                        tsUqsIndexContent = "\n\nexport interface UQs extends AppUQs {";
+                    }
+                    else {
+                        tsUqsIndexContent = "\n\nexport interface UQs {";
+                    }
+                    tsUqsIndexHeader += tools_1.buildTsHeader();
+                    tsUqsIndexReExport = '\n';
+                    tsUqsUI = "\n\nexport function setUI(uqs:UQs) {";
+                    for (_a = 0, uqMans_2 = uqMans; _a < uqMans_2.length; _a++) {
+                        uq = uqMans_2[_a];
+                        _b = tools_1.getNameFromUq(uq), o1 = _b.devName, n1 = _b.uqName;
+                        uqAlias = o1 + n1;
+                        buildTsUqFolder_1.buildTsUqFolder(uq, uqsFolder, uqAlias);
+                        tsUqsIndexHeader += "\nimport * as " + uqAlias + " from './" + uqAlias + "';";
+                        tsUqsIndexContent += "\n\t" + uqAlias + ": " + uqAlias + ".UqExt;";
+                        tsUqsIndexReExport += "\nexport * as " + uqAlias + " from './" + uqAlias + "';";
+                        tsUqsUI += "\n\t" + uqAlias + ".setUI(uqs." + uqAlias + ");";
+                    }
                     if (!fs_1.default.existsSync(uqsFolder)) {
                         fs_1.default.mkdirSync(uqsFolder);
                     }
                     else {
                         try {
                             files = fs_1.default.readdirSync(uqsFolder);
-                            for (_a = 0, files_1 = files; _a < files_1.length; _a++) {
-                                file = files_1[_a];
+                            for (_c = 0, files_1 = files; _c < files_1.length; _c++) {
+                                file = files_1[_c];
                                 fullPath = path_1.default.join(uqsFolder, file);
                                 if (fs_1.default.lstatSync(fullPath).isFile() === true) {
                                     fs_1.default.unlinkSync(fullPath);
@@ -85,22 +111,7 @@ function buildUqsFolder(uqsFolder, options) {
                             throw err;
                         }
                     }
-                    tsUqsIndexHeader = tools_1.buildTsHeader();
-                    tsUqsIndexContent = "\n\nexport interface UQs {";
-                    tsUqsIndexReExport = '\n';
-                    tsUqsUI = "\n\nexport function setUI(uqs:UQs) {";
-                    for (_b = 0, uqMans_2 = uqMans; _b < uqMans_2.length; _b++) {
-                        uq = uqMans_2[_b];
-                        _c = tools_1.getNameFromUq(uq), o1 = _c.devName, n1 = _c.uqName;
-                        uqAlias = o1 + n1;
-                        buildTsUqFolder_1.buildTsUqFolder(uq, uqsFolder, uqAlias);
-                        //overrideTsFile(uqsFolder, uqAlias, tsUq);
-                        tsUqsIndexHeader += "\nimport * as " + uqAlias + " from './" + uqAlias + "';";
-                        tsUqsIndexContent += "\n\t" + uqAlias + ": " + uqAlias + ".UqExt;";
-                        tsUqsIndexReExport += "\nexport * as " + uqAlias + " from './" + uqAlias + "';";
-                        tsUqsUI += "\n\t" + uqAlias + ".setUI(uqs." + uqAlias + ");";
-                    }
-                    tools_1.overrideTsFile(uqsFolder + "/index.ts", tsUqsIndexHeader + tsUqsIndexContent + '\n}' + tsUqsIndexReExport + tsUqsUI + '\n}\n');
+                    tools_1.overrideTsFile(uqsIndexFile, tsUqsIndexHeader + tsUqsIndexContent + '\n}' + tsUqsIndexReExport + tsUqsUI + '\n}\n');
                     return [2 /*return*/];
             }
         });
@@ -118,7 +129,7 @@ function uqsStart(uqsConfig) {
                     return [4 /*yield*/, components_1.nav.init()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, uqsMan_1.UQsMan.build(uqsConfig)];
+                    return [4 /*yield*/, uqsMan_1.UQsMan.buildUQs(uqsConfig)];
                 case 2:
                     retErrors = _a.sent();
                     return [2 /*return*/, retErrors];
