@@ -12,6 +12,7 @@ export interface TVs {
 }
 
 export class UQsMan {
+	private static isBuildingUQ: boolean = false;
 	static _uqs: any;
 	static value: UQsMan;
 
@@ -35,6 +36,7 @@ export class UQsMan {
 		let {uqs, tvs, version} = uqsConfig;
 		let retErrors:string[];
 		if (uqs) {
+			UQsMan.isBuildingUQ = true;
 			retErrors = await UQsMan.loadUqs(uqs, version, tvs);
 		}
 		else {
@@ -65,14 +67,14 @@ export class UQsMan {
 		uqsMan.id = id;
 		//console.error(uqAppData);
 		//let ownerProfixMap: {[owner: string]: string};
-		return uqsMan.buildUqs(uqs, version);
+		return await uqsMan.buildUqs(uqs, version);
 	}
 
 	// 返回 errors, 每个uq一行
 	private static async loadUqs(uqConfigs: UqConfig[], version:string, tvs:TVs):Promise<string[]> {
 		let uqsMan = UQsMan.value = new UQsMan(tvs);
 		let uqs = await loadUqs(uqConfigs);
-		return uqsMan.buildUqs(uqs, version, uqConfigs);
+		return await uqsMan.buildUqs(uqs, version, uqConfigs);
 	}
 
 	private uqMans: UqMan[] = [];
@@ -101,7 +103,9 @@ export class UQsMan {
 
         let retErrors = await this.load();
 		if (retErrors.length > 0) return retErrors;
-		retErrors.push(...this.setTuidImportsLocal());
+		if (UQsMan.isBuildingUQ === false) {
+			retErrors.push(...this.setTuidImportsLocal());
+		}
 		if (retErrors.length > 0) return retErrors;
 		if (uqConfigs) {
 			for (let uqConfig of uqConfigs) {
