@@ -20,8 +20,7 @@ export class UQsMan {
 		let {app, uqs, tvs, version} = appConfig;
 		let retErrors:string[];
 		if (app) {
-			let {dev, name, version} = app;
-			retErrors = await UQsMan.load(`${dev.name}/${name}`, version, tvs);
+			retErrors = await UQsMan.loadApp(appConfig);
 		}
 		else if (uqs) {
 			retErrors = await UQsMan.loadUqs(uqs, version, tvs);
@@ -46,8 +45,11 @@ export class UQsMan {
 	}
 
 	// 返回 errors, 每个uq一行
-	private static async load(tonvaAppName:string, version:string, tvs:TVs):Promise<string[]> {
-		let uqsMan = UQsMan.value = new UQsManApp(tonvaAppName, tvs);
+	private static async loadApp(appConfig: AppConfig):Promise<string[]> {
+		let {app, uqs:uqConfigs, tvs, version} = appConfig;
+
+		let {name, dev} = app;
+		let uqsMan = UQsMan.value = new UQsManApp(`${dev.name}/${name}`, tvs);
         let {appOwner, appName} = uqsMan;
         let {localData} = uqsMan;
         let uqAppData:UqAppData = localData.get();
@@ -59,6 +61,12 @@ export class UQsMan {
 				];
 			}
             uqAppData.version = version;
+
+			if (uqConfigs) {
+				let data = await loadUqs(uqConfigs);
+				uqAppData.uqs.push(...data);
+			}
+
             localData.set(uqAppData);
             // 
             for (let uq of uqAppData.uqs) uq.newVersion = true;
@@ -67,7 +75,7 @@ export class UQsMan {
 		uqsMan.id = id;
 		//console.error(uqAppData);
 		//let ownerProfixMap: {[owner: string]: string};
-		return await uqsMan.buildUqs(uqs, version);
+		return await uqsMan.buildUqs(uqs, version, uqConfigs);
 	}
 
 	// 返回 errors, 每个uq一行
@@ -104,7 +112,8 @@ export class UQsMan {
         let retErrors = await this.load();
 		if (retErrors.length > 0) return retErrors;
 		if (UQsMan.isBuildingUQ === false) {
-			retErrors.push(...this.setTuidImportsLocal());
+			//retErrors.push(...this.setTuidImportsLocal());
+			this.setTuidImportsLocal();
 		}
 		if (retErrors.length > 0) return retErrors;
 		if (uqConfigs) {
@@ -155,10 +164,16 @@ export class UQsMan {
 
 			// 原名加入collection
 			let uqFullName = uqOwner + '/' + uqName;
-			if (this.collection[uqFullName]) {
-				continue;
+			let uqFull = this.collection[uqFullName];
+			let uq:UqMan;
+			if (uqFull) {
+				uq = uqFull;
 			}
-			let uq = new UqMan(this, uqData, undefined, this.tvs[uqFullName] || this.tvs[uqName]);
+			else {
+				uq  = new UqMan(this, uqData, undefined, this.tvs[uqFullName] || this.tvs[uqName]);
+				this.collection[uqFullName] = uq;
+				promiseInits.push(uq.init());
+			}
 			this.uqMans.push(uq);
 			let lower = uqFullName.toLowerCase();
 			this.collection[lower] = uq;
@@ -169,7 +184,6 @@ export class UQsMan {
 			uqFullName = uqOwner + '/' + uqName;
 			lower = uqFullName.toLowerCase();
 			this.collection[lower] = uq;
-			promiseInits.push(uq.init());
 		}
         await Promise.all(promiseInits);
     }
@@ -201,12 +215,26 @@ export class UQsMan {
     buildUQs(): any {
         //let that = this;
         let uqs:any = {};
-        for (let uqMan of this.uqMans) {
-            let uqKey = uqMan.getUqKey();
+		function setUq(uqKey: string, proxy: any):void {
+			if (!uqKey) return;
 			let lower = uqKey.toLowerCase();
-			let proxy = uqMan.createProxy();
 			uqs[uqKey] = proxy;
 			if (lower !== uqKey) uqs[lower] = proxy;
+		}
+		for (let uqMan of this.uqMans) {
+			let proxy = uqMan.createProxy();
+			setUq(uqMan.getUqKey(), proxy);
+			setUq(uqMan.getUqKeyWithConfig(), proxy);
+			/*
+			let uqKey = uqMan.getUqKey();
+			let lower = uqKey.toLowerCase();
+			uqs[uqKey] = proxy;
+			if (lower !== uqKey) uqs[lower] = proxy;
+            let uqKeyWithConfig = uqMan.getUqKeyWithConfig();
+			let lowerWithConfig = uqKeyWithConfig.toLowerCase();
+			uqs[uqKeyWithConfig] = proxy;
+			if (lowerWithConfig !== uqKeyWithConfig) uqs[lowerWithConfig] = proxy;
+			*/
         }
         return new Proxy(uqs, {
             get: (target, key, receiver) => {
@@ -257,7 +285,8 @@ export class UQsMan {
         let uq = this.collection[fromName];
         if (uq === undefined) {
             //debugger;
-            return `setInner(tuidImport: TuidImport): uq ${fromName} is not loaded`;
+            console.error(`setInner(tuidImport: TuidImport): uq ${fromName} is not loaded`);
+			return;
         }
         let iName = tuidImport.name
         let tuid = uq.tuid(iName);

@@ -49,17 +49,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IX = exports.UqIX = exports.IDX = exports.UqIDX = exports.ID = exports.UqID = exports.IDXEntity = void 0;
+exports.IX = exports.UqIX = exports.IDX = exports.UqIDX = exports.ID = exports.UqID = void 0;
 var entity_1 = require("./entity");
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-var IDXEntity = /** @class */ (function (_super) {
-    __extends(IDXEntity, _super);
-    function IDXEntity() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return IDXEntity;
-}(entity_1.Entity));
-exports.IDXEntity = IDXEntity;
 var UqID = /** @class */ (function (_super) {
     __extends(UqID, _super);
     function UqID() {
@@ -84,8 +76,28 @@ var UqID = /** @class */ (function (_super) {
         });
     };
     ;
+    UqID.prototype.getIdFromObj = function (value) { return value['id']; };
+    UqID.prototype.cacheTuids = function (defer) { };
+    UqID.prototype.loadValuesFromIds = function (divName, ids) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.uq.QueryID({
+                            IDX: [this],
+                            id: ids
+                        })];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqID.prototype.cacheTuidFieldValues = function (value) { };
+    UqID.prototype.unpackTuidIds = function (values) { return; };
     return UqID;
-}(IDXEntity));
+}(entity_1.Entity));
 exports.UqID = UqID;
 var ID = /** @class */ (function (_super) {
     __extends(ID, _super);
@@ -107,7 +119,7 @@ var UqIDX = /** @class */ (function (_super) {
         configurable: true
     });
     return UqIDX;
-}(IDXEntity));
+}(entity_1.Entity));
 exports.UqIDX = UqIDX;
 var IDX = /** @class */ (function (_super) {
     __extends(IDX, _super);
@@ -129,7 +141,7 @@ var UqIX = /** @class */ (function (_super) {
         configurable: true
     });
     return UqIX;
-}(IDXEntity));
+}(entity_1.Entity));
 exports.UqIX = UqIX;
 var IX = /** @class */ (function (_super) {
     __extends(IX, _super);

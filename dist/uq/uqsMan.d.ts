@@ -13,7 +13,7 @@ export declare class UQsMan {
     static value: UQsMan;
     static build(appConfig: AppConfig): Promise<string[]>;
     static buildUQs(uqsConfig: AppConfig): Promise<string[]>;
-    private static load;
+    private static loadApp;
     private static loadUqs;
     private uqMans;
     private collection;

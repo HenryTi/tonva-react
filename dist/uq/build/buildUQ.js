@@ -95,7 +95,7 @@ var fieldTypeMap = {
     "float": "number",
     "double": "number",
 };
-var sysFields = ['id', 'master', 'row', 'no', '$create', '$update', '$owner'];
+var sysFields = ['id', 'main', 'row', 'no', '$create', '$update', '$owner'];
 function buildField(field, isInID, indent) {
     if (indent === void 0) { indent = 1; }
     var name = field.name, type = field.type;
@@ -134,11 +134,11 @@ function buildReturns(entity, returns) {
     for (var _i = 0, returns_1 = returns; _i < returns_1.length; _i++) {
         var ret = returns_1[_i];
         var retName = tool_1.capitalCase(ret.name);
-        ts += "interface Return" + sName + retName + " {";
+        ts += "export interface Return" + sName + retName + " {";
         ts += buildFields(ret.fields);
         ts += '\n}\n';
     }
-    ts += "interface Result" + sName + " {\n";
+    ts += "export interface Result" + sName + " {\n";
     for (var _a = 0, returns_2 = returns; _a < returns_2.length; _a++) {
         var ret = returns_2[_a];
         var retName = tool_1.capitalCase(ret.name);

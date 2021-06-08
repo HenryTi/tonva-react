@@ -16,7 +16,7 @@ import { UqEnum } from './enum';
 import { UqConfig } from '../app';
 import { ID, IX, IDX } from './ID';
 export declare type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text' | 'datetime' | 'date' | 'time' | 'timestamp';
-export declare function fieldDefaultValue(type: FieldType): "" | 0 | "2000-1-1" | "0:00";
+export declare function fieldDefaultValue(type: FieldType): 0 | "" | "2000-1-1" | "0:00";
 export interface Field {
     name: string;
     type: FieldType;
@@ -68,7 +68,7 @@ export interface ParamActIXSort {
     after: number;
 }
 export interface ParamActDetail<M, D> {
-    master: {
+    main: {
         ID: ID;
         value: M;
     };
@@ -78,7 +78,7 @@ export interface ParamActDetail<M, D> {
     };
 }
 export interface RetActDetail {
-    master: number;
+    main: number;
     detail: number[];
 }
 export interface ParamActDetail2<M, D, D2> extends ParamActDetail<M, D> {
@@ -120,7 +120,7 @@ export interface ParamIDNO {
 }
 export interface ParamIDDetailGet {
     id: number;
-    master: ID;
+    main: ID;
     detail: ID;
     detail2?: ID;
     detail3?: ID;
@@ -223,6 +223,9 @@ export interface Uq {
         $in: boolean;
     }[]>;
     IDTree<T>(param: ParamIDTree): Promise<T[]>;
+    IDTv(ids: number[]): Promise<any[]>;
+    IDRender(id: number, render?: (value: any) => JSX.Element): JSX.Element;
+    IDV<T>(id: number): T;
 }
 export declare class UqMan {
     private readonly entities;
@@ -241,6 +244,7 @@ export declare class UqMan {
     private readonly tuidsCache;
     private readonly localEntities;
     private readonly tvs;
+    private idCache;
     proxy: any;
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
@@ -319,6 +323,7 @@ export declare class UqMan {
     buildArrFieldsTuid(arrFields: ArrFields[], mainFields: Field[]): void;
     pullModify(modifyMax: number): void;
     getUqKey(): string;
+    getUqKeyWithConfig(): string;
     createProxy(): any;
     private showReload;
     private Acts;
@@ -326,6 +331,7 @@ export declare class UqMan {
     private ActIXSort;
     private ActDetail;
     private QueryID;
+    private IDTv;
     private IDNO;
     private IDDetailGet;
     private IDXToString;
@@ -339,5 +345,8 @@ export declare class UqMan {
     private IDinIX;
     private IDxID;
     private IDTree;
+    private IDRender;
+    private IDV;
+    private renderIDUnknownType;
 }
 export {};

@@ -17,6 +17,9 @@ import { Entity } from './entity';
 import { UqConfig } from '../app';
 import { ID, IX, IDX } from './ID';
 import { nav } from '../components';
+import { IDCache } from './IDCache';
+import React from 'react';
+import { observer } from 'mobx-react';
 
 export type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text'
     | 'datetime' | 'date' | 'time' | 'timestamp';
@@ -91,7 +94,7 @@ export interface ParamActIXSort {
 }
 
 export interface ParamActDetail<M,D> {
-	master: {
+	main: {
 		ID: ID;
 		value: M;
 	};
@@ -102,7 +105,7 @@ export interface ParamActDetail<M,D> {
 }
 
 export interface RetActDetail {
-	master: number;
+	main: number;
 	detail: number[];
 }
 
@@ -147,7 +150,7 @@ export interface ParamIDNO {
 
 export interface ParamIDDetailGet {
 	id: number;
-	master: ID;
+	main: ID;
 	detail: ID;
 	detail2?: ID;
 	detail3?: ID;
@@ -257,6 +260,10 @@ export interface Uq {
 	IDxID<T,T2> (param: ParamIDxID): Promise<[T[],T2[]]>; // ID list with IX 对应的子集
 	IDinIX<T>(param:ParamIDinIX): Promise<T&{$in:boolean}[]>;
 	IDTree<T>(param:ParamIDTree): Promise<T[]>;
+
+	IDTv(ids: number[]): Promise<any[]>;
+	IDRender(id: number, render?:(value:any) => JSX.Element): JSX.Element;
+	IDV<T>(id: number): T;
 }
 
 export class UqMan {
@@ -277,6 +284,7 @@ export class UqMan {
     private readonly tuidsCache: TuidsCache;
     private readonly localEntities: LocalCache;
     private readonly tvs:{[entity:string]:(values:any)=>JSX.Element};
+	private idCache: IDCache;
 	proxy: any;
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
@@ -689,10 +697,14 @@ export class UqMan {
 
 	getUqKey() {
 		let uqKey:string = this.uqName.split(/[-._]/).join('').toLowerCase();
-		if (this.config) {
-			let {dev, alias} = this.config;
-			uqKey = capitalCase(dev.alias || dev.name) + capitalCase(alias??uqKey);
-		}
+		return uqKey;
+	}
+
+	getUqKeyWithConfig() {
+		if (!this.config) return;
+		let uqKey:string = this.uqName.split(/[-._]/).join('').toLowerCase();
+		let {dev, alias} = this.config;
+		uqKey = capitalCase(dev.alias || dev.name) + capitalCase(alias??uqKey);
 		return uqKey;
 	}
 
@@ -710,8 +722,10 @@ export class UqMan {
 					case 'Acts': return this.Acts;
 					case 'ActIX': return this.ActIX;
 					case 'ActIXSort': return this.ActIXSort;
-					case 'QueryID': return this.QueryID;
+					case 'ActDetail': return this.ActDetail;
 					case 'IDDetail': return this.ActDetail;
+					case 'QueryID': return this.QueryID;
+					case 'IDTv': return this.IDTv;
 					case 'IDNO': return this.IDNO;
 					case 'IDDetailGet': return this.IDDetailGet;
 					case 'ID': return this.ID;
@@ -724,6 +738,8 @@ export class UqMan {
 					case 'IDinIX': return this.IDinIX;
 					case 'IDxID': return this.IDxID;
 					case 'IDTree': return this.IDTree;
+					case 'IDRender': return this.IDRender;
+					case 'IDV': return this.IDV;
 				}
 				let err = `entity ${this.name}.${String(key)} not defined`;
 				console.error(err);
@@ -732,6 +748,7 @@ export class UqMan {
 			}
 		});
 		this.proxy = ret;
+		this.idCache = new IDCache(this.proxy);
 		return ret;
 	}
 
@@ -812,11 +829,11 @@ export class UqMan {
 	}
 
 	private ActDetail = async (param: ParamActDetail<any, any>): Promise<any> => {
-		let {master, detail, detail2, detail3} = param as unknown as ParamActDetail3<any, any, any, any>;
+		let {main, detail, detail2, detail3} = param as unknown as ParamActDetail3<any, any, any, any>;
 		let postParam:any = {
-			master: {
-				name: entityName(master.ID),
-				value: toScalars(master.value),
+			main: {
+				name: entityName(main.ID),
+				value: toScalars(main.value),
 			},
 			detail: {
 				name: entityName(detail.ID),
@@ -840,7 +857,7 @@ export class UqMan {
 		let parts = val.split('\n');
 		let items = parts.map(v => v.split('\t'));
 		ret = {
-			master: ids(items[0])[0],
+			main: ids(items[0])[0],
 			detail: ids(items[1]),
 			detail2: ids(items[2]),
 			detail3: ids(items[3]),
@@ -859,6 +876,33 @@ export class UqMan {
 		return ret;
 	}
 
+	private IDTv = async (ids: number[]): Promise<any[]> => {
+		let ret = await this.uqApi.post(IDPath('id-tv'), ids);
+		let retValues: any[] = [];
+		for (let row of ret) {
+			let {$type, $tv} = row;
+			if (!$tv) continue;
+			let ID = this.ids[$type];
+			if (!ID) continue;
+			let {schema} = ID;
+			if (!schema) {
+				await ID.loadSchema();
+				schema = ID.schema;
+			}
+			let {nameNoVice} = schema;
+			if (!nameNoVice) continue;
+			let values = ($tv as string).split('\n');
+			let len = nameNoVice.length;
+			for (let i=0; i<len; i++) {
+				let p = nameNoVice[i];
+				row[p] = values[i];
+			}
+			delete row.$tv;
+			retValues.push(row);
+		}
+		return retValues;
+	}
+
 	private IDNO = async (param: ParamIDNO): Promise<string> => {
 		let {ID} = param;
 		let ret = await this.uqApi.post(IDPath('id-no'), {ID: entityName(ID)});
@@ -866,10 +910,10 @@ export class UqMan {
 	}
 
 	private IDDetailGet = async (param: ParamIDDetailGet): Promise<any> => {
-		let {id, master, detail, detail2, detail3} = param;
+		let {id, main, detail, detail2, detail3} = param;
 		let ret = await this.uqApi.post(IDPath('id-detail-get'), {
 			id,
-			master: entityName(master),
+			main: entityName(main),
 			detail: entityName(detail),
 			detail2: entityName(detail2),
 			detail3: entityName(detail3),
@@ -982,6 +1026,29 @@ export class UqMan {
 			ID: entityName(ID),
 		});
 		return ret;
+	}
+
+	private IDRender = (id: number, render?:(value:any) => JSX.Element): JSX.Element => {
+		return React.createElement(observer(() => {
+			let ret = this.idCache.getValue(id);
+			if (ret === undefined) {
+				return React.createElement('span', {props:{className: 'text-muted'},  children: ['id='+id]});
+			}
+			let {$type} = ret as any;
+			if (!$type) return this.renderIDUnknownType(id);
+			let IDType = this.ids[$type];
+			if (!IDType) return this.renderIDUnknownType(id);
+			return (render ?? IDType.render)(ret);
+		}));
+	}
+
+	private IDV = <T extends object>(id: number): T => {
+		let ret = this.idCache.getValue(id);
+		return ret as T;
+	}
+
+	private renderIDUnknownType(id: number) {
+		return React.createElement('span', {props:{className: 'text-muted'},  children: [`id=${id} type undefined`]});
 	}
 }
 

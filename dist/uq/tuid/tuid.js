@@ -126,7 +126,7 @@ var TuidInner = /** @class */ (function (_super) {
     function TuidInner(uq, name, typeId) {
         var _this = _super.call(this, uq, name, typeId) || this;
         _this.idCache = new idCache_1.IdCache(_this);
-        _this.localArr = _this.cache.arr(_this.name + '.whole');
+        _this.localArr = _this.schemaLocal.arr(_this.name + '.whole');
         if (uq.newVersion === true)
             _this.localArr.removeAll();
         return _this;
@@ -215,7 +215,7 @@ var TuidInner = /** @class */ (function (_super) {
     TuidInner.prototype.div = function (name) {
         return this.divs && this.divs[name];
     };
-    TuidInner.prototype.loadTuidIds = function (divName, ids) {
+    TuidInner.prototype.loadValuesFromIds = function (divName, ids) {
         return __awaiter(this, void 0, void 0, function () {
             var ret;
             return __generator(this, function (_a) {
@@ -223,8 +223,7 @@ var TuidInner = /** @class */ (function (_super) {
                     case 0: return [4 /*yield*/, new IdsCaller(this, { divName: divName, ids: ids }, false).request()];
                     case 1:
                         ret = _a.sent();
-                        if (ret.length > 0)
-                            this.cached = true;
+                        //if (ret.length > 0) this.cached = true;
                         return [2 /*return*/, ret];
                 }
             });

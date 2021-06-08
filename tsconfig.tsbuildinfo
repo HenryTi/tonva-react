@@ -787,8 +787,8 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/components/simple/lmr.tsx": {
-        "version": "19fa035359066fd5e4b69c88d2a58999c5fa961da5fa6af7908118e132cb6097",
-        "signature": "6f19b50e6612d45e7cdba725e2d8c797c634d1ed7fb5a46c0ad3dc48d7412bb5",
+        "version": "b27ee63a2b25e539ed76a92681fc38121161b7078b446a9e059229c62da6a003",
+        "signature": "061dbc8694b7fb34af79fe6fb7f4846231737bee93fecd96d124953ce9690345",
         "affectsGlobalScope": false
       },
       "./tonva-react/components/simple/fa.tsx": {
@@ -1287,8 +1287,8 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/entity.ts": {
-        "version": "b01db017b9fbee1790c8e77e8cc12dc0b22ff324151f27c783968f14f29d7fea",
-        "signature": "95c43843ac1658a39c12649d7a9046893c95d241ed8969c8b8f02f42399d28e0",
+        "version": "d8e951453a3b6026860a570810bcd2dc6c6bcdd756e7fe72d13bfecf119196d1",
+        "signature": "968c8bb38083c62e6cbaa508a6d2d5042f9e040283e7f12bc3a55d1b952e81d8",
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/action.ts": {
@@ -1307,13 +1307,13 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/tuid/idcache.ts": {
-        "version": "01fd89462ea851093c7a5c89c7cc702275ee368c09669189514e3b0856d60644",
-        "signature": "5bda644dcd28e0954debb0c2be30a6d950a3a47ec64b58a2bbb77e0cd1d2bfcc",
+        "version": "93248e03cfb7e1fd7b490828b7c037ee4375c93ff3bb9f06586e89884cf0fadf",
+        "signature": "98e8f34f62ad8378d406cc5c2219867c05200685b1a91053afc7cac0a24c401c",
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/tuid/tuid.ts": {
-        "version": "d2dd80059d1f65fe2bdc94e138acaa24349f93bff2a241e8c6fce321ade0f134",
-        "signature": "5ea4264663d120aa49c2e9410510d98ea25893f0ab8bb287afc9b9991e5f7357",
+        "version": "ecdd3ef143812de2bfe1d521bfbbafae20caf103aff1ef69d76ab4171a956381",
+        "signature": "e836e336d037f7f79c767b1b701c5ac6cdc7528ba52eed9fec43e44ffca3bae7",
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/tuid/boxid.tsx": {
@@ -1392,8 +1392,8 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/uqsman.ts": {
-        "version": "6cc8cf42682204428d46492225dd3251ade1a9bc68d70a1f2dbfb0b69c31d546",
-        "signature": "116d9cbdcd98f08019c34b75f4c9f931beeb1ebde409413ad893e65162f7c449",
+        "version": "40bbf0ef1a628d792549898d3fba2b00025257a5e1f0b2cf7c40359615085b0e",
+        "signature": "9054efce8893a42904c5bcda2123cdad722f8c8613f5f1b4cf9f8fe534e5f5bb",
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/tag/tagview.tsx": {
@@ -1437,13 +1437,23 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/id.ts": {
-        "version": "2ff64e3b1fc48e60a76f0a513c74222593b9c36d1e02ec04467a60bee452a1d8",
-        "signature": "76f60fb4c8bcd7519053e2dad3e6188cc5fdbccdf1ab6a5038bc7de26e4fd2d6",
+        "version": "332760371e3822358331b6be8793227479d571289d1b4cb9e2fc11a47f51a357",
+        "signature": "a2e5389afb750724b838c4877af576d0cd8aac1448142da7dac55318305a3157",
+        "affectsGlobalScope": false
+      },
+      "./tonva-react/uq/idcache/idcache.ts": {
+        "version": "d039a3e4a511f1e7c62174c810297bd5c42b7879857d118b6abcd5ffa758b85f",
+        "signature": "9e47cddae23255378d97e2f3844cf5fe1558ffbbe6bf31f23361ef2afb10fc22",
+        "affectsGlobalScope": false
+      },
+      "./tonva-react/uq/idcache/index.ts": {
+        "version": "f9dbb36eeb00e0deb42c4d543d11c9ef03705ae541b5ccb06a0ffbed25db2ab4",
+        "signature": "f9dbb36eeb00e0deb42c4d543d11c9ef03705ae541b5ccb06a0ffbed25db2ab4",
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/uqman.ts": {
-        "version": "01d260e30e9cb248a8eb378e040f75c1d4dd2b34af47a5e3e95a14c1d12d1493",
-        "signature": "b3d48d893459882cbbdded9fdb1bdeb2a3dece308cfc71abcb62e4523b1f114a",
+        "version": "1ad7fb4d6f6322d1a59eaefabc911aee2ae7f81be7f76d269366329687509752",
+        "signature": "51408a8cd89a3def2dd060190a10398c7870b29fb7ac26adf5989012e331fe0d",
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/build/context.ts": {
@@ -1462,7 +1472,7 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/uq/build/builduq.ts": {
-        "version": "eae8095b76f51bfd7e48815465133930b2f2b2793210ab2e813ab034c3794ca2",
+        "version": "70ca9f0a131d73d5059e425efb540e51e0b5afb9b1f764c6a981001a9f87c897",
         "signature": "18f8f9a0764c4e0b26f07ad2e5572c3b174886bd245eb0289b064eb95d9fb9dc",
         "affectsGlobalScope": false
       },
@@ -3823,7 +3833,21 @@
         "./node_modules/@types/react/jsx-runtime.d.ts",
         "./tonva-react/res/index.ts",
         "./tonva-react/ui/index.ts",
-        "./tonva-react/uq/entity.ts"
+        "./tonva-react/uq/entity.ts",
+        "./tonva-react/uq/uqman.ts"
+      ],
+      "./tonva-react/uq/idcache/idcache.ts": [
+        "./node_modules/@types/node/base.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/react/jsx-runtime.d.ts",
+        "./node_modules/mobx/dist/mobx.d.ts",
+        "./tonva-react/uq/uqman.ts"
+      ],
+      "./tonva-react/uq/idcache/index.ts": [
+        "./node_modules/@types/node/base.d.ts",
+        "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/react/jsx-runtime.d.ts",
+        "./tonva-react/uq/idcache/idcache.ts"
       ],
       "./tonva-react/uq/index.ts": [
         "./node_modules/@types/node/base.d.ts",
@@ -3965,7 +3989,9 @@
       "./tonva-react/uq/uqman.ts": [
         "./node_modules/@types/node/base.d.ts",
         "./node_modules/@types/node/ts3.2/index.d.ts",
+        "./node_modules/@types/react/index.d.ts",
         "./node_modules/@types/react/jsx-runtime.d.ts",
+        "./node_modules/mobx-react/dist/index.d.ts",
         "./tonva-react/app/index.ts",
         "./tonva-react/components/index.ts",
         "./tonva-react/net/index.ts",
@@ -3976,6 +4002,7 @@
         "./tonva-react/uq/enum.ts",
         "./tonva-react/uq/history.ts",
         "./tonva-react/uq/id.ts",
+        "./tonva-react/uq/idcache/index.ts",
         "./tonva-react/uq/map.ts",
         "./tonva-react/uq/pending.ts",
         "./tonva-react/uq/query.ts",
@@ -5332,6 +5359,12 @@
         "./tonva-react/ui/index.ts",
         "./tonva-react/uq/entity.ts"
       ],
+      "./tonva-react/uq/idcache/idcache.ts": [
+        "./tonva-react/uq/uqman.ts"
+      ],
+      "./tonva-react/uq/idcache/index.ts": [
+        "./tonva-react/uq/idcache/idcache.ts"
+      ],
       "./tonva-react/uq/index.ts": [
         "./tonva-react/uq/action.ts",
         "./tonva-react/uq/book.ts",
@@ -5764,6 +5797,8 @@
       "./tonva-react/uq/enum.ts",
       "./tonva-react/uq/history.ts",
       "./tonva-react/uq/id.ts",
+      "./tonva-react/uq/idcache/idcache.ts",
+      "./tonva-react/uq/idcache/index.ts",
       "./tonva-react/uq/index.ts",
       "./tonva-react/uq/map.ts",
       "./tonva-react/uq/pending.ts",

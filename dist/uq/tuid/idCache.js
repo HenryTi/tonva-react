@@ -72,7 +72,7 @@ var IdCache = /** @class */ (function () {
         this.initLocalArr();
     }
     IdCache.prototype.initLocalArr = function () {
-        this.localArr = this.tuidInner.cache.arr(this.tuidInner.name + '.ids');
+        this.localArr = this.tuidInner.schemaLocal.arr(this.tuidInner.name + '.ids');
     };
     IdCache.prototype.useId = function (id, defer) {
         if (!id)
@@ -283,12 +283,12 @@ var IdCache = /** @class */ (function () {
             });
         });
     };
-    IdCache.prototype.loadTuidIds = function (netIds) {
+    IdCache.prototype.loadValuesFromIds = function (netIds) {
         return __awaiter(this, void 0, void 0, function () {
             var netRet;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.tuidInner.loadTuidIds(undefined, netIds)];
+                    case 0: return [4 /*yield*/, this.tuidInner.loadValuesFromIds(undefined, netIds)];
                     case 1:
                         netRet = _a.sent();
                         return [2 /*return*/, netRet];
@@ -317,7 +317,7 @@ var IdCache = /** @class */ (function () {
                         len = netIds.length;
                         if (len === 0)
                             return [2 /*return*/, ret];
-                        return [4 /*yield*/, this.loadTuidIds(netIds)];
+                        return [4 /*yield*/, this.loadValuesFromIds(netIds)];
                     case 1:
                         netRet = _a.sent();
                         _loop_1 = function (i) {
@@ -356,7 +356,7 @@ var IdDivCache = /** @class */ (function (_super) {
         var _this = _super.call(this, tuidLocal) || this;
         _this.div = div;
         _this.divName = div.name;
-        _this.localArr = tuidLocal.cache.arr(tuidLocal.name + '.ids.' + _this.divName);
+        _this.localArr = tuidLocal.schemaLocal.arr(tuidLocal.name + '.ids.' + _this.divName);
         return _this;
     }
     IdDivCache.prototype.initLocalArr = function () {
@@ -370,12 +370,12 @@ var IdDivCache = /** @class */ (function (_super) {
     IdDivCache.prototype.cacheTuidFieldValues = function (tuidValue) {
         this.div.cacheTuidFieldValues(tuidValue);
     };
-    IdDivCache.prototype.loadTuidIds = function (netIds) {
+    IdDivCache.prototype.loadValuesFromIds = function (netIds) {
         return __awaiter(this, void 0, void 0, function () {
             var netRet;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.tuidInner.loadTuidIds(this.divName, netIds)];
+                    case 0: return [4 /*yield*/, this.tuidInner.loadValuesFromIds(this.divName, netIds)];
                     case 1:
                         netRet = _a.sent();
                         return [2 /*return*/, netRet];

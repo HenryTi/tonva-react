@@ -64,7 +64,7 @@ var Entity = /** @class */ (function () {
         this.name = name;
         this.typeId = typeId;
         this.sys = this.name.indexOf('$') >= 0;
-        this.cache = this.uq.localMap.item(this.name); // new EntityCache(this);
+        this.schemaLocal = this.uq.localMap.item(this.name); // new EntityCache(this);
         this.uqApi = this.uq.uqApi;
     }
     Object.defineProperty(Entity.prototype, "sName", {
@@ -109,7 +109,7 @@ var Entity = /** @class */ (function () {
                     case 0:
                         if (this.schema !== undefined)
                             return [2 /*return*/];
-                        schema = this.cache.get();
+                        schema = this.schemaLocal.get();
                         if (!!schema) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.uq.loadEntitySchema(this.name)];
                     case 1:
@@ -147,7 +147,7 @@ var Entity = /** @class */ (function () {
         var name = schema.name, version = schema.version;
         this.ver = version || 0;
         this.setJName(name);
-        this.cache.set(schema);
+        this.schemaLocal.set(schema);
         this.schema = schema;
         this.buildFieldsTuid();
     };

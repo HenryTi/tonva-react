@@ -46,6 +46,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UqMan = exports.fieldDefaultValue = void 0;
 var net_1 = require("../net");
@@ -63,6 +66,9 @@ var tag_1 = require("./tag/tag");
 var enum_1 = require("./enum");
 var ID_1 = require("./ID");
 var components_1 = require("../components");
+var IDCache_1 = require("./IDCache");
+var react_1 = __importDefault(require("react"));
+var mobx_react_1 = require("mobx-react");
 function fieldDefaultValue(type) {
     switch (type) {
         case 'tinyint':
@@ -219,16 +225,16 @@ var UqMan = /** @class */ (function () {
             });
         }); };
         this.ActDetail = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, master, detail, detail2, detail3, postParam, ret, val, parts, items;
+            var _a, main, detail, detail2, detail3, postParam, ret, val, parts, items;
             var _b, _c, _d;
             return __generator(this, function (_e) {
                 switch (_e.label) {
                     case 0:
-                        _a = param, master = _a.master, detail = _a.detail, detail2 = _a.detail2, detail3 = _a.detail3;
+                        _a = param, main = _a.main, detail = _a.detail, detail2 = _a.detail2, detail3 = _a.detail3;
                         postParam = {
-                            master: {
-                                name: entityName(master.ID),
-                                value: toScalars(master.value),
+                            main: {
+                                name: entityName(main.ID),
+                                value: toScalars(main.value),
                             },
                             detail: {
                                 name: entityName(detail.ID),
@@ -254,7 +260,7 @@ var UqMan = /** @class */ (function () {
                         parts = val.split('\n');
                         items = parts.map(function (v) { return v.split('\t'); });
                         ret = {
-                            master: ids(items[0])[0],
+                            main: ids(items[0])[0],
                             detail: ids(items[1]),
                             detail2: ids(items[2]),
                             detail3: ids(items[3]),
@@ -276,6 +282,52 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
+        this.IDTv = function (ids) { return __awaiter(_this, void 0, void 0, function () {
+            var ret, retValues, _i, ret_1, row, $type, $tv, ID_2, schema, nameNoVice, values, len, i, p;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.uqApi.post(IDPath('id-tv'), ids)];
+                    case 1:
+                        ret = _a.sent();
+                        retValues = [];
+                        _i = 0, ret_1 = ret;
+                        _a.label = 2;
+                    case 2:
+                        if (!(_i < ret_1.length)) return [3 /*break*/, 6];
+                        row = ret_1[_i];
+                        $type = row.$type, $tv = row.$tv;
+                        if (!$tv)
+                            return [3 /*break*/, 5];
+                        ID_2 = this.ids[$type];
+                        if (!ID_2)
+                            return [3 /*break*/, 5];
+                        schema = ID_2.schema;
+                        if (!!schema) return [3 /*break*/, 4];
+                        return [4 /*yield*/, ID_2.loadSchema()];
+                    case 3:
+                        _a.sent();
+                        schema = ID_2.schema;
+                        _a.label = 4;
+                    case 4:
+                        nameNoVice = schema.nameNoVice;
+                        if (!nameNoVice)
+                            return [3 /*break*/, 5];
+                        values = $tv.split('\n');
+                        len = nameNoVice.length;
+                        for (i = 0; i < len; i++) {
+                            p = nameNoVice[i];
+                            row[p] = values[i];
+                        }
+                        delete row.$tv;
+                        retValues.push(row);
+                        _a.label = 5;
+                    case 5:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 6: return [2 /*return*/, retValues];
+                }
+            });
+        }); };
         this.IDNO = function (param) { return __awaiter(_this, void 0, void 0, function () {
             var ID, ret;
             return __generator(this, function (_a) {
@@ -290,14 +342,14 @@ var UqMan = /** @class */ (function () {
             });
         }); };
         this.IDDetailGet = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var id, master, detail, detail2, detail3, ret;
+            var id, main, detail, detail2, detail3, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        id = param.id, master = param.master, detail = param.detail, detail2 = param.detail2, detail3 = param.detail3;
+                        id = param.id, main = param.main, detail = param.detail, detail2 = param.detail2, detail3 = param.detail3;
                         return [4 /*yield*/, this.uqApi.post(IDPath('id-detail-get'), {
                                 id: id,
-                                master: entityName(master),
+                                main: entityName(main),
                                 detail: entityName(detail),
                                 detail2: entityName(detail2),
                                 detail3: entityName(detail3),
@@ -438,6 +490,25 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
+        this.IDRender = function (id, render) {
+            return react_1.default.createElement(mobx_react_1.observer(function () {
+                var ret = _this.idCache.getValue(id);
+                if (ret === undefined) {
+                    return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ['id=' + id] });
+                }
+                var $type = ret.$type;
+                if (!$type)
+                    return _this.renderIDUnknownType(id);
+                var IDType = _this.ids[$type];
+                if (!IDType)
+                    return _this.renderIDUnknownType(id);
+                return (render !== null && render !== void 0 ? render : IDType.render)(ret);
+            }));
+        };
+        this.IDV = function (id) {
+            var ret = _this.idCache.getValue(id);
+            return ret;
+        };
         this.createBoxId = createBoxId;
         if (createBoxId === undefined) {
             this.createBoxId = this.createBoxIdFromTVs;
@@ -896,10 +967,14 @@ var UqMan = /** @class */ (function () {
     };
     UqMan.prototype.getUqKey = function () {
         var uqKey = this.uqName.split(/[-._]/).join('').toLowerCase();
-        if (this.config) {
-            var _a = this.config, dev = _a.dev, alias = _a.alias;
-            uqKey = tool_1.capitalCase(dev.alias || dev.name) + tool_1.capitalCase(alias !== null && alias !== void 0 ? alias : uqKey);
-        }
+        return uqKey;
+    };
+    UqMan.prototype.getUqKeyWithConfig = function () {
+        if (!this.config)
+            return;
+        var uqKey = this.uqName.split(/[-._]/).join('').toLowerCase();
+        var _a = this.config, dev = _a.dev, alias = _a.alias;
+        uqKey = tool_1.capitalCase(dev.alias || dev.name) + tool_1.capitalCase(alias !== null && alias !== void 0 ? alias : uqKey);
         return uqKey;
     };
     UqMan.prototype.createProxy = function () {
@@ -920,8 +995,10 @@ var UqMan = /** @class */ (function () {
                     case 'Acts': return _this.Acts;
                     case 'ActIX': return _this.ActIX;
                     case 'ActIXSort': return _this.ActIXSort;
-                    case 'QueryID': return _this.QueryID;
+                    case 'ActDetail': return _this.ActDetail;
                     case 'IDDetail': return _this.ActDetail;
+                    case 'QueryID': return _this.QueryID;
+                    case 'IDTv': return _this.IDTv;
                     case 'IDNO': return _this.IDNO;
                     case 'IDDetailGet': return _this.IDDetailGet;
                     case 'ID': return _this.ID;
@@ -934,6 +1011,8 @@ var UqMan = /** @class */ (function () {
                     case 'IDinIX': return _this.IDinIX;
                     case 'IDxID': return _this.IDxID;
                     case 'IDTree': return _this.IDTree;
+                    case 'IDRender': return _this.IDRender;
+                    case 'IDV': return _this.IDV;
                 }
                 var err = "entity " + _this.name + "." + String(key) + " not defined";
                 console.error(err);
@@ -942,6 +1021,7 @@ var UqMan = /** @class */ (function () {
             }
         });
         this.proxy = ret;
+        this.idCache = new IDCache_1.IDCache(this.proxy);
         return ret;
     };
     UqMan.prototype.showReload = function (msg) {
@@ -954,6 +1034,9 @@ var UqMan = /** @class */ (function () {
         if (Array.isArray(p) === true)
             return p.map(function (v) { return entityName(v); });
         return entityName(p);
+    };
+    UqMan.prototype.renderIDUnknownType = function (id) {
+        return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ["id=" + id + " type undefined"] });
     };
     return UqMan;
 }());

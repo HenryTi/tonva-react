@@ -2,6 +2,7 @@ import * as React from 'react';
 import '../../css/va-lmr.css';
 export interface LMRProps {
     className?: string | string[];
+    style?: React.CSSProperties;
     left?: string | JSX.Element;
     right?: string | JSX.Element;
     onClick?: () => void;

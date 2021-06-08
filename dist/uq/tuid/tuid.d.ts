@@ -15,7 +15,6 @@ export declare abstract class UqTuid<M> extends Entity {
     protected noCache: boolean;
     readonly typeName: string;
     protected idName: string;
-    cached: boolean;
     unique: string[];
     setSchema(schema: any): void;
     buildTuidBox(): TuidBox;
@@ -70,7 +69,7 @@ export declare class TuidInner extends Tuid {
     cacheTuids(defer: number): void;
     get hasDiv(): boolean;
     div(name: string): TuidDiv;
-    loadTuidIds(divName: string, ids: number[]): Promise<any[]>;
+    loadValuesFromIds(divName: string, ids: number[]): Promise<any[]>;
     loadMain(id: number | BoxId): Promise<any>;
     load(id: number | BoxId): Promise<any>;
     cacheTuidFieldValues(values: any): void;

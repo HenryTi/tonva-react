@@ -64,14 +64,13 @@ var UQsMan = /** @class */ (function () {
     }
     UQsMan.build = function (appConfig) {
         return __awaiter(this, void 0, void 0, function () {
-            var app, uqs, tvs, version, retErrors, dev, name_1, version_1;
+            var app, uqs, tvs, version, retErrors;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         app = appConfig.app, uqs = appConfig.uqs, tvs = appConfig.tvs, version = appConfig.version;
                         if (!app) return [3 /*break*/, 2];
-                        dev = app.dev, name_1 = app.name, version_1 = app.version;
-                        return [4 /*yield*/, UQsMan.load(dev.name + "/" + name_1, version_1, tvs)];
+                        return [4 /*yield*/, UQsMan.loadApp(appConfig)];
                     case 1:
                         retErrors = _a.sent();
                         return [3 /*break*/, 5];
@@ -107,41 +106,51 @@ var UQsMan = /** @class */ (function () {
         });
     };
     // 返回 errors, 每个uq一行
-    UQsMan.load = function (tonvaAppName, version, tvs) {
+    UQsMan.loadApp = function (appConfig) {
         return __awaiter(this, void 0, void 0, function () {
-            var uqsMan, appOwner, appName, localData, uqAppData, _i, _a, uq, id, uqs;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var app, uqConfigs, tvs, version, name, dev, uqsMan, appOwner, appName, localData, uqAppData, data, _i, _a, uq, id, uqs;
+            var _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        uqsMan = UQsMan.value = new UQsManApp(tonvaAppName, tvs);
+                        app = appConfig.app, uqConfigs = appConfig.uqs, tvs = appConfig.tvs, version = appConfig.version;
+                        name = app.name, dev = app.dev;
+                        uqsMan = UQsMan.value = new UQsManApp(dev.name + "/" + name, tvs);
                         appOwner = uqsMan.appOwner, appName = uqsMan.appName;
                         localData = uqsMan.localData;
                         uqAppData = localData.get();
-                        if (!(!uqAppData || uqAppData.version !== version)) return [3 /*break*/, 2];
+                        if (!(!uqAppData || uqAppData.version !== version)) return [3 /*break*/, 4];
                         return [4 /*yield*/, loadAppUqs(appOwner, appName)];
                     case 1:
-                        uqAppData = _b.sent();
+                        uqAppData = _c.sent();
                         if (!uqAppData.id) {
                             return [2 /*return*/, [
                                     appOwner + "/" + appName + "\u4E0D\u5B58\u5728\u3002\u8BF7\u4ED4\u7EC6\u68C0\u67E5app\u5168\u540D\u3002"
                                 ]];
                         }
                         uqAppData.version = version;
+                        if (!uqConfigs) return [3 /*break*/, 3];
+                        return [4 /*yield*/, loadUqs(uqConfigs)];
+                    case 2:
+                        data = _c.sent();
+                        (_b = uqAppData.uqs).push.apply(_b, data);
+                        _c.label = 3;
+                    case 3:
                         localData.set(uqAppData);
                         // 
                         for (_i = 0, _a = uqAppData.uqs; _i < _a.length; _i++) {
                             uq = _a[_i];
                             uq.newVersion = true;
                         }
-                        _b.label = 2;
-                    case 2:
+                        _c.label = 4;
+                    case 4:
                         id = uqAppData.id, uqs = uqAppData.uqs;
                         uqsMan.id = id;
-                        return [4 /*yield*/, uqsMan.buildUqs(uqs, version)];
-                    case 3: 
+                        return [4 /*yield*/, uqsMan.buildUqs(uqs, version, uqConfigs)];
+                    case 5: 
                     //console.error(uqAppData);
                     //let ownerProfixMap: {[owner: string]: string};
-                    return [2 /*return*/, _b.sent()];
+                    return [2 /*return*/, _c.sent()];
                 }
             });
         });
@@ -165,7 +174,7 @@ var UQsMan = /** @class */ (function () {
     };
     UQsMan.prototype.buildUqs = function (uqDataArr, version, uqConfigs) {
         return __awaiter(this, void 0, void 0, function () {
-            var localMap, localCacheVersion, cacheVersion, _i, _a, uqMan, retErrors, _b, uqConfigs_1, uqConfig, dev, name_2, alias, owner, ownerAlias, uqLower, uq;
+            var localMap, localCacheVersion, cacheVersion, _i, _a, uqMan, retErrors, _b, uqConfigs_1, uqConfig, dev, name_1, alias, owner, ownerAlias, uqLower, uq;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0: return [4 /*yield*/, this.init(uqDataArr)];
@@ -187,16 +196,17 @@ var UQsMan = /** @class */ (function () {
                         if (retErrors.length > 0)
                             return [2 /*return*/, retErrors];
                         if (UQsMan.isBuildingUQ === false) {
-                            retErrors.push.apply(retErrors, this.setTuidImportsLocal());
+                            //retErrors.push(...this.setTuidImportsLocal());
+                            this.setTuidImportsLocal();
                         }
                         if (retErrors.length > 0)
                             return [2 /*return*/, retErrors];
                         if (uqConfigs) {
                             for (_b = 0, uqConfigs_1 = uqConfigs; _b < uqConfigs_1.length; _b++) {
                                 uqConfig = uqConfigs_1[_b];
-                                dev = uqConfig.dev, name_2 = uqConfig.name, alias = uqConfig.alias;
+                                dev = uqConfig.dev, name_1 = uqConfig.name, alias = uqConfig.alias;
                                 owner = dev.name, ownerAlias = dev.alias;
-                                uqLower = (ownerAlias !== null && ownerAlias !== void 0 ? ownerAlias : owner).toLowerCase() + '/' + (alias !== null && alias !== void 0 ? alias : name_2).toLowerCase();
+                                uqLower = (ownerAlias !== null && ownerAlias !== void 0 ? ownerAlias : owner).toLowerCase() + '/' + (alias !== null && alias !== void 0 ? alias : name_1).toLowerCase();
                                 uq = this.collection[uqLower];
                                 uq.config = uqConfig;
                             }
@@ -251,7 +261,7 @@ var UQsMan = /** @class */ (function () {
     };
     UQsMan.prototype.init = function (uqsData) {
         return __awaiter(this, void 0, void 0, function () {
-            var promiseInits, _i, uqsData_1, uqData, uqOwner, ownerAlias, uqName, uqAlias, uqFullName, uq, lower;
+            var promiseInits, _i, uqsData_1, uqData, uqOwner, ownerAlias, uqName, uqAlias, uqFullName, uqFull, uq, lower;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -260,10 +270,16 @@ var UQsMan = /** @class */ (function () {
                             uqData = uqsData_1[_i];
                             uqOwner = uqData.uqOwner, ownerAlias = uqData.ownerAlias, uqName = uqData.uqName, uqAlias = uqData.uqAlias;
                             uqFullName = uqOwner + '/' + uqName;
-                            if (this.collection[uqFullName]) {
-                                continue;
+                            uqFull = this.collection[uqFullName];
+                            uq = void 0;
+                            if (uqFull) {
+                                uq = uqFull;
                             }
-                            uq = new uqMan_1.UqMan(this, uqData, undefined, this.tvs[uqFullName] || this.tvs[uqName]);
+                            else {
+                                uq = new uqMan_1.UqMan(this, uqData, undefined, this.tvs[uqFullName] || this.tvs[uqName]);
+                                this.collection[uqFullName] = uq;
+                                promiseInits.push(uq.init());
+                            }
                             this.uqMans.push(uq);
                             lower = uqFullName.toLowerCase();
                             this.collection[lower] = uq;
@@ -275,7 +291,6 @@ var UQsMan = /** @class */ (function () {
                             uqFullName = uqOwner + '/' + uqName;
                             lower = uqFullName.toLowerCase();
                             this.collection[lower] = uq;
-                            promiseInits.push(uq.init());
                         }
                         return [4 /*yield*/, Promise.all(promiseInits)];
                     case 1:
@@ -323,14 +338,29 @@ var UQsMan = /** @class */ (function () {
         var _this = this;
         //let that = this;
         var uqs = {};
-        for (var _i = 0, _a = this.uqMans; _i < _a.length; _i++) {
-            var uqMan = _a[_i];
-            var uqKey = uqMan.getUqKey();
+        function setUq(uqKey, proxy) {
+            if (!uqKey)
+                return;
             var lower = uqKey.toLowerCase();
-            var proxy = uqMan.createProxy();
             uqs[uqKey] = proxy;
             if (lower !== uqKey)
                 uqs[lower] = proxy;
+        }
+        for (var _i = 0, _a = this.uqMans; _i < _a.length; _i++) {
+            var uqMan = _a[_i];
+            var proxy = uqMan.createProxy();
+            setUq(uqMan.getUqKey(), proxy);
+            setUq(uqMan.getUqKeyWithConfig(), proxy);
+            /*
+            let uqKey = uqMan.getUqKey();
+            let lower = uqKey.toLowerCase();
+            uqs[uqKey] = proxy;
+            if (lower !== uqKey) uqs[lower] = proxy;
+            let uqKeyWithConfig = uqMan.getUqKeyWithConfig();
+            let lowerWithConfig = uqKeyWithConfig.toLowerCase();
+            uqs[uqKeyWithConfig] = proxy;
+            if (lowerWithConfig !== uqKeyWithConfig) uqs[lowerWithConfig] = proxy;
+            */
         }
         return new Proxy(uqs, {
             get: function (target, key, receiver) {
@@ -382,7 +412,8 @@ var UQsMan = /** @class */ (function () {
         var uq = this.collection[fromName];
         if (uq === undefined) {
             //debugger;
-            return "setInner(tuidImport: TuidImport): uq " + fromName + " is not loaded";
+            console.error("setInner(tuidImport: TuidImport): uq " + fromName + " is not loaded");
+            return;
         }
         var iName = tuidImport.name;
         var tuid = uq.tuid(iName);
