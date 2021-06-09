@@ -98,6 +98,7 @@ var TextWidget = /** @class */ (function (_super) {
         };
         _this.onFocus = function (evt) {
             mobx_1.runInAction(function () {
+                _this.input.select();
                 _this.clearError();
                 _this.context.removeErrorWidget(_this);
                 _this.context.clearErrors();

@@ -957,7 +957,7 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/components/form/widgets/textwidget.tsx": {
-        "version": "79ef05b22c7fa3a4be3fa92c36ab7a04b69334644d9eae8390745756b555f411",
+        "version": "1155abbd7e57c6519a963942f5f8e76a0aa7d6b137c3472772096a9a7268bd22",
         "signature": "680709f468a09fb27e9cfda7661c522fd1e8dbd36d3e6502cbdd035c9c09c1a3",
         "affectsGlobalScope": false
       },
