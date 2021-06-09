@@ -98,12 +98,16 @@ var TextWidget = /** @class */ (function (_super) {
         };
         _this.onFocus = function (evt) {
             mobx_1.runInAction(function () {
-                _this.input.select();
                 _this.clearError();
                 _this.context.removeErrorWidget(_this);
                 _this.context.clearErrors();
                 _this.hasFocus = true;
             });
+            setTimeout(function () {
+                console.log('focus and select');
+                _this.input.focus();
+                _this.input.select();
+            }, 10);
         };
         mobx_1.makeObservable(_this, {
             hasFocus: mobx_1.observable,

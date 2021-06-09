@@ -63,12 +63,16 @@ export class TextWidget extends Widget {
     }
     protected onFocus = (evt: React.FocusEvent<any>) => {
 		runInAction(() => {
-			this.input.select();
 			this.clearError();
 			this.context.removeErrorWidget(this);
 			this.context.clearErrors();
 			this.hasFocus = true;
 		});
+		setTimeout(() => {
+			console.log('focus and select');
+			this.input.focus();
+			this.input.select();
+		}, 10)
     }
     protected onChange(evt: React.ChangeEvent<any>) {
 		this.onInputChange(evt);
