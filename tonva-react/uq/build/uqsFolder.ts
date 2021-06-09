@@ -33,7 +33,7 @@ export async function buildUqsFolder(uqsFolder:string, appConfig: AppConfig) {
 		let p1 = indexText.indexOf('///###import AppUQs###///');
 		let pe = indexText.indexOf('\n', p1);
 		tsUqsIndexHeader = indexText.substring(0, pe + 1);
-		tsUqsIndexContent = `\n\nexport interface UQs extends AppUQs {`;
+		tsUqsIndexContent = `\n\nexport interface UQs {`;
 	}
 	else {
 		tsUqsIndexContent = `\n\nexport interface UQs {`;

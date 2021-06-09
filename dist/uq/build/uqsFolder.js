@@ -75,7 +75,7 @@ function buildUqsFolder(uqsFolder, appConfig) {
                         p1 = indexText.indexOf('///###import AppUQs###///');
                         pe = indexText.indexOf('\n', p1);
                         tsUqsIndexHeader = indexText.substring(0, pe + 1);
-                        tsUqsIndexContent = "\n\nexport interface UQs extends AppUQs {";
+                        tsUqsIndexContent = "\n\nexport interface UQs {";
                     }
                     else {
                         tsUqsIndexContent = "\n\nexport interface UQs {";
