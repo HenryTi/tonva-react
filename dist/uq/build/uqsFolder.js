@@ -73,9 +73,14 @@ function buildUqsFolder(uqsFolder, appConfig) {
                     if (fs_1.default.existsSync(uqsIndexFile) === true) {
                         indexText = fs_1.default.readFileSync(uqsIndexFile, 'utf8');
                         p1 = indexText.indexOf('///###import AppUQs###///');
-                        pe = indexText.indexOf('\n', p1);
-                        tsUqsIndexHeader = indexText.substring(0, pe + 1);
-                        tsUqsIndexContent = "\n\nexport interface UQs {";
+                        if (p1 >= 0) {
+                            pe = indexText.indexOf('\n', p1);
+                            tsUqsIndexHeader = indexText.substring(0, pe + 1);
+                            tsUqsIndexContent = "\n\nexport interface UQs extends AppUQs {";
+                        }
+                        else {
+                            tsUqsIndexContent = "\n\nexport interface UQs {";
+                        }
                     }
                     else {
                         tsUqsIndexContent = "\n\nexport interface UQs {";
