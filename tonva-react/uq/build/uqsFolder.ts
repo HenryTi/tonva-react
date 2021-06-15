@@ -29,7 +29,6 @@ export async function buildUqsFolder(uqsFolder:string, appConfig: AppConfig) {
 	let uqsIndexFile = `${uqsFolder}/index.ts`;
 	if (fs.existsSync(uqsIndexFile) === true) {
 		let indexText = fs.readFileSync(uqsIndexFile, 'utf8');
-		// let p0 = indexText.indexOf('///+++import AppUQs+++///');
 		let p1 = indexText.indexOf('///###import AppUQs###///');
 		if (p1 >= 0) {
 			let pe = indexText.indexOf('\n', p1);
