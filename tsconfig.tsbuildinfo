@@ -757,7 +757,7 @@
         "affectsGlobalScope": false
       },
       "./tonva-react/net/uqapi.ts": {
-        "version": "0fb834b9020cb9b9797e761aa1e95d2d10264417d3e1f0297ed316f57b52a48c",
+        "version": "80460380e3742f05d4cb817bfb598a8ed8c07a20f5f312fb811b1d89af7e5583",
         "signature": "af71827228966e9205c9f2dd454632c73b9e080f0a350508ab4b32afa98699e2",
         "affectsGlobalScope": false
       },
