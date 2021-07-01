@@ -23,7 +23,7 @@ function saveTuidTsIndexAndRender(uqFolder:string, uq: UqMan, uqAlias:string) {
 	let imports = '', sets = '';
 	let {tuidArr} = uq;
 	for (let i of tuidArr) {
-		let cName = capitalCase(i.name);
+		let cName = capitalCase(i.sName);
 		imports += `\nimport * as ${cName} from './${cName}.ui';`;
 		sets += `\n	Object.assign(uq.${cName}, ${cName});`;
 
