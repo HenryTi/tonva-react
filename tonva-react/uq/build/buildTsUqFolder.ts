@@ -24,6 +24,7 @@ function saveTuidTsIndexAndRender(uqFolder:string, uq: UqMan, uqAlias:string) {
 	let {tuidArr} = uq;
 	for (let i of tuidArr) {
 		let cName = capitalCase(i.sName);
+		if (cName[0] === '$') continue;
 		imports += `\nimport * as ${cName} from './${cName}.ui';`;
 		sets += `\n	Object.assign(uq.${cName}, ${cName});`;
 
@@ -60,6 +61,7 @@ function saveIDTsIndexAndRender(uqFolder:string, uq: UqMan, uqAlias:string) {
 	let {idArr, idxArr, ixArr} = uq;
 	for (let i of [...idArr, ...idxArr, ...ixArr]) {
 		let cName = capitalCase(i.name);
+		if (cName[0] === '$') continue;
 		imports += `\nimport * as ${cName} from './${cName}.ui';`;
 		sets += `\n	Object.assign(uq.${cName}, ${cName});`;
 

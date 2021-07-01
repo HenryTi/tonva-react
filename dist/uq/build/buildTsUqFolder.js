@@ -34,6 +34,8 @@ function saveTuidTsIndexAndRender(uqFolder, uq, uqAlias) {
     for (var _i = 0, tuidArr_1 = tuidArr; _i < tuidArr_1.length; _i++) {
         var i = tuidArr_1[_i];
         var cName = tool_1.capitalCase(i.sName);
+        if (cName[0] === '$')
+            continue;
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
         sets += "\n\tObject.assign(uq." + cName + ", " + cName + ");";
         var tsUI = "import { Res, setRes, TFunc, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { Tuid" + cName + " } from \"./" + uqAlias + "\";\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: Tuid" + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
@@ -47,6 +49,8 @@ function saveIDTsIndexAndRender(uqFolder, uq, uqAlias) {
     for (var _i = 0, _a = __spreadArrays(idArr, idxArr, ixArr); _i < _a.length; _i++) {
         var i = _a[_i];
         var cName = tool_1.capitalCase(i.name);
+        if (cName[0] === '$')
+            continue;
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
         sets += "\n\tObject.assign(uq." + cName + ", " + cName + ");";
         var tsUI = "import { Res, setRes, TFunc, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
