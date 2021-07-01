@@ -24,10 +24,24 @@ function buildTsUqFolder(uq, uqsFolder, uqAlias) {
     var tsUq = tools_1.buildTsHeader();
     tsUq += buildUQ_1.buildUQ(uq, uqAlias);
     tools_1.overrideTsFile(uqFolder + "/" + uqAlias + ".ts", tsUq);
-    saveTsIndexAndRender(uqFolder, uq, uqAlias);
+    saveTuidTsIndexAndRender(uqFolder, uq, uqAlias);
+    saveIDTsIndexAndRender(uqFolder, uq, uqAlias);
 }
 exports.buildTsUqFolder = buildTsUqFolder;
-function saveTsIndexAndRender(uqFolder, uq, uqAlias) {
+function saveTuidTsIndexAndRender(uqFolder, uq, uqAlias) {
+    var imports = '', sets = '';
+    var tuidArr = uq.tuidArr;
+    for (var _i = 0, tuidArr_1 = tuidArr; _i < tuidArr_1.length; _i++) {
+        var i = tuidArr_1[_i];
+        var cName = tool_1.capitalCase(i.name);
+        imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
+        sets += "\n\tObject.assign(uq." + cName + ", " + cName + ");";
+        var tsUI = "import { Res, setRes, TFunc, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
+        var path = uqFolder + "/" + cName + ".ui.tsx";
+        tools_1.saveTsFileIfNotExists(path, tsUI);
+    }
+}
+function saveIDTsIndexAndRender(uqFolder, uq, uqAlias) {
     var imports = '', sets = '';
     var idArr = uq.idArr, idxArr = uq.idxArr, ixArr = uq.ixArr;
     for (var _i = 0, _a = __spreadArrays(idArr, idxArr, ixArr); _i < _a.length; _i++) {

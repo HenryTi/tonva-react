@@ -25,7 +25,7 @@ export async function buildUqsFolder(uqsFolder:string, appConfig: AppConfig) {
 	await Promise.all(promiseArr);
 
 	let tsUqsIndexHeader = '';
-	let tsUqsIndexContent: string;
+	let tsUqsIndexContent;
 	let uqsIndexFile = `${uqsFolder}/index.ts`;
 	if (fs.existsSync(uqsIndexFile) === true) {
 		let indexText = fs.readFileSync(uqsIndexFile, 'utf8');

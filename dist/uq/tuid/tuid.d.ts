@@ -1,8 +1,10 @@
+/// <reference types="react" />
 import { LocalArr } from '../../tool';
 import { Entity } from '../entity';
 import { UqMan, Field, SchemaFrom } from '../uqMan';
 import { BoxId } from './boxId';
 import { IdCache, IdDivCache } from './idCache';
+import { Render } from '../../ui';
 export interface TuidSaveResult {
     id: number;
     inId: number;
@@ -16,10 +18,12 @@ export declare abstract class UqTuid<M> extends Entity {
     readonly typeName: string;
     protected idName: string;
     unique: string[];
+    render: Render<M>;
     setSchema(schema: any): void;
     buildTuidBox(): TuidBox;
     getIdFromObj(obj: any): number;
     stopCache(): void;
+    abstract tv(id: number, render?: Render<M>): JSX.Element;
     abstract useId(id: number): void;
     abstract boxId(id: number): BoxId;
     abstract valueFromId(id: number): any;
@@ -59,6 +63,7 @@ export declare class TuidInner extends Tuid {
     protected localArr: LocalArr;
     constructor(uq: UqMan, name: string, typeId: number);
     setSchema(schema: any): void;
+    tv(id: number, render?: Render<any>): JSX.Element;
     useId(id: number, defer?: boolean): void;
     boxId(id: number): BoxId;
     valueFromId(id: number): any;
@@ -91,6 +96,7 @@ export declare class TuidImport extends Tuid {
     setFrom(tuidLocal: TuidInner): void;
     readonly from: SchemaFrom;
     isImport: boolean;
+    tv(id: number, render?: Render<any>): JSX.Element;
     useId(id: number): void;
     boxId(id: number): BoxId;
     valueFromId(id: number): any;

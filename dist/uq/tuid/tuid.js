@@ -57,6 +57,9 @@ var lodash_1 = __importDefault(require("lodash"));
 var entity_1 = require("../entity");
 var caller_1 = require("../caller");
 var idCache_1 = require("./idCache");
+var react_1 = __importDefault(require("react"));
+var mobx_react_1 = require("mobx-react");
+var reactBoxId_1 = require("./reactBoxId");
 var UqTuid = /** @class */ (function (_super) {
     __extends(UqTuid, _super);
     function UqTuid() {
@@ -145,6 +148,24 @@ var TuidInner = /** @class */ (function (_super) {
                 tuidDiv.buildFieldsTuid();
             }
         }
+    };
+    TuidInner.prototype.tv = function (id, render) {
+        var _this = this;
+        return react_1.default.createElement(mobx_react_1.observer(function () {
+            var _a;
+            var obj = _this.valueFromId(id);
+            if (!obj) {
+                _this.useId(id);
+                return react_1.default.createElement(react_1.default.Fragment, undefined, [
+                    _this.sName + ":" + id
+                ]);
+            }
+            return ((_a = render !== null && render !== void 0 ? render : _this.render) !== null && _a !== void 0 ? _a : (function () {
+                return react_1.default.createElement(react_1.default.Fragment, undefined, [
+                    _this.sName + ':' + reactBoxId_1.uqStringify(obj)
+                ]);
+            }))(obj);
+        }));
     };
     TuidInner.prototype.useId = function (id, defer) {
         if (this.noCache === true)
@@ -701,6 +722,10 @@ var TuidImport = /** @class */ (function (_super) {
         return _this;
     }
     TuidImport.prototype.setFrom = function (tuidLocal) { this.tuidLocal = tuidLocal; };
+    TuidImport.prototype.tv = function (id, render) {
+        var _a;
+        return (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.tv(id, render);
+    };
     TuidImport.prototype.useId = function (id) { var _a; (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.useId(id); };
     TuidImport.prototype.boxId = function (id) {
         var _a;
