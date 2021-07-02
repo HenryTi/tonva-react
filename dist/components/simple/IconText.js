@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -54,8 +56,7 @@ var IconText = /** @class */ (function (_super) {
     }
     IconText.prototype.render = function () {
         var _a = this.props, icon = _a.icon, iconClass = _a.iconClass, text = _a.text, textClass = _a.textClass;
-        return jsx_runtime_1.jsxs("div", __assign({ className: "py-2" }, { children: [jsx_runtime_1.jsx(FA_1.FA, { className: iconClass, name: icon, fixWidth: true }, void 0),
-                jsx_runtime_1.jsx("span", __assign({ className: textClass }, { children: text }), void 0)] }), void 0);
+        return jsx_runtime_1.jsxs("div", __assign({ className: "py-2" }, { children: [jsx_runtime_1.jsx(FA_1.FA, { className: iconClass, name: icon, fixWidth: true }, void 0), jsx_runtime_1.jsx("span", __assign({ className: textClass }, { children: text }), void 0)] }), void 0);
     };
     return IconText;
 }(React.Component));

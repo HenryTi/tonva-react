@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -148,6 +150,13 @@ var TuidInner = /** @class */ (function (_super) {
                 tuidDiv.buildFieldsTuid();
             }
         }
+    };
+    TuidInner.prototype.getObj = function (id) {
+        var obj = this.valueFromId(id);
+        if (obj)
+            return obj;
+        this.useId(id);
+        return { id: id };
     };
     TuidInner.prototype.tv = function (id, render) {
         var _this = this;
@@ -722,6 +731,7 @@ var TuidImport = /** @class */ (function (_super) {
         return _this;
     }
     TuidImport.prototype.setFrom = function (tuidLocal) { this.tuidLocal = tuidLocal; };
+    TuidImport.prototype.getObj = function (id) { var _a; return (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.getObj(id); };
     TuidImport.prototype.tv = function (id, render) {
         var _a;
         return (_a = this.tuidLocal) === null || _a === void 0 ? void 0 : _a.tv(id, render);

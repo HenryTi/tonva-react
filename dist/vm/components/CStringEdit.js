@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -109,9 +111,7 @@ var CStringEdit = /** @class */ (function (_super) {
                 if (evt.keyCode === 13)
                     onSave();
             };
-            _this.openPage(jsx_runtime_1.jsx(components_1.Page, __assign({ header: label, right: right }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("input", { type: "text", onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, maxLength: maxLength }, void 0),
-                        react_1.default.createElement(mobx_react_1.observer(function () { return placeholder && jsx_runtime_1.jsx("div", __assign({ className: "small muted m-2" }, { children: placeholder }), void 0); })),
-                        _this.error && jsx_runtime_1.jsx("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0));
+            _this.openPage(jsx_runtime_1.jsx(components_1.Page, __assign({ header: label, right: right }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("input", { type: "text", onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, maxLength: maxLength }, void 0), react_1.default.createElement(mobx_react_1.observer(function () { return placeholder && jsx_runtime_1.jsx("div", __assign({ className: "small muted m-2" }, { children: placeholder }), void 0); })), _this.error && jsx_runtime_1.jsx("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0));
         };
         mobx_1.makeObservable(_this, {
             value: mobx_1.observable,

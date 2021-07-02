@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -72,20 +74,16 @@ function logoutApis() {
 exports.logoutApis = logoutApis;
 var UqApi = /** @class */ (function (_super) {
     __extends(UqApi, _super);
-    function UqApi(basePath, /*appOwner:string, appName:string, */ uqOwner, uqName /*, access:string[]*/, showWaiting) {
+    function UqApi(basePath, uqOwner, uqName, showWaiting) {
         var _this = _super.call(this, basePath, showWaiting) || this;
-        //this.appOwner = appOwner;
-        //this.appName = appName;
         if (uqName) {
             _this.uqOwner = uqOwner;
             _this.uqName = uqName;
             _this.uq = uqOwner + '/' + uqName;
         }
-        //this.access = access;
         _this.showWaiting = showWaiting;
         return _this;
     }
-    //setUqVersion(uqVersion:number) {this.uqVersion = undefined}
     UqApi.prototype.init = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -281,7 +279,7 @@ exports.logoutUnitxApis = logoutUnitxApis;
 var UnitxApi = /** @class */ (function (_super) {
     __extends(UnitxApi, _super);
     function UnitxApi(unitId) {
-        var _this = _super.call(this, 'tv/', /*undefined, undefined, */ undefined, undefined /*, undefined*/, true) || this;
+        var _this = _super.call(this, 'tv/', undefined, undefined, true) || this;
         _this.unitId = unitId;
         return _this;
     }

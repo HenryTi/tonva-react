@@ -541,8 +541,7 @@ var UqMan = /** @class */ (function () {
             this.uqApi = new net_1.UnitxApi(tool_1.env.unit);
         }
         else {
-            //let {appOwner, appName} = uqs;
-            this.uqApi = new net_1.UqApi(baseUrl, /*appOwner, appName, */ uqOwner, uqName /*, acc*/, true);
+            this.uqApi = new net_1.UqApi(baseUrl, uqOwner, uqName, true);
         }
         this.tuidsCache = new tuid_1.TuidsCache(this);
     }

@@ -20,9 +20,7 @@ var components_1 = require("../components");
 var tool_1 = require("../tool");
 var logo_svg_1 = __importDefault(require("../img/logo.svg"));
 function tonvaTop() {
-    return components_1.nav.loginTop(jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center position-relative" }, { children: [jsx_runtime_1.jsx("img", { className: "App-logo h-3c position-absolute", src: logo_svg_1.default, alt: "img" }, void 0),
-            jsx_runtime_1.jsxs("div", __assign({ className: "h3 flex-fill text-center" }, { children: [jsx_runtime_1.jsx("span", __assign({ className: "text-primary mr-3" }, { children: "\u540C" }), void 0),
-                    jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "\u82B1" }), void 0)] }), void 0)] }), void 0));
+    return components_1.nav.loginTop(jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center position-relative" }, { children: [jsx_runtime_1.jsx("img", { className: "App-logo h-3c position-absolute", src: logo_svg_1.default, alt: "img" }, void 0), jsx_runtime_1.jsxs("div", __assign({ className: "h3 flex-fill text-center" }, { children: [jsx_runtime_1.jsx("span", __assign({ className: "text-primary mr-3" }, { children: "\u540C" }), void 0), jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "\u82B1" }), void 0)] }), void 0)] }), void 0));
 }
 exports.tonvaTop = tonvaTop;
 var senders = [

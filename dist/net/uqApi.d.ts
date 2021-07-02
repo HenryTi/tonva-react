@@ -5,7 +5,7 @@ export declare class UqApi extends ApiBase {
     uqOwner: string;
     uqName: string;
     uq: string;
-    constructor(basePath: string, /*appOwner:string, appName:string, */ uqOwner: string, uqName: string, showWaiting?: boolean);
+    constructor(basePath: string, uqOwner: string, uqName: string, showWaiting?: boolean);
     init(): Promise<void>;
     protected getHttpChannel(): Promise<HttpChannel>;
     loadEntities(): Promise<any>;

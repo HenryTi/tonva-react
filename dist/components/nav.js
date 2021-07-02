@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -271,9 +273,7 @@ var NavView = /** @class */ (function (_super) {
     NavView.prototype.showUpgradeUq = function (uq, version) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.show(jsx_runtime_1.jsx(page_1.Page, __assign({ header: false }, { children: jsx_runtime_1.jsxs("div", { children: ["UQ\u5347\u7EA7\u4E86\uFF0C\u8BF7\u70B9\u51FB\u6309\u94AE\u5347\u7EA7 ", jsx_runtime_1.jsx("br", {}, void 0),
-                            jsx_runtime_1.jsxs("small", __assign({ className: "text-muted" }, { children: [uq, " ver-", version] }), void 0),
-                            jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary", onClick: this.upgradeUq }, { children: "\u5347\u7EA7" }), void 0)] }, void 0) }), void 0));
+                this.show(jsx_runtime_1.jsx(page_1.Page, __assign({ header: false }, { children: jsx_runtime_1.jsxs("div", { children: ["UQ\u5347\u7EA7\u4E86\uFF0C\u8BF7\u70B9\u51FB\u6309\u94AE\u5347\u7EA7 ", jsx_runtime_1.jsx("br", {}, void 0), jsx_runtime_1.jsxs("small", __assign({ className: "text-muted" }, { children: [uq, " ver-", version] }), void 0), jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary", onClick: this.upgradeUq }, { children: "\u5347\u7EA7" }), void 0)] }, void 0) }), void 0));
                 return [2 /*return*/];
             });
         });

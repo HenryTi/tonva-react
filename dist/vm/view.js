@@ -134,8 +134,7 @@ var View = /** @class */ (function () {
     View.prototype.renderUser = function (user, imageClassName, textClassName) {
         var renderUser = function (user) {
             var name = user.name, nick = user.nick, icon = user.icon;
-            return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c mr-2' }, void 0),
-                    jsx_runtime_1.jsx("span", __assign({ className: textClassName }, { children: nick || name }), void 0)] }, void 0);
+            return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c mr-2' }, void 0), jsx_runtime_1.jsx("span", __assign({ className: textClassName }, { children: nick || name }), void 0)] }, void 0);
         };
         return jsx_runtime_1.jsx(components_1.UserView, { user: user, render: renderUser }, void 0);
     };

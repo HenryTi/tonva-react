@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -212,8 +214,7 @@ var Edit = /** @class */ (function (_super) {
                                         case 0: return [4 /*yield*/, this.rowClick(itemEdit)];
                                         case 1: return [2 /*return*/, _a.sent()];
                                     }
-                                }); }); } }, { children: [divLabel, jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: itemEdit === undefined ? undefined : itemEdit.renderContent() }), void 0),
-                                    editInRow === false && jsx_runtime_1.jsx("div", __assign({ className: "w-2c text-right" }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-angle-right" }, void 0) }), void 0)] }), void 0)] }, index);
+                                }); }); } }, { children: [divLabel, jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: itemEdit === undefined ? undefined : itemEdit.renderContent() }), void 0), editInRow === false && jsx_runtime_1.jsx("div", __assign({ className: "w-2c text-right" }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-angle-right" }, void 0) }), void 0)] }), void 0)] }, index);
                     sep = _this.sep;
                     return ret;
                 }), this.bottomBorder] }, void 0);

@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -126,10 +128,7 @@ var VPassword = /** @class */ (function (_super) {
                 submit: { widget: 'button', className: 'btn btn-primary btn-block mt-3', label: this.submitCaption },
             }
         };
-        return jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u6CE8\u518C\u8D26\u53F7", jsx_runtime_1.jsx("br", {}, void 0),
-                jsx_runtime_1.jsx("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: jsx_runtime_1.jsx("b", { children: this.account }, void 0) }), void 0),
-                jsx_runtime_1.jsx("div", { className: "h-1c" }, void 0),
-                jsx_runtime_1.jsx(components_1.Form, { schema: this.schema, uiSchema: uiSchema, onButtonClick: this.onButtonSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0)] }), void 0);
+        return jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u6CE8\u518C\u8D26\u53F7", jsx_runtime_1.jsx("br", {}, void 0), jsx_runtime_1.jsx("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: jsx_runtime_1.jsx("b", { children: this.account }, void 0) }), void 0), jsx_runtime_1.jsx("div", { className: "h-1c" }, void 0), jsx_runtime_1.jsx(components_1.Form, { schema: this.schema, uiSchema: uiSchema, onButtonClick: this.onButtonSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0)] }), void 0);
     };
     return VPassword;
 }(vm_1.VPage));

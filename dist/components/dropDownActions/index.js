@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -106,9 +108,7 @@ var DropdownActions = /** @class */ (function (_super) {
         //isOpen={this.state.dropdownOpen} toggle={this.toggle}
         var cn = className || 'cursor-pointer dropdown-toggle btn btn-sm';
         //if (className) cn += className;
-        return jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('dropdown', containerClass) }, { children: [jsx_runtime_1.jsxs("button", __assign({ ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle }, { children: [icon !== null && jsx_runtime_1.jsx("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) }, void 0),
-                        content && jsx_runtime_1.jsx("span", __assign({ className: "ml-1" }, { children: content }), void 0)] }), void 0),
-                jsx_runtime_1.jsx("div", __assign({ ref: function (v) { return _this.menu = v; }, className: classnames_1.default({ "dropdown-menu": true, "dropdown-menu-right": isRight, "show": dropdownOpen }) }, { children: actions.map(function (v, index) {
+        return jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('dropdown', containerClass) }, { children: [jsx_runtime_1.jsxs("button", __assign({ ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle }, { children: [icon !== null && jsx_runtime_1.jsx("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) }, void 0), content && jsx_runtime_1.jsx("span", __assign({ className: "ml-1" }, { children: content }), void 0)] }), void 0), jsx_runtime_1.jsx("div", __assign({ ref: function (v) { return _this.menu = v; }, className: classnames_1.default({ "dropdown-menu": true, "dropdown-menu-right": isRight, "show": dropdownOpen }) }, { children: actions.map(function (v, index) {
                         if (!v) {
                             return jsx_runtime_1.jsx("div", { className: "dropdown-divider" }, index);
                         }

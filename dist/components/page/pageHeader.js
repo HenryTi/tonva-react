@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -131,7 +133,7 @@ function renderPageHeader(props, inWebNav) {
             var user = nav_1.nav.user;
             if (user !== undefined) {
                 var nick = user.nick, name_1 = user.name;
-                debugLogout = jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center" }, { children: [jsx_runtime_1.jsx("small", __assign({ className: "text-light" }, { children: nick || name_1 }), void 0),
+                debugLogout = jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center" }, { children: [jsx_runtime_1.jsx("small", __assign({ className: "text-light" }, { children: nick || name_1 }), void 0), 
                         // eslint-disable-next-line
                         jsx_runtime_1.jsx("div", __assign({ className: "ml-2 py-2 px-3 cursor-pointer", role: "button", onClick: onLogoutClick }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-sign-out fa-lg" }, void 0) }), void 0)] }), void 0);
             }

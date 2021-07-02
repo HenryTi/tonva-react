@@ -24,6 +24,7 @@ export declare abstract class UqTuid<M> extends Entity {
     getIdFromObj(obj: any): number;
     stopCache(): void;
     abstract tv(id: number, render?: Render<M>): JSX.Element;
+    abstract getObj(id: number): M;
     abstract useId(id: number): void;
     abstract boxId(id: number): BoxId;
     abstract valueFromId(id: number): any;
@@ -63,6 +64,7 @@ export declare class TuidInner extends Tuid {
     protected localArr: LocalArr;
     constructor(uq: UqMan, name: string, typeId: number);
     setSchema(schema: any): void;
+    getObj(id: number): any;
     tv(id: number, render?: Render<any>): JSX.Element;
     useId(id: number, defer?: boolean): void;
     boxId(id: number): BoxId;
@@ -96,6 +98,7 @@ export declare class TuidImport extends Tuid {
     setFrom(tuidLocal: TuidInner): void;
     readonly from: SchemaFrom;
     isImport: boolean;
+    getObj(id: number): any;
     tv(id: number, render?: Render<any>): JSX.Element;
     useId(id: number): void;
     boxId(id: number): BoxId;

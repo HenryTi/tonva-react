@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -64,8 +66,7 @@ var Media = /** @class */ (function (_super) {
         else
             disp = discription;
         var cn = classnames_1.default('media', px === undefined ? 'px-0' : 'px-' + px, py === undefined ? 'py-2' : 'py-' + py);
-        return jsx_runtime_1.jsxs("div", __assign({ className: cn }, { children: [jsx_runtime_1.jsx(_1.Image, { className: "mr-3 w-4c h-4c", src: icon }, void 0),
-                jsx_runtime_1.jsxs("div", __assign({ className: "media-body" }, { children: [jsx_runtime_1.jsx("h5", __assign({ className: "mt-0" }, { children: main }), void 0), disp] }), void 0)] }), void 0);
+        return jsx_runtime_1.jsxs("div", __assign({ className: cn }, { children: [jsx_runtime_1.jsx(_1.Image, { className: "mr-3 w-4c h-4c", src: icon }, void 0), jsx_runtime_1.jsxs("div", __assign({ className: "media-body" }, { children: [jsx_runtime_1.jsx("h5", __assign({ className: "mt-0" }, { children: main }), void 0), disp] }), void 0)] }), void 0);
     };
     return Media;
 }(React.Component));

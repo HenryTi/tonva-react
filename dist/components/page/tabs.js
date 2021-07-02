@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -155,8 +157,7 @@ var Tab = /** @class */ (function () {
     };
     return Tab;
 }());
-var TabCaptionComponent = function (label, icon, color) { return jsx_runtime_1.jsxs("div", __assign({ className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color }, { children: [jsx_runtime_1.jsx("div", { children: jsx_runtime_1.jsx("i", { className: 'fa fa-lg fa-' + icon }, void 0) }, void 0),
-        jsx_runtime_1.jsx("small", { children: label }, void 0)] }), void 0); };
+var TabCaptionComponent = function (label, icon, color) { return jsx_runtime_1.jsxs("div", __assign({ className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color }, { children: [jsx_runtime_1.jsx("div", { children: jsx_runtime_1.jsx("i", { className: 'fa fa-lg fa-' + icon }, void 0) }, void 0), jsx_runtime_1.jsx("small", { children: label }, void 0)] }), void 0); };
 exports.TabCaptionComponent = TabCaptionComponent;
 //export const TabCaption = TabCaptionComponent;
 var TabsView = /** @class */ (function () {
@@ -253,20 +254,16 @@ var TabsView = /** @class */ (function () {
                     var header, footer;
                     var visibility = { visibility: 'hidden' };
                     if (tabPosition === 'top') {
-                        header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: "tv-page-header" }, { children: jsx_runtime_1.jsxs("header", { children: [tabs, pageHeader] }, void 0) }), void 0),
-                                jsx_runtime_1.jsxs("header", __assign({ style: visibility }, { children: [tabs, pageHeader] }), void 0)] }, void 0);
+                        header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: "tv-page-header" }, { children: jsx_runtime_1.jsxs("header", { children: [tabs, pageHeader] }, void 0) }), void 0), jsx_runtime_1.jsxs("header", __assign({ style: visibility }, { children: [tabs, pageHeader] }), void 0)] }, void 0);
                         if (pageFooter !== undefined) {
-                            footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("footer", __assign({ style: visibility }, { children: pageFooter }), void 0),
-                                    jsx_runtime_1.jsx("section", __assign({ className: "tv-page-footer" }, { children: jsx_runtime_1.jsx("footer", { children: pageFooter }, void 0) }), void 0)] }, void 0);
+                            footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("footer", __assign({ style: visibility }, { children: pageFooter }), void 0), jsx_runtime_1.jsx("section", __assign({ className: "tv-page-footer" }, { children: jsx_runtime_1.jsx("footer", { children: pageFooter }, void 0) }), void 0)] }, void 0);
                         }
                     }
                     else {
                         if (pageHeader !== undefined) {
-                            header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-header' }, { children: jsx_runtime_1.jsx("header", { children: pageHeader }, void 0) }), void 0),
-                                    jsx_runtime_1.jsx("header", __assign({ style: visibility }, { children: pageHeader }), void 0)] }, void 0);
+                            header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-header' }, { children: jsx_runtime_1.jsx("header", { children: pageHeader }, void 0) }), void 0), jsx_runtime_1.jsx("header", __assign({ style: visibility }, { children: pageHeader }), void 0)] }, void 0);
                         }
-                        footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsxs("footer", __assign({ style: visibility }, { children: [pageFooter, tabs] }), void 0),
-                                jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-footer' }, { children: jsx_runtime_1.jsxs("footer", { children: [pageFooter, tabs] }, void 0) }), void 0)] }, void 0);
+                        footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsxs("footer", __assign({ style: visibility }, { children: [pageFooter, tabs] }), void 0), jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-footer' }, { children: jsx_runtime_1.jsxs("footer", { children: [pageFooter, tabs] }, void 0) }), void 0)] }, void 0);
                     }
                     var style;
                     if (v.selected === false)

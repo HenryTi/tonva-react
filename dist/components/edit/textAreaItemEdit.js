@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -114,9 +116,7 @@ var TextAreaItemEdit = /** @class */ (function (_super) {
             var onKeyDown = function (evt) {
                 // if (evt.keyCode === 13) onSave();
             };
-            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: _this.label, right: right }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("textarea", { onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, rows: 6 }, void 0),
-                        _this.uiItem && jsx_runtime_1.jsx("div", __assign({ className: "small muted m-2" }, { children: _this.uiItem.placeholder }), void 0),
-                        _this.error && jsx_runtime_1.jsx("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0);
+            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: _this.label, right: right }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("textarea", { onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, rows: 6 }, void 0), _this.uiItem && jsx_runtime_1.jsx("div", __assign({ className: "small muted m-2" }, { children: _this.uiItem.placeholder }), void 0), _this.error && jsx_runtime_1.jsx("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0);
         });
         return _this;
     }

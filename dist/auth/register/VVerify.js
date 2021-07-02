@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -136,9 +138,7 @@ var VVerify = /** @class */ (function (_super) {
                 extra = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "\u6CE8\u610F" }), void 0), ": \u6709\u53EF\u80FD\u8BEF\u4E3A\u5783\u573E\u90AE\u4EF6\uFF0C\u8BF7\u68C0\u67E5", jsx_runtime_1.jsx("br", {}, void 0)] }, void 0);
                 break;
         }
-        return jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u9A8C\u8BC1\u7801\u5DF2\u7ECF\u53D1\u9001\u5230", typeText, jsx_runtime_1.jsx("br", {}, void 0),
-                jsx_runtime_1.jsx("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: jsx_runtime_1.jsx("b", { children: this.controller.account }, void 0) }), void 0), extra, jsx_runtime_1.jsx("div", { className: "h-1c" }, void 0),
-                jsx_runtime_1.jsx(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0)] }), void 0);
+        return jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u9A8C\u8BC1\u7801\u5DF2\u7ECF\u53D1\u9001\u5230", typeText, jsx_runtime_1.jsx("br", {}, void 0), jsx_runtime_1.jsx("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: jsx_runtime_1.jsx("b", { children: this.controller.account }, void 0) }), void 0), extra, jsx_runtime_1.jsx("div", { className: "h-1c" }, void 0), jsx_runtime_1.jsx(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0)] }), void 0);
     };
     return VVerify;
 }(vm_1.VPage));
