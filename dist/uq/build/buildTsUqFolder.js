@@ -28,9 +28,12 @@ exports.buildTsUqFolder = buildTsUqFolder;
 function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
     var imports = '', sets = '';
     var idArr = uq.idArr, idxArr = uq.idxArr, ixArr = uq.ixArr, tuidArr = uq.tuidArr;
+    var coll = {};
     for (var _i = 0, tuidArr_1 = tuidArr; _i < tuidArr_1.length; _i++) {
         var i = tuidArr_1[_i];
-        var cName = tool_1.capitalCase(i.sName);
+        var name_1 = i.name, sName = i.sName;
+        coll[name_1] = i;
+        var cName = tool_1.capitalCase(sName);
         if (cName[0] === '$')
             continue;
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
@@ -41,7 +44,9 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
     }
     for (var _a = 0, _b = __spreadArray(__spreadArray(__spreadArray([], idArr), idxArr), ixArr); _a < _b.length; _a++) {
         var i = _b[_a];
-        var cName = tool_1.capitalCase(i.name);
+        var name_2 = i.name, sName = i.sName;
+        coll[name_2] = i;
+        var cName = tool_1.capitalCase(sName);
         if (cName[0] === '$')
             continue;
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
@@ -64,6 +69,20 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
     }
     var tsIndex = "import { UqExt as Uq } from './" + uqAlias + "';" + imports + "\n\nexport function setUI(uq: Uq) {" + sets + "\n}\nexport * from './" + uqAlias + "';\n";
     tools_1.overrideTsFile(uqFolder + "/index.ts", tsIndex);
+    var files = fs_1.default.readdirSync(uqFolder);
+    var suffix = '.ui.tsx';
+    for (var _c = 0, files_1 = files; _c < files_1.length; _c++) {
+        var file = files_1[_c];
+        if (file.endsWith(suffix) === false)
+            continue;
+        var from = file.length - suffix.length;
+        var fileEntityName = file.substring(0, from);
+        var entity = coll[fileEntityName.toLocaleLowerCase()];
+        if (entity === undefined || fileEntityName[0] === '$') {
+            var unFile = uqFolder + "/" + file;
+            fs_1.default.unlinkSync(unFile);
+        }
+    }
 }
 function buildFields(i) {
     switch (i.typeName) {
@@ -79,9 +98,9 @@ function buildIDFields(ID) {
     var schema = ID.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_1 = function (f) {
-        var name_1 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_1; })) >= 0;
-        ret[name_1] = fieldItem_1.buildFieldItem(f, isKey);
+        var name_3 = f.name;
+        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_3; })) >= 0;
+        ret[name_3] = fieldItem_1.buildFieldItem(f, isKey);
     };
     for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
         var f = fields_1[_i];
@@ -95,9 +114,9 @@ function buildIDXFields(IDX) {
     var schema = IDX.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_2 = function (f) {
-        var name_2 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_2; })) >= 0;
-        ret[name_2] = fieldItem_1.buildFieldItem(f, isKey);
+        var name_4 = f.name;
+        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_4; })) >= 0;
+        ret[name_4] = fieldItem_1.buildFieldItem(f, isKey);
     };
     for (var _i = 0, fields_2 = fields; _i < fields_2.length; _i++) {
         var f = fields_2[_i];
@@ -112,9 +131,9 @@ function buildIXFields(IX) {
     var schema = IX.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_3 = function (f) {
-        var name_3 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_3; })) >= 0;
-        ret[name_3] = fieldItem_1.buildFieldItem(f, isKey);
+        var name_5 = f.name;
+        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_5; })) >= 0;
+        ret[name_5] = fieldItem_1.buildFieldItem(f, isKey);
     };
     for (var _i = 0, fields_3 = fields; _i < fields_3.length; _i++) {
         var f = fields_3[_i];
@@ -143,10 +162,10 @@ function buildIDFieldArr(i) {
     var ts = '';
     for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
         var f = _a[_i];
-        var name_4 = f.name;
-        if (name_4 === 'id')
+        var name_6 = f.name;
+        if (name_6 === 'id')
             continue;
-        ts += "fields." + name_4 + ", ";
+        ts += "fields." + name_6 + ", ";
     }
     return ts;
 }
@@ -155,10 +174,10 @@ function buildIDXFieldArr(i) {
     var ts = '';
     for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
         var f = _a[_i];
-        var name_5 = f.name;
-        if (name_5 === 'id')
+        var name_7 = f.name;
+        if (name_7 === 'id')
             continue;
-        ts += "fields." + name_5 + ", ";
+        ts += "fields." + name_7 + ", ";
     }
     return ts;
 }
@@ -167,12 +186,12 @@ function buildIXFieldArr(i) {
     var ts = '';
     for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
         var f = _a[_i];
-        var name_6 = f.name;
-        if (name_6 === 'ix')
+        var name_8 = f.name;
+        if (name_8 === 'ix')
             continue;
-        if (name_6 === 'id')
+        if (name_8 === 'id')
             continue;
-        ts += "fields." + name_6 + ", ";
+        ts += "fields." + name_8 + ", ";
     }
     return ts;
 }
