@@ -31,8 +31,8 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
     var coll = {};
     for (var _i = 0, tuidArr_1 = tuidArr; _i < tuidArr_1.length; _i++) {
         var i = tuidArr_1[_i];
-        var name_1 = i.name, sName = i.sName;
-        coll[name_1] = i;
+        var sName = i.sName;
+        coll[sName.toLowerCase()] = i;
         var cName = tool_1.capitalCase(sName);
         if (cName[0] === '$')
             continue;
@@ -44,8 +44,8 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
     }
     for (var _a = 0, _b = __spreadArray(__spreadArray(__spreadArray([], idArr), idxArr), ixArr); _a < _b.length; _a++) {
         var i = _b[_a];
-        var name_2 = i.name, sName = i.sName;
-        coll[name_2] = i;
+        var sName = i.sName;
+        coll[sName.toLowerCase()] = i;
         var cName = tool_1.capitalCase(sName);
         if (cName[0] === '$')
             continue;
@@ -98,9 +98,9 @@ function buildIDFields(ID) {
     var schema = ID.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_1 = function (f) {
-        var name_3 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_3; })) >= 0;
-        ret[name_3] = fieldItem_1.buildFieldItem(f, isKey);
+        var name_1 = f.name;
+        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_1; })) >= 0;
+        ret[name_1] = fieldItem_1.buildFieldItem(f, isKey);
     };
     for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
         var f = fields_1[_i];
@@ -114,9 +114,9 @@ function buildIDXFields(IDX) {
     var schema = IDX.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_2 = function (f) {
-        var name_4 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_4; })) >= 0;
-        ret[name_4] = fieldItem_1.buildFieldItem(f, isKey);
+        var name_2 = f.name;
+        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_2; })) >= 0;
+        ret[name_2] = fieldItem_1.buildFieldItem(f, isKey);
     };
     for (var _i = 0, fields_2 = fields; _i < fields_2.length; _i++) {
         var f = fields_2[_i];
@@ -131,9 +131,9 @@ function buildIXFields(IX) {
     var schema = IX.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_3 = function (f) {
-        var name_5 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_5; })) >= 0;
-        ret[name_5] = fieldItem_1.buildFieldItem(f, isKey);
+        var name_3 = f.name;
+        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_3; })) >= 0;
+        ret[name_3] = fieldItem_1.buildFieldItem(f, isKey);
     };
     for (var _i = 0, fields_3 = fields; _i < fields_3.length; _i++) {
         var f = fields_3[_i];
@@ -162,10 +162,10 @@ function buildIDFieldArr(i) {
     var ts = '';
     for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
         var f = _a[_i];
-        var name_6 = f.name;
-        if (name_6 === 'id')
+        var name_4 = f.name;
+        if (name_4 === 'id')
             continue;
-        ts += "fields." + name_6 + ", ";
+        ts += "fields." + name_4 + ", ";
     }
     return ts;
 }
@@ -174,10 +174,10 @@ function buildIDXFieldArr(i) {
     var ts = '';
     for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
         var f = _a[_i];
-        var name_7 = f.name;
-        if (name_7 === 'id')
+        var name_5 = f.name;
+        if (name_5 === 'id')
             continue;
-        ts += "fields." + name_7 + ", ";
+        ts += "fields." + name_5 + ", ";
     }
     return ts;
 }
@@ -186,12 +186,12 @@ function buildIXFieldArr(i) {
     var ts = '';
     for (var _i = 0, _a = schema.fields; _i < _a.length; _i++) {
         var f = _a[_i];
-        var name_8 = f.name;
-        if (name_8 === 'ix')
+        var name_6 = f.name;
+        if (name_6 === 'ix')
             continue;
-        if (name_8 === 'id')
+        if (name_6 === 'id')
             continue;
-        ts += "fields." + name_8 + ", ";
+        ts += "fields." + name_6 + ", ";
     }
     return ts;
 }

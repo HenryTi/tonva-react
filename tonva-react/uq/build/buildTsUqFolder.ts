@@ -25,8 +25,8 @@ function saveTuidAndIDTsIndexAndRender(uqFolder:string, uq: UqMan, uqAlias:strin
 	let coll:{[name:string]: Entity} = {};
 
 	for (let i of tuidArr) {
-		let {name, sName} = i;
-		coll[name] = i;
+		let {sName} = i;
+		coll[sName.toLowerCase()] = i;
 		let cName = capitalCase(sName);		
 		if (cName[0] === '$') continue;
 		imports += `\nimport * as ${cName} from './${cName}.ui';`;
@@ -59,8 +59,8 @@ export function render(item: Tuid${cName}):JSX.Element {
 	}
 
 	for (let i of [...idArr, ...idxArr, ...ixArr]) {
-		let {name, sName} = i;
-		coll[name] = i;
+		let {sName} = i;
+		coll[sName.toLowerCase()] = i;
 		let cName = capitalCase(sName);
 		if (cName[0] === '$') continue;
 		imports += `\nimport * as ${cName} from './${cName}.ui';`;
