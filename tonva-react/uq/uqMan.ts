@@ -741,7 +741,7 @@ export class UqMan {
 					case 'IDV': return this.IDV;
 				}
 				let err = `entity ${this.name}.${String(key)} not defined`;
-				console.error(err);
+				//console.error(err);
 				this.showReload('UQ错误：' + err);
 				return undefined;
 			}
@@ -751,9 +751,27 @@ export class UqMan {
 		return ret;
 	}
 
+	/*
     private showReload(msg: string) {
 		this.localMap.removeAll();
 		nav.showReloadPage(msg);
+    }
+	*/
+
+    private showReload(msg: string) {
+		let cache = this.localMap.child('$reload-tick');
+		let reloadTick = cache.get();
+		if (!reloadTick) reloadTick = 0;
+		console.error(msg);
+		this.localMap.removeAll();
+		let tick = Date.now();
+		cache.set(tick);
+		if (tick - reloadTick  < 60*1000)  {
+			nav.showReloadPage(msg);
+		}
+		else {
+			nav.reload();
+		}
     }
 
 	//private coms:any;

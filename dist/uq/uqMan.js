@@ -1014,7 +1014,7 @@ var UqMan = /** @class */ (function () {
                     case 'IDV': return _this.IDV;
                 }
                 var err = "entity " + _this.name + "." + String(key) + " not defined";
-                console.error(err);
+                //console.error(err);
                 _this.showReload('UQ错误：' + err);
                 return undefined;
             }
@@ -1023,9 +1023,27 @@ var UqMan = /** @class */ (function () {
         this.idCache = new IDCache_1.IDCache(this.proxy);
         return ret;
     };
-    UqMan.prototype.showReload = function (msg) {
+    /*
+    private showReload(msg: string) {
         this.localMap.removeAll();
-        components_1.nav.showReloadPage(msg);
+        nav.showReloadPage(msg);
+    }
+    */
+    UqMan.prototype.showReload = function (msg) {
+        var cache = this.localMap.child('$reload-tick');
+        var reloadTick = cache.get();
+        if (!reloadTick)
+            reloadTick = 0;
+        console.error(msg);
+        this.localMap.removeAll();
+        var tick = Date.now();
+        cache.set(tick);
+        if (tick - reloadTick < 60 * 1000) {
+            components_1.nav.showReloadPage(msg);
+        }
+        else {
+            components_1.nav.reload();
+        }
     };
     //private checkParam(ID:ID, IDX:(ID|IDX)|(ID|IDX)[], IX:IX, id:number|number[], key:{[key:string]:string|number}, page: ParamPage) {
     //}
