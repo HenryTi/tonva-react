@@ -370,14 +370,8 @@ var UQsMan = /** @class */ (function () {
                 var ret = target[lk];
                 if (ret !== undefined)
                     return ret;
-                /*
-                for (let i in uqs) {
-                    if (i.toLowerCase() === lk) {
-                        return uqs[i];
-                    }
-                }*/
                 debugger;
-                console.error('error in uqs');
+                //console.error('error in uqs');
                 _this.showReload("\u65B0\u589E uq " + String(key));
                 return undefined;
             },
@@ -414,7 +408,9 @@ var UQsMan = /** @class */ (function () {
         var uq = this.collection[fromName];
         if (uq === undefined) {
             //debugger;
-            console.error("setInner(tuidImport: TuidImport): uq " + fromName + " is not loaded");
+            if (tool_1.env.buildingUq === false) {
+                console.error("setInner(tuidImport: TuidImport): uq " + fromName + " is not loaded");
+            }
             return;
         }
         var iName = tuidImport.name;

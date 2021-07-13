@@ -3,6 +3,7 @@ import { LocalMap } from './localDb';
 export declare const env: {
     unit: number;
     testing: boolean;
+    buildingUq: boolean;
     params: {
         [key: string]: string;
     };
