@@ -38,7 +38,7 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
             continue;
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
         sets += "\n\tObject.assign(uq." + cName + ", " + cName + ");";
-        var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, FieldItem, FieldItemNumber, FieldItemString, FieldItemId, UI } from \"tonva-react\";\nimport { Tuid" + cName + " } from \"./" + uqAlias + "\";\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: Tuid" + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
+        var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, FieldItem, FieldItemNumber, FieldItemString, FieldItemId, UI, uqStringify } from \"tonva-react\";\nimport { Tuid" + cName + " } from \"./" + uqAlias + "\";\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: Tuid" + cName + "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n";
         var path = uqFolder + "/" + cName + ".ui.tsx";
         tools_1.saveTsFileIfNotExists(path, tsUI);
     }
@@ -51,7 +51,7 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
             continue;
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
         sets += "\n\tObject.assign(uq." + cName + ", " + cName + ");";
-        var tsUI = "import { Res, setRes, TFunc, UI } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{JSON.stringify(item)}</>;\n};\n";
+        var tsUI = "import { Res, setRes, TFunc, UI, uqStringify } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n";
         var path = uqFolder + "/" + cName + ".ui.tsx";
         tools_1.saveTsFileIfNotExists(path, tsUI);
         var fields = buildFields(i);
