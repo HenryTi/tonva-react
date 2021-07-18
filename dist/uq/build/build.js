@@ -59,6 +59,7 @@ function build(appConfig, uqSrcPath) {
                     buildContext = new context_1.BuildContext(uqSrcPath);
                     // 只从test 数据库构建uq ts
                     tool_1.env.testing = true;
+                    tool_1.env.buildingUq = true;
                     if (tools_1.lastBuildTime > 0) {
                         console.log(tools_1.red, 'quit !');
                         return [2 /*return*/];

@@ -31,4 +31,5 @@ __exportStar(require("./userIcon"), exports);
 __exportStar(require("./ax"), exports);
 __exportStar(require("./autoHideTips"), exports);
 __exportStar(require("./login"), exports);
+__exportStar(require("./input"), exports);
 //# sourceMappingURL=index.js.map

@@ -133,7 +133,7 @@ var Form = /** @class */ (function (_super) {
         };
         _this.DefaultFieldClass = undefined;
         _this.DefaultButtonClass = 'text-center py-2';
-        _this.DefaultRes = res_1.resLang(res_1.formRes);
+        _this.DefaultRes = res_1.resLang(res_1.inputRes);
         _this.ArrContainer = function (label, content) {
             return jsx_runtime_1.jsxs("div", { children: [jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default('small text-muted text-center bg-light py-1 px-3 mt-4 mb-1') }, { children: label }), void 0), content] }, void 0);
         };

@@ -521,20 +521,10 @@ var UqMan = /** @class */ (function () {
         this.id = id;
         this.name = uqOwner + '/' + uqName;
         this.uqVersion = 0;
-        //this.localMap = uqs.localMap.map(this.name);
         this.localMap = tool_1.env.localDb.map(this.name);
         this.localModifyMax = this.localMap.child('$modifyMax');
         this.localEntities = this.localMap.child('$access');
         var baseUrl = 'tv/';
-        /*
-        let acc: string[];
-        if (access === null || access === undefined || access === '*') {
-            acc = [];
-        }
-        else {
-            acc = access.split(';').map(v => v.trim()).filter(v => v.length > 0);
-        }
-        */
         if (this.name === '$$$/$unitx') {
             // 这里假定，点击home link之后，已经设置unit了
             // 调用 UnitxApi会自动搜索绑定 unitx service
@@ -1014,7 +1004,6 @@ var UqMan = /** @class */ (function () {
                     case 'IDV': return _this.IDV;
                 }
                 var err = "entity " + _this.name + "." + String(key) + " not defined";
-                //console.error(err);
                 _this.showReload('UQ错误：' + err);
                 return undefined;
             }
@@ -1023,12 +1012,6 @@ var UqMan = /** @class */ (function () {
         this.idCache = new IDCache_1.IDCache(this.proxy);
         return ret;
     };
-    /*
-    private showReload(msg: string) {
-        this.localMap.removeAll();
-        nav.showReloadPage(msg);
-    }
-    */
     UqMan.prototype.showReload = function (msg) {
         var cache = this.localMap.child('$reload-tick');
         var reloadTick = cache.get();

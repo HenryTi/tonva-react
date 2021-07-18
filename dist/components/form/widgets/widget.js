@@ -42,7 +42,7 @@ exports.Widget = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
-var rules_1 = require("../rules");
+var inputRules_1 = require("../../inputRules");
 var mobx_1 = require("mobx");
 var mobx_react_1 = require("mobx-react");
 var Widget = /** @class */ (function () {
@@ -119,7 +119,7 @@ var Widget = /** @class */ (function () {
     Widget.prototype.init = function () {
         this.rules = [];
         if (this.itemSchema.required === true) {
-            this.rules.push(new rules_1.RuleRequired(this.context.form.res));
+            this.rules.push(new inputRules_1.RuleRequired(this.context.form.res));
         }
         this.buildRules();
         if (this.ui === undefined)
@@ -128,12 +128,12 @@ var Widget = /** @class */ (function () {
         if (rules === undefined)
             return;
         if (Array.isArray(rules) === false) {
-            this.rules.push(new rules_1.RuleCustom(rules));
+            this.rules.push(new inputRules_1.RuleCustom(rules));
             return;
         }
         for (var _i = 0, _a = rules; _i < _a.length; _i++) {
             var rule = _a[_i];
-            this.rules.push(new rules_1.RuleCustom(rule));
+            this.rules.push(new inputRules_1.RuleCustom(rule));
         }
     };
     Widget.prototype.buildRules = function () {

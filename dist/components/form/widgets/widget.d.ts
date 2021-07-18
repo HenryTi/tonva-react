@@ -3,7 +3,7 @@ import { UiItem } from '../../schema';
 import { FieldProps } from '../field';
 import { Context } from '../context';
 import { ItemSchema } from '../../schema';
-import { Rule } from '../rules';
+import { Rule } from '../../inputRules';
 export declare abstract class Widget {
     name: string;
     protected context: Context;

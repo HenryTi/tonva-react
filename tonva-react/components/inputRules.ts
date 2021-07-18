@@ -1,13 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//import { InputRes } from '../../../res/inputRes';
-/*
+import _ from 'lodash';
+import { resLang } from '../res';
+import { inputRes, InputRes } from '../res/inputRes';
+
 export abstract class Rule {
     abstract check(defy:string[], value:any):void;
 }
-*/
-/*
+
+//export type ContextRule = (context:Context)=>{[target:string]:string[]|string} | string[] | string;
 export type FieldRule = (value:any) => string[] | string;
+
+const defaultInputRes:InputRes = resLang<InputRes>(inputRes);
 
 export class RuleCustom extends Rule {
     private func: FieldRule;
@@ -22,15 +24,15 @@ export class RuleCustom extends Rule {
             case 'undefined': return;
             case 'string': defy.push(ret as string); return;
             default: defy.push(...ret); return;
-        }
+        }        
     }
 }
 
 export abstract class RulePredefined extends Rule {
     protected res: InputRes;
-    constructor(res: InputRes) {
+    constructor(res?: InputRes) {
         super();
-        this.res = res;
+        this.res = res ?? defaultInputRes;
     }
 }
 
@@ -62,8 +64,8 @@ export class RuleNum extends RulePredefined {
     protected max: number
     constructor(res: InputRes, min?: number, max?: number) {
         super(res);
-        this.minMsg = _.template(res.min);
-        this.maxMsg = _.template(res.max);
+        this.minMsg = _.template(this.res.min);
+        this.maxMsg = _.template(this.res.max);
         this.min = min;
         this.max = max;
     }
@@ -96,5 +98,3 @@ export class RuleInt extends RuleNum {
         }
     }
 }
-*/
-//# sourceMappingURL=index.js.map

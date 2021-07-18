@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NumberWidget = void 0;
 //import * as React from 'react';
 var textWidget_1 = require("./textWidget");
-var rules_1 = require("../rules");
+var inputRules_1 = require("../../inputRules");
 var NumberWidget = /** @class */ (function (_super) {
     __extends(NumberWidget, _super);
     function NumberWidget() {
@@ -37,8 +37,8 @@ var NumberWidget = /** @class */ (function (_super) {
         var res = this.context.form.res;
         var _a = this.itemSchema, min = _a.min, max = _a.max;
         this.rules.push(this.itemSchema.type === 'integer' ?
-            new rules_1.RuleInt(res, min, max) :
-            new rules_1.RuleNum(res, min, max));
+            new inputRules_1.RuleInt(res, min, max) :
+            new inputRules_1.RuleNum(res, min, max));
     };
     NumberWidget.prototype.parse = function (value) {
         switch (typeof value) {

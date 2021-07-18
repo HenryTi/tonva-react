@@ -3,7 +3,9 @@ import { Form } from './form';
 import { UiSchema, UiItem } from '../schema';
 import { ArrSchema, ItemSchema } from '../schema';
 import { Widget } from './widgets/widget';
-import { ContextRule } from './rules';
+export declare type ContextRule = (context: Context) => {
+    [target: string]: string[] | string;
+} | string[] | string;
 export declare abstract class Context {
     private subContexts;
     readonly form: Form;
