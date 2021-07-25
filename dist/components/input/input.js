@@ -112,10 +112,12 @@ var Input = /** @class */ (function (_super) {
     };
     Input.prototype.buildRules = function () {
     };
+    Input.prototype.getValue = function () { return this.value; };
+    Input.prototype.setValue = function (v) { this.value = v; };
     Input.prototype.render = function () {
         var _this = this;
-        var _a = this.props, className = _a.className, defaultValue = _a.defaultValue, disabled = _a.disabled, required = _a.required;
-        var content = jsx_runtime_1.jsx("input", { ref: function (inp) { return _this.input = inp; }, className: className, type: this.type, placeholder: this.placeholder, defaultValue: defaultValue, defaultChecked: defaultValue, maxLength: this.maxLength, max: this.max, min: this.min, disabled: disabled, onChange: function () { return _this.onChange(); }, onBlur: function () { return _this.onBlur(); }, onFocus: function () { return _this.onFocus(); } }, void 0);
+        var _a = this.props, defaultValue = _a.defaultValue, disabled = _a.disabled, required = _a.required;
+        var content = jsx_runtime_1.jsx("input", { ref: function (inp) { return _this.input = inp; }, className: this.className, type: this.type, placeholder: this.placeholder, defaultValue: defaultValue, defaultChecked: defaultValue, maxLength: this.maxLength, max: this.max, min: this.min, disabled: disabled, onChange: function () { return _this.onChange(); }, onBlur: function () { return _this.onBlur(); }, onFocus: function () { return _this.onFocus(); } }, void 0);
         if (this.rules.length === 0)
             return content;
         var _b = this.props, containerClassName = _b.containerClassName, ruleClassName = _b.ruleClassName;

@@ -28,6 +28,8 @@ export declare abstract class Input<P extends InputProps, V> extends Component<P
     constructor(props: P);
     private init;
     protected buildRules(): void;
+    getValue(): V;
+    setValue(v: V): void;
     render(): JSX.Element;
     onChange(): void;
     protected valueFromInput(): V;
