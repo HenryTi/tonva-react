@@ -113,7 +113,16 @@ var Input = /** @class */ (function (_super) {
     Input.prototype.buildRules = function () {
     };
     Input.prototype.getValue = function () { return this.value; };
-    Input.prototype.setValue = function (v) { this.value = v; };
+    Input.prototype.setValue = function (v) {
+        var p = this.value;
+        this.value = v;
+        this.checkRules();
+        var onValueChange = this.props.onValueChange;
+        if (!onValueChange)
+            return;
+        if (v !== p)
+            onValueChange(v, p, this.ruleMessage);
+    };
     Input.prototype.render = function () {
         var _this = this;
         var _a = this.props, defaultValue = _a.defaultValue, disabled = _a.disabled, required = _a.required;

@@ -58,7 +58,14 @@ export abstract class Input<P extends InputProps, V> extends Component<P> {
     }
 
     getValue(): V {return this.value;}
-    setValue(v: V) {this.value = v;}
+    setValue(v: V) {
+        let p = this.value;
+        this.value = v;
+        this.checkRules();
+        let {onValueChange} = this.props;
+        if (!onValueChange) return;
+        if (v !== p) onValueChange(v, p, this.ruleMessage);
+    }
 
     render(): JSX.Element {
         let {defaultValue, disabled, required} = this.props;
