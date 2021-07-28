@@ -1004,7 +1004,8 @@ var UqMan = /** @class */ (function () {
                     case 'IDV': return _this.IDV;
                 }
                 var err = "entity " + _this.name + "." + String(key) + " not defined";
-                _this.showReload('UQ错误：' + err);
+                // this.showReload('UQ错误：' + err);
+                console.error('UQ错误：' + err);
                 return undefined;
             }
         });
