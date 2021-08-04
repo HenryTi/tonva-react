@@ -462,7 +462,7 @@ function loadAppUqs(appOwner, appName) {
 }
 function loadUqs(uqConfigs) {
     return __awaiter(this, void 0, void 0, function () {
-        var uqs, centerAppApi, ret, i, _a, ownerAlias, alias;
+        var uqs, centerAppApi, ret, err, i, _a, ownerAlias, alias;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -475,6 +475,11 @@ function loadUqs(uqConfigs) {
                     return [4 /*yield*/, centerAppApi.uqs(uqs)];
                 case 1:
                     ret = _b.sent();
+                    if (ret.length < uqs.length) {
+                        err = "\u4E0B\u5217UQ\uFF1A\n" + uqs.map(function (v) { return v.owner + "/" + v.name; }).join('\n') + "\u4E4B\u4E00\u4E0D\u5B58\u5728";
+                        console.error(err);
+                        throw Error(err);
+                    }
                     for (i = 0; i < uqs.length; i++) {
                         _a = uqs[i], ownerAlias = _a.ownerAlias, alias = _a.alias;
                         ret[i].ownerAlias = ownerAlias;
