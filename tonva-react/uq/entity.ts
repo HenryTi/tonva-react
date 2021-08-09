@@ -252,7 +252,7 @@ export abstract class Entity {
 
     private escape(row:any, field:Field):any {
         let d = row[field.name];
-        if (d === null) return null;
+        if (d === null) return '';
         switch (field.type) {
             case 'datetime':
                 return this.buildDateTimeParam(d);
