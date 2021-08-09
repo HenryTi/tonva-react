@@ -315,6 +315,8 @@ var Entity = /** @class */ (function () {
     };
     Entity.prototype.escape = function (row, field) {
         var d = row[field.name];
+        if (d === null)
+            return null;
         switch (field.type) {
             case 'datetime':
                 return this.buildDateTimeParam(d);
