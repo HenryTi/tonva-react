@@ -91,6 +91,12 @@ function fieldDefaultValue(type) {
 }
 exports.fieldDefaultValue = fieldDefaultValue;
 function IDPath(path) { return path; }
+var EnumResultType;
+(function (EnumResultType) {
+    EnumResultType[EnumResultType["data"] = 0] = "data";
+    EnumResultType[EnumResultType["sql"] = 1] = "sql";
+})(EnumResultType || (EnumResultType = {}));
+;
 var UqMan = /** @class */ (function () {
     function UqMan(uqs, uqData, createBoxId, tvs) {
         var _this = this;
@@ -132,52 +138,17 @@ var UqMan = /** @class */ (function () {
         this.historyArr = [];
         this.pendingArr = [];
         this.tagArr = [];
-        //private coms:any;
-        //private setComs = (coms: any) => {this.coms = coms;}
         this.Acts = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var arr, apiParam, i, ret, retArr, retActs, i;
+            var ret, retArr, arr, i, retActs, i;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        arr = [];
-                        apiParam = {};
-                        for (i in param) {
-                            arr.push(i);
-                            apiParam[i] = param[i].map(function (v) {
-                                var obj = {};
-                                for (var j in v) {
-                                    var val = v[j];
-                                    if (typeof val === 'object') {
-                                        var nv = {};
-                                        for (var n in val) {
-                                            var tv = val[n];
-                                            if (tv && typeof tv === 'object') {
-                                                if (n === 'time') {
-                                                    if (Object.prototype.toString.call(tv) === '[object Date]') {
-                                                        tv = tv.getTime();
-                                                    }
-                                                }
-                                                else {
-                                                    var id = tv['id'];
-                                                    tv = id;
-                                                }
-                                            }
-                                            nv[n] = tv;
-                                        }
-                                        obj[j] = nv;
-                                    }
-                                    else {
-                                        obj[j] = val;
-                                    }
-                                }
-                                return obj;
-                            });
-                        }
-                        apiParam['$'] = arr;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('acts'), apiParam)];
+                    case 0: return [4 /*yield*/, this.apiActs(param, EnumResultType.data)];
                     case 1:
                         ret = _a.sent();
                         retArr = ret[0].ret.split('\n');
+                        arr = [];
+                        for (i in param)
+                            arr.push(i);
                         retActs = {};
                         for (i = 0; i < arr.length; i++) {
                             retActs[arr[i]] = ids(retArr[i].split('\t'));
@@ -186,76 +157,70 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
-        this.ActIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IX, ID, values, IXs, apiParam, ret;
+        this.$Acts = function (param) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        IX = param.IX, ID = param.ID, values = param.values, IXs = param.IXs;
-                        apiParam = {
-                            IX: entityName(IX),
-                            ID: entityName(ID),
-                            IXs: IXs === null || IXs === void 0 ? void 0 : IXs.map(function (v) { return ({ IX: entityName(v.IX), ix: v.ix }); }),
-                            values: values,
-                        };
-                        return [4 /*yield*/, this.uqApi.post(IDPath('act-ix'), apiParam)];
+                    case 0: return [4 /*yield*/, this.apiActs(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.ActIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            var ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiActIX(param, EnumResultType.data)];
                     case 1:
                         ret = _a.sent();
                         return [2 /*return*/, ret[0].ret.split('\t').map(function (v) { return Number(v); })];
                 }
             });
         }); };
-        this.ActIXSort = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IX, ix, id, after, apiParam;
+        this.$ActIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            var ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        IX = param.IX, ix = param.ix, id = param.id, after = param.after;
-                        apiParam = {
-                            IX: entityName(IX),
-                            ix: ix,
-                            id: id,
-                            after: after,
-                        };
-                        return [4 /*yield*/, this.uqApi.post(IDPath('act-ix-sort'), apiParam)];
+                    case 0: return [4 /*yield*/, this.apiActIX(param, EnumResultType.sql)];
                     case 1:
-                        _a.sent();
-                        return [2 /*return*/];
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        }); };
+        this.ActIXSort = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiActIxSort(param, EnumResultType.data)];
+                    case 1: 
+                    /*
+                    let {IX, ix, id, after} = param;
+                    let apiParam:any = {
+                        IX: entityName(IX),
+                        ix,
+                        id,
+                        after,
+                    };
+                    await this.apiPost('act-ix-sort'), apiParam);
+                    */
+                    return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$ActIXSort = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiActIxSort(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.ActDetail = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, main, detail, detail2, detail3, postParam, ret, val, parts, items;
-            var _b, _c, _d;
-            return __generator(this, function (_e) {
-                switch (_e.label) {
-                    case 0:
-                        _a = param, main = _a.main, detail = _a.detail, detail2 = _a.detail2, detail3 = _a.detail3;
-                        postParam = {
-                            main: {
-                                name: entityName(main.ID),
-                                value: toScalars(main.value),
-                            },
-                            detail: {
-                                name: entityName(detail.ID),
-                                values: (_b = detail.values) === null || _b === void 0 ? void 0 : _b.map(function (v) { return toScalars(v); }),
-                            },
-                        };
-                        if (detail2) {
-                            postParam.detail2 = {
-                                name: entityName(detail2.ID),
-                                values: (_c = detail2.values) === null || _c === void 0 ? void 0 : _c.map(function (v) { return toScalars(v); }),
-                            };
-                        }
-                        if (detail3) {
-                            postParam.detail3 = {
-                                name: entityName(detail3.ID),
-                                values: (_d = detail3.values) === null || _d === void 0 ? void 0 : _d.map(function (v) { return toScalars(v); }),
-                            };
-                        }
-                        return [4 /*yield*/, this.uqApi.post(IDPath('act-detail'), postParam)];
+            var ret, val, parts, items;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiActDetail(param, EnumResultType.data)];
                     case 1:
-                        ret = _e.sent();
+                        ret = _a.sent();
                         val = ret[0].ret;
                         parts = val.split('\n');
                         items = parts.map(function (v) { return v.split('\t'); });
@@ -269,16 +234,27 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
-        this.QueryID = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var ID, IX, IDX, ret;
+        this.$ActDetail = function (param) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        ID = param.ID, IX = param.IX, IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('query-id'), __assign(__assign({}, param), { ID: entityName(ID), IX: IX === null || IX === void 0 ? void 0 : IX.map(function (v) { return entityName(v); }), IDX: this.IDXToString(IDX) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiActDetail(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.QueryID = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiQueryID(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$QueryID = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiQueryID(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
@@ -286,7 +262,7 @@ var UqMan = /** @class */ (function () {
             var ret, retValues, _i, ret_1, row, $type, $tv, ID_2, schema, nameNoVice, values, len, i, p;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.uqApi.post(IDPath('id-tv'), ids)];
+                    case 0: return [4 /*yield*/, this.apiIDTv(ids, EnumResultType.data)];
                     case 1:
                         ret = _a.sent();
                         retValues = [];
@@ -328,165 +304,203 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
-        this.IDNO = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var ID, ret;
+        this.$IDTv = function (ids) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        ID = param.ID;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-no'), { ID: entityName(ID) })];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIDTv(ids, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.IDNO = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDNO(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IDNO = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDNO(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IDDetailGet = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var id, main, detail, detail2, detail3, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        id = param.id, main = param.main, detail = param.detail, detail2 = param.detail2, detail3 = param.detail3;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-detail-get'), {
-                                id: id,
-                                main: entityName(main),
-                                detail: entityName(detail),
-                                detail2: entityName(detail2),
-                                detail3: entityName(detail3),
-                            })];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIDDetailGet(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IDDetailGet = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDDetailGet(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.ID = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id'), __assign(__assign({}, param), { IDX: this.IDXToString(IDX) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiID(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$ID = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiID(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.KeyID = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var ID, IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        ID = param.ID, IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('key-id'), __assign(__assign({}, param), { ID: entityName(ID), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiKeyID(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$KeyID = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiKeyID(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IX = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IX, IX1, IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        IX = param.IX, IX1 = param.IX1, IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('ix'), __assign(__assign({}, param), { IX: entityName(IX), IX1: entityName(IX1), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIX(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IX = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIX(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IXr = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IX, IX1, IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        IX = param.IX, IX1 = param.IX1, IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('ixr'), __assign(__assign({}, param), { IX: entityName(IX), IX1: entityName(IX1), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIXr(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IXr = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIXr(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.KeyIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var ID, IX, IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        ID = param.ID, IX = param.IX, IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('key-ix'), __assign(__assign({}, param), { ID: entityName(ID), IX: entityName(IX), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiKeyIX(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$KeyIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiKeyIX(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IDLog = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-log'), __assign(__assign({}, param), { IDX: entityName(IDX) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIDLog(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IDLog = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDLog(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IDSum = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var IDX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        IDX = param.IDX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-sum'), __assign(__assign({}, param), { IDX: entityName(IDX) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIDSum(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IDSum = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDSum(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IDinIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var ID, IX, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        ID = param.ID, IX = param.IX;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-in-ix'), __assign(__assign({}, param), { ID: entityName(ID), IX: entityName(IX) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIDinIX(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IDinIX = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDinIX(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IDxID = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var ID, IX, ID2, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        ID = param.ID, IX = param.IX, ID2 = param.ID2;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-x-id'), __assign(__assign({}, param), { ID: entityName(ID), IX: entityName(IX), ID2: entityName(ID2) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIDxID(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IDxID = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDxID(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
         this.IDTree = function (param) { return __awaiter(_this, void 0, void 0, function () {
-            var ID, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        ID = param.ID;
-                        return [4 /*yield*/, this.uqApi.post(IDPath('id-tree'), __assign(__assign({}, param), { ID: entityName(ID) }))];
-                    case 1:
-                        ret = _a.sent();
-                        return [2 /*return*/, ret];
+                    case 0: return [4 /*yield*/, this.apiIDTree(param, EnumResultType.data)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
+        this.$IDTree = function (param) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiIDTree(param, EnumResultType.sql)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); };
@@ -977,36 +991,43 @@ var UqMan = /** @class */ (function () {
                 var ret = target[lk];
                 if (ret !== undefined)
                     return ret;
-                switch (key) {
-                    default:
-                        debugger;
-                        break;
-                    case 'Acts': return _this.Acts;
-                    case 'ActIX': return _this.ActIX;
-                    case 'ActIXSort': return _this.ActIXSort;
-                    case 'ActDetail': return _this.ActDetail;
-                    case 'IDDetail': return _this.ActDetail;
-                    case 'QueryID': return _this.QueryID;
-                    case 'IDTv': return _this.IDTv;
-                    case 'IDNO': return _this.IDNO;
-                    case 'IDDetailGet': return _this.IDDetailGet;
-                    case 'ID': return _this.ID;
-                    case 'KeyID': return _this.KeyID;
-                    case 'IX': return _this.IX;
-                    case 'IXr': return _this.IXr;
-                    case 'KeyIX': return _this.KeyIX;
-                    case 'IDLog': return _this.IDLog;
-                    case 'IDSum': return _this.IDSum;
-                    case 'IDinIX': return _this.IDinIX;
-                    case 'IDxID': return _this.IDxID;
-                    case 'IDTree': return _this.IDTree;
-                    case 'IDRender': return _this.IDRender;
-                    case 'IDV': return _this.IDV;
-                }
+                var func = _this[key];
+                if (func !== undefined)
+                    return func;
                 var err = "entity " + _this.name + "." + String(key) + " not defined";
                 // this.showReload('UQ错误：' + err);
                 console.error('UQ错误：' + err);
                 return undefined;
+                /*
+                switch (key) {
+                    default: debugger; break;
+                    case 'IDRender': return this.IDRender;
+                    case 'IDV': return this.IDV;
+                    case 'Acts': return this.Acts;
+                    case 'ActIX': return this.ActIX;
+                    case 'ActIXSort': return this.ActIXSort;
+                    case 'ActDetail': return this.ActDetail;
+                    case 'IDDetail': return this.ActDetail;
+                    case 'QueryID': return this.QueryID;
+                    case 'IDTv': return this.IDTv;
+                    case 'IDNO': return this.IDNO;
+                    case 'IDDetailGet': return this.IDDetailGet;
+                    case 'ID': return this.ID;
+                    case 'KeyID': return this.KeyID;
+                    case 'IX': return this.IX;
+                    case 'IXr': return this.IXr;
+                    case 'KeyIX': return this.KeyIX;
+                    case 'IDLog': return this.IDLog;
+                    case 'IDSum': return this.IDSum;
+                    case 'IDinIX': return this.IDinIX;
+                    case 'IDxID': return this.IDxID;
+                    case 'IDTree': return this.IDTree;
+                }
+                let err = `entity ${this.name}.${String(key)} not defined`;
+                // this.showReload('UQ错误：' + err);
+                console.error('UQ错误：' + err);
+                return undefined;
+                */
             }
         });
         this.proxy = ret;
@@ -1029,12 +1050,369 @@ var UqMan = /** @class */ (function () {
             components_1.nav.reload();
         }
     };
+    UqMan.prototype.apiPost = function (api, resultType, apiParam) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (resultType === EnumResultType.sql)
+                            api = '$sql-' + api;
+                        return [4 /*yield*/, this.uqApi.post(IDPath(api), apiParam)];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiActs = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var arr, apiParam, i, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        arr = [];
+                        apiParam = {};
+                        for (i in param) {
+                            arr.push(i);
+                            apiParam[i] = param[i].map(function (v) {
+                                var obj = {};
+                                for (var j in v) {
+                                    var val = v[j];
+                                    if (typeof val === 'object') {
+                                        var nv = {};
+                                        for (var n in val) {
+                                            var tv = val[n];
+                                            if (tv && typeof tv === 'object') {
+                                                if (n === 'time') {
+                                                    if (Object.prototype.toString.call(tv) === '[object Date]') {
+                                                        tv = tv.getTime();
+                                                    }
+                                                }
+                                                else {
+                                                    var id = tv['id'];
+                                                    tv = id;
+                                                }
+                                            }
+                                            nv[n] = tv;
+                                        }
+                                        obj[j] = nv;
+                                    }
+                                    else {
+                                        obj[j] = val;
+                                    }
+                                }
+                                return obj;
+                            });
+                        }
+                        apiParam['$'] = arr;
+                        return [4 /*yield*/, this.apiPost('acts', resultType, apiParam)];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiActIX = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var IX, ID, values, IXs, apiParam, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IX = param.IX, ID = param.ID, values = param.values, IXs = param.IXs;
+                        apiParam = {
+                            IX: entityName(IX),
+                            ID: entityName(ID),
+                            IXs: IXs === null || IXs === void 0 ? void 0 : IXs.map(function (v) { return ({ IX: entityName(v.IX), ix: v.ix }); }),
+                            values: values,
+                        };
+                        return [4 /*yield*/, this.apiPost('act-ix', resultType, apiParam)];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiActIxSort = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var IX, ix, id, after, apiParam;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IX = param.IX, ix = param.ix, id = param.id, after = param.after;
+                        apiParam = {
+                            IX: entityName(IX),
+                            ix: ix,
+                            id: id,
+                            after: after,
+                        };
+                        return [4 /*yield*/, this.apiPost('act-ix-sort', resultType, apiParam)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiActDetail = function (param, resultType) {
+        var _a, _b, _c;
+        return __awaiter(this, void 0, void 0, function () {
+            var _d, main, detail, detail2, detail3, postParam, ret;
+            return __generator(this, function (_e) {
+                switch (_e.label) {
+                    case 0:
+                        _d = param, main = _d.main, detail = _d.detail, detail2 = _d.detail2, detail3 = _d.detail3;
+                        postParam = {
+                            main: {
+                                name: entityName(main.ID),
+                                value: toScalars(main.value),
+                            },
+                            detail: {
+                                name: entityName(detail.ID),
+                                values: (_a = detail.values) === null || _a === void 0 ? void 0 : _a.map(function (v) { return toScalars(v); }),
+                            },
+                        };
+                        if (detail2) {
+                            postParam.detail2 = {
+                                name: entityName(detail2.ID),
+                                values: (_b = detail2.values) === null || _b === void 0 ? void 0 : _b.map(function (v) { return toScalars(v); }),
+                            };
+                        }
+                        if (detail3) {
+                            postParam.detail3 = {
+                                name: entityName(detail3.ID),
+                                values: (_c = detail3.values) === null || _c === void 0 ? void 0 : _c.map(function (v) { return toScalars(v); }),
+                            };
+                        }
+                        return [4 /*yield*/, this.apiPost('act-detail', resultType, postParam)];
+                    case 1:
+                        ret = _e.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiQueryID = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ID, IX, IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID, IX = param.IX, IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('query-id', resultType, __assign(__assign({}, param), { ID: entityName(ID), IX: IX === null || IX === void 0 ? void 0 : IX.map(function (v) { return entityName(v); }), IDX: this.IDXToString(IDX) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDTv = function (ids, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiPost('id-tv', resultType, ids)];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDNO = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ID, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID;
+                        return [4 /*yield*/, this.apiPost('id-no', resultType, { ID: entityName(ID) })];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDDetailGet = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, main, detail, detail2, detail3, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        id = param.id, main = param.main, detail = param.detail, detail2 = param.detail2, detail3 = param.detail3;
+                        return [4 /*yield*/, this.apiPost('id-detail-get', resultType, {
+                                id: id,
+                                main: entityName(main),
+                                detail: entityName(detail),
+                                detail2: entityName(detail2),
+                                detail3: entityName(detail3),
+                            })];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
     //private checkParam(ID:ID, IDX:(ID|IDX)|(ID|IDX)[], IX:IX, id:number|number[], key:{[key:string]:string|number}, page: ParamPage) {
     //}
     UqMan.prototype.IDXToString = function (p) {
         if (Array.isArray(p) === true)
             return p.map(function (v) { return entityName(v); });
         return entityName(p);
+    };
+    UqMan.prototype.apiID = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('id', resultType, __assign(__assign({}, param), { IDX: this.IDXToString(IDX) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiKeyID = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ID, IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID, IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('key-id', resultType, __assign(__assign({}, param), { ID: entityName(ID), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIX = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var IX, IX1, IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IX = param.IX, IX1 = param.IX1, IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('ix', resultType, __assign(__assign({}, param), { IX: entityName(IX), IX1: entityName(IX1), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIXr = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var IX, IX1, IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IX = param.IX, IX1 = param.IX1, IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('ixr', resultType, __assign(__assign({}, param), { IX: entityName(IX), IX1: entityName(IX1), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiKeyIX = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ID, IX, IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID, IX = param.IX, IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('key-ix', resultType, __assign(__assign({}, param), { ID: entityName(ID), IX: entityName(IX), IDX: IDX === null || IDX === void 0 ? void 0 : IDX.map(function (v) { return entityName(v); }) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDLog = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('id-log', resultType, __assign(__assign({}, param), { IDX: entityName(IDX) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDSum = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var IDX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        IDX = param.IDX;
+                        return [4 /*yield*/, this.apiPost('id-sum', resultType, __assign(__assign({}, param), { IDX: entityName(IDX) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDinIX = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ID, IX, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID, IX = param.IX;
+                        return [4 /*yield*/, this.apiPost('id-in-ix', resultType, __assign(__assign({}, param), { ID: entityName(ID), IX: entityName(IX) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDxID = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ID, IX, ID2, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID, IX = param.IX, ID2 = param.ID2;
+                        return [4 /*yield*/, this.apiPost('id-x-id', resultType, __assign(__assign({}, param), { ID: entityName(ID), IX: entityName(IX), ID2: entityName(ID2) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
+    UqMan.prototype.apiIDTree = function (param, resultType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ID, ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        ID = param.ID;
+                        return [4 /*yield*/, this.apiPost('id-tree', resultType, __assign(__assign({}, param), { ID: entityName(ID) }))];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
     };
     UqMan.prototype.renderIDUnknownType = function (id) {
         return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ["id=" + id + " type undefined"] });

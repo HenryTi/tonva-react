@@ -20,6 +20,7 @@ import { nav } from '../components';
 import { IDCache } from './IDCache';
 import React from 'react';
 import { observer } from 'mobx-react';
+import { result } from 'lodash';
 
 export type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text'
     | 'datetime' | 'date' | 'time' | 'timestamp';
@@ -236,30 +237,52 @@ export interface ParamIDTree {
 }
 
 function IDPath(path:string):string {return path;}
+enum EnumResultType {data, sql};
 
 export interface Uq {
 	$: UqMan;
 	Acts(param:any): Promise<any>;
+	$Acts(param:any): Promise<string>;
 	ActIX<T>(param: ParamActIX<T>): Promise<number[]>;
+	$ActIX<T>(param: ParamActIX<T>): Promise<string>;
 	ActIXSort(param: ParamActIXSort): Promise<void>;
+	$ActIXSort(param: ParamActIXSort): Promise<string>;
 	ActDetail<M,D>(param: ParamActDetail<M,D>): Promise<RetActDetail>;
+	$ActDetail<M,D>(param: ParamActDetail<M,D>): Promise<string>;
 	ActDetail<M,D,D2>(param: ParamActDetail2<M,D,D2>): Promise<RetActDetail2>;
+	$ActDetail<M,D,D2>(param: ParamActDetail2<M,D,D2>): Promise<string>;
 	ActDetail<M,D,D2,D3>(param: ParamActDetail3<M,D,D2,D3>): Promise<RetActDetail3>;
+	$ActDetail<M,D,D2,D3>(param: ParamActDetail3<M,D,D2,D3>): Promise<string>;
 	QueryID<T>(param: ParamQueryID): Promise<T[]>;
+	$QueryID<T>(param: ParamQueryID): Promise<string>;
 	IDNO(param: ParamIDNO): Promise<string>;
+	$IDNO(param: ParamIDNO): Promise<string>;
 	IDDetailGet<M,D>(param: ParamIDDetailGet): Promise<[M[], D[]]>;
+	$IDDetailGet<M,D>(param: ParamIDDetailGet): Promise<string>;
 	IDDetailGet<M,D,D2>(param: ParamIDDetailGet): Promise<[M[], D[], D2[]]>;
+	$IDDetailGet<M,D,D2>(param: ParamIDDetailGet): Promise<string>;
 	IDDetailGet<M,D,D2,D3>(param: ParamIDDetailGet): Promise<[M[], D[], D2[], D3[]]>;
+	$IDDetailGet<M,D,D2,D3>(param: ParamIDDetailGet): Promise<string>;
 	ID<T>(param: ParamID): Promise<T[]>;
+	$ID<T>(param: ParamID): Promise<string>;
 	KeyID<T>(param: ParamKeyID): Promise<T[]>;
+	$KeyID<T>(param: ParamKeyID): Promise<string>;
 	IX<T>(param: ParamIX): Promise<T[]>;
+	$IX<T>(param: ParamIX): Promise<string>;
 	IXr<T> (param: ParamIX): Promise<T[]>; // IX id 反查IX list
+	$IXr<T> (param: ParamIX): Promise<string>; // IX id 反查IX list
 	KeyIX<T>(param: ParamKeyIX): Promise<T[]>;
+	$KeyIX<T>(param: ParamKeyIX): Promise<string>;
 	IDLog<T> (param: ParamIDLog): Promise<T[]>;
+	$IDLog<T> (param: ParamIDLog): Promise<string>;
 	IDSum<T> (param: ParamIDSum): Promise<T[]>;
+	$IDSum<T> (param: ParamIDSum): Promise<string>;
 	IDxID<T,T2> (param: ParamIDxID): Promise<[T[],T2[]]>; // ID list with IX 对应的子集
+	$IDxID<T,T2> (param: ParamIDxID): Promise<string>; // ID list with IX 对应的子集
 	IDinIX<T>(param:ParamIDinIX): Promise<T&{$in:boolean}[]>;
+	$IDinIX<T>(param:ParamIDinIX): Promise<string>;
 	IDTree<T>(param:ParamIDTree): Promise<T[]>;
+	$IDTree<T>(param:ParamIDTree): Promise<string>;
 
 	IDTv(ids: number[]): Promise<any[]>;
 	IDRender(id: number, render?:(value:any) => JSX.Element): JSX.Element;
@@ -705,8 +728,17 @@ export class UqMan {
 				}
 				let ret = target[lk];
 				if (ret !== undefined) return ret;
+				let func = (this as any)[key];
+				if (func !== undefined) return func;
+				let err = `entity ${this.name}.${String(key)} not defined`;
+				// this.showReload('UQ错误：' + err);
+				console.error('UQ错误：' + err);
+				return undefined;
+				/*
 				switch (key) {
 					default: debugger; break;
+					case 'IDRender': return this.IDRender;
+					case 'IDV': return this.IDV;
 					case 'Acts': return this.Acts;
 					case 'ActIX': return this.ActIX;
 					case 'ActIXSort': return this.ActIXSort;
@@ -726,13 +758,12 @@ export class UqMan {
 					case 'IDinIX': return this.IDinIX;
 					case 'IDxID': return this.IDxID;
 					case 'IDTree': return this.IDTree;
-					case 'IDRender': return this.IDRender;
-					case 'IDV': return this.IDV;
 				}
 				let err = `entity ${this.name}.${String(key)} not defined`;
 				// this.showReload('UQ错误：' + err);
 				console.error('UQ错误：' + err);
 				return undefined;
+				*/
 			}
 		});
 		this.proxy = ret;
@@ -756,9 +787,13 @@ export class UqMan {
 		}
     }
 
-	//private coms:any;
-	//private setComs = (coms: any) => {this.coms = coms;}
-	private Acts = async (param:any): Promise<any> => {
+	private async apiPost(api:string, resultType: EnumResultType, apiParam: any): Promise<any> {
+		if (resultType === EnumResultType.sql) api = '$sql-' + api;
+		let ret = await this.uqApi.post(IDPath(api), apiParam);
+		return ret;
+	}
+
+	private async apiActs(param: any, resultType: EnumResultType): Promise<any> {
 		// 这边的obj属性序列，也许会不一样
 		let arr:string[] = [];
 		let apiParam:any = {};
@@ -795,8 +830,16 @@ export class UqMan {
 			});
 		}
 		apiParam['$'] = arr;
-		let ret = await this.uqApi.post(IDPath('acts'), apiParam);
+		let ret = await this.apiPost('acts', resultType,  apiParam);
+		return ret;
+	}
+
+	protected Acts = async (param:any): Promise<any> => {
+		//let apiParam = this.ActsApiParam(param);
+		let ret = await this.apiActs(param, EnumResultType.data); // await this.apiPost('acts', apiParam);
 		let retArr = (ret[0].ret as string).split('\n');
+		let arr:string[] = [];
+		for (let i in param) arr.push(i);
 		let retActs:{[key:string]:number[]} = {};
 		for (let i=0; i<arr.length; i++) {
 			retActs[arr[i]] = ids(retArr[i].split('\t'));
@@ -804,7 +847,11 @@ export class UqMan {
 		return retActs;
 	}
 
-	private ActIX = async (param: ParamActIX<any>): Promise<number[]> => {
+	protected $Acts = async (param:any): Promise<any> => {
+		return await this.apiActs(param, EnumResultType.sql);
+	}
+
+	private async apiActIX(param: any, resultType: EnumResultType): Promise<any> {
 		let {IX, ID, values, IXs} = param;
 		let apiParam:any = {
 			IX: entityName(IX),
@@ -812,11 +859,31 @@ export class UqMan {
 			IXs: IXs?.map(v => ({IX:entityName(v.IX), ix:v.ix})),
 			values,
 		};
-		let ret = await this.uqApi.post(IDPath('act-ix'), apiParam);
+		let ret = await this.apiPost('act-ix', resultType, apiParam);
+		return ret;
+	}
+
+	protected ActIX = async (param: ParamActIX<any>): Promise<number[]> => {
+		/*
+		let {IX, ID, values, IXs} = param;
+		let apiParam:any = {
+			IX: entityName(IX),
+			ID: entityName(ID),
+			IXs: IXs?.map(v => ({IX:entityName(v.IX), ix:v.ix})),
+			values,
+		};
+		let ret = await this.apiPost('act-ix'), apiParam);
+		*/
+		let ret = await this.apiActIX(param, EnumResultType.data);
 		return (ret[0].ret as string).split('\t').map(v => Number(v));
 	}
 
-	private ActIXSort = async (param: ParamActIXSort): Promise<void> => {
+	protected $ActIX = async (param: ParamActIX<any>): Promise<string> => {
+		let ret = await this.apiActIX(param, EnumResultType.sql);
+		return ret;
+	}
+
+	private async apiActIxSort(param: ParamActIXSort, resultType: EnumResultType): Promise<any> {
 		let {IX, ix, id, after} = param;
 		let apiParam:any = {
 			IX: entityName(IX),
@@ -824,10 +891,28 @@ export class UqMan {
 			id,
 			after,
 		};
-		await this.uqApi.post(IDPath('act-ix-sort'), apiParam);
+		return await this.apiPost('act-ix-sort', resultType, apiParam);
 	}
 
-	private ActDetail = async (param: ParamActDetail<any, any>): Promise<any> => {
+	protected ActIXSort = async (param: ParamActIXSort): Promise<void> => {
+		/*
+		let {IX, ix, id, after} = param;
+		let apiParam:any = {
+			IX: entityName(IX),
+			ix,
+			id,
+			after,
+		};
+		await this.apiPost('act-ix-sort'), apiParam);
+		*/
+		return await this.apiActIxSort(param, EnumResultType.data);
+	}
+
+	protected $ActIXSort = async (param: ParamActIXSort): Promise<string> => {
+		return await this.apiActIxSort(param, EnumResultType.sql);
+	}
+
+	private async apiActDetail(param: ParamActDetail<any, any>, resultType: EnumResultType): Promise<any> {
 		let {main, detail, detail2, detail3} = param as unknown as ParamActDetail3<any, any, any, any>;
 		let postParam:any = {
 			main: {
@@ -851,7 +936,11 @@ export class UqMan {
 				values: detail3.values?.map(v => toScalars(v)),
 			}
 		}
-		let ret = await this.uqApi.post(IDPath('act-detail'), postParam);
+		let ret = await this.apiPost('act-detail', resultType, postParam);
+	}
+
+	protected ActDetail = async (param: ParamActDetail<any, any>) => {
+		let ret = await this.apiActDetail(param, EnumResultType.data);
 		let val:string = ret[0].ret;
 		let parts = val.split('\n');
 		let items = parts.map(v => v.split('\t'));
@@ -864,9 +953,13 @@ export class UqMan {
 		return ret;
 	}
 
-	private QueryID = async (param: ParamQueryID): Promise<any[]> => {
+	protected $ActDetail = async (param: ParamActDetail<any, any>) => {
+		return await this.apiActDetail(param, EnumResultType.sql);
+	}
+
+	private async apiQueryID(param: ParamQueryID, resultType: EnumResultType): Promise<any[]> {
 		let {ID, IX, IDX} = param;
-		let ret = await this.uqApi.post(IDPath('query-id'), {
+		let ret = await this.apiPost('query-id', resultType, {
 			...param,
 			ID: entityName(ID),
 			IX: IX?.map(v => entityName(v)),
@@ -875,8 +968,21 @@ export class UqMan {
 		return ret;
 	}
 
-	private IDTv = async (ids: number[]): Promise<any[]> => {
-		let ret = await this.uqApi.post(IDPath('id-tv'), ids);
+	protected QueryID = async (param: ParamQueryID) => {
+		return await this.apiQueryID(param, EnumResultType.data);
+	}
+
+	protected $QueryID = async (param: ParamQueryID) => {
+		return await this.apiQueryID(param, EnumResultType.sql);
+	}
+
+	private async apiIDTv(ids: number[], resultType: EnumResultType): Promise<any[]> {		
+		let ret = await this.apiPost('id-tv', resultType, ids);
+		return ret;
+	}
+
+	protected IDTv = async (ids: number[]): Promise<any[]> => {
+		let ret = await this.apiIDTv(ids, EnumResultType.data);
 		let retValues: any[] = [];
 		for (let row of ret) {
 			let {$type, $tv} = row;
@@ -902,15 +1008,27 @@ export class UqMan {
 		return retValues;
 	}
 
-	private IDNO = async (param: ParamIDNO): Promise<string> => {
+	protected $IDTv = async (ids: number[]): Promise<any> => {
+		return await this.apiIDTv(ids, EnumResultType.sql);
+	}
+
+	private async apiIDNO(param: ParamIDNO, resultType: EnumResultType): Promise<string> {
 		let {ID} = param;
-		let ret = await this.uqApi.post(IDPath('id-no'), {ID: entityName(ID)});
+		let ret = await this.apiPost('id-no', resultType, {ID: entityName(ID)});
 		return ret;
 	}
 
-	private IDDetailGet = async (param: ParamIDDetailGet): Promise<any> => {
+	protected IDNO = async (param: ParamIDNO): Promise<string> => {
+		return await this.apiIDNO(param, EnumResultType.data);
+	}
+
+	protected $IDNO = async (param: ParamIDNO): Promise<string> => {
+		return await this.apiIDNO(param, EnumResultType.sql);
+	}
+
+	private async apiIDDetailGet(param: ParamIDDetailGet, resultType: EnumResultType): Promise<any> {
 		let {id, main, detail, detail2, detail3} = param;
-		let ret = await this.uqApi.post(IDPath('id-detail-get'), {
+		let ret = await this.apiPost('id-detail-get', resultType, {
 			id,
 			main: entityName(main),
 			detail: entityName(detail),
@@ -920,35 +1038,57 @@ export class UqMan {
 		return ret;
 	}
 
+	protected IDDetailGet = async (param: ParamIDDetailGet): Promise<any> => {
+		return await this.apiIDDetailGet(param, EnumResultType.data);
+	}
+
+	protected $IDDetailGet = async (param: ParamIDDetailGet): Promise<any> => {
+		return await this.apiIDDetailGet(param, EnumResultType.sql);
+	}
+
 	//private checkParam(ID:ID, IDX:(ID|IDX)|(ID|IDX)[], IX:IX, id:number|number[], key:{[key:string]:string|number}, page: ParamPage) {
 	//}
 	private IDXToString(p:ID|IDX|((ID|IDX)[])):string|string[] {
 		if (Array.isArray(p) === true) return (p as (ID|IDX)[]).map(v => entityName(v));
 		return entityName(p as ID|IDX);
 	}
-	private ID = async (param: ParamID): Promise<any[]> => {
+	private async apiID(param: ParamID, resultType: EnumResultType): Promise<any> {
 		let {IDX} = param;
 		//this.checkParam(null, IDX, null, id, null, page);
-		let ret = await this.uqApi.post(IDPath('id'), {
+		let ret = await this.apiPost('id', resultType, {
 			...param,
 			IDX: this.IDXToString(IDX),
 		});
 		return ret;
 	}
-	private KeyID = async (param: ParamKeyID): Promise<any[]> => {
+	protected  ID = async (param: ParamID): Promise<any[]> => {
+		return await this.apiID(param, EnumResultType.data);
+	}
+	protected  $ID = async (param: ParamID): Promise<string> => {
+		return await this.apiID(param, EnumResultType.sql);
+	}
+
+	private async apiKeyID(param: ParamKeyID, resultType: EnumResultType): Promise<any> {
 		let {ID, IDX} = param;
 		//this.checkParam(null, IDX, null, null, key, page);
-		let ret = await this.uqApi.post(IDPath('key-id'), {
+		let ret = await this.apiPost('key-id', resultType, {
 			...param,
 			ID: entityName(ID),
 			IDX: IDX?.map(v => entityName(v)),
 		});
 		return ret;
 	}
-	private IX = async (param: ParamIX): Promise<any[]> => {
+	protected KeyID = async (param: ParamKeyID): Promise<any[]> => {
+		return await this.apiKeyID(param, EnumResultType.data);
+	}
+	protected $KeyID = async (param: ParamKeyID): Promise<string> => {
+		return await this.apiKeyID(param, EnumResultType.sql);
+	}
+
+	private async apiIX(param: ParamIX, resultType: EnumResultType): Promise<any> {
 		let {IX, IX1, IDX} = param;
 		//this.checkParam(null, IDX, IX, id, null, page);
-		let ret = await this.uqApi.post(IDPath('ix'), {
+		let ret = await this.apiPost('ix', resultType, {
 			...param,
 			IX: entityName(IX),
 			IX1: entityName(IX1),
@@ -956,10 +1096,17 @@ export class UqMan {
 		});
 		return ret;
 	}
-	private IXr = async (param: ParamIX): Promise<any[]> => {
+	protected IX = async (param: ParamIX): Promise<any[]> => {
+		return await this.apiIX(param, EnumResultType.data);
+	}
+	protected $IX = async (param: ParamIX): Promise<string> => {
+		return await this.apiIX(param, EnumResultType.sql);
+	}
+
+	private async apiIXr(param: ParamIX, resultType: EnumResultType): Promise<any> {
 		let {IX, IX1, IDX} = param;
 		//this.checkParam(null, IDX, IX, id, null, page);
-		let ret = await this.uqApi.post(IDPath('ixr'), {
+		let ret = await this.apiPost('ixr', resultType, {
 			...param,
 			IX: entityName(IX),
 			IX1: entityName(IX1),
@@ -967,10 +1114,17 @@ export class UqMan {
 		});
 		return ret;
 	}
-	private KeyIX = async (param: ParamKeyIX): Promise<any[]> => {
+	protected IXr = async (param: ParamIX): Promise<any[]> => {
+		return await this.apiIXr(param, EnumResultType.data);
+	}
+	protected $IXr = async (param: ParamIX): Promise<any[]> => {
+		return await this.apiIXr(param, EnumResultType.sql);
+	}
+
+	private async apiKeyIX(param: ParamKeyIX, resultType: EnumResultType): Promise<any> {
 		let {ID, IX, IDX} = param;
 		//this.checkParam(ID, IDX, IX, null, key, page);
-		let ret = await this.uqApi.post(IDPath('key-ix'), {
+		let ret = await this.apiPost('key-ix', resultType, {
 			...param,
 			ID: entityName(ID),
 			IX: entityName(IX),
@@ -978,38 +1132,66 @@ export class UqMan {
 		});
 		return ret;
 	}
-	private IDLog = async (param: ParamIDLog): Promise<any[]> => {
+	protected KeyIX = async (param: ParamKeyIX): Promise<any[]> => {
+		return await this.apiKeyIX(param, EnumResultType.data);
+	}
+	protected $KeyIX = async (param: ParamKeyIX): Promise<any[]> => {
+		return await this.apiKeyIX(param, EnumResultType.sql);
+	}
+
+	private async apiIDLog(param: ParamIDLog, resultType: EnumResultType): Promise<any> {
 		let {IDX} = param;
 		//this.checkParam(null, IDX, null, id, null, page);
-		let ret = await this.uqApi.post(IDPath('id-log'), {
+		let ret = await this.apiPost('id-log', resultType, {
 			...param,
 			IDX: entityName(IDX),
 		});
 		return ret;
 	}
-	private IDSum = async (param: ParamIDSum): Promise<any[]> => {
+	protected IDLog = async (param: ParamIDLog): Promise<any[]> => {
+		return await this.apiIDLog(param, EnumResultType.data);
+	}
+	protected $IDLog = async (param: ParamIDLog): Promise<string> => {
+		return await this.apiIDLog(param, EnumResultType.sql);
+	}
+	
+	private async apiIDSum(param: ParamIDSum, resultType: EnumResultType): Promise<any> {
 		let {IDX} = param;
 		//this.checkParam(null, IDX, null, id, null, page);
-		let ret = await this.uqApi.post(IDPath('id-sum'), {
+		let ret = await this.apiPost('id-sum', resultType, {
 			...param,
 			IDX: entityName(IDX),
 		});
 		return ret;
 	}
-	private IDinIX = async (param:ParamIDinIX): Promise<any|{$in:boolean}[]> => {
+	protected IDSum = async (param: ParamIDSum): Promise<any[]> => {
+		return await this.apiIDSum(param, EnumResultType.data);
+	}
+	protected $IDSum = async (param: ParamIDSum): Promise<string> => {
+		return await this.apiIDSum(param, EnumResultType.sql);
+	}
+
+	private async apiIDinIX(param:ParamIDinIX, resultType: EnumResultType): Promise<any> {
 		let {ID, IX} = param;
 		//this.checkParam(null, IDX, null, id, null, page);
-		let ret = await this.uqApi.post(IDPath('id-in-ix'), {
+		let ret = await this.apiPost('id-in-ix', resultType, {
 			...param,
 			ID: entityName(ID),
 			IX: entityName(IX),
 		});
 		return ret;
 	}
-	private IDxID = async (param:ParamIDxID): Promise<any[]> => {
+	protected IDinIX = async (param:ParamIDinIX): Promise<any|{$in:boolean}[]> => {
+		return await this.apiIDinIX(param, EnumResultType.data);
+	}
+	protected $IDinIX = async (param:ParamIDinIX): Promise<string> => {
+		return await this.apiIDinIX(param, EnumResultType.sql);
+	}
+
+	private async apiIDxID(param:ParamIDxID,resultType: EnumResultType): Promise<any> {
 		let {ID, IX, ID2} = param;
 		//this.checkParam(null, IDX, null, id, null, page);
-		let ret = await this.uqApi.post(IDPath('id-x-id'), {
+		let ret = await this.apiPost('id-x-id', resultType, {
 			...param,
 			ID: entityName(ID),
 			IX: entityName(IX),
@@ -1017,17 +1199,29 @@ export class UqMan {
 		});
 		return ret;
 	}
+	protected IDxID = async (param:ParamIDxID): Promise<any[]> => {
+		return await this.apiIDxID(param, EnumResultType.data);
+	}
+	protected $IDxID = async (param:ParamIDxID): Promise<string> => {
+		return await this.apiIDxID(param, EnumResultType.sql);
+	}
 
-	private IDTree = async (param:ParamIDTree): Promise<any[]> => {
+	private async apiIDTree(param:ParamIDTree, resultType: EnumResultType): Promise<any> {
 		let {ID} = param;
-		let ret = await this.uqApi.post(IDPath('id-tree'), {
+		let ret = await this.apiPost('id-tree', resultType, {
 			...param,
 			ID: entityName(ID),
 		});
 		return ret;
 	}
+	protected IDTree = async (param:ParamIDTree): Promise<any[]> => {
+		return await this.apiIDTree(param, EnumResultType.data);
+	}
+	protected $IDTree = async (param:ParamIDTree): Promise<string> => {
+		return await this.apiIDTree(param, EnumResultType.sql);
+	}
 
-	private IDRender = (id: number, render?:(value:any) => JSX.Element): JSX.Element => {
+	protected IDRender = (id: number, render?:(value:any) => JSX.Element): JSX.Element => {
 		return React.createElement(observer(() => {
 			let ret = this.idCache.getValue(id);
 			if (ret === undefined) {
@@ -1041,7 +1235,7 @@ export class UqMan {
 		}));
 	}
 
-	private IDV = <T extends object>(id: number): T => {
+	protected IDV = <T extends object>(id: number): T => {
 		let ret = this.idCache.getValue(id);
 		return ret as T;
 	}
