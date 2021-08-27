@@ -1057,7 +1057,7 @@ var UqMan = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         if (resultType === EnumResultType.sql)
-                            api = '$sql-' + api;
+                            api = 'sql-' + api;
                         return [4 /*yield*/, this.uqApi.post(IDPath(api), apiParam)];
                     case 1:
                         ret = _a.sent();

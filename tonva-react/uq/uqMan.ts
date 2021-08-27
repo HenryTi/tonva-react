@@ -788,7 +788,7 @@ export class UqMan {
     }
 
 	private async apiPost(api:string, resultType: EnumResultType, apiParam: any): Promise<any> {
-		if (resultType === EnumResultType.sql) api = '$sql-' + api;
+		if (resultType === EnumResultType.sql) api = 'sql-' + api;
 		let ret = await this.uqApi.post(IDPath(api), apiParam);
 		return ret;
 	}
