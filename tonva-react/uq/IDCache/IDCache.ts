@@ -4,7 +4,7 @@ import { Uq } from '../uqMan';
 const maxCacheSize = 1000;
 const delayLoad = 30; 	// 延迟loading的时间
 export class IDCache {
-	private uq: Uq;
+	protected uq: Uq;
 	private queue: number[] = [];               							// 每次使用，都排到队头
 	private cache = observable.map<number, object|number>({}, {deep: false});    // 已经缓冲的, 如果是数值，则是重复取的次数
 	private waitingIds: number[] = [];          							// 等待loading的
@@ -25,13 +25,18 @@ export class IDCache {
 		return ret;
 	}
 
+	protected async TvIdValues(waitingIds: number[]) {
+		return await this.uq.IDTv(waitingIds);
+	}
+
 	private timeOut = async () => {
 		let waitingIds = this.waitingIds;
 		this.waitingIds = [];
 		if (waitingIds.length === 0) return;
-		let values = await this.uq.IDTv(waitingIds);
+		let values = await this.TvIdValues(waitingIds);
 		for (let val of values) {
 			let {id} = val;
+			if (waitingIds[0] < 0) id = -id;
 			this.cache.set(id, val);
 			let index = waitingIds.findIndex(v => v === id);
 			if (index >= 0) waitingIds.splice(index, 1);
@@ -112,3 +117,10 @@ export class IDCache {
 	}
 	*/
 }
+/*
+export class IDLocalCache extends IDCache {
+	protected async TvIdValues(waitingIds: number[]) {
+		return await this.uq.IDLocalTv(waitingIds);
+	}
+}
+*/

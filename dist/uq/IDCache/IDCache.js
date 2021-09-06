@@ -55,11 +55,13 @@ var IDCache = /** @class */ (function () {
                         this.waitingIds = [];
                         if (waitingIds.length === 0)
                             return [2 /*return*/];
-                        return [4 /*yield*/, this.uq.IDTv(waitingIds)];
+                        return [4 /*yield*/, this.TvIdValues(waitingIds)];
                     case 1:
                         values = _b.sent();
                         _loop_1 = function (val) {
                             var id = val.id;
+                            if (waitingIds[0] < 0)
+                                id = -id;
                             this_1.cache.set(id, val);
                             var index = waitingIds.findIndex(function (v) { return v === id; });
                             if (index >= 0)
@@ -91,6 +93,16 @@ var IDCache = /** @class */ (function () {
         if (typeof ret === 'number')
             return;
         return ret;
+    };
+    IDCache.prototype.TvIdValues = function (waitingIds) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.uq.IDTv(waitingIds)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     IDCache.prototype.useId = function (id) {
         if (!id)
@@ -151,4 +163,11 @@ var IDCache = /** @class */ (function () {
     return IDCache;
 }());
 exports.IDCache = IDCache;
+/*
+export class IDLocalCache extends IDCache {
+    protected async TvIdValues(waitingIds: number[]) {
+        return await this.uq.IDLocalTv(waitingIds);
+    }
+}
+*/ 
 //# sourceMappingURL=IDCache.js.map

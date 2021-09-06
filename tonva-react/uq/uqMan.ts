@@ -20,7 +20,6 @@ import { nav } from '../components';
 import { IDCache } from './IDCache';
 import React from 'react';
 import { observer } from 'mobx-react';
-import { result } from 'lodash';
 
 export type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text'
     | 'datetime' | 'date' | 'time' | 'timestamp';
@@ -287,6 +286,11 @@ export interface Uq {
 	IDTv(ids: number[]): Promise<any[]>;
 	IDRender(id: number, render?:(value:any) => JSX.Element): JSX.Element;
 	IDV<T>(id: number): T;
+	/*
+	IDLocalTv(ids: number[]): Promise<any[]>;
+	IDLocalRender(id: number, render?:(value:any) => JSX.Element): JSX.Element;
+	IDLocalV<T>(id: number): T;
+	*/
 }
 
 export class UqMan {
@@ -308,6 +312,7 @@ export class UqMan {
     private readonly localEntities: LocalCache;
     private readonly tvs:{[entity:string]:(values:any)=>JSX.Element};
 	private idCache: IDCache;
+	//private idLocalCache: IDLocalCache;
 	proxy: any;
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
@@ -424,7 +429,7 @@ export class UqMan {
             this.buildEntities(entities);
         }
         catch (err) {
-            return err;
+            return err as any;
         }
     }
 
@@ -856,7 +861,7 @@ export class UqMan {
 		let apiParam:any = {
 			IX: entityName(IX),
 			ID: entityName(ID),
-			IXs: IXs?.map(v => ({IX:entityName(v.IX), ix:v.ix})),
+			IXs: IXs?.map((v: any) => ({IX:entityName(v.IX), ix:v.ix})),
 			values,
 		};
 		let ret = await this.apiPost('act-ix', resultType, apiParam);
@@ -1239,6 +1244,13 @@ export class UqMan {
 		let ret = this.idCache.getValue(id);
 		return ret as T;
 	}
+
+	/*
+	protected IDLocalV = <T extends object>(id: number): T => {
+		let ret = this.idLocalCache.getValue(id);
+		return ret as T;
+	}
+	*/
 
 	private renderIDUnknownType(id: number) {
 		return React.createElement('span', {props:{className: 'text-muted'},  children: [`id=${id} type undefined`]});

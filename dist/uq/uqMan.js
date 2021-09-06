@@ -1414,6 +1414,12 @@ var UqMan = /** @class */ (function () {
             });
         });
     };
+    /*
+    protected IDLocalV = <T extends object>(id: number): T => {
+        let ret = this.idLocalCache.getValue(id);
+        return ret as T;
+    }
+    */
     UqMan.prototype.renderIDUnknownType = function (id) {
         return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ["id=" + id + " type undefined"] });
     };
