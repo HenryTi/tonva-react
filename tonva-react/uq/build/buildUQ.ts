@@ -68,6 +68,12 @@ import { IDXValue, Uq`;
 	appendArr<IDX>(uq.idxArr, 'IDX', v => uqBlock<IDX>(v, buildIDX));
 	appendArr<IX>(uq.ixArr, 'IX', v => uqBlock<IX>(v, buildIX));
 	ts += '\n}\n';
+	ts += `
+	export function assign(uq: any, to:string, from:any): void {
+		Object.assign((uq as any)[to], from);
+	}
+	`;
+	
 	tsImport += ' } from "tonva-react";';
 	return tsImport + ts;
 }

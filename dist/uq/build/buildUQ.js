@@ -48,6 +48,7 @@ function buildUQ(uq, uqAlias) {
     appendArr(uq.idxArr, 'IDX', function (v) { return uqBlock(v, buildIDX); });
     appendArr(uq.ixArr, 'IX', function (v) { return uqBlock(v, buildIX); });
     ts += '\n}\n';
+    ts += "\n\texport function assign(uq: any, to:string, from:any): void {\n\t\tObject.assign((uq as any)[to], from);\n\t}\n\t";
     tsImport += ' } from "tonva-react";';
     return tsImport + ts;
 }

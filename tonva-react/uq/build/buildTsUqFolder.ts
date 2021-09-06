@@ -125,14 +125,7 @@ export function render(item: ${cName}):JSX.Element {
 		);
 	}
 
-	let tsIndex = `import { UqExt as Uq } from './${uqAlias}';${imports}
-
-function assign(uq:Uq, to:string, from:any): void {
-	try {
-		Object.assign((uq as any)[to], from);
-	}
-	catch {}
-}
+	let tsIndex = `import { UqExt as Uq, assign } from './${uqAlias}';${imports}
 	
 export function setUI(uq: Uq) {${sets}
 }

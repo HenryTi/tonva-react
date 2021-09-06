@@ -1,6 +1,6 @@
 {
   "name": "tonva-react",
-  "version": "2.0.35",
+  "version": "2.0.36",
   "description": "tonva react client libs",
   "private": false,
   "main": "dist/index.js",

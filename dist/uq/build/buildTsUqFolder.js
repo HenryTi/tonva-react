@@ -67,7 +67,7 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         });
         replaceTsFileString(path, { begin: '\nconst fieldArr: FieldItem[] = [\n', end: '\n];\n', content: tsFieldArr });
     }
-    var tsIndex = "import { UqExt as Uq } from './" + uqAlias + "';" + imports + "\n\nfunction assign(uq:Uq, to:string, from:any): void {\n\ttry {\n\t\tObject.assign((uq as any)[to], from);\n\t}\n\tcatch {}\n}\n\t\nexport function setUI(uq: Uq) {" + sets + "\n}\nexport * from './" + uqAlias + "';\n";
+    var tsIndex = "import { UqExt as Uq, assign } from './" + uqAlias + "';" + imports + "\n\t\nexport function setUI(uq: Uq) {" + sets + "\n}\nexport * from './" + uqAlias + "';\n";
     tools_1.overrideTsFile(uqFolder + "/index.ts", tsIndex);
     var files = fs_1.default.readdirSync(uqFolder);
     var suffix = '.ui.tsx';
