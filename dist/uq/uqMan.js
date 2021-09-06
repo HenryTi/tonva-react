@@ -523,6 +523,12 @@ var UqMan = /** @class */ (function () {
             var ret = _this.idCache.getValue(id);
             return ret;
         };
+        this.IDLocalV = function (id) {
+            return _this.IDV(-id);
+        };
+        this.IDLocalRender = function (id, render) {
+            return _this.IDRender(-id, render);
+        };
         this.createBoxId = createBoxId;
         if (createBoxId === undefined) {
             this.createBoxId = this.createBoxIdFromTVs;
@@ -1414,14 +1420,11 @@ var UqMan = /** @class */ (function () {
             });
         });
     };
-    /*
-    protected IDLocalV = <T extends object>(id: number): T => {
-        let ret = this.idLocalCache.getValue(id);
-        return ret as T;
-    }
-    */
     UqMan.prototype.renderIDUnknownType = function (id) {
         return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ["id=" + id + " type undefined"] });
+    };
+    UqMan.prototype.IDLocalTv = function (ids) {
+        return this.IDTv(ids.map(function (v) { return -v; }));
     };
     return UqMan;
 }());

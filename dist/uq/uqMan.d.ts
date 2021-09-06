@@ -247,6 +247,9 @@ export interface Uq {
     IDTv(ids: number[]): Promise<any[]>;
     IDRender(id: number, render?: (value: any) => JSX.Element): JSX.Element;
     IDV<T>(id: number): T;
+    IDLocalTv(ids: number[]): Promise<any[]>;
+    IDLocalRender(id: number, render?: (value: any) => JSX.Element): JSX.Element;
+    IDLocalV<T>(id: number): T;
 }
 export declare class UqMan {
     private readonly entities;
@@ -408,5 +411,8 @@ export declare class UqMan {
     protected IDRender: (id: number, render?: (value: any) => JSX.Element) => JSX.Element;
     protected IDV: <T extends object>(id: number) => T;
     private renderIDUnknownType;
+    IDLocalTv(ids: number[]): Promise<any[]>;
+    protected IDLocalV: <T extends object>(id: number) => T;
+    protected IDLocalRender: (id: number, render?: (value: any) => JSX.Element) => JSX.Element;
 }
 export {};

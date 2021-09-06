@@ -286,11 +286,10 @@ export interface Uq {
 	IDTv(ids: number[]): Promise<any[]>;
 	IDRender(id: number, render?:(value:any) => JSX.Element): JSX.Element;
 	IDV<T>(id: number): T;
-	/*
+
 	IDLocalTv(ids: number[]): Promise<any[]>;
 	IDLocalRender(id: number, render?:(value:any) => JSX.Element): JSX.Element;
 	IDLocalV<T>(id: number): T;
-	*/
 }
 
 export class UqMan {
@@ -312,7 +311,6 @@ export class UqMan {
     private readonly localEntities: LocalCache;
     private readonly tvs:{[entity:string]:(values:any)=>JSX.Element};
 	private idCache: IDCache;
-	//private idLocalCache: IDLocalCache;
 	proxy: any;
     readonly localMap: LocalMap;
     readonly localModifyMax: LocalCache;
@@ -1245,15 +1243,20 @@ export class UqMan {
 		return ret as T;
 	}
 
-	/*
-	protected IDLocalV = <T extends object>(id: number): T => {
-		let ret = this.idLocalCache.getValue(id);
-		return ret as T;
-	}
-	*/
-
 	private renderIDUnknownType(id: number) {
 		return React.createElement('span', {props:{className: 'text-muted'},  children: [`id=${id} type undefined`]});
+	}
+
+	IDLocalTv(ids: number[]): Promise<any[]> {
+		return this.IDTv(ids.map(v => -v));
+	}
+
+	protected IDLocalV = <T extends object>(id: number): T => {
+		return this.IDV(-id);
+	}
+
+	protected IDLocalRender = (id: number, render?:(value:any) => JSX.Element): JSX.Element => {
+		return this.IDRender(-id, render);
 	}
 }
 
