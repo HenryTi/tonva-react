@@ -1,3 +1,5 @@
+import { env } from "tool";
+
 const options:Intl.DateTimeFormatOptions = { 
 	weekday: 'long', 
 	year: 'numeric', 
@@ -8,4 +10,10 @@ const options:Intl.DateTimeFormatOptions = {
 export function toLocaleDateString(date:Date) {
 	if (!date) return '';
 	return date.toLocaleDateString('zh-cn', options);
+}
+
+const minuteId0 = new Date('2020-1-1');
+export function dateFromMinuteId(id: number): Date {
+	let d0 = new Date('')
+	return new Date(minuteId0.getTime() + ((id >> 20) + env.timeZone * 60) * 60000);
 }
