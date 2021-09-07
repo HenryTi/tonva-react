@@ -16,7 +16,9 @@ function toLocaleDateString(date) {
 exports.toLocaleDateString = toLocaleDateString;
 var minuteId0 = new Date('2020-1-1');
 function dateFromMinuteId(id) {
-    return new Date(minuteId0.getTime() + ((id >> 20) + env_1.env.timeZone * 60) * 60000);
+    var m = (id >> 20) + env_1.env.timeZone * 60;
+    var t = minuteId0.getTime();
+    return new Date(m * 60000 + t);
 }
 exports.dateFromMinuteId = dateFromMinuteId;
 //# sourceMappingURL=date.js.map

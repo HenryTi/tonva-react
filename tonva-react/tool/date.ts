@@ -14,5 +14,7 @@ export function toLocaleDateString(date:Date) {
 
 const minuteId0 = new Date('2020-1-1');
 export function dateFromMinuteId(id: number): Date {
-	return new Date(minuteId0.getTime() + ((id >> 20) + env.timeZone * 60) * 60000);
+	let m = (id >> 20) + env.timeZone * 60;
+	let t = minuteId0.getTime();
+	return new Date(m * 60000 + t);
 }
