@@ -136,7 +136,7 @@ export const VDate: React.FunctionComponent<DateProps> = (props) => {
 	let {date, hideTime} = props;
 	let vTime:any;
 	if (hideTime !== true) {
-		vTime = <>{date.getHours()}:{date.getMinutes}</>;
+		vTime = <>{date.getHours()}:{date.getMinutes()}</>;
 	}
 	return <>
 		{date.getFullYear()}-{date.getMonth()+1}-{date.getDate()} {vTime}

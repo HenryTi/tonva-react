@@ -169,7 +169,7 @@ var VDate = function (props) {
     var date = props.date, hideTime = props.hideTime;
     var vTime;
     if (hideTime !== true) {
-        vTime = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", date.getMinutes] }, void 0);
+        vTime = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", date.getMinutes()] }, void 0);
     }
     return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getFullYear(), "-", date.getMonth() + 1, "-", date.getDate(), " ", vTime] }, void 0);
 };
