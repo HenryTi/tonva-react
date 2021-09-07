@@ -34,7 +34,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EasyTime = exports.EasyDate = void 0;
+exports.VDate = exports.EasyTime = exports.EasyDate = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var res_1 = require("../../res");
 //type YMD = (year:number, month:number, date:number) => string;
@@ -164,4 +165,13 @@ var EasyTime = /** @class */ (function (_super) {
     return EasyTime;
 }(React.Component));
 exports.EasyTime = EasyTime;
+var VDate = function (props) {
+    var date = props.date, hideTime = props.hideTime;
+    var vTime;
+    if (hideTime !== true) {
+        vTime = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", date.getMinutes] }, void 0);
+    }
+    return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getFullYear(), "-", date.getMonth() + 1, "-", date.getDate(), " ", vTime] }, void 0);
+};
+exports.VDate = VDate;
 //# sourceMappingURL=index.js.map

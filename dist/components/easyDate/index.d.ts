@@ -12,4 +12,9 @@ interface EasyTimeProps extends EasyDateProps {
 export declare class EasyTime extends React.Component<EasyTimeProps> {
     render(): string;
 }
+interface DateProps {
+    date: Date;
+    hideTime?: boolean;
+}
+export declare const VDate: React.FunctionComponent<DateProps>;
 export {};
