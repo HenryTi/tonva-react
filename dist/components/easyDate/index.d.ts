@@ -1,6 +1,7 @@
 import * as React from 'react';
 export interface EasyDateProps {
     date: Date | number;
+    timeZone?: number;
 }
 export declare class EasyDate extends React.Component<EasyDateProps> {
     render(): string;

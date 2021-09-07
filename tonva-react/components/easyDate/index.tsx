@@ -3,6 +3,7 @@ import { setRes } from '../../res';
 
 export interface EasyDateProps {
     date: Date | number;
+	timeZone?: number;
 }
 
 //type YMD = (year:number, month:number, date:number) => string;
