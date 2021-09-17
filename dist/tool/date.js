@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dateFromMinuteId = exports.toLocaleDateString = void 0;
+exports.dateFromMinuteId = exports.miniSecondsOf2020_01_01 = exports.toLocaleDateString = void 0;
 var options = {
     weekday: 'long',
     year: 'numeric',
@@ -13,13 +13,12 @@ function toLocaleDateString(date) {
     return date.toLocaleDateString('zh-cn', options);
 }
 exports.toLocaleDateString = toLocaleDateString;
-var minuteId0 = new Date('2020-1-1');
+exports.miniSecondsOf2020_01_01 = 26297280 * 60000; // 2020-1-1 到 1970-1-1 的毫秒数
 function dateFromMinuteId(id, timeZone) {
     var m = (id / Math.pow(2, 20));
     if (timeZone !== undefined)
         m += timeZone * 60;
-    var t = minuteId0.getTime();
-    return new Date(m * 60000 + t);
+    return new Date(m * 60000 + exports.miniSecondsOf2020_01_01);
 }
 exports.dateFromMinuteId = dateFromMinuteId;
 //# sourceMappingURL=date.js.map
