@@ -167,15 +167,16 @@ var EasyTime = /** @class */ (function (_super) {
 exports.EasyTime = EasyTime;
 var VDate = function (props) {
     var date = props.date, hideTime = props.hideTime, hideSameYear = props.hideSameYear;
+    var year = date.getFullYear();
     var vTime;
     if (hideTime !== true) {
         vTime = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", date.getMinutes()] }, void 0);
     }
     var vDate = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getMonth() + 1, "-", date.getDate()] }, void 0);
-    if (hideSameYear === true) {
+    if (hideSameYear === true && year === new Date().getFullYear()) {
     }
     else {
-        vDate = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getFullYear(), "-", vDate] }, void 0);
+        vDate = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [year, "-", vDate] }, void 0);
     }
     return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [vDate, " ", vTime] }, void 0);
 };

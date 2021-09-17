@@ -135,15 +135,16 @@ interface DateProps {
 }
 export const VDate: React.FunctionComponent<DateProps> = (props) => {
 	let {date, hideTime, hideSameYear} = props;
+	let year = date.getFullYear();
 	let vTime:any;
 	if (hideTime !== true) {
 		vTime = <>{date.getHours()}:{date.getMinutes()}</>;
 	}
 	let vDate = <>{date.getMonth()+1}-{date.getDate()}</>;
-	if (hideSameYear === true) {
+	if (hideSameYear === true && year === new Date().getFullYear()) {
 	}
 	else {
-		vDate = <>{date.getFullYear()}-{vDate}</>;
+		vDate = <>{year}-{vDate}</>;
 	}
 	return <>
 		{vDate} {vTime}
