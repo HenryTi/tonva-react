@@ -166,12 +166,18 @@ var EasyTime = /** @class */ (function (_super) {
 }(React.Component));
 exports.EasyTime = EasyTime;
 var VDate = function (props) {
-    var date = props.date, hideTime = props.hideTime;
+    var date = props.date, hideTime = props.hideTime, hideSameYear = props.hideSameYear;
     var vTime;
     if (hideTime !== true) {
         vTime = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", date.getMinutes()] }, void 0);
     }
-    return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getFullYear(), "-", date.getMonth() + 1, "-", date.getDate(), " ", vTime] }, void 0);
+    var vDate = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getMonth() + 1, "-", date.getDate()] }, void 0);
+    if (hideSameYear === true) {
+    }
+    else {
+        vDate = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getFullYear(), "-", vDate] }, void 0);
+    }
+    return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [vDate, " ", vTime] }, void 0);
 };
 exports.VDate = VDate;
 //# sourceMappingURL=index.js.map

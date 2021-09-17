@@ -15,6 +15,7 @@ export declare class EasyTime extends React.Component<EasyTimeProps> {
 interface DateProps {
     date: Date;
     hideTime?: boolean;
+    hideSameYear?: boolean;
 }
 export declare const VDate: React.FunctionComponent<DateProps>;
 export {};

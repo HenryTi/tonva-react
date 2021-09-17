@@ -131,14 +131,21 @@ export class EasyTime extends React.Component<EasyTimeProps> {
 interface DateProps {
 	date: Date;
 	hideTime?: boolean;
+	hideSameYear?: boolean;
 }
 export const VDate: React.FunctionComponent<DateProps> = (props) => {
-	let {date, hideTime} = props;
+	let {date, hideTime, hideSameYear} = props;
 	let vTime:any;
 	if (hideTime !== true) {
 		vTime = <>{date.getHours()}:{date.getMinutes()}</>;
 	}
+	let vDate = <>{date.getMonth()+1}-{date.getDate()}</>;
+	if (hideSameYear === true) {
+	}
+	else {
+		vDate = <>{date.getFullYear()}-{vDate}</>;
+	}
 	return <>
-		{date.getFullYear()}-{date.getMonth()+1}-{date.getDate()} {vTime}
+		{vDate} {vTime}
 	</>;
 }
