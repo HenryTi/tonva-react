@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.camelCase = exports.capitalCase = void 0;
 function capitalCase(s) {
     var parts = s.split(/[-._]/);
-    return parts.map(function (v) { return firstCharUppercase(v); }).join('');
+    return parts.map(function (v) { return firstCharUppercase(v); }).join('_');
 }
 exports.capitalCase = capitalCase;
 function camelCase(s) {
@@ -13,7 +13,7 @@ function camelCase(s) {
     for (var i = 1; i < len; i++) {
         parts[1] = firstCharUppercase(parts[1]);
     }
-    return parts.join('');
+    return parts.join('_');
 }
 exports.camelCase = camelCase;
 var aCode = 'a'.charCodeAt(0);

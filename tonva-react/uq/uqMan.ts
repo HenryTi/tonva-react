@@ -734,39 +734,9 @@ export class UqMan {
 				let func = (this as any)[key];
 				if (func !== undefined) return func;
 				let err = `entity ${this.name}.${String(key)} not defined`;
-				// this.showReload('UQ错误：' + err);
 				console.error('UQ错误：' + err);
+				this.showReload('服务器正在更新');
 				return undefined;
-				/*
-				switch (key) {
-					default: debugger; break;
-					case 'IDRender': return this.IDRender;
-					case 'IDV': return this.IDV;
-					case 'Acts': return this.Acts;
-					case 'ActIX': return this.ActIX;
-					case 'ActIXSort': return this.ActIXSort;
-					case 'ActDetail': return this.ActDetail;
-					case 'IDDetail': return this.ActDetail;
-					case 'QueryID': return this.QueryID;
-					case 'IDTv': return this.IDTv;
-					case 'IDNO': return this.IDNO;
-					case 'IDDetailGet': return this.IDDetailGet;
-					case 'ID': return this.ID;
-					case 'KeyID': return this.KeyID;
-					case 'IX': return this.IX;
-					case 'IXr': return this.IXr;
-					case 'KeyIX': return this.KeyIX;
-					case 'IDLog': return this.IDLog;
-					case 'IDSum': return this.IDSum;
-					case 'IDinIX': return this.IDinIX;
-					case 'IDxID': return this.IDxID;
-					case 'IDTree': return this.IDTree;
-				}
-				let err = `entity ${this.name}.${String(key)} not defined`;
-				// this.showReload('UQ错误：' + err);
-				console.error('UQ错误：' + err);
-				return undefined;
-				*/
 			}
 		});
 		this.proxy = ret;
@@ -782,7 +752,7 @@ export class UqMan {
 		this.localMap.removeAll();
 		let tick = Date.now();
 		cache.set(tick);
-		if (tick - reloadTick  < 60*1000)  {
+		if (tick - reloadTick  < 10*1000)  {
 			nav.showReloadPage(msg);
 		}
 		else {
