@@ -210,6 +210,10 @@ var UQsMan = /** @class */ (function () {
                                 owner = dev.name, ownerAlias = dev.alias;
                                 uqLower = (ownerAlias !== null && ownerAlias !== void 0 ? ownerAlias : owner).toLowerCase() + '/' + (alias !== null && alias !== void 0 ? alias : name_1).toLowerCase();
                                 uq = this.collection[uqLower];
+                                if (!uq) {
+                                    console.error(uqLower + " invalid");
+                                    continue;
+                                }
                                 uq.config = uqConfig;
                             }
                         }

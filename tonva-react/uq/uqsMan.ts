@@ -122,6 +122,10 @@ export class UQsMan {
 				let {name:owner, alias:ownerAlias} = dev;
 				let uqLower = (ownerAlias??owner).toLowerCase() + '/' + (alias??name).toLowerCase();
 				let uq = this.collection[uqLower];
+				if (!uq) {
+					console.error(`${uqLower} invalid`);
+					continue;
+				}
 				uq.config = uqConfig;
 			}
 		}
