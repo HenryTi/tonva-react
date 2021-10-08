@@ -376,7 +376,15 @@ var UQsMan = /** @class */ (function () {
                     return ret;
                 debugger;
                 console.error("controller.uqs." + String(key) + " " + ret);
-                _this.showReload("\u65B0\u589E uq " + String(key));
+                for (var _i = 0, _a = _this.uqMans; _i < _a.length; _i++) {
+                    var uqMan = _a[_i];
+                    if (uqMan.name.toLowerCase() === lk) {
+                        uqMan.localMap.removeAll();
+                        break;
+                    }
+                }
+                // this.showReload(`新增 uq ${String(key)}`);
+                components_1.nav.reload();
                 return undefined;
             },
         });

@@ -247,7 +247,14 @@ export class UQsMan {
                 if (ret) return ret;
                 debugger;
                 console.error(`controller.uqs.${String(key)} ${ret}`);
-                this.showReload(`新增 uq ${String(key)}`);
+				for (let uqMan of this.uqMans) {
+					if (uqMan.name.toLowerCase() === lk) {
+						uqMan.localMap.removeAll();
+						break;
+					}
+				}
+                // this.showReload(`新增 uq ${String(key)}`);
+				nav.reload();
                 return undefined;
             },
         });
