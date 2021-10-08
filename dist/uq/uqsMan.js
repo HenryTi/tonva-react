@@ -372,7 +372,7 @@ var UQsMan = /** @class */ (function () {
             get: function (target, key, receiver) {
                 var lk = key.toLowerCase();
                 var ret = target[lk];
-                if (!ret)
+                if (ret)
                     return ret;
                 debugger;
                 console.error("controller.uqs." + String(key) + " " + ret);

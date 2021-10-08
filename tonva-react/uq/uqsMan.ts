@@ -244,7 +244,7 @@ export class UQsMan {
             get: (target, key, receiver) => {
                 let lk = (key as string).toLowerCase();
                 let ret = target[lk];
-                if (!ret) return ret;
+                if (ret) return ret;
                 debugger;
                 console.error(`controller.uqs.${String(key)} ${ret}`);
                 this.showReload(`新增 uq ${String(key)}`);
