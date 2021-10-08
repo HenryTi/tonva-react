@@ -9,6 +9,10 @@ export declare class UqApi extends ApiBase {
     init(): Promise<void>;
     protected getHttpChannel(): Promise<HttpChannel>;
     loadEntities(): Promise<any>;
+    getAdmins(): Promise<{
+        id: number;
+        role: number;
+    }[]>;
     getRoles(): Promise<string[]>;
     getAllRoleUsers(): Promise<{
         user: number;

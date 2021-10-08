@@ -1,5 +1,3 @@
-import { env } from "./env";
-
 const options:Intl.DateTimeFormatOptions = { 
 	weekday: 'long', 
 	year: 'numeric', 

@@ -16,7 +16,7 @@ import { UqEnum } from './enum';
 import { UqConfig } from '../app';
 import { ID, IX, IDX } from './ID';
 export declare type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text' | 'datetime' | 'date' | 'time' | 'timestamp';
-export declare function fieldDefaultValue(type: FieldType): 0 | "" | "2000-1-1" | "0:00";
+export declare function fieldDefaultValue(type: FieldType): "" | 0 | "2000-1-1" | "0:00";
 export interface Field {
     name: string;
     type: FieldType;
@@ -199,6 +199,10 @@ export interface ParamIDTree {
     page?: ParamPage;
 }
 export interface Uq {
+    getAdmins(): Promise<{
+        id: number;
+        role: number;
+    }[]>;
     $: UqMan;
     Acts(param: any): Promise<any>;
     $Acts(param: any): Promise<string>;
@@ -353,6 +357,10 @@ export declare class UqMan {
     private apiPost;
     private apiActs;
     protected Acts: (param: any) => Promise<any>;
+    protected getAdmins: () => Promise<{
+        id: number;
+        role: number;
+    }[]>;
     protected $Acts: (param: any) => Promise<any>;
     private apiActIX;
     protected ActIX: (param: ParamActIX<any>) => Promise<number[]>;

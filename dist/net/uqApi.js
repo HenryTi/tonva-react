@@ -175,6 +175,19 @@ var UqApi = /** @class */ (function (_super) {
             });
         });
     };
+    UqApi.prototype.getAdmins = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var ret;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.get('get-admins')];
+                    case 1:
+                        ret = _a.sent();
+                        return [2 /*return*/, ret];
+                }
+            });
+        });
+    };
     UqApi.prototype.getRoles = function () {
         return __awaiter(this, void 0, void 0, function () {
             var ret, parts, s, _i, parts_1, p;

@@ -149,10 +149,7 @@ var UQsMan = /** @class */ (function () {
                         id = uqAppData.id, uqs = uqAppData.uqs;
                         uqsMan.id = id;
                         return [4 /*yield*/, uqsMan.buildUqs(uqs, version, uqConfigs)];
-                    case 5: 
-                    //console.error(uqAppData);
-                    //let ownerProfixMap: {[owner: string]: string};
-                    return [2 /*return*/, _c.sent()];
+                    case 5: return [2 /*return*/, _c.sent()];
                 }
             });
         });
@@ -210,10 +207,6 @@ var UQsMan = /** @class */ (function () {
                                 owner = dev.name, ownerAlias = dev.alias;
                                 uqLower = (ownerAlias !== null && ownerAlias !== void 0 ? ownerAlias : owner).toLowerCase() + '/' + (alias !== null && alias !== void 0 ? alias : name_1).toLowerCase();
                                 uq = this.collection[uqLower];
-                                if (!uq) {
-                                    console.error(uqLower + " invalid");
-                                    continue;
-                                }
                                 uq.config = uqConfig;
                             }
                         }
@@ -355,33 +348,28 @@ var UQsMan = /** @class */ (function () {
         for (var _i = 0, _a = this.uqMans; _i < _a.length; _i++) {
             var uqMan = _a[_i];
             var proxy = uqMan.createProxy();
-            var uqKey = uqMan.getUqKey();
-            setUq(uqKey, proxy);
-            var uqKeyWithConfig = uqMan.getUqKeyWithConfig();
-            setUq(uqKeyWithConfig, proxy);
-            console.error("buildUQs: getUqKey=" + uqKey + " getUqKeyWithConfig=" + uqKeyWithConfig + ", " + proxy);
+            setUq(uqMan.getUqKey(), proxy);
+            setUq(uqMan.getUqKeyWithConfig(), proxy);
+            /*
+            let uqKey = uqMan.getUqKey();
+            let lower = uqKey.toLowerCase();
+            uqs[uqKey] = proxy;
+            if (lower !== uqKey) uqs[lower] = proxy;
+            let uqKeyWithConfig = uqMan.getUqKeyWithConfig();
+            let lowerWithConfig = uqKeyWithConfig.toLowerCase();
+            uqs[uqKeyWithConfig] = proxy;
+            if (lowerWithConfig !== uqKeyWithConfig) uqs[lowerWithConfig] = proxy;
+            */
         }
         return new Proxy(uqs, {
             get: function (target, key, receiver) {
-                if (!key) {
-                    console.error("Uqs Proxy get key " + String(key));
-                    return _this;
-                }
                 var lk = key.toLowerCase();
                 var ret = target[lk];
-                if (ret)
+                if (ret !== undefined)
                     return ret;
                 debugger;
-                console.error("controller.uqs." + String(key) + " " + ret);
-                for (var _i = 0, _a = _this.uqMans; _i < _a.length; _i++) {
-                    var uqMan = _a[_i];
-                    if (uqMan.name.toLowerCase() === lk) {
-                        uqMan.localMap.removeAll();
-                        break;
-                    }
-                }
-                // this.showReload(`新增 uq ${String(key)}`);
-                // nav.reload();
+                console.error("controller.uqs." + String(key) + " undefined");
+                _this.showReload("\u65B0\u589E uq " + String(key));
                 return undefined;
             },
         });

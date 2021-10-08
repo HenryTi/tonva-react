@@ -68,22 +68,22 @@ var Input = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(Input.prototype, "placeholder", {
-        get: function () { return; },
+        get: function () { return undefined; },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "max", {
-        get: function () { return; },
+        get: function () { return undefined; },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "min", {
-        get: function () { return; },
+        get: function () { return undefined; },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "maxLength", {
-        get: function () { return; },
+        get: function () { return undefined; },
         enumerable: false,
         configurable: true
     });

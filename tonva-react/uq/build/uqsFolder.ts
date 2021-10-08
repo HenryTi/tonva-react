@@ -16,6 +16,7 @@ export async function buildUqsFolder(uqsFolder:string, appConfig: AppConfig) {
 	let promiseArr:Promise<void>[] = [];
 	if (uqErrors) {
 		console.error(uqErrors.join('\n'));
+		//throw new Error(uqErrors.join('\n'));
 	}
 
 	for (let uq of uqMans) {

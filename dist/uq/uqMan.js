@@ -157,6 +157,14 @@ var UqMan = /** @class */ (function () {
                 }
             });
         }); };
+        this.getAdmins = function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.uqApi.getAdmins()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
         this.$Acts = function (param) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -618,21 +626,17 @@ var UqMan = /** @class */ (function () {
                         _a.trys.push([0, 3, , 4]);
                         entities = this.localEntities.get();
                         if (!!entities) return [3 /*break*/, 2];
-                        this.localMap.removeAll();
                         return [4 /*yield*/, this.uqApi.loadEntities()];
                     case 1:
                         entities = _a.sent();
                         _a.label = 2;
                     case 2:
-                        if (!entities) {
-                            console.error(this.name + " this.uqApi.loadEntities() return " + entities);
+                        if (!entities)
                             return [2 /*return*/];
-                        }
                         this.buildEntities(entities);
                         return [3 /*break*/, 4];
                     case 3:
                         err_1 = _a.sent();
-                        console.error(err_1);
                         return [2 /*return*/, err_1];
                     case 4: return [2 /*return*/];
                 }
@@ -994,10 +998,6 @@ var UqMan = /** @class */ (function () {
         var _this = this;
         var ret = new Proxy(this.entities, {
             get: function (target, key, receiver) {
-                if (!key) {
-                    console.error("Proxy get " + _this.name + " key " + String(key));
-                    return _this;
-                }
                 var lk = key.toLowerCase();
                 if (lk === '$') {
                     return _this;

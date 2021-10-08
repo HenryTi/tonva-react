@@ -108,7 +108,11 @@ export class UqApi extends ApiBase {
 		let ret = await this.get('entities');
         return ret;
 	}
-	async getRoles():Promise<string[]> {
+    async getAdmins():Promise<{id:number;role:number}[]> {
+		let ret = await this.get('get-admins',);
+		return ret;
+    }
+ 	async getRoles():Promise<string[]> {
 		let ret = await this.get('get-roles',);
 		if (!ret) return null;
 		let parts:string[] = (ret as string).split('|');

@@ -239,7 +239,8 @@ function IDPath(path:string):string {return path;}
 enum EnumResultType {data, sql};
 
 export interface Uq {
-	$: UqMan;
+	getAdmins(): Promise<{id:number; role:number}[]>;
+	$: UqMan;	
 	Acts(param:any): Promise<any>;
 	$Acts(param:any): Promise<string>;
 	ActIX<T>(param: ParamActIX<T>): Promise<number[]>;
@@ -421,17 +422,12 @@ export class UqMan {
         try {
             let entities = this.localEntities.get();
             if (!entities) {
-				this.localMap.removeAll();
                 entities = await this.uqApi.loadEntities();
 			}
-            if (!entities) {
-				console.error(`${this.name} this.uqApi.loadEntities() return ${entities}`);
-				return;
-			}
+            if (!entities) return;
             this.buildEntities(entities);
         }
         catch (err) {
-			console.error(err);
             return err as any;
         }
     }
@@ -730,10 +726,6 @@ export class UqMan {
 	createProxy():any {
 		let ret = new Proxy(this.entities, {
 			get: (target, key, receiver) => {
-				if (!key) {
-					console.error(`Proxy get ${this.name} key ${String(key)}`);
-					return this;
-				}
 				let lk = (key as string).toLowerCase();
 				if (lk === '$') {
 					return this;
@@ -827,6 +819,10 @@ export class UqMan {
 			retActs[arr[i]] = ids(retArr[i].split('\t'));
 		}
 		return retActs;
+	}
+
+	protected getAdmins = async(): Promise<{id:number; role:number}[]> => {
+		return await this.uqApi.getAdmins();
 	}
 
 	protected $Acts = async (param:any): Promise<any> => {

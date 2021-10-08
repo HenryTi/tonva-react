@@ -22,10 +22,10 @@ export abstract class Input<P extends InputProps, V> extends Component<P> {
     protected value: V = null;
     protected input: HTMLInputElement;
     protected abstract get type(): 'text' | 'number' | 'checkbox' | 'radio';
-    protected get placeholder(): string {return;}
-    protected get max(): number {return;}
-    protected get min(): number {return;}
-    protected get maxLength(): number {return;}
+    protected get placeholder(): string {return undefined;}
+    protected get max(): number {return undefined;}
+    protected get min(): number {return undefined;}
+    protected get maxLength(): number {return undefined;}
     protected get className(): string {return this.props.className}
     protected requiredFlagElement?: JSX.Element;
     ruleMessage: string = null;
