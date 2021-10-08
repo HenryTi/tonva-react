@@ -355,12 +355,18 @@ var UQsMan = /** @class */ (function () {
         for (var _i = 0, _a = this.uqMans; _i < _a.length; _i++) {
             var uqMan = _a[_i];
             var proxy = uqMan.createProxy();
-            setUq(uqMan.getUqKey(), proxy);
-            setUq(uqMan.getUqKeyWithConfig(), proxy);
-            console.error("buildUQs: getUqKey=" + uqMan.getUqKey() + " getUqKeyWithConfig=" + uqMan.getUqKeyWithConfig() + ", " + proxy);
+            var uqKey = uqMan.getUqKey();
+            setUq(uqKey, proxy);
+            var uqKeyWithConfig = uqMan.getUqKeyWithConfig();
+            setUq(uqKeyWithConfig, proxy);
+            console.error("buildUQs: getUqKey=" + uqKey + " getUqKeyWithConfig=" + uqKeyWithConfig + ", " + proxy);
         }
         return new Proxy(uqs, {
             get: function (target, key, receiver) {
+                if (!key) {
+                    console.error("Uqs Proxy get key " + String(key));
+                    return _this;
+                }
                 var lk = key.toLowerCase();
                 var ret = target[lk];
                 if (ret)

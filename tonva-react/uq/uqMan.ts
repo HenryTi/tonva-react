@@ -730,6 +730,10 @@ export class UqMan {
 	createProxy():any {
 		let ret = new Proxy(this.entities, {
 			get: (target, key, receiver) => {
+				if (!key) {
+					console.error(`Proxy get ${this.name} key ${String(key)}`);
+					return this;
+				}
 				let lk = (key as string).toLowerCase();
 				if (lk === '$') {
 					return this;

@@ -994,6 +994,10 @@ var UqMan = /** @class */ (function () {
         var _this = this;
         var ret = new Proxy(this.entities, {
             get: function (target, key, receiver) {
+                if (!key) {
+                    console.error("Proxy get " + _this.name + " key " + String(key));
+                    return _this;
+                }
                 var lk = key.toLowerCase();
                 if (lk === '$') {
                     return _this;

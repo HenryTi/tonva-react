@@ -73,8 +73,6 @@ export class UQsMan {
         }
         let {id, uqs} = uqAppData;
 		uqsMan.id = id;
-		//console.error(uqAppData);
-		//let ownerProfixMap: {[owner: string]: string};
 		return await uqsMan.buildUqs(uqs, version, uqConfigs);
 	}
 
@@ -227,12 +225,18 @@ export class UQsMan {
 		}
 		for (let uqMan of this.uqMans) {
 			let proxy = uqMan.createProxy();
-			setUq(uqMan.getUqKey(), proxy);
-			setUq(uqMan.getUqKeyWithConfig(), proxy);
-			console.error(`buildUQs: getUqKey=${uqMan.getUqKey()} getUqKeyWithConfig=${uqMan.getUqKeyWithConfig()}, ${proxy}`);
+			let uqKey = uqMan.getUqKey();
+			setUq(uqKey, proxy);
+			let uqKeyWithConfig = uqMan.getUqKeyWithConfig();
+			setUq(uqKeyWithConfig, proxy);
+			console.error(`buildUQs: getUqKey=${uqKey} getUqKeyWithConfig=${uqKeyWithConfig}, ${proxy}`);
         }
         return new Proxy(uqs, {
             get: (target, key, receiver) => {
+				if (!key) {
+					console.error(`Uqs Proxy get key ${String(key)}`);
+					return this;
+				}
                 let lk = (key as string).toLowerCase();
                 let ret = target[lk];
                 if (ret) return ret;
