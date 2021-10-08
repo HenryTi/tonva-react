@@ -372,10 +372,10 @@ var UQsMan = /** @class */ (function () {
             get: function (target, key, receiver) {
                 var lk = key.toLowerCase();
                 var ret = target[lk];
-                if (ret !== undefined)
+                if (!ret)
                     return ret;
                 debugger;
-                //console.error('error in uqs');
+                console.error("controller.uqs." + String(key) + " " + ret);
                 _this.showReload("\u65B0\u589E uq " + String(key));
                 return undefined;
             },
