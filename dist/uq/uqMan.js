@@ -618,17 +618,21 @@ var UqMan = /** @class */ (function () {
                         _a.trys.push([0, 3, , 4]);
                         entities = this.localEntities.get();
                         if (!!entities) return [3 /*break*/, 2];
+                        this.localMap.removeAll();
                         return [4 /*yield*/, this.uqApi.loadEntities()];
                     case 1:
                         entities = _a.sent();
                         _a.label = 2;
                     case 2:
-                        if (!entities)
+                        if (!entities) {
+                            console.error(this.name + " this.uqApi.loadEntities() return " + entities);
                             return [2 /*return*/];
+                        }
                         this.buildEntities(entities);
                         return [3 /*break*/, 4];
                     case 3:
                         err_1 = _a.sent();
+                        console.error(err_1);
                         return [2 /*return*/, err_1];
                     case 4: return [2 /*return*/];
                 }

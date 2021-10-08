@@ -421,12 +421,17 @@ export class UqMan {
         try {
             let entities = this.localEntities.get();
             if (!entities) {
+				this.localMap.removeAll();
                 entities = await this.uqApi.loadEntities();
 			}
-            if (!entities) return;
+            if (!entities) {
+				console.error(`${this.name} this.uqApi.loadEntities() return ${entities}`);
+				return;
+			}
             this.buildEntities(entities);
         }
         catch (err) {
+			console.error(err);
             return err as any;
         }
     }

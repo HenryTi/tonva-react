@@ -229,16 +229,7 @@ export class UQsMan {
 			let proxy = uqMan.createProxy();
 			setUq(uqMan.getUqKey(), proxy);
 			setUq(uqMan.getUqKeyWithConfig(), proxy);
-			/*
-			let uqKey = uqMan.getUqKey();
-			let lower = uqKey.toLowerCase();
-			uqs[uqKey] = proxy;
-			if (lower !== uqKey) uqs[lower] = proxy;
-            let uqKeyWithConfig = uqMan.getUqKeyWithConfig();
-			let lowerWithConfig = uqKeyWithConfig.toLowerCase();
-			uqs[uqKeyWithConfig] = proxy;
-			if (lowerWithConfig !== uqKeyWithConfig) uqs[lowerWithConfig] = proxy;
-			*/
+			console.error(`buildUQs: getUqKey=${uqMan.getUqKey()} getUqKeyWithConfig=${uqMan.getUqKeyWithConfig()}, ${proxy}`);
         }
         return new Proxy(uqs, {
             get: (target, key, receiver) => {
@@ -254,7 +245,7 @@ export class UQsMan {
 					}
 				}
                 // this.showReload(`新增 uq ${String(key)}`);
-				nav.reload();
+				// nav.reload();
                 return undefined;
             },
         });
