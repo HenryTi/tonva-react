@@ -110,7 +110,6 @@ export class UQsMan {
         let retErrors = await this.load();
 		if (retErrors.length > 0) return retErrors;
 		if (UQsMan.isBuildingUQ === false) {
-			//retErrors.push(...this.setTuidImportsLocal());
 			this.setTuidImportsLocal();
 		}
 		if (retErrors.length > 0) return retErrors;
@@ -210,8 +209,7 @@ export class UQsMan {
         return retErrors;
     }
 
-    buildUQs(): any {
-        //let that = this;
+    private buildUQs(): any {
         let uqs:any = {};
 		function setUq(uqKey: string, proxy: any):void {
 			if (!uqKey) return;

@@ -144,7 +144,7 @@ export class VErrorsPage extends VPage<CAppBase<any>> {
 
 export class VStartError extends VPage<CAppBase<any>> {
     async open(error:any) {
-        this.openPage(this.page, {error:error});
+        this.openPage(this.page, {error});
     }
 
     private page = ({error}:{error:any}) => {

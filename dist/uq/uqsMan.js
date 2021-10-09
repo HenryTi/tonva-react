@@ -195,7 +195,6 @@ var UQsMan = /** @class */ (function () {
                         if (retErrors.length > 0)
                             return [2 /*return*/, retErrors];
                         if (UQsMan.isBuildingUQ === false) {
-                            //retErrors.push(...this.setTuidImportsLocal());
                             this.setTuidImportsLocal();
                         }
                         if (retErrors.length > 0)
@@ -335,7 +334,6 @@ var UQsMan = /** @class */ (function () {
     };
     UQsMan.prototype.buildUQs = function () {
         var _this = this;
-        //let that = this;
         var uqs = {};
         function setUq(uqKey, proxy) {
             if (!uqKey)

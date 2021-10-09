@@ -59,7 +59,6 @@ function buildUqsFolder(uqsFolder, appConfig) {
                     promiseArr = [];
                     if (uqErrors) {
                         console.error(uqErrors.join('\n'));
-                        //throw new Error(uqErrors.join('\n'));
                     }
                     for (_i = 0, uqMans_1 = uqMans; _i < uqMans_1.length; _i++) {
                         uq = uqMans_1[_i];

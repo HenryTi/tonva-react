@@ -89,24 +89,13 @@ export abstract class CAppBase<U> extends Controller {
 		if (user === this.uqsUser) return;
 		this.uqsUser = user;
 		logoutApis();
-		//let {appName, version, tvs} = this.appConfig;
+		console.error('CAppBase.ts initUQs() before let retErrors = await UQsMan.build(this.appConfig);');
 		let retErrors = await UQsMan.build(this.appConfig);
+		console.error('CAppBase.ts initUQs() after let retErrors = await UQsMan.build(this.appConfig);');
 		this._uqs = UQsMan._uqs;
 		this.afterBuiltUQs(this._uqs);
+		console.error('CAppBase.ts initUQs() after this.afterBuiltUQs(this._uqs);');
 		return retErrors;
-		//let retErrors = await this.load();
-		//let app = await loadAppUqs(this.appOwner, this.appName);
-		// if (isDevelopment === true) {
-		// 这段代码原本打算只是在程序员调试方式下使用，实际上，也可以开放给普通用户，production方式下
-		//let retErrors = UQsMan.errors;
-		/*
-		if (user !== undefined && user.id > 0) {
-			let uqAppId = UQsMan.value.id;
-			let result = await centerApi.userAppUnits(uqAppId);
-			this.appUnits = result;
-			//if (this.noUnit === true) return true;
-		}
-		*/
 	}
 
     protected async beforeStart():Promise<boolean> {

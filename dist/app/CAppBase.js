@@ -97,11 +97,14 @@ var CAppBase = /** @class */ (function (_super) {
                             return [2 /*return*/];
                         this.uqsUser = user;
                         net_1.logoutApis();
+                        console.error('CAppBase.ts initUQs() before let retErrors = await UQsMan.build(this.appConfig);');
                         return [4 /*yield*/, uq_1.UQsMan.build(this.appConfig)];
                     case 1:
                         retErrors = _a.sent();
+                        console.error('CAppBase.ts initUQs() after let retErrors = await UQsMan.build(this.appConfig);');
                         this._uqs = uq_1.UQsMan._uqs;
                         this.afterBuiltUQs(this._uqs);
+                        console.error('CAppBase.ts initUQs() after this.afterBuiltUQs(this._uqs);');
                         return [2 /*return*/, retErrors];
                 }
             });
