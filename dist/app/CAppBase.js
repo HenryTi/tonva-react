@@ -97,14 +97,11 @@ var CAppBase = /** @class */ (function (_super) {
                             return [2 /*return*/];
                         this.uqsUser = user;
                         net_1.logoutApis();
-                        console.error('CAppBase.ts initUQs() before let retErrors = await UQsMan.build(this.appConfig);');
                         return [4 /*yield*/, uq_1.UQsMan.build(this.appConfig)];
                     case 1:
                         retErrors = _a.sent();
-                        console.error('CAppBase.ts initUQs() after let retErrors = await UQsMan.build(this.appConfig);');
                         this._uqs = uq_1.UQsMan._uqs;
                         this.afterBuiltUQs(this._uqs);
-                        console.error('CAppBase.ts initUQs() after this.afterBuiltUQs(this._uqs);');
                         return [2 /*return*/, retErrors];
                 }
             });
@@ -121,24 +118,10 @@ var CAppBase = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.initUQs()];
                     case 1:
                         retErrors = _a.sent();
-                        // UQsMan.errors;
                         if (retErrors !== undefined) {
                             this.openVPage(vMain_1.VErrorsPage, retErrors);
                             return [2 /*return*/, false];
                         }
-                        //this._uqs = UQsMan._uqs;
-                        //this.afterBuiltUQs(this._uqs);
-                        //let retErrors = await this.load();
-                        //let app = await loadAppUqs(this.appOwner, this.appName);
-                        // if (isDevelopment === true) {
-                        // 这段代码原本打算只是在程序员调试方式下使用，实际上，也可以开放给普通用户，production方式下
-                        //let retErrors = UQsMan.errors;
-                        //let {predefinedUnit} = appInFrame;
-                        /*
-                        let {user} = nav;
-                        if (user !== undefined && user.id > 0) {
-                        }
-                        */
                         return [2 /*return*/, true];
                     case 2:
                         err_1 = _a.sent();
