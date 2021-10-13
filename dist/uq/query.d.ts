@@ -32,12 +32,24 @@ export declare class UqQuery<P, R> extends Entity {
     get hasMore(): boolean;
     loadPage(): Promise<void>;
     protected pageCaller(params: any, showWaiting?: boolean): QueryPageCaller;
-    page(params: P, pageStart: any, pageSize: number, showWaiting?: boolean): Promise<R>;
-    protected queryCaller(params: P, showWaiting?: boolean): QueryQueryCaller;
-    query(params: P, showWaiting?: boolean): Promise<R>;
-    table(params: P, showWaiting?: boolean): Promise<any[]>;
-    obj(params: P, showWaiting?: boolean): Promise<any>;
-    scalar(params: P, showWaiting?: boolean): Promise<any>;
+    page(params: P | {
+        $user?: number;
+    }, pageStart: any, pageSize: number, showWaiting?: boolean): Promise<R>;
+    protected queryCaller(params: P | {
+        $user?: number;
+    }, showWaiting?: boolean): QueryQueryCaller;
+    query(params: P | {
+        $user?: number;
+    }, showWaiting?: boolean): Promise<R>;
+    table(params: P | {
+        $user?: number;
+    }, showWaiting?: boolean): Promise<any[]>;
+    obj(params: P | {
+        $user?: number;
+    }, showWaiting?: boolean): Promise<any>;
+    scalar(params: P | {
+        $user?: number;
+    }, showWaiting?: boolean): Promise<any>;
 }
 export declare class Query extends UqQuery<any, any> {
 }

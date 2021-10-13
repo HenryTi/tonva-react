@@ -3,15 +3,15 @@ import { ActionCaller } from './caller';
 
 export class UqAction<P, R> extends Entity {
     get typeName(): string { return 'action';}
-    async submit(data:P, waiting: boolean = true) {
+    async submit(data:P|{$user?:number}, waiting: boolean = true) {
 		let caller = new ActionSubmitCaller(this, data)
 		let ret = await caller.request();
 		return ret;
     }
-    async submitReturns(data:P):Promise<R> {
+    async submitReturns(data:P|{$user?:number}):Promise<R> {
        return await new SubmitReturnsCaller(this, data).request();
     }
-    async submitConvert(data:P) {
+    async submitConvert(data:P|{$user?:number}) {
         return await new SubmitConvertCaller(this, data).request();
     }
 }
