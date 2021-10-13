@@ -352,6 +352,7 @@ export declare class UqMan {
     pullModify(modifyMax: number): void;
     getUqKey(): string;
     getUqKeyWithConfig(): string;
+    hasEntity(name: string): boolean;
     createProxy(): any;
     private showReload;
     private apiPost;

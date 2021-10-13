@@ -70,6 +70,10 @@ import { IDXValue, Uq`;
 	ts += '\n}\n';
 	ts += `
 export function assign(uq: any, to:string, from:any): void {
+	let hasEntity = uq.$.hasEntity(to);
+	if (hasEntity === false) {
+		return;
+	}
 	Object.assign((uq as any)[to], from);
 }
 `;

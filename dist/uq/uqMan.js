@@ -994,6 +994,9 @@ var UqMan = /** @class */ (function () {
         uqKey = tool_1.capitalCase(dev.alias || dev.name) + tool_1.capitalCase(alias !== null && alias !== void 0 ? alias : uqKey);
         return uqKey;
     };
+    UqMan.prototype.hasEntity = function (name) {
+        return this.entities[name] !== undefined;
+    };
     UqMan.prototype.createProxy = function () {
         var _this = this;
         var ret = new Proxy(this.entities, {

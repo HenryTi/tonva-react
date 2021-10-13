@@ -723,6 +723,10 @@ export class UqMan {
 		return uqKey;
 	}
 
+	hasEntity(name: string):boolean {
+		return this.entities[name] !== undefined;
+	}
+
 	createProxy():any {
 		let ret = new Proxy(this.entities, {
 			get: (target, key, receiver) => {
