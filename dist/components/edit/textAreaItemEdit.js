@@ -112,7 +112,7 @@ var TextAreaItemEdit = /** @class */ (function (_super) {
                     resolve(val);
                 }
             };
-            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0);
+            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0);
             var onKeyDown = function (evt) {
                 // if (evt.keyCode === 13) onSave();
             };

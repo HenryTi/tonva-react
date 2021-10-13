@@ -98,7 +98,7 @@ var Context = /** @class */ (function () {
             var errors = _this.errors;
             if (errors.length === 0)
                 return null;
-            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: errors.map(function (err) { return jsx_runtime_1.jsxs("span", __assign({ className: "text-danger inline-block my-1 ml-3" }, { children: [jsx_runtime_1.jsx("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }), err); }) }, void 0);
+            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: errors.map(function (err) { return jsx_runtime_1.jsxs("span", __assign({ className: "text-danger inline-block my-1 ms-3" }, { children: [jsx_runtime_1.jsx("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }), err); }) }, void 0);
         });
         mobx_1.makeObservable(this, {
             errors: mobx_1.observable,

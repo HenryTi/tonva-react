@@ -127,9 +127,9 @@ var Form = /** @class */ (function (_super) {
                     labelView = jsx_runtime_1.jsx("label", __assign({ className: classnames_1.default('col-sm-' + fieldLabelSize, 'col-form-label', cnAlign) }, { children: label }), void 0);
                 }
                 var fieldCol = 'col-sm-' + (12 - fieldLabelSize);
-                return jsx_runtime_1.jsxs("div", __assign({ className: "form-group row" }, { children: [labelView, jsx_runtime_1.jsx("div", __assign({ className: fieldCol }, { children: content }), void 0)] }), void 0);
+                return jsx_runtime_1.jsxs("div", __assign({ className: "mb-3 row" }, { children: [labelView, jsx_runtime_1.jsx("div", __assign({ className: fieldCol }, { children: content }), void 0)] }), void 0);
             }
-            return jsx_runtime_1.jsxs("div", __assign({ className: "form-group" }, { children: [label === null ? null : jsx_runtime_1.jsx("label", __assign({ className: "col-form-label" }, { children: label }), void 0), content] }), void 0);
+            return jsx_runtime_1.jsxs("div", __assign({ className: "mb-3" }, { children: [label === null ? null : jsx_runtime_1.jsx("label", __assign({ className: "col-form-label" }, { children: label }), void 0), content] }), void 0);
         };
         _this.DefaultFieldClass = undefined;
         _this.DefaultButtonClass = 'text-center py-2';

@@ -135,7 +135,7 @@ function renderPageHeader(props, inWebNav) {
                 var nick = user.nick, name_1 = user.name;
                 debugLogout = jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center" }, { children: [jsx_runtime_1.jsx("small", __assign({ className: "text-light" }, { children: nick || name_1 }), void 0), 
                         // eslint-disable-next-line
-                        jsx_runtime_1.jsx("div", __assign({ className: "ml-2 py-2 px-3 cursor-pointer", role: "button", onClick: onLogoutClick }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-sign-out fa-lg" }, void 0) }), void 0)] }), void 0);
+                        jsx_runtime_1.jsx("div", __assign({ className: "ms-2 py-2 px-3 cursor-pointer", role: "button", onClick: onLogoutClick }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-sign-out fa-lg" }, void 0) }), void 0)] }), void 0);
             }
         }
     }

@@ -86,7 +86,7 @@ export class DropdownActions extends React.Component<DropdownActionsProps, Dropd
                 aria-expanded={dropdownOpen}
                 onClick={this.toggle}>
                 {icon!==null && <i className={classNames('fa fa-fw ', 'fa-'+(icon||'ellipsis-v'))} />}
-				{content && <span className="ml-1">{content}</span>}
+				{content && <span className="ms-1">{content}</span>}
             </button>
             <div ref={v => this.menu=v} className={classNames({"dropdown-menu":true, "dropdown-menu-right":isRight, "show":dropdownOpen})}>
                 {
@@ -101,7 +101,7 @@ export class DropdownActions extends React.Component<DropdownActionsProps, Dropd
                         if (hasIcon === true) {
                             if (icon !== undefined) icon = 'fa-' + icon;
 							if (!iconClass) iconClass = 'text-info';
-							i = <i className={classNames('mr-2', 'fa', icon, 'fa-fw', iconClass || itemIconClass)}
+							i = <i className={classNames('me-2', 'fa', icon, 'fa-fw', iconClass || itemIconClass)}
 								aria-hidden={true}></i>;
                         }
                         if (action === undefined) 

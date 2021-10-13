@@ -289,7 +289,7 @@ var Widget = /** @class */ (function () {
         var tag = inNode === true ? 'span' : 'div';
         return errorList.map(function (err) { return React.createElement(tag, {
             key: err,
-            className: 'text-danger d-inline-block my-2 ml-3'
+            className: 'text-danger d-inline-block my-2 ms-3'
         }, jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }, void 0)); });
     };
     return Widget;

@@ -49,7 +49,7 @@ export abstract class View<C extends Controller> {
 		let renderUser = (user:User) => {
 			let {name, nick, icon} = user;
 			return <>
-				<Image src={icon} className={imageClassName || 'w-1c h-1c mr-2'} />
+				<Image src={icon} className={imageClassName || 'w-1c h-1c me-2'} />
 				<span className={textClassName}>{nick || name}</span>
 			</>;
 		}

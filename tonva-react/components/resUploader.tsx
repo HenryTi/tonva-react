@@ -336,7 +336,7 @@ export class ImageUploader extends React.Component<ImageUploaderProps> {
         if (arr.length < 2) return;
         return <div>{arr.map((v, index) => {
             let {caption, size} = v;
-            return <label key={index} className="mr-3"><input type="radio" name="size" 
+            return <label key={index} className="me-3"><input type="radio" name="size" 
                 onChange={()=>this.setSize(size as any)}
                 defaultChecked={index===0} /> {caption}</label>;
         })}</div>
@@ -345,7 +345,7 @@ export class ImageUploader extends React.Component<ImageUploaderProps> {
     render() {
         let {label} = this.props;
         let right = <button
-            className="btn btn-sm btn-success align-self-center mr-2"
+            className="btn btn-sm btn-success align-self-center me-2"
             disabled={!this.isChanged}
             onClick={this.onSaved}>保存</button>;
         return <Page header={label || '更改图片'} right={right}>
@@ -365,7 +365,7 @@ export class ImageUploader extends React.Component<ImageUploaderProps> {
                             <div className="text-success p-2">上传成功！</div>
                             :
                             this.file && this.desImgSize > 0 && <div className="mb-3 d-flex align-items-end">
-                                <div className="mr-5">
+                                <div className="me-5">
                                     {this.levelDiv()}
                                     <div>分辨率：{this.desImgWidth} x {this.desImgHeight}
                                     &nbsp; &nbsp;
@@ -504,7 +504,7 @@ export class AudioUploader extends React.Component<AudioUploaderProps> {
     render() {
         let {label} = this.props;
         let right = <button
-            className="btn btn-sm btn-success align-self-center mr-2"
+            className="btn btn-sm btn-success align-self-center me-2"
             disabled={!this.isChanged}
             onClick={this.onSaved}>保存</button>;
         return <Page header={label || '更改文件'} right={right}>

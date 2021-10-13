@@ -33,7 +33,7 @@ abstract class TagItemEdit extends ItemEdit {
     private page = observer((props:{resolve:(value:any)=>void, reject: (resean?:any)=>void}):JSX.Element => {
         let {resolve} = props;
         let right = <button
-            className="btn btn-sm btn-success align-self-center mr-2"
+            className="btn btn-sm btn-success align-self-center me-2"
             disabled={!this.isChanged}
             onClick={()=>{
                 this.verifyValue();

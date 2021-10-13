@@ -68,7 +68,7 @@ export class SearchBox extends React.Component<SearchBoxProps> { //}, SearchBoxS
 		if (env.isMobile === true) autoComplete = 'off';
 		return <form className={className} onSubmit={this.onSubmit} autoComplete={autoComplete}>
 			<div className={classNames("input-group", inputSize)}>
-				{label && <div className="input-group-addon align-self-center mr-2">{label}</div>}
+				{label && <div className="input-group-addon align-self-center me-2">{label}</div>}
 				<input ref={v=>this.input=v} onChange={this.onChange}
 					type="text"
 					name="key"

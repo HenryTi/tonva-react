@@ -239,7 +239,7 @@ export abstract class Widget {
         return errorList.map(err => React.createElement(tag, 
             {
                 key: err, 
-                className: 'text-danger d-inline-block my-2 ml-3'
+                className: 'text-danger d-inline-block my-2 ms-3'
             },
             <><i className="fa fa-exclamation-circle" /> &nbsp;{err}</>
         ));

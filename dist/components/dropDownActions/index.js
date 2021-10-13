@@ -108,7 +108,7 @@ var DropdownActions = /** @class */ (function (_super) {
         //isOpen={this.state.dropdownOpen} toggle={this.toggle}
         var cn = className || 'cursor-pointer dropdown-toggle btn btn-sm';
         //if (className) cn += className;
-        return jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('dropdown', containerClass) }, { children: [jsx_runtime_1.jsxs("button", __assign({ ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle }, { children: [icon !== null && jsx_runtime_1.jsx("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) }, void 0), content && jsx_runtime_1.jsx("span", __assign({ className: "ml-1" }, { children: content }), void 0)] }), void 0), jsx_runtime_1.jsx("div", __assign({ ref: function (v) { return _this.menu = v; }, className: classnames_1.default({ "dropdown-menu": true, "dropdown-menu-right": isRight, "show": dropdownOpen }) }, { children: actions.map(function (v, index) {
+        return jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('dropdown', containerClass) }, { children: [jsx_runtime_1.jsxs("button", __assign({ ref: function (v) { return _this.button = v; }, className: cn, "data-toggle": "dropdown", "aria-expanded": dropdownOpen, onClick: this.toggle }, { children: [icon !== null && jsx_runtime_1.jsx("i", { className: classnames_1.default('fa fa-fw ', 'fa-' + (icon || 'ellipsis-v')) }, void 0), content && jsx_runtime_1.jsx("span", __assign({ className: "ms-1" }, { children: content }), void 0)] }), void 0), jsx_runtime_1.jsx("div", __assign({ ref: function (v) { return _this.menu = v; }, className: classnames_1.default({ "dropdown-menu": true, "dropdown-menu-right": isRight, "show": dropdownOpen }) }, { children: actions.map(function (v, index) {
                         if (!v) {
                             return jsx_runtime_1.jsx("div", { className: "dropdown-divider" }, index);
                         }
@@ -121,7 +121,7 @@ var DropdownActions = /** @class */ (function (_super) {
                                 icon = 'fa-' + icon;
                             if (!iconClass)
                                 iconClass = 'text-info';
-                            i = jsx_runtime_1.jsx("i", { className: classnames_1.default('mr-2', 'fa', icon, 'fa-fw', iconClass || itemIconClass), "aria-hidden": true }, void 0);
+                            i = jsx_runtime_1.jsx("i", { className: classnames_1.default('me-2', 'fa', icon, 'fa-fw', iconClass || itemIconClass), "aria-hidden": true }, void 0);
                         }
                         if (action === undefined)
                             return jsx_runtime_1.jsxs("h6", __assign({ className: "dropdown-header" }, { children: [i, " ", caption] }), void 0);

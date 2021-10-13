@@ -43,7 +43,7 @@ export function renderPageHeader(props: PageHeaderProps, inWebNav?: boolean) {
 					<small className="text-light">{nick || name}</small>
 					{
 						// eslint-disable-next-line
-						<div className="ml-2 py-2 px-3 cursor-pointer"
+						<div className="ms-2 py-2 px-3 cursor-pointer"
 							role="button"
 							onClick={onLogoutClick}>
 							<i className="fa fa-sign-out fa-lg" />
@@ -127,7 +127,7 @@ export class PageHeader extends React.Component<PageHeaderProps> {
                         <small className="text-light">{nick || name}</small>
                         {
                             // eslint-disable-next-line
-                            <div className="ml-2 py-2 px-3 cursor-pointer"
+                            <div className="ms-2 py-2 px-3 cursor-pointer"
                                 role="button"
                                 onClick={this.logoutClick}>
                                 <i className="fa fa-sign-out fa-lg" />

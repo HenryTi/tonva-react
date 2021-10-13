@@ -235,12 +235,12 @@ export class Form extends React.Component<FormProps> {
                 labelView = <label className={classNames('col-sm-' + fieldLabelSize, 'col-form-label', cnAlign)}>{label}</label>
             }
             let fieldCol = 'col-sm-' + (12 - fieldLabelSize);
-            return <div className="form-group row">
+            return <div className="mb-3 row">
                 {labelView}
                 <div className={fieldCol}>{content}</div>
             </div>;
         }
-        return <div className="form-group">
+        return <div className="mb-3">
             {label===null? null:<label className="col-form-label">{label}</label>}
             {content}
         </div>;

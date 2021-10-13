@@ -95,7 +95,7 @@ var TagItemEdit = /** @class */ (function (_super) {
         _this.inputs = {};
         _this.page = mobx_react_1.observer(function (props) {
             var resolve = props.resolve;
-            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: function () {
+            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: function () {
                     _this.verifyValue();
                     if (!_this.error)
                         resolve(_this.newValue);

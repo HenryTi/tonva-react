@@ -106,7 +106,7 @@ var CStringEdit = /** @class */ (function (_super) {
                         onValueChange(_this.value);
                 }
             };
-            var right = react_1.default.createElement(mobx_react_1.observer(function () { return jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center mr-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0); }));
+            var right = react_1.default.createElement(mobx_react_1.observer(function () { return jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0); }));
             var onKeyDown = function (evt) {
                 if (evt.keyCode === 13)
                     onSave();

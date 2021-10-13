@@ -260,13 +260,13 @@ export abstract class Controller {
             }
             let buttons:any[] = [];
             if (ok !== undefined) {
-                buttons.push(<button key="ok" className="btn btn-primary mr-3" onClick={()=>close('ok')}>{ok}</button>);
+                buttons.push(<button key="ok" className="btn btn-primary me-3" onClick={()=>close('ok')}>{ok}</button>);
             }
             if (yes !== undefined) {
-                buttons.push(<button key="yes" className="btn btn-success mr-3" onClick={()=>close('yes')}>{yes}</button>);
+                buttons.push(<button key="yes" className="btn btn-success me-3" onClick={()=>close('yes')}>{yes}</button>);
             }
             if (no !== undefined) {
-                buttons.push(<button key="no" className="btn btn-outline-danger mr-3" onClick={()=>close('no')}>{no}</button>);
+                buttons.push(<button key="no" className="btn btn-outline-danger me-3" onClick={()=>close('no')}>{no}</button>);
             }
             this.openPage(<Page header={caption || '请确认'} back="close">
                 <div className={classNames || "rounded bg-white m-5 p-3 border"}>

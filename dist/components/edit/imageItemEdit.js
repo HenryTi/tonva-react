@@ -127,7 +127,7 @@ var ImageItemEdit = /** @class */ (function (_super) {
                     {overSize}
                     <div className="small muted my-4">支持JPG、GIF、PNG格式图片，不超过2M。</div>
                     <div className="d-flex">
-                        <div className="w-12c h-12c mr-4"
+                        <div className="w-12c h-12c me-4"
                             style={{border: '1px dotted gray', padding: '8px'}}>
                             <Image className="w-100 h-100" src={this.resId} />
                         </div>

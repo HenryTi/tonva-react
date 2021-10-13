@@ -51,23 +51,23 @@ export class VUnsupportedUnit extends VPage<CAppBase<any>> {
 		//let {appOwner, appName} = UQsMan.value;
         return <Page header="APP无法运行" logout={true}>
             <div className="m-3 text-danger container">
-                <div className="form-group row">
+                <div className="mb-3 row">
                     <div className="col-sm-3 font-weight-bold">登录用户</div>
                     <div className="col-sm text-body">{userName}</div>
                 </div>
-                <div className="form-group row">
+                <div className="mb-3 row">
                     <div className="col-sm-3 font-weight-bold">预设小号</div>
                     <div className="col-sm text-body">{predefinedUnit || <small className="">[无预设小号]</small>}</div>
                 </div>
 				{
 					uqsLoadErrors && uqsLoadErrors.map(v => {
-						return <div className="form-group row">
+						return <div className="mb-3 row">
 							<div className="col-sm-3 font-weight-bold">App</div>
 							<div className="col-sm text-body">{v}</div>
 						</div>
 					})
 				}
-                <div className="form-group row">
+                <div className="mb-3 row">
                     <div className="col-sm-3 font-weight-bold">小号{predefinedUnit}</div>
                     <div className="col-sm text-body">
                         预设小号定义在 public/unit.json 文件中。
@@ -80,7 +80,7 @@ export class VUnsupportedUnit extends VPage<CAppBase<any>> {
 		</Page>;		
 	}
 	/*
-	<div className="form-group row">
+	<div className="mb-3 row">
 		<div className="col-sm-3 font-weight-bold">
 			可能原因<FA name="exclamation-triangle" />
 		</div>

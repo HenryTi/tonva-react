@@ -72,7 +72,7 @@ export class CStringEdit extends Controller {
 			}
 		}
         let right = React.createElement(observer(() => <button
-            className="btn btn-sm btn-success align-self-center mr-2"
+            className="btn btn-sm btn-success align-self-center me-2"
             disabled={!this.isChanged}
             onClick={onSave}>保存</button>));
 		let onKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {

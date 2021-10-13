@@ -226,7 +226,7 @@ export abstract class Context {
         let {errors} = this;
         if (errors.length === 0) return null;
         return <>
-            {errors.map(err => <span key={err} className="text-danger inline-block my-1 ml-3">
+            {errors.map(err => <span key={err} className="text-danger inline-block my-1 ms-3">
                 <i className="fa fa-exclamation-circle" /> &nbsp;{err}
             </span>)}
         </>

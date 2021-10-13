@@ -398,13 +398,13 @@ var Controller = /** @class */ (function () {
                             };
                             buttons = [];
                             if (ok !== undefined) {
-                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary mr-3", onClick: function () { return close('ok'); } }, { children: ok }), "ok"));
+                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary me-3", onClick: function () { return close('ok'); } }, { children: ok }), "ok"));
                             }
                             if (yes !== undefined) {
-                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-success mr-3", onClick: function () { return close('yes'); } }, { children: yes }), "yes"));
+                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-success me-3", onClick: function () { return close('yes'); } }, { children: yes }), "yes"));
                             }
                             if (no !== undefined) {
-                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-outline-danger mr-3", onClick: function () { return close('no'); } }, { children: no }), "no"));
+                                buttons.push(jsx_runtime_1.jsx("button", __assign({ className: "btn btn-outline-danger me-3", onClick: function () { return close('no'); } }, { children: no }), "no"));
                             }
                             this.openPage(jsx_runtime_1.jsx(components_1.Page, __assign({ header: caption || '请确认', back: "close" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classNames || "rounded bg-white m-5 p-3 border" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "d-flex align-items-center justify-content-center" }, { children: message }), void 0), jsx_runtime_1.jsx("div", __assign({ className: "mt-3 d-flex align-items-center justify-content-center" }, { children: buttons }), void 0)] }), void 0) }), void 0));
                             components_1.nav.regConfirmClose(function () { return __awaiter(_this, void 0, void 0, function () {

@@ -70,7 +70,7 @@ export const ConfirmReloadPage = (props: ConfirmReloadPageProps):JSX.Element => 
                 升级将清除所有本机缓冲区内容，并从服务器重新安装程序！
             </div>
             <div className="text-center mt-5">
-                <button className="btn btn-danger mr-3" onClick={()=>props.confirm(true)}>确认升级</button>
+                <button className="btn btn-danger me-3" onClick={()=>props.confirm(true)}>确认升级</button>
             </div>
         </div>
     </Page>;
