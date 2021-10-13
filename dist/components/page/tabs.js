@@ -209,6 +209,7 @@ var TabsView = /** @class */ (function () {
                     borderBottomWidth: 1,
                     borderLeftWidth: 0,
                     borderRightWidth: 0,
+                    cursor: 'pointer',
                 };
                 if (tabPosition === 'top') {
                     bsCur.borderBottomWidth = 0;

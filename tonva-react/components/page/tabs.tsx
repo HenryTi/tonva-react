@@ -192,6 +192,7 @@ export class TabsView {
                 borderBottomWidth: 1,
                 borderLeftWidth: 0,
                 borderRightWidth: 0,
+				cursor: 'pointer',
             }
             if (tabPosition === 'top') {
                 bsCur.borderBottomWidth = 0;
@@ -218,7 +219,8 @@ export class TabsView {
                         else if (num < 0) notifyCircle = <u className="dot" />;
                     }
                 }
-                return <div key={index} onClick={()=>this.tabClick(v)} style={selected===true? bsCur:bsTab}>
+                return <div key={index} onClick={()=>this.tabClick(v)} 
+					style={selected===true? bsCur:bsTab}>
 					<div>
 					{notifyCircle}
 					{caption(selected)}
