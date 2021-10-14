@@ -177,6 +177,7 @@ var TuidInner = /** @class */ (function (_super) {
         }));
     };
     TuidInner.prototype.useId = function (id, defer) {
+        console.log("TUID.useId: " + id + " this.noCache: " + this.noCache);
         if (this.noCache === true)
             return;
         if (!id)

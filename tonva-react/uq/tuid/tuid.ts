@@ -145,6 +145,7 @@ export class TuidInner extends Tuid {
 	}
 
     useId(id:number, defer?:boolean) {
+        console.log(`TUID.useId: ${id} this.noCache: ${this.noCache}`);
         if (this.noCache === true) return;
         if (!id) return;
         this.idCache.useId(id, defer);
