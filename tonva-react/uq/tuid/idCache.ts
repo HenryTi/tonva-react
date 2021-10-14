@@ -4,7 +4,7 @@ import { LocalArr } from '../../tool';
 import { BoxId } from './boxId';
 import { TuidInner, TuidDiv } from './tuid';
 
-const maxCacheSize = 1000;
+const maxCacheSize = 10000;
 
 export class IdCache {
     private queue: number[] = [];                   // 每次使用，都排到队头

@@ -724,7 +724,8 @@ export class UqMan {
 	}
 
 	hasEntity(name: string):boolean {
-		return this.entities[name] !== undefined;
+		return this.entities[name] !== undefined
+			|| this.entities[name.toLowerCase()] !== undefined;
 	}
 
 	createProxy():any {

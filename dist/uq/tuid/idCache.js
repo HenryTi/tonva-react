@@ -62,7 +62,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.IdDivCache = exports.IdCache = void 0;
 var mobx_1 = require("mobx");
 var lodash_1 = __importDefault(require("lodash"));
-var maxCacheSize = 1000;
+var maxCacheSize = 10000;
 var IdCache = /** @class */ (function () {
     function IdCache(tuidLocal) {
         this.queue = []; // 每次使用，都排到队头

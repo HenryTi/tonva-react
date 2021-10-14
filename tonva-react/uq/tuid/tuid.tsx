@@ -129,13 +129,24 @@ export class TuidInner extends Tuid {
 	tv(id:number, render?:Render<any>):JSX.Element {
         const TuidView = observer(() => {
 			let obj = this.valueFromId(id);
-			if (typeof obj !== 'object') {
+			if (obj === undefined) {
 				this.useId(id);
 				return <>{this.sName}:{id}</>;
 			}
-			return (render ?? this.render ?? ((item:any) => {
-				return <>{this.sName}:{uqStringify(item)}</>;
-			}))(obj);
+            let r: Render<any>;
+            if (render) {
+                r = render;
+            }
+            else if (this.render) {
+                r = this.render;
+            }
+            else {
+                console.log('render', render, 'this.render', this.render);
+                r = (item:any) => {
+                    return <>{this.sName}:{uqStringify(item)}</>;
+                };
+            }
+			return r(obj);
 		});
 		return <><TuidView /></>;
 	}

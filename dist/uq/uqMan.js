@@ -995,7 +995,8 @@ var UqMan = /** @class */ (function () {
         return uqKey;
     };
     UqMan.prototype.hasEntity = function (name) {
-        return this.entities[name] !== undefined;
+        return this.entities[name] !== undefined
+            || this.entities[name.toLowerCase()] !== undefined;
     };
     UqMan.prototype.createProxy = function () {
         var _this = this;
