@@ -1,4 +1,4 @@
-import { isObservableMap, observable, ObservableMap } from 'mobx';
+import { action, isObservableMap, makeObservable, observable, ObservableMap } from 'mobx';
 import _ from 'lodash';
 import { LocalArr } from '../../tool';
 import { BoxId } from './boxId';
@@ -16,6 +16,9 @@ export class IdCache {
 
     constructor(tuidLocal: TuidInner) {
         this.cache = observable.map({}, {deep: false});
+        makeObservable(this, {
+            cacheSet: action
+        });
         this.tuidInner = tuidLocal;
         this.initLocalArr();
     }
@@ -23,6 +26,10 @@ export class IdCache {
     protected initLocalArr() {
         this.localArr = this.tuidInner.schemaLocal.arr(this.tuidInner.name + '.ids');
         console.log('initLocalArr()', this.localArr);
+    }
+
+    cacheSet(id:number, val:any) {
+        this.cache.set(id, val);
     }
 
     useId(id:number, defer?:boolean) {
@@ -36,8 +43,8 @@ export class IdCache {
             return;
         }
         this.tuidInner.cacheTuids(defer===true?70:20);
-        this.cache.set(id, id);
-        console.log(`this.cache.set(id, id);${id}`);
+        this.cacheSet(id, id);
+        console.log(`this.cacheSet(id, id);${id}`);
         if (this.waitingIds.findIndex(v => v === id) >= 0) {
             this.moveToHead(id);
             return;
@@ -80,10 +87,6 @@ export class IdCache {
         return ret;
     }
 
-    setIdNull(id:number) {
-        this.cache.set(id, null);
-    }
-
     remove(id:number) {
         this.cache.delete(id);
         let index = this.queue.findIndex(v => v === id);
@@ -110,8 +113,8 @@ export class IdCache {
         if (val === undefined) return false;
         let id = this.getIdFromObj(val);
         if (id === undefined) return false;
-        this.cache.set(id, val);
-        console.log('this.cache.set(id, val)', id, val);
+        this.cacheSet(id, val);
+        console.log('this.cacheSet(id, val)', id, val);
         return true;
     }
     protected getIdFromObj(val:any) {return this.tuidInner.getIdFromObj(val)}
@@ -163,7 +166,7 @@ export class IdCache {
         let val = this.cache.get(id);
         switch (typeof val) {
             case 'object': return val;
-            case 'number': this.cache.set(id, id); break;
+            case 'number': this.cacheSet(id, id); break;
         }
         let ret = await this.loadTuidIdsOrLocal([id]);
         this.cacheIdValues(ret);

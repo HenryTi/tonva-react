@@ -68,12 +68,18 @@ var IdCache = /** @class */ (function () {
         this.queue = []; // 每次使用，都排到队头
         this.waitingIds = []; // 等待loading的
         this.cache = mobx_1.observable.map({}, { deep: false });
+        mobx_1.makeObservable(this, {
+            cacheSet: mobx_1.action
+        });
         this.tuidInner = tuidLocal;
         this.initLocalArr();
     }
     IdCache.prototype.initLocalArr = function () {
         this.localArr = this.tuidInner.schemaLocal.arr(this.tuidInner.name + '.ids');
         console.log('initLocalArr()', this.localArr);
+    };
+    IdCache.prototype.cacheSet = function (id, val) {
+        this.cache.set(id, val);
     };
     IdCache.prototype.useId = function (id, defer) {
         if (!id)
@@ -87,8 +93,8 @@ var IdCache = /** @class */ (function () {
             return;
         }
         this.tuidInner.cacheTuids(defer === true ? 70 : 20);
-        this.cache.set(id, id);
-        console.log("this.cache.set(id, id);" + id);
+        this.cacheSet(id, id);
+        console.log("this.cacheSet(id, id);" + id);
         if (this.waitingIds.findIndex(function (v) { return v === id; }) >= 0) {
             this.moveToHead(id);
             return;
@@ -126,9 +132,6 @@ var IdCache = /** @class */ (function () {
         console.log("idCache.getValue " + id + " " + ret + " isObservableMap: " + mobx_1.isObservableMap(this.cache));
         return ret;
     };
-    IdCache.prototype.setIdNull = function (id) {
-        this.cache.set(id, null);
-    };
     IdCache.prototype.remove = function (id) {
         this.cache.delete(id);
         var index = this.queue.findIndex(function (v) { return v === id; });
@@ -158,8 +161,8 @@ var IdCache = /** @class */ (function () {
         var id = this.getIdFromObj(val);
         if (id === undefined)
             return false;
-        this.cache.set(id, val);
-        console.log('this.cache.set(id, val)', id, val);
+        this.cacheSet(id, val);
+        console.log('this.cacheSet(id, val)', id, val);
         return true;
     };
     IdCache.prototype.getIdFromObj = function (val) { return this.tuidInner.getIdFromObj(val); };
@@ -250,7 +253,7 @@ var IdCache = /** @class */ (function () {
                         switch (typeof val) {
                             case 'object': return [2 /*return*/, val];
                             case 'number':
-                                this.cache.set(id, id);
+                                this.cacheSet(id, id);
                                 break;
                         }
                         return [4 /*yield*/, this.loadTuidIdsOrLocal([id])];

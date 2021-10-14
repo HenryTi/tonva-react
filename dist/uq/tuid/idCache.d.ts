@@ -9,10 +9,10 @@ export declare class IdCache {
     protected tuidInner: TuidInner;
     constructor(tuidLocal: TuidInner);
     protected initLocalArr(): void;
+    cacheSet(id: number, val: any): void;
     useId(id: number, defer?: boolean): void;
     private moveToHead;
     getValue(id: number): any;
-    setIdNull(id: number): void;
     remove(id: number): void;
     valueFromId(id: number | BoxId): any;
     resetCache(id: number): void;
