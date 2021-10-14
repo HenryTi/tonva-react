@@ -66,8 +66,8 @@ var maxCacheSize = 1000;
 var IdCache = /** @class */ (function () {
     function IdCache(tuidLocal) {
         this.queue = []; // 每次使用，都排到队头
-        this.cache = mobx_1.observable.map({}, { deep: false }); // 已经缓冲的
         this.waitingIds = []; // 等待loading的
+        this.cache = mobx_1.observable.map({}, { deep: false });
         this.tuidInner = tuidLocal;
         this.initLocalArr();
     }
@@ -88,6 +88,7 @@ var IdCache = /** @class */ (function () {
         }
         this.tuidInner.cacheTuids(defer === true ? 70 : 20);
         this.cache.set(id, id);
+        console.log("this.cache.set(id, id);" + id);
         if (this.waitingIds.findIndex(function (v) { return v === id; }) >= 0) {
             this.moveToHead(id);
             return;
@@ -122,8 +123,11 @@ var IdCache = /** @class */ (function () {
     };
     IdCache.prototype.getValue = function (id) {
         var ret = this.cache.get(id);
-        console.log("idCache.getValue " + id + " " + ret);
+        console.log("idCache.getValue " + id + " " + ret + " isObservableMap: " + mobx_1.isObservableMap(this.cache));
         return ret;
+    };
+    IdCache.prototype.setIdNull = function (id) {
+        this.cache.set(id, null);
     };
     IdCache.prototype.remove = function (id) {
         this.cache.delete(id);
@@ -155,6 +159,7 @@ var IdCache = /** @class */ (function () {
         if (id === undefined)
             return false;
         this.cache.set(id, val);
+        console.log('this.cache.set(id, val)', id, val);
         return true;
     };
     IdCache.prototype.getIdFromObj = function (val) { return this.tuidInner.getIdFromObj(val); };

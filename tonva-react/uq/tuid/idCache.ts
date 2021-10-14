@@ -80,6 +80,10 @@ export class IdCache {
         return ret;
     }
 
+    setIdNull(id:number) {
+        this.cache.set(id, null);
+    }
+
     remove(id:number) {
         this.cache.delete(id);
         let index = this.queue.findIndex(v => v === id);

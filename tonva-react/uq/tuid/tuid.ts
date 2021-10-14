@@ -128,6 +128,10 @@ export class TuidInner extends Tuid {
     }
 
 	tv(id:number, render?:Render<any>):JSX.Element {
+        let obj = this.valueFromId(id);
+        if (obj === undefined) {
+            this.idCache.setIdNull(id);
+        }
 		return React.createElement(observer(() => {
 			let obj = this.valueFromId(id);
 			if (!obj) {

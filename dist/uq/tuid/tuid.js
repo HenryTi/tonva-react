@@ -160,6 +160,10 @@ var TuidInner = /** @class */ (function (_super) {
     };
     TuidInner.prototype.tv = function (id, render) {
         var _this = this;
+        var obj = this.valueFromId(id);
+        if (obj === undefined) {
+            this.idCache.setIdNull(id);
+        }
         return react_1.default.createElement(mobx_react_1.observer(function () {
             var _a;
             var obj = _this.valueFromId(id);
