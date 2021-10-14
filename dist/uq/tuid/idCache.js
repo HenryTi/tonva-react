@@ -73,6 +73,7 @@ var IdCache = /** @class */ (function () {
     }
     IdCache.prototype.initLocalArr = function () {
         this.localArr = this.tuidInner.schemaLocal.arr(this.tuidInner.name + '.ids');
+        console.log('initLocalArr()', this.localArr);
     };
     IdCache.prototype.useId = function (id, defer) {
         if (!id)
@@ -114,29 +115,15 @@ var IdCache = /** @class */ (function () {
         this.queue.push(id);
         return;
     };
-    /*
-    protected removeWaiting(id:number) {
-        let index = this.waitingIds.findIndex(v => v === id);
-        this.waitingIds.splice(index, 1);
-    }
-    
-    protected clearWaiting() {
-        this.waitingIds.splice(0, this.waitingIds.length);
-    }
-    
-    protected removeLoading(id:number) {
-        if (this.loadingIds === undefined) return;
-        let index = this.loadingIds.findIndex(v => v === id);
-        this.loadingIds.splice(index, 1);
-    }
-    */
     IdCache.prototype.moveToHead = function (id) {
         var index = this.queue.findIndex(function (v) { return v === id; });
         this.queue.splice(index, 1);
         this.queue.push(id);
     };
     IdCache.prototype.getValue = function (id) {
-        return this.cache.get(id);
+        var ret = this.cache.get(id);
+        console.log("idCache.getValue " + id + " " + ret);
+        return ret;
     };
     IdCache.prototype.remove = function (id) {
         this.cache.delete(id);
@@ -167,12 +154,6 @@ var IdCache = /** @class */ (function () {
         var id = this.getIdFromObj(val);
         if (id === undefined)
             return false;
-        /*
-        let index = this.waitingIds.findIndex(v => v === id);
-        if (index>=0) this.waitingIds.splice(index, 1);
-        */
-        //this.removeWaiting(id);
-        //this.removeLoading(id);
         this.cache.set(id, val);
         return true;
     };
@@ -185,13 +166,6 @@ var IdCache = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.loadIds()];
                     case 1:
                         tuidValues = _a.sent();
-                        /*
-                        if (tuidValues === undefined || tuidValues.length === 0) {
-                            //this.waitingIds.splice(0, this.waitingIds.length);
-                            this.clearWaiting();
-                            return;
-                        }
-                        */
                         this.cacheIdValues(tuidValues);
                         return [2 /*return*/];
                 }
@@ -202,11 +176,13 @@ var IdCache = /** @class */ (function () {
         if (tuidValues === undefined)
             return;
         var tuids = this.unpackTuidIds(tuidValues);
+        console.log('this.unpackTuidIds(tuidValues)', tuids);
         for (var _i = 0, tuids_1 = tuids; _i < tuids_1.length; _i++) {
             var tuidValue = tuids_1[_i];
-            if (this.cacheValue(tuidValue) === false)
-                continue;
-            this.cacheTuidFieldValues(tuidValue);
+            if (this.cacheValue(tuidValue) === true) {
+                console.log('this.cacheValue(tuidValue)', tuidValue);
+                this.cacheTuidFieldValues(tuidValue);
+            }
         }
     };
     IdCache.prototype.modifyIds = function (ids) {
@@ -243,13 +219,11 @@ var IdCache = /** @class */ (function () {
                         if (this.waitingIds.length === 0)
                             return [2 /*return*/];
                         loadingIds = __spreadArray([], this.waitingIds);
-                        //this.clearWaiting();
                         this.waitingIds = [];
                         return [4 /*yield*/, this.loadTuidIdsOrLocal(loadingIds)];
                     case 1:
                         ret = _a.sent();
-                        //this.loading = false;
-                        //this.loadingIds = undefined;
+                        console.log('loadIds', ret);
                         return [2 /*return*/, ret];
                 }
             });

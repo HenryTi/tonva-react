@@ -329,8 +329,9 @@ export abstract class Entity {
     }
 
     protected unpackTuidIdsOfFields(values:string[], fields: Field[]):any[] {
-        if (fields === undefined) return values as any[];
-        //if (this.fields === undefined) return values as any[];
+        if (fields === undefined) {
+            return values as any[];
+        }
         let ret:any[] = []
         for (let ln of values) {
             if (!ln) continue;

@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { isObservableMap, observable, ObservableMap } from 'mobx';
 import _ from 'lodash';
 import { LocalArr } from '../../tool';
 import { BoxId } from './boxId';
@@ -8,21 +8,21 @@ const maxCacheSize = 1000;
 
 export class IdCache {
     private queue: number[] = [];               // 每次使用，都排到队头
-	private cache = observable.map({}, {deep: false});    // 已经缓冲的
-	//private loading:boolean = false;
-	//private loadingIds: number[];
+	private cache:ObservableMap<number, any>;    // 已经缓冲的
 
     protected localArr:LocalArr;
     protected waitingIds: number[] = [];          // 等待loading的
     protected tuidInner: TuidInner;
 
     constructor(tuidLocal: TuidInner) {
+        this.cache = observable.map({}, {deep: false});
         this.tuidInner = tuidLocal;
         this.initLocalArr();
     }
 
     protected initLocalArr() {
         this.localArr = this.tuidInner.schemaLocal.arr(this.tuidInner.name + '.ids');
+        console.log('initLocalArr()', this.localArr);
     }
 
     useId(id:number, defer?:boolean) {
@@ -37,6 +37,7 @@ export class IdCache {
         }
         this.tuidInner.cacheTuids(defer===true?70:20);
         this.cache.set(id, id);
+        console.log(`this.cache.set(id, id);${id}`);
         if (this.waitingIds.findIndex(v => v === id) >= 0) {
             this.moveToHead(id);
             return;
@@ -66,22 +67,7 @@ export class IdCache {
         this.queue.push(id);
 		return;
     }
-	/*
-	protected removeWaiting(id:number) {
-		let index = this.waitingIds.findIndex(v => v === id);
-		this.waitingIds.splice(index, 1);
-	}
-	
-	protected clearWaiting() {
-		this.waitingIds.splice(0, this.waitingIds.length);
-	}
-	
-	protected removeLoading(id:number) {
-		if (this.loadingIds === undefined) return;
-		let index = this.loadingIds.findIndex(v => v === id);
-		this.loadingIds.splice(index, 1);
-	}
-	*/
+
     private moveToHead(id:number) {
         let index = this.queue.findIndex(v => v === id);
         this.queue.splice(index, 1);
@@ -89,7 +75,9 @@ export class IdCache {
     }
 
     getValue(id:number) {
-		return this.cache.get(id);
+		let ret = this.cache.get(id);
+        console.log(`idCache.getValue ${id} ${ret} isObservableMap: ${isObservableMap(this.cache)}`);
+        return ret;
     }
 
     remove(id:number) {
@@ -118,36 +106,26 @@ export class IdCache {
         if (val === undefined) return false;
         let id = this.getIdFromObj(val);
         if (id === undefined) return false;
-		/*
-        let index = this.waitingIds.findIndex(v => v === id);
-        if (index>=0) this.waitingIds.splice(index, 1);
-		*/
-		//this.removeWaiting(id);
-		//this.removeLoading(id);
         this.cache.set(id, val);
+        console.log('this.cache.set(id, val)', id, val);
         return true;
     }
     protected getIdFromObj(val:any) {return this.tuidInner.getIdFromObj(val)}
 
     async cacheIds():Promise<void> {
-        //if (this.waitingIds.length === 0) return;
 		let tuidValues = await this.loadIds();
-		/*
-		if (tuidValues === undefined || tuidValues.length === 0) {
-			//this.waitingIds.splice(0, this.waitingIds.length);
-			this.clearWaiting();
-			return;
-		}
-		*/
         this.cacheIdValues(tuidValues);
     }
 
     protected cacheIdValues(tuidValues: any[]) {
         if (tuidValues === undefined) return;
         let tuids = this.unpackTuidIds(tuidValues);
+        console.log('this.unpackTuidIds(tuidValues)', tuids)
         for (let tuidValue of tuids) {
-            if (this.cacheValue(tuidValue) === false) continue;
-            this.cacheTuidFieldValues(tuidValue);
+            if (this.cacheValue(tuidValue) === true) {
+                console.log('this.cacheValue(tuidValue)', tuidValue);
+                this.cacheTuidFieldValues(tuidValue);
+            }
         }
     }
     async modifyIds(ids:any[]):Promise<void> {
@@ -164,14 +142,10 @@ export class IdCache {
     }
     protected async loadIds(): Promise<any[]> {
 		if (this.waitingIds.length === 0) return;
-		//if (this.loading === true) return;
-		//this.loading = true;
 		let loadingIds = [...this.waitingIds];
-		//this.clearWaiting();
 		this.waitingIds = [];
 		let ret = await this.loadTuidIdsOrLocal(loadingIds);
-		//this.loading = false;
-		//this.loadingIds = undefined;
+        console.log('loadIds', ret);
         return ret;
     }
     protected unpackTuidIds(values:string[]):any[] {

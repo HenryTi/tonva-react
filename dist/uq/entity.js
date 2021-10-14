@@ -408,9 +408,9 @@ var Entity = /** @class */ (function () {
         }
     };
     Entity.prototype.unpackTuidIdsOfFields = function (values, fields) {
-        if (fields === undefined)
+        if (fields === undefined) {
             return values;
-        //if (this.fields === undefined) return values as any[];
+        }
         var ret = [];
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var ln_1 = values_1[_i];

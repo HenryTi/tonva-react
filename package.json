@@ -1,6 +1,6 @@
 {
   "name": "tonva-react",
-  "version": "2.0.75",
+  "version": "2.0.80",
   "description": "tonva react client libs",
   "private": false,
   "main": "dist/index.js",
@@ -32,8 +32,8 @@
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.21",
-    "mobx": "^6.1.8",
-    "mobx-react": "^7.1.0",
+    "mobx": "^6.3.3",
+    "mobx-react": "^7.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "typescript": "^3.9.7"
