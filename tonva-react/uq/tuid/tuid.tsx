@@ -7,7 +7,6 @@ import { EntityCaller } from '../caller';
 import { BoxId } from './boxId';
 import { IdCache, IdDivCache } from './idCache';
 import { Render } from '../../ui';
-import React from 'react';
 import { uqStringify } from './reactBoxId';
 
 export interface TuidSaveResult {
@@ -40,7 +39,7 @@ export abstract class UqTuid<M> extends Entity {
 
     getIdFromObj(obj:any):number {return obj[this.idName]}
     stopCache():void {this.noCache = true}
-	abstract tv(id:number, render?:Render<M>):JSX.Element;
+    abstract tv(id:number, render?:Render<M>):JSX.Element;
     abstract getObj(id:number):M;
     abstract useId(id:number):void;
     abstract boxId(id:number):BoxId;
@@ -128,10 +127,9 @@ export class TuidInner extends Tuid {
     }
 
 	tv(id:number, render?:Render<any>):JSX.Element {
-        console.log('<TuidView />');
         const TuidView = observer(() => {
 			let obj = this.valueFromId(id);
-			if (!obj) {
+			if (typeof obj !== 'object') {
 				this.useId(id);
 				return <>{this.sName}:{id}</>;
 			}
@@ -139,11 +137,10 @@ export class TuidInner extends Tuid {
 				return <>{this.sName}:{uqStringify(item)}</>;
 			}))(obj);
 		});
-		return <TuidView />;
+		return <><TuidView /></>;
 	}
 
     useId(id:number, defer?:boolean) {
-        console.log(`TUID.useId: ${id} this.noCache: ${this.noCache}`);
         if (this.noCache === true) return;
         if (!id) return;
         this.idCache.useId(id, defer);
@@ -372,14 +369,9 @@ class SaveCaller extends TuidCaller<{id:number, props:any}> {
                 switch (type) {
                     case 'date':
                         val = this.entity.buildDateParam(val); 
-                        //val = (val as string).replace('T', ' ');
-                        //val = (val as string).replace('Z', '');
                         break;
                     case 'datetime':
                         val = this.entity.buildDateTimeParam(val);
-                        //val = new Date(val).toISOString();
-                        //val = (val as string).replace('T', ' ');
-                        //val = (val as string).replace('Z', '');
                         break;
                 }
             }
@@ -535,15 +527,12 @@ export class TuidBox {
 }
 
 
-export class TuidDiv extends TuidInner /* Entity*/ {
+export class TuidDiv extends TuidInner {
     readonly typeName:string = 'div';
     protected cacheFields: Field[];
     protected tuid: TuidInner;
     protected idName: string;
     protected idCache: IdDivCache;
-
-    //ui: React.StatelessComponent<any>;
-    //res: any;
 
     constructor(uq: UqMan, tuid: TuidInner, name: string) {
         super(uq, name, 0);
@@ -553,19 +542,6 @@ export class TuidDiv extends TuidInner /* Entity*/ {
     }
 
     get owner() {return this.tuid}
-
-    /*
-    setSchema(schema:any) {
-        super.setSchema(schema);
-        this.buildFieldsTuid();
-    }*/
-
-    /*
-    setUIRes(ui:any, res:any) {
-        this.ui = ui && ui.content;
-        this.res = res;
-    }
-    */
 
     buildFieldsTuid() {
         super.buildFieldsTuid();
@@ -588,14 +564,6 @@ export class TuidDiv extends TuidInner /* Entity*/ {
         this.idCache.useId(id, defer);
     }
 
-    /*
-    boxId(id:number):BoxId {
-        if (typeof id === 'object') return id;
-        this.useId(id);
-        //return new BoxDivId(this.tuid, this, id);
-        return this.tuid.boxDivId(this, id);
-    }
-    */
     valueFromId(id:number):any {
         return this.idCache.getValue(id)
     }

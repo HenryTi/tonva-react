@@ -3,7 +3,7 @@ import { BoxId } from './boxId';
 import { TuidInner, TuidDiv } from './tuid';
 export declare class IdCache {
     private queue;
-    private cache;
+    cache: Map<any, any>;
     protected localArr: LocalArr;
     protected waitingIds: number[];
     protected tuidInner: TuidInner;

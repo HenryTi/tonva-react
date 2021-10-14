@@ -58,7 +58,7 @@ export class IDCache {
 		}
 		clearTimeout(this.timeoutHandler);
 		this.timeoutHandler = setTimeout(this.timeOut, delayLoad);
-		this.cache.set(id, 0);
+		//this.cache.set(id, 0);
 		if (this.waitingIds.findIndex(v => v === id) >= 0) {
 			this.moveToHead(id);
 			return;
@@ -106,21 +106,4 @@ export class IDCache {
 		this.remove(id);
 		this.useId(id);
 	}
-
-	/*
-	cacheValue(val:T):boolean {
-		if (val === undefined) return false;
-		let id = val.id;
-		if (id === undefined) return false;
-		this.cache.set(id, val);
-		return true;
-	}
-	*/
 }
-/*
-export class IDLocalCache extends IDCache {
-	protected async TvIdValues(waitingIds: number[]) {
-		return await this.uq.IDLocalTv(waitingIds);
-	}
-}
-*/

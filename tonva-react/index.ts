@@ -7,3 +7,4 @@ export * from './app';
 export * from './vm';
 export * from './res';
 export * from './ui';
+export * from './test';

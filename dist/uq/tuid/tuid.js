@@ -160,11 +160,10 @@ var TuidInner = /** @class */ (function (_super) {
     };
     TuidInner.prototype.tv = function (id, render) {
         var _this = this;
-        console.log('<TuidView />');
         var TuidView = mobx_react_1.observer(function () {
             var _a;
             var obj = _this.valueFromId(id);
-            if (!obj) {
+            if (typeof obj !== 'object') {
                 _this.useId(id);
                 return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [_this.sName, ":", id] }, void 0);
             }
@@ -172,10 +171,9 @@ var TuidInner = /** @class */ (function (_super) {
                 return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [_this.sName, ":", reactBoxId_1.uqStringify(item)] }, void 0);
             }))(obj);
         });
-        return jsx_runtime_1.jsx(TuidView, {}, void 0);
+        return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: jsx_runtime_1.jsx(TuidView, {}, void 0) }, void 0);
     };
     TuidInner.prototype.useId = function (id, defer) {
-        console.log("TUID.useId: " + id + " this.noCache: " + this.noCache);
         if (this.noCache === true)
             return;
         if (!id)
@@ -589,14 +587,9 @@ var SaveCaller = /** @class */ (function (_super) {
                 switch (type) {
                     case 'date':
                         val = this.entity.buildDateParam(val);
-                        //val = (val as string).replace('T', ' ');
-                        //val = (val as string).replace('Z', '');
                         break;
                     case 'datetime':
                         val = this.entity.buildDateTimeParam(val);
-                        //val = new Date(val).toISOString();
-                        //val = (val as string).replace('T', ' ');
-                        //val = (val as string).replace('Z', '');
                         break;
                 }
             }
@@ -915,9 +908,7 @@ var TuidBox = /** @class */ (function () {
 }());
 exports.TuidBox = TuidBox;
 var TuidDiv = /** @class */ (function (_super) {
-    __extends(TuidDiv, _super); /* Entity*/
-    //ui: React.StatelessComponent<any>;
-    //res: any;
+    __extends(TuidDiv, _super);
     function TuidDiv(uq, tuid, name) {
         var _this = _super.call(this, uq, name, 0) || this;
         _this.typeName = 'div';
@@ -931,17 +922,6 @@ var TuidDiv = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    /*
-    setSchema(schema:any) {
-        super.setSchema(schema);
-        this.buildFieldsTuid();
-    }*/
-    /*
-    setUIRes(ui:any, res:any) {
-        this.ui = ui && ui.content;
-        this.res = res;
-    }
-    */
     TuidDiv.prototype.buildFieldsTuid = function () {
         _super.prototype.buildFieldsTuid.call(this);
         var mainFields = this.schema.mainFields;
@@ -961,14 +941,6 @@ var TuidDiv = /** @class */ (function (_super) {
             return;
         this.idCache.useId(id, defer);
     };
-    /*
-    boxId(id:number):BoxId {
-        if (typeof id === 'object') return id;
-        this.useId(id);
-        //return new BoxDivId(this.tuid, this, id);
-        return this.tuid.boxDivId(this, id);
-    }
-    */
     TuidDiv.prototype.valueFromId = function (id) {
         return this.idCache.getValue(id);
     };
@@ -1004,7 +976,7 @@ var TuidDiv = /** @class */ (function (_super) {
         return this.unpackTuidIdsOfFields(values, this.cacheFields);
     };
     return TuidDiv;
-}(TuidInner /* Entity*/));
+}(TuidInner));
 exports.TuidDiv = TuidDiv;
 var TuidBoxDiv = /** @class */ (function (_super) {
     __extends(TuidBoxDiv, _super);

@@ -66,17 +66,17 @@ var maxCacheSize = 1000;
 var IdCache = /** @class */ (function () {
     function IdCache(tuidLocal) {
         this.queue = []; // 每次使用，都排到队头
+        this.cache = new Map(); // 已经缓冲的
         this.waitingIds = []; // 等待loading的
-        this.cache = mobx_1.observable.map(new Map(), { deep: false });
         mobx_1.makeObservable(this, {
-            cacheSet: mobx_1.action
+            cache: mobx_1.observable.shallow,
+            cacheSet: mobx_1.action,
         });
         this.tuidInner = tuidLocal;
         this.initLocalArr();
     }
     IdCache.prototype.initLocalArr = function () {
         this.localArr = this.tuidInner.schemaLocal.arr(this.tuidInner.name + '.ids');
-        console.log('initLocalArr()', this.localArr);
     };
     IdCache.prototype.cacheSet = function (id, val) {
         this.cache.set(id, val);
@@ -93,8 +93,6 @@ var IdCache = /** @class */ (function () {
             return;
         }
         this.tuidInner.cacheTuids(defer === true ? 70 : 20);
-        this.cacheSet(id, id);
-        console.log("this.cacheSet(id, id);" + id);
         if (this.waitingIds.findIndex(function (v) { return v === id; }) >= 0) {
             this.moveToHead(id);
             return;
@@ -107,7 +105,6 @@ var IdCache = /** @class */ (function () {
                 this.queue.push(r_1);
                 return;
             }
-            //let rKey = String(r);
             if (this.cache.has(r_1) === true) {
                 // 如果移除r已经缓存
                 this.cache.delete(r_1);
@@ -128,9 +125,7 @@ var IdCache = /** @class */ (function () {
         this.queue.push(id);
     };
     IdCache.prototype.getValue = function (id) {
-        var ret = this.cache.get(id);
-        console.log("idCache.getValue " + id + " " + ret + " isObservableMap: " + mobx_1.isObservableMap(this.cache));
-        return ret;
+        return this.cache.get(id);
     };
     IdCache.prototype.remove = function (id) {
         this.cache.delete(id);
@@ -162,7 +157,6 @@ var IdCache = /** @class */ (function () {
         if (id === undefined)
             return false;
         this.cacheSet(id, val);
-        console.log('this.cacheSet(id, val)', id, val);
         return true;
     };
     IdCache.prototype.getIdFromObj = function (val) { return this.tuidInner.getIdFromObj(val); };
@@ -184,11 +178,9 @@ var IdCache = /** @class */ (function () {
         if (tuidValues === undefined)
             return;
         var tuids = this.unpackTuidIds(tuidValues);
-        console.log('this.unpackTuidIds(tuidValues)', tuids);
         for (var _i = 0, tuids_1 = tuids; _i < tuids_1.length; _i++) {
             var tuidValue = tuids_1[_i];
             if (this.cacheValue(tuidValue) === true) {
-                console.log('this.cacheValue(tuidValue)', tuidValue);
                 this.cacheTuidFieldValues(tuidValue);
             }
         }
@@ -220,7 +212,7 @@ var IdCache = /** @class */ (function () {
     };
     IdCache.prototype.loadIds = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var loadingIds, ret;
+            var loadingIds;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -229,10 +221,7 @@ var IdCache = /** @class */ (function () {
                         loadingIds = __spreadArray([], this.waitingIds);
                         this.waitingIds = [];
                         return [4 /*yield*/, this.loadTuidIdsOrLocal(loadingIds)];
-                    case 1:
-                        ret = _a.sent();
-                        console.log('loadIds', ret);
-                        return [2 /*return*/, ret];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
@@ -250,12 +239,8 @@ var IdCache = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         val = this.cache.get(id);
-                        switch (typeof val) {
-                            case 'object': return [2 /*return*/, val];
-                            case 'number':
-                                this.cacheSet(id, id);
-                                break;
-                        }
+                        if (val !== undefined)
+                            return [2 /*return*/, val];
                         return [4 /*yield*/, this.loadTuidIdsOrLocal([id])];
                     case 1:
                         ret = _a.sent();

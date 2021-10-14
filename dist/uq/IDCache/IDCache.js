@@ -117,7 +117,7 @@ var IDCache = /** @class */ (function () {
         }
         clearTimeout(this.timeoutHandler);
         this.timeoutHandler = setTimeout(this.timeOut, delayLoad);
-        this.cache.set(id, 0);
+        //this.cache.set(id, 0);
         if (this.waitingIds.findIndex(function (v) { return v === id; }) >= 0) {
             this.moveToHead(id);
             return;
@@ -163,11 +163,4 @@ var IDCache = /** @class */ (function () {
     return IDCache;
 }());
 exports.IDCache = IDCache;
-/*
-export class IDLocalCache extends IDCache {
-    protected async TvIdValues(waitingIds: number[]) {
-        return await this.uq.IDLocalTv(waitingIds);
-    }
-}
-*/ 
 //# sourceMappingURL=IDCache.js.map

@@ -7,17 +7,17 @@ import { TuidInner, TuidDiv } from './tuid';
 const maxCacheSize = 1000;
 
 export class IdCache {
-    private queue: number[] = [];               // 每次使用，都排到队头
-	private cache:ObservableMap<number, any>;    // 已经缓冲的
+    private queue: number[] = [];                   // 每次使用，都排到队头
+	cache = new Map();    // 已经缓冲的
 
     protected localArr:LocalArr;
     protected waitingIds: number[] = [];          // 等待loading的
     protected tuidInner: TuidInner;
 
     constructor(tuidLocal: TuidInner) {
-        this.cache = observable.map(new Map(), {deep: false});
         makeObservable(this, {
-            cacheSet: action
+            cache: observable.shallow,
+            cacheSet: action,
         });
         this.tuidInner = tuidLocal;
         this.initLocalArr();
@@ -25,7 +25,6 @@ export class IdCache {
 
     protected initLocalArr() {
         this.localArr = this.tuidInner.schemaLocal.arr(this.tuidInner.name + '.ids');
-        console.log('initLocalArr()', this.localArr);
     }
 
     cacheSet(id:number, val:any) {
@@ -43,8 +42,6 @@ export class IdCache {
             return;
         }
         this.tuidInner.cacheTuids(defer===true?70:20);
-        this.cacheSet(id, id);
-        console.log(`this.cacheSet(id, id);${id}`);
         if (this.waitingIds.findIndex(v => v === id) >= 0) {
             this.moveToHead(id);
             return;
@@ -59,7 +56,6 @@ export class IdCache {
                 return;
             }
 
-            //let rKey = String(r);
             if (this.cache.has(r) === true) {
                 // 如果移除r已经缓存
                 this.cache.delete(r);
@@ -82,9 +78,7 @@ export class IdCache {
     }
 
     getValue(id:number) {
-		let ret = this.cache.get(id);
-        console.log(`idCache.getValue ${id} ${ret} isObservableMap: ${isObservableMap(this.cache)}`);
-        return ret;
+		return this.cache.get(id);
     }
 
     remove(id:number) {
@@ -114,7 +108,6 @@ export class IdCache {
         let id = this.getIdFromObj(val);
         if (id === undefined) return false;
         this.cacheSet(id, val);
-        console.log('this.cacheSet(id, val)', id, val);
         return true;
     }
     protected getIdFromObj(val:any) {return this.tuidInner.getIdFromObj(val)}
@@ -127,10 +120,8 @@ export class IdCache {
     protected cacheIdValues(tuidValues: any[]) {
         if (tuidValues === undefined) return;
         let tuids = this.unpackTuidIds(tuidValues);
-        console.log('this.unpackTuidIds(tuidValues)', tuids)
         for (let tuidValue of tuids) {
             if (this.cacheValue(tuidValue) === true) {
-                console.log('this.cacheValue(tuidValue)', tuidValue);
                 this.cacheTuidFieldValues(tuidValue);
             }
         }
@@ -151,9 +142,7 @@ export class IdCache {
 		if (this.waitingIds.length === 0) return;
 		let loadingIds = [...this.waitingIds];
 		this.waitingIds = [];
-		let ret = await this.loadTuidIdsOrLocal(loadingIds);
-        console.log('loadIds', ret);
-        return ret;
+		return await this.loadTuidIdsOrLocal(loadingIds);
     }
     protected unpackTuidIds(values:string[]):any[] {
         return this.tuidInner.unpackTuidIds(values);
@@ -164,10 +153,13 @@ export class IdCache {
 
     async assureObj(id:number):Promise<void> {
         let val = this.cache.get(id);
+        if (val !== undefined) return val;
+        /*
         switch (typeof val) {
             case 'object': return val;
-            case 'number': this.cacheSet(id, id); break;
+            // case 'number': this.cache.set(id, undefined); break;
         }
+        */
         let ret = await this.loadTuidIdsOrLocal([id]);
         this.cacheIdValues(ret);
     }
