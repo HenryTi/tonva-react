@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import _ from 'lodash';
 import { LocalArr } from '../../tool';
 import { Entity } from '../entity';
@@ -7,7 +8,6 @@ import { BoxId } from './boxId';
 import { IdCache, IdDivCache } from './idCache';
 import { Render } from '../../ui';
 import React from 'react';
-import { observer } from 'mobx-react';
 import { uqStringify } from './reactBoxId';
 
 export interface TuidSaveResult {
@@ -128,24 +128,18 @@ export class TuidInner extends Tuid {
     }
 
 	tv(id:number, render?:Render<any>):JSX.Element {
-        let obj = this.valueFromId(id);
-        if (obj === undefined) {
-            this.idCache.setIdNull(id);
-        }
-		return React.createElement(observer(() => {
+        console.log('<TuidView />');
+        const TuidView = observer(() => {
 			let obj = this.valueFromId(id);
 			if (!obj) {
 				this.useId(id);
-				return React.createElement(React.Fragment, undefined, [
-					`${this.sName}:${id}`
-				]);
+				return <>{this.sName}:{id}</>;
 			}
-			return (render ?? this.render ?? (() => {
-				return React.createElement(React.Fragment, undefined, [
-					this.sName + ':' + uqStringify(obj)
-				]);
+			return (render ?? this.render ?? ((item:any) => {
+				return <>{this.sName}:{uqStringify(item)}</>;
 			}))(obj);
-		}));
+		});
+		return <TuidView />;
 	}
 
     useId(id:number, defer?:boolean) {

@@ -55,12 +55,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TuidBoxDiv = exports.TuidDiv = exports.TuidBox = exports.TuidImport = exports.TuidInner = exports.Tuid = exports.UqTuid = void 0;
+var jsx_runtime_1 = require("react/jsx-runtime");
+var mobx_react_1 = require("mobx-react");
 var lodash_1 = __importDefault(require("lodash"));
 var entity_1 = require("../entity");
 var caller_1 = require("../caller");
 var idCache_1 = require("./idCache");
-var react_1 = __importDefault(require("react"));
-var mobx_react_1 = require("mobx-react");
 var reactBoxId_1 = require("./reactBoxId");
 var UqTuid = /** @class */ (function (_super) {
     __extends(UqTuid, _super);
@@ -160,25 +160,19 @@ var TuidInner = /** @class */ (function (_super) {
     };
     TuidInner.prototype.tv = function (id, render) {
         var _this = this;
-        var obj = this.valueFromId(id);
-        if (obj === undefined) {
-            this.idCache.setIdNull(id);
-        }
-        return react_1.default.createElement(mobx_react_1.observer(function () {
+        console.log('<TuidView />');
+        var TuidView = mobx_react_1.observer(function () {
             var _a;
             var obj = _this.valueFromId(id);
             if (!obj) {
                 _this.useId(id);
-                return react_1.default.createElement(react_1.default.Fragment, undefined, [
-                    _this.sName + ":" + id
-                ]);
+                return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [_this.sName, ":", id] }, void 0);
             }
-            return ((_a = render !== null && render !== void 0 ? render : _this.render) !== null && _a !== void 0 ? _a : (function () {
-                return react_1.default.createElement(react_1.default.Fragment, undefined, [
-                    _this.sName + ':' + reactBoxId_1.uqStringify(obj)
-                ]);
+            return ((_a = render !== null && render !== void 0 ? render : _this.render) !== null && _a !== void 0 ? _a : (function (item) {
+                return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [_this.sName, ":", reactBoxId_1.uqStringify(item)] }, void 0);
             }))(obj);
-        }));
+        });
+        return jsx_runtime_1.jsx(TuidView, {}, void 0);
     };
     TuidInner.prototype.useId = function (id, defer) {
         console.log("TUID.useId: " + id + " this.noCache: " + this.noCache);
