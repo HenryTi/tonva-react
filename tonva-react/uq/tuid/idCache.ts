@@ -15,7 +15,7 @@ export class IdCache {
     protected tuidInner: TuidInner;
 
     constructor(tuidLocal: TuidInner) {
-        this.cache = observable.map({}, {deep: false});
+        this.cache = observable.map(new Map(), {deep: false});
         makeObservable(this, {
             cacheSet: action
         });

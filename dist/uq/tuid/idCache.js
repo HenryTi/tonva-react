@@ -67,7 +67,7 @@ var IdCache = /** @class */ (function () {
     function IdCache(tuidLocal) {
         this.queue = []; // 每次使用，都排到队头
         this.waitingIds = []; // 等待loading的
-        this.cache = mobx_1.observable.map({}, { deep: false });
+        this.cache = mobx_1.observable.map(new Map(), { deep: false });
         mobx_1.makeObservable(this, {
             cacheSet: mobx_1.action
         });
