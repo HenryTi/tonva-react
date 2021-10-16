@@ -109,7 +109,7 @@ var Controller = /** @class */ (function () {
             param[_i] = arguments[_i];
         }
         this.beforeInit();
-        this.init(param);
+        this.init.apply(this, param);
         this.pageWebNav = this.getPageWebNav();
         this.afterInit();
     };
