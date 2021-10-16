@@ -3,16 +3,16 @@ import { ActionCaller } from './caller';
 
 export class UqAction<P, R> extends Entity {
     get typeName(): string { return 'action';}
-    async submit(data:P|{$user?:number}, waiting: boolean = true) {
-		let caller = new ActionSubmitCaller(this, data)
+    async submit(data:P, $$user:number = undefined, waiting: boolean = true) {
+		let caller = new ActionSubmitCaller(this, data, $$user, waiting)
 		let ret = await caller.request();
 		return ret;
     }
-    async submitReturns(data:P|{$user?:number}):Promise<R> {
-       return await new SubmitReturnsCaller(this, data).request();
+    async submitReturns(data:P, $$user:number = undefined):Promise<R> {
+       return await new SubmitReturnsCaller(this, data, $$user).request();
     }
-    async submitConvert(data:P|{$user?:number}) {
-        return await new SubmitConvertCaller(this, data).request();
+    async submitConvert(data:P, $$user:number = undefined) {
+        return await new SubmitConvertCaller(this, data, $$user).request();
     }
 }
 
@@ -22,7 +22,10 @@ export class Action extends UqAction<any, any> {
 export class ActionSubmitCaller extends ActionCaller {
     get path():string {return 'action/' + this.entity.name;}
     buildParams():any {
-		return {data: this.entity.pack(this.params)}
+		return {
+            $$user: this.$$user,
+            data: this.entity.pack(this.params)
+        };
 	}
 }
 
@@ -44,6 +47,7 @@ class SubmitConvertCaller extends ActionSubmitCaller {
     get path():string {return 'action-convert/' + this.entity.name;}
     buildParams():any {
         return {
+            $$user: this.$$user,
             data: this.params
         };
     }

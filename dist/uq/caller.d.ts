@@ -5,7 +5,7 @@ import { Query } from './query';
 export declare abstract class EntityCaller<T> extends Caller<T> {
     private tries;
     protected _entity: Entity;
-    constructor(entity: Entity, params: T, waiting?: boolean);
+    constructor(entity: Entity, params: T, $$user?: number, waiting?: boolean);
     protected get entity(): Entity;
     request(): Promise<any>;
     protected innerCall(): Promise<any>;

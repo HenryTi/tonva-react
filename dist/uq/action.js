@@ -64,14 +64,15 @@ var UqAction = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    UqAction.prototype.submit = function (data, waiting) {
+    UqAction.prototype.submit = function (data, $$user, waiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (waiting === void 0) { waiting = true; }
         return __awaiter(this, void 0, void 0, function () {
             var caller, ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        caller = new ActionSubmitCaller(this, data);
+                        caller = new ActionSubmitCaller(this, data, $$user, waiting);
                         return [4 /*yield*/, caller.request()];
                     case 1:
                         ret = _a.sent();
@@ -80,21 +81,23 @@ var UqAction = /** @class */ (function (_super) {
             });
         });
     };
-    UqAction.prototype.submitReturns = function (data) {
+    UqAction.prototype.submitReturns = function (data, $$user) {
+        if ($$user === void 0) { $$user = undefined; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, new SubmitReturnsCaller(this, data).request()];
+                    case 0: return [4 /*yield*/, new SubmitReturnsCaller(this, data, $$user).request()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    UqAction.prototype.submitConvert = function (data) {
+    UqAction.prototype.submitConvert = function (data, $$user) {
+        if ($$user === void 0) { $$user = undefined; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, new SubmitConvertCaller(this, data).request()];
+                    case 0: return [4 /*yield*/, new SubmitConvertCaller(this, data, $$user).request()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -122,7 +125,10 @@ var ActionSubmitCaller = /** @class */ (function (_super) {
         configurable: true
     });
     ActionSubmitCaller.prototype.buildParams = function () {
-        return { data: this.entity.pack(this.params) };
+        return {
+            $$user: this.$$user,
+            data: this.entity.pack(this.params)
+        };
     };
     return ActionSubmitCaller;
 }(caller_1.ActionCaller));
@@ -161,6 +167,7 @@ var SubmitConvertCaller = /** @class */ (function (_super) {
     });
     SubmitConvertCaller.prototype.buildParams = function () {
         return {
+            $$user: this.$$user,
             data: this.params
         };
     };

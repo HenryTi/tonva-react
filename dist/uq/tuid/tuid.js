@@ -257,10 +257,9 @@ var TuidInner = /** @class */ (function (_super) {
             var ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, new IdsCaller(this, { divName: divName, ids: ids }, false).request()];
+                    case 0: return [4 /*yield*/, new IdsCaller(this, { divName: divName, ids: ids }, undefined, false).request()];
                     case 1:
                         ret = _a.sent();
-                        //if (ret.length > 0) this.cached = true;
                         return [2 /*return*/, ret];
                 }
             });

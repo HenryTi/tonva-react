@@ -107,12 +107,13 @@ var QueryPager = /** @class */ (function (_super) {
             });
         });
     };
-    QueryPager.prototype.loadResults = function (param, pageStart, pageSize) {
+    QueryPager.prototype.loadResults = function (param, pageStart, pageSize, $$user) {
+        if ($$user === void 0) { $$user = undefined; }
         return __awaiter(this, void 0, void 0, function () {
             var ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.query.page(param, pageStart, pageSize)];
+                    case 0: return [4 /*yield*/, this.query.page(param, pageStart, pageSize, $$user)];
                     case 1:
                         ret = _a.sent();
                         return [2 /*return*/, ret];
@@ -206,14 +207,6 @@ var UqQuery = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    /*
-    constructor(uq:UqMan, name:string, typeId:number) {
-        super(uq, name, typeId);
-        makeObservable(this, {
-            list: observable,
-        })
-    }
-    */
     UqQuery.prototype.setSchema = function (schema) {
         _super.prototype.setSchema.call(this, schema);
         var returns = schema.returns;
@@ -258,12 +251,6 @@ var UqQuery = /** @class */ (function (_super) {
                     case 1:
                         ret = _b.sent();
                         page = ret.$page;
-                        /*
-                        await this.loadSchema();
-                        let res = await this.tvApi.page(this.name, pageStart, this.pageSize+1, this.params);
-                        let data = await this.unpackReturns(res);
-                        let page = data['$page'] as any[];
-                        */
                         this.list = mobx_1.observable.array([], { deep: false });
                         if (page !== undefined) {
                             if (page.length > this.pageSize) {
@@ -283,11 +270,13 @@ var UqQuery = /** @class */ (function (_super) {
             });
         });
     };
-    UqQuery.prototype.pageCaller = function (params, showWaiting) {
+    UqQuery.prototype.pageCaller = function (params, $$user, showWaiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (showWaiting === void 0) { showWaiting = true; }
-        return new caller_1.QueryPageCaller(this, params, showWaiting);
+        return new caller_1.QueryPageCaller(this, params, $$user, showWaiting);
     };
-    UqQuery.prototype.page = function (params, pageStart, pageSize, showWaiting) {
+    UqQuery.prototype.page = function (params, pageStart, pageSize, $$user, showWaiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (showWaiting === void 0) { showWaiting = true; }
         return __awaiter(this, void 0, void 0, function () {
             var p, res;
@@ -295,7 +284,7 @@ var UqQuery = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         p = { pageStart: pageStart, pageSize: pageSize, params: params };
-                        return [4 /*yield*/, this.pageCaller(p, showWaiting).request()];
+                        return [4 /*yield*/, this.pageCaller(p, $$user, showWaiting).request()];
                     case 1:
                         res = _a.sent();
                         return [2 /*return*/, res];
@@ -303,17 +292,19 @@ var UqQuery = /** @class */ (function (_super) {
             });
         });
     };
-    UqQuery.prototype.queryCaller = function (params, showWaiting) {
+    UqQuery.prototype.queryCaller = function (params, $$user, showWaiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (showWaiting === void 0) { showWaiting = true; }
-        return new caller_1.QueryQueryCaller(this, params, showWaiting);
+        return new caller_1.QueryQueryCaller(this, params, $$user, showWaiting);
     };
-    UqQuery.prototype.query = function (params, showWaiting) {
+    UqQuery.prototype.query = function (params, $$user, showWaiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (showWaiting === void 0) { showWaiting = true; }
         return __awaiter(this, void 0, void 0, function () {
             var res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.queryCaller(params, showWaiting).request()];
+                    case 0: return [4 /*yield*/, this.queryCaller(params, $$user, showWaiting).request()];
                     case 1:
                         res = _a.sent();
                         return [2 /*return*/, res];
@@ -321,13 +312,14 @@ var UqQuery = /** @class */ (function (_super) {
             });
         });
     };
-    UqQuery.prototype.table = function (params, showWaiting) {
+    UqQuery.prototype.table = function (params, $$user, showWaiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (showWaiting === void 0) { showWaiting = true; }
         return __awaiter(this, void 0, void 0, function () {
             var ret, i;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.query(params, showWaiting)];
+                    case 0: return [4 /*yield*/, this.query(params, $$user, showWaiting)];
                     case 1:
                         ret = _a.sent();
                         for (i in ret) {
@@ -338,13 +330,14 @@ var UqQuery = /** @class */ (function (_super) {
             });
         });
     };
-    UqQuery.prototype.obj = function (params, showWaiting) {
+    UqQuery.prototype.obj = function (params, $$user, showWaiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (showWaiting === void 0) { showWaiting = true; }
         return __awaiter(this, void 0, void 0, function () {
             var ret;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.table(params, showWaiting)];
+                    case 0: return [4 /*yield*/, this.table(params, $$user, showWaiting)];
                     case 1:
                         ret = _a.sent();
                         if (ret.length > 0)
@@ -354,13 +347,14 @@ var UqQuery = /** @class */ (function (_super) {
             });
         });
     };
-    UqQuery.prototype.scalar = function (params, showWaiting) {
+    UqQuery.prototype.scalar = function (params, $$user, showWaiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (showWaiting === void 0) { showWaiting = true; }
         return __awaiter(this, void 0, void 0, function () {
             var ret, i;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.obj(params, showWaiting)];
+                    case 0: return [4 /*yield*/, this.obj(params, $$user, showWaiting)];
                     case 1:
                         ret = _a.sent();
                         for (i in ret)

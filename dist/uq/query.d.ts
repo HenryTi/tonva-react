@@ -11,7 +11,7 @@ export declare class QueryPager<T extends any> extends PageItems<T> {
     constructor(query: Query, pageSize?: number, firstSize?: number, itemObservable?: boolean);
     setReverse(): void;
     protected onLoad(): Promise<void>;
-    protected loadResults(param: any, pageStart: number, pageSize: number): Promise<{
+    protected loadResults(param: any, pageStart: number, pageSize: number, $$user?: number): Promise<{
         [name: string]: any[];
     }>;
     protected getPageId(item: T): any;
@@ -31,25 +31,13 @@ export declare class UqQuery<P, R> extends Entity {
     resetPage(size: number, params: any): void;
     get hasMore(): boolean;
     loadPage(): Promise<void>;
-    protected pageCaller(params: any, showWaiting?: boolean): QueryPageCaller;
-    page(params: P | {
-        $user?: number;
-    }, pageStart: any, pageSize: number, showWaiting?: boolean): Promise<R>;
-    protected queryCaller(params: P | {
-        $user?: number;
-    }, showWaiting?: boolean): QueryQueryCaller;
-    query(params: P | {
-        $user?: number;
-    }, showWaiting?: boolean): Promise<R>;
-    table(params: P | {
-        $user?: number;
-    }, showWaiting?: boolean): Promise<any[]>;
-    obj(params: P | {
-        $user?: number;
-    }, showWaiting?: boolean): Promise<any>;
-    scalar(params: P | {
-        $user?: number;
-    }, showWaiting?: boolean): Promise<any>;
+    protected pageCaller(params: any, $$user?: number, showWaiting?: boolean): QueryPageCaller;
+    page(params: P, pageStart: any, pageSize: number, $$user?: number, showWaiting?: boolean): Promise<R>;
+    protected queryCaller(params: P, $$user?: number, showWaiting?: boolean): QueryQueryCaller;
+    query(params: P, $$user?: number, showWaiting?: boolean): Promise<R>;
+    table(params: P, $$user?: number, showWaiting?: boolean): Promise<any[]>;
+    obj(params: P, $$user?: number, showWaiting?: boolean): Promise<any>;
+    scalar(params: P, $$user?: number, showWaiting?: boolean): Promise<any>;
 }
 export declare class Query extends UqQuery<any, any> {
 }

@@ -40,8 +40,8 @@ export class QueryPager<T extends any> extends PageItems<T> {
 		}
     }
 
-    protected async loadResults(param:any, pageStart:number, pageSize:number):Promise<{[name:string]:any[]}> {
-		let ret = await this.query.page(param, pageStart, pageSize);
+    protected async loadResults(param:any, pageStart:number, pageSize:number, $$user:number = undefined):Promise<{[name:string]:any[]}> {
+		let ret = await this.query.page(param, pageStart, pageSize, $$user);
 		return ret;
 	}
 	protected getPageId(item:T) {
@@ -103,19 +103,10 @@ export class UqQuery<P, R> extends Entity {
     private params:any;
     private more: boolean;
     private startField: Field;
-    list:IObservableArray; // = observable.array([], {deep: false});
+    list:IObservableArray; 
     returns: ArrFields[];
 	isPaged: boolean;
 	
-	/*
-	constructor(uq:UqMan, name:string, typeId:number) {
-		super(uq, name, typeId);
-		makeObservable(this, {
-			list: observable,
-		})
-	}
-	*/
-
     setSchema(schema:any) {
         super.setSchema(schema);
         let {returns} = schema;
@@ -146,12 +137,6 @@ export class UqQuery<P, R> extends Entity {
         }
 		let ret = await this.page(this.params, pageStart, this.pageSize+1);
 		let page = (ret as any).$page;
-        /*
-        await this.loadSchema();
-        let res = await this.tvApi.page(this.name, pageStart, this.pageSize+1, this.params);
-        let data = await this.unpackReturns(res);
-        let page = data['$page'] as any[];
-        */
         this.list = observable.array([], {deep: false});
         if (page !== undefined) {
             if (page.length > this.pageSize) {
@@ -166,37 +151,36 @@ export class UqQuery<P, R> extends Entity {
             }
             this.list.push(...page);
         }
-        //this.loaded = true;
     }
 
-    protected pageCaller(params: any, showWaiting: boolean = true): QueryPageCaller {
-        return new QueryPageCaller(this, params, showWaiting);
+    protected pageCaller(params: any, $$user:number = undefined, showWaiting: boolean = true): QueryPageCaller {
+        return new QueryPageCaller(this, params, $$user, showWaiting);
     }
 
-    async page(params:P|{$user?:number}, pageStart:any, pageSize:number, showWaiting: boolean = true):Promise<R> {
+    async page(params:P, pageStart:any, pageSize:number, $$user:number = undefined, showWaiting: boolean = true):Promise<R> {
         let p = {pageStart, pageSize, params};
-        let res = await this.pageCaller(p, showWaiting).request();
+        let res = await this.pageCaller(p, $$user, showWaiting).request();
         return res;
     }
-    protected queryCaller(params: P|{$user?:number}, showWaiting: boolean = true): QueryQueryCaller {
-        return new QueryQueryCaller(this, params, showWaiting);
+    protected queryCaller(params: P, $$user:number = undefined, showWaiting: boolean = true): QueryQueryCaller {
+        return new QueryQueryCaller(this, params, $$user, showWaiting);
     }
-    async query(params:P|{$user?:number}, showWaiting:boolean = true):Promise<R> {
-        let res = await this.queryCaller(params, showWaiting).request();
+    async query(params:P, $$user:number = undefined, showWaiting:boolean = true):Promise<R> {
+        let res = await this.queryCaller(params, $$user, showWaiting).request();
         return res;
     }
-    async table(params:P|{$user?:number}, showWaiting:boolean = true): Promise<any[]> {
-        let ret = await this.query(params, showWaiting);
+    async table(params:P, $$user:number = undefined, showWaiting:boolean = true): Promise<any[]> {
+        let ret = await this.query(params, $$user, showWaiting);
         for (let i in ret) {
             return (ret as any)[i];
         }
     }
-    async obj(params:P|{$user?:number}, showWaiting:boolean = true):Promise<any> {
-        let ret = await this.table(params, showWaiting);
+    async obj(params:P, $$user:number = undefined, showWaiting:boolean = true):Promise<any> {
+        let ret = await this.table(params, $$user,showWaiting);
         if (ret.length > 0) return ret[0];
     }
-    async scalar(params:P|{$user?:number}, showWaiting:boolean = true):Promise<any> {
-        let ret = await this.obj(params, showWaiting);
+    async scalar(params:P, $$user:number = undefined, showWaiting:boolean = true):Promise<any> {
+        let ret = await this.obj(params, $$user, showWaiting);
         for (let i in ret) return ret[i];
     }
 }

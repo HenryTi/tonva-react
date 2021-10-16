@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Caller = void 0;
 var Caller = /** @class */ (function () {
-    function Caller(params, waiting) {
+    function Caller(params, $$user, waiting) {
+        if ($$user === void 0) { $$user = undefined; }
         this.method = 'POST';
         this._params = params;
+        this.$$user = $$user;
         this.waiting = waiting;
     }
     Object.defineProperty(Caller.prototype, "params", {

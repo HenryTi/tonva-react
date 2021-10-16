@@ -190,8 +190,7 @@ export class TuidInner extends Tuid {
         return this.divs && this.divs[name];
     }
     async loadValuesFromIds(divName:string, ids:number[]):Promise<any[]> {
-        let ret:any[] = await new IdsCaller(this, {divName:divName, ids:ids}, false).request();
-        //if (ret.length > 0) this.cached = true;
+        let ret:any[] = await new IdsCaller(this, {divName:divName, ids:ids}, undefined, false).request();
         return ret;
     }
     async loadMain(id:number|BoxId):Promise<any> {

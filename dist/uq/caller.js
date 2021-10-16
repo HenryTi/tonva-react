@@ -56,9 +56,10 @@ exports.QueryPageCaller = exports.QueryQueryCaller = exports.ActionCaller = expo
 var net_1 = require("../net");
 var EntityCaller = /** @class */ (function (_super) {
     __extends(EntityCaller, _super);
-    function EntityCaller(entity, params, waiting) {
+    function EntityCaller(entity, params, $$user, waiting) {
+        if ($$user === void 0) { $$user = undefined; }
         if (waiting === void 0) { waiting = true; }
-        var _this = _super.call(this, params, waiting) || this;
+        var _this = _super.call(this, params, $$user, waiting) || this;
         _this.tries = 0;
         _this._entity = entity;
         return _this;

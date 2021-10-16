@@ -13,8 +13,8 @@ export abstract class EntityCaller<T> extends Caller<T> {
     private tries: number;
     protected _entity: Entity;
 
-    constructor(entity: Entity, params:T, waiting: boolean = true) {
-        super(params, waiting);
+    constructor(entity: Entity, params:T, $$user:number = undefined, waiting: boolean = true) {
+        super(params, $$user, waiting);
         this.tries = 0;
         this._entity = entity;
     }
