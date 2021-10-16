@@ -40,7 +40,7 @@ export abstract class Controller {
 	protected beforeInit() {}
 	protected afterInit() {}
 
-    protected internalInit(...param: any[]) {
+    internalInit(...param: any[]) {
 		this.beforeInit();
         this.init(param);
 		this.pageWebNav = this.getPageWebNav();        
