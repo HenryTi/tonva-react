@@ -103,14 +103,21 @@ var Controller = /** @class */ (function () {
     });
     Controller.prototype.beforeInit = function () { };
     Controller.prototype.afterInit = function () { };
-    Controller.prototype.init = function () {
+    Controller.prototype.internalInit = function () {
         var param = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             param[_i] = arguments[_i];
         }
         this.beforeInit();
+        this.init(param);
         this.pageWebNav = this.getPageWebNav();
         this.afterInit();
+    };
+    Controller.prototype.init = function () {
+        var param = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            param[_i] = arguments[_i];
+        }
     };
     Controller.prototype.internalT = function (str) {
         var _a, _b;

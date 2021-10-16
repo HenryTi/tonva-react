@@ -8,8 +8,8 @@ export declare abstract class CBase<A extends CAppBase<U>, U> extends Controller
     get cApp(): A;
     getUqRoles(uqName: string): Promise<string[]>;
     internalT(str: string): any;
-    protected newC<T extends CBase<A, U>>(type: IConstructor<T>, param?: any): T;
-    newSub<O extends CBase<A, U>, T extends CSub<A, U, O>>(type: IConstructor<T>, param?: any): T;
+    protected newC<T extends CBase<A, U>>(type: IConstructor<T>, ...param: any[]): T;
+    newSub<O extends CBase<A, U>, T extends CSub<A, U, O>>(type: IConstructor<T>, ...param: any[]): T;
     getWebNav(): WebNav<any>;
 }
 export declare abstract class CSub<A extends CAppBase<U>, U, T extends CBase<A, U>> extends CBase<A, U> {

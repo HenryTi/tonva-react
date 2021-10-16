@@ -89,14 +89,22 @@ var CBase = /** @class */ (function (_super) {
             return r;
         return this._cApp.internalT(str);
     };
-    CBase.prototype.newC = function (type, param) {
+    CBase.prototype.newC = function (type) {
+        var param = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            param[_i - 1] = arguments[_i];
+        }
         var c = new type(this.cApp);
-        c.init(param);
+        c.internalInit(param);
         return c;
     };
-    CBase.prototype.newSub = function (type, param) {
+    CBase.prototype.newSub = function (type) {
+        var param = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            param[_i - 1] = arguments[_i];
+        }
         var s = new type(this);
-        s.init(param);
+        s.internalInit(param);
         return s;
     };
     CBase.prototype.getWebNav = function () {

@@ -29,6 +29,7 @@ export declare abstract class Controller {
     get isLogined(): boolean;
     protected beforeInit(): void;
     protected afterInit(): void;
+    protected internalInit(...param: any[]): void;
     init(...param: any[]): void;
     internalT(str: string): any;
     get webNav(): WebNav<any>;
