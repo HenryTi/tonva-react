@@ -1210,7 +1210,7 @@ var Nav = /** @class */ (function () {
             });
         });
     };
-    Nav.prototype.quitUser = function () {
+    Nav.prototype.userQuit = function () {
         return __awaiter(this, void 0, void 0, function () {
             var login;
             return __generator(this, function (_a) {
@@ -1218,7 +1218,7 @@ var Nav = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.getLogin()];
                     case 1:
                         login = _a.sent();
-                        login.showQuitUser();
+                        login.showUserQuit();
                         return [2 /*return*/];
                 }
             });

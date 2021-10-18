@@ -7,5 +7,5 @@ export declare class CLogin extends Controller implements Login {
     showLogout(callback?: () => Promise<void>): Promise<void>;
     protected getVChangePassword(): new (cLogin: CLogin) => VPage<CLogin>;
     showChangePassword(): Promise<void>;
-    showQuitUser(): Promise<void>;
+    showUserQuit(): Promise<void>;
 }

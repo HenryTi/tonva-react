@@ -921,9 +921,9 @@ export class Nav {
 		login.showChangePassword();
     }
 
-    async quitUser() {
+    async userQuit() {
         let login = await this.getLogin();
-        login.showQuitUser();
+        login.showUserQuit();
     }
 
     get level(): number {

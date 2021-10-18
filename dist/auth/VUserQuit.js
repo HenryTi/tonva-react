@@ -62,75 +62,75 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VQuitUser = void 0;
+exports.VUserQuit = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var vm_1 = require("../vm");
 var components_1 = require("../components");
 var net_1 = require("../net");
 var waitingTime = '一小时';
-var VQuitUserBase = /** @class */ (function (_super) {
-    __extends(VQuitUserBase, _super);
-    function VQuitUserBase() {
+var VUserQuitBase = /** @class */ (function (_super) {
+    __extends(VUserQuitBase, _super);
+    function VUserQuitBase() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Object.defineProperty(VQuitUserBase.prototype, "button1Caption", {
+    Object.defineProperty(VUserQuitBase.prototype, "button1Caption", {
         get: function () { return; },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(VQuitUserBase.prototype, "button2Caption", {
+    Object.defineProperty(VUserQuitBase.prototype, "button2Caption", {
         get: function () { return; },
         enumerable: false,
         configurable: true
     });
-    VQuitUserBase.prototype.renderButton1 = function () {
+    VUserQuitBase.prototype.renderButton1 = function () {
         var _this = this;
         var caption = this.button1Caption;
         if (caption === null)
             return null;
         return jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary", onClick: function () { return _this.onClickButton1(); } }, { children: caption !== null && caption !== void 0 ? caption : '不注销' }), void 0);
     };
-    VQuitUserBase.prototype.renderButton2 = function () {
+    VUserQuitBase.prototype.renderButton2 = function () {
         var _this = this;
         var caption = this.button2Caption;
         if (caption === null)
             return null;
         return jsx_runtime_1.jsx("button", __assign({ className: "btn btn-outline-info ms-3", onClick: function () { return _this.onClickButton2(); } }, { children: caption !== null && caption !== void 0 ? caption : '确认注销' }), void 0);
     };
-    VQuitUserBase.prototype.header = function () { return '注销账号'; };
-    VQuitUserBase.prototype.content = function () {
-        return jsx_runtime_1.jsxs("div", __assign({ className: "border border-danger rounded mx-auto m-5 w-max-30c bg-white " }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "p-3 border-bottom" }, { children: this.note }), void 0), jsx_runtime_1.jsxs("div", __assign({ className: "p-3 text-center" }, { children: [this.renderButton1(), this.renderButton2()] }), void 0)] }), void 0);
+    VUserQuitBase.prototype.header = function () { return '注销账号'; };
+    VUserQuitBase.prototype.content = function () {
+        return jsx_runtime_1.jsxs("div", __assign({ className: "border border-danger rounded mx-auto m-3 w-max-30c bg-white " }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "p-4 border-bottom" }, { children: this.note }), void 0), jsx_runtime_1.jsxs("div", __assign({ className: "p-3 text-center" }, { children: [this.renderButton1(), this.renderButton2()] }), void 0)] }), void 0);
     };
-    VQuitUserBase.prototype.onClickButton1 = function () {
+    VUserQuitBase.prototype.onClickButton1 = function () {
         this.closePage();
     };
-    VQuitUserBase.prototype.onClickButton2 = function () {
+    VUserQuitBase.prototype.onClickButton2 = function () {
     };
-    return VQuitUserBase;
+    return VUserQuitBase;
 }(vm_1.VPage));
-var VQuitUser = /** @class */ (function (_super) {
-    __extends(VQuitUser, _super);
-    function VQuitUser() {
+var VUserQuit = /** @class */ (function (_super) {
+    __extends(VUserQuit, _super);
+    function VUserQuit() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Object.defineProperty(VQuitUser.prototype, "note", {
+    Object.defineProperty(VUserQuit.prototype, "note", {
         get: function () {
             return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: ["\u6CE8\u610F\uFF1A\u8D26\u53F7\u6CE8\u9500\u540E\uFF0C\u8D26\u53F7\u7ED1\u5B9A\u624B\u673A\u3001\u90AE\u4EF6\u7B49\u76F8\u5173\u4FE1\u606F\u5C06\u88AB\u91CA\u653E\u3002\u8D26\u53F7\u65E0\u6CD5\u5C06\u767B\u5F55\u3002", jsx_runtime_1.jsx("br", {}, void 0), "\u8BF7\u786E\u8BA4\uFF01"] }, void 0);
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(VQuitUser.prototype, "button2Caption", {
+    Object.defineProperty(VUserQuit.prototype, "button2Caption", {
         get: function () { return '我已了解，仍然注销'; },
         enumerable: false,
         configurable: true
     });
-    VQuitUser.prototype.onClickButton2 = function () {
+    VUserQuit.prototype.onClickButton2 = function () {
         this.openVPage(VQuitConfirm);
     };
-    return VQuitUser;
-}(VQuitUserBase));
-exports.VQuitUser = VQuitUser;
+    return VUserQuit;
+}(VUserQuitBase));
+exports.VUserQuit = VUserQuit;
 var VQuitConfirm = /** @class */ (function (_super) {
     __extends(VQuitConfirm, _super);
     function VQuitConfirm() {
@@ -155,7 +155,7 @@ var VQuitConfirm = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, net_1.userApi.quitUser()];
+                    case 0: return [4 /*yield*/, net_1.userApi.userQuit()];
                     case 1:
                         _a.sent();
                         this.openVPage(VQuitDone);
@@ -165,7 +165,7 @@ var VQuitConfirm = /** @class */ (function (_super) {
         });
     };
     return VQuitConfirm;
-}(VQuitUserBase));
+}(VUserQuitBase));
 var VQuitDone = /** @class */ (function (_super) {
     __extends(VQuitDone, _super);
     function VQuitDone() {
@@ -179,7 +179,7 @@ var VQuitDone = /** @class */ (function (_super) {
     });
     Object.defineProperty(VQuitDone.prototype, "note", {
         get: function () {
-            return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: ["\u8D26\u53F7\u5C06\u5728", waitingTime, "\u540E\u5F7B\u5E95\u6CE8\u9500\u3002 \u5982\u679C\u5728", waitingTime, "\u5185\u5BB9\u91CD\u65B0\u767B\u5F55\u8D26\u53F7\uFF0C\u6CE8\u9500\u64CD\u4F5C\u81EA\u52A8\u53D6\u6D88\u3002", waitingTime, "\u4E4B\u540E\uFF0C\u8D26\u53F7\u7ED1\u5B9A\u624B\u673A\u3001\u90AE\u4EF6\u7B49\u76F8\u5173\u4FE1\u606F\u5C06\u88AB\u91CA\u653E\u3002\u8D26\u53F7\u65E0\u6CD5\u5C06\u767B\u5F55\u3002", jsx_runtime_1.jsx("br", {}, void 0)] }, void 0);
+            return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: ["\u8D26\u53F7\u5C06\u5728", waitingTime, "\u540E\u5F7B\u5E95\u6CE8\u9500\u3002", jsx_runtime_1.jsx("br", {}, void 0), "\u5982\u679C\u5728", waitingTime, "\u5185\u5BB9\u91CD\u65B0\u767B\u5F55\u8D26\u53F7\uFF0C\u6CE8\u9500\u64CD\u4F5C\u81EA\u52A8\u53D6\u6D88\u3002", waitingTime, "\u4E4B\u540E\uFF0C\u8D26\u53F7\u7ED1\u5B9A\u624B\u673A\u3001\u90AE\u4EF6\u7B49\u76F8\u5173\u4FE1\u606F\u5C06\u88AB\u91CA\u653E\u3002\u8D26\u53F7\u65E0\u6CD5\u5C06\u767B\u5F55\u3002"] }, void 0);
         },
         enumerable: false,
         configurable: true
@@ -198,5 +198,5 @@ var VQuitDone = /** @class */ (function (_super) {
         components_1.nav.logout();
     };
     return VQuitDone;
-}(VQuitUserBase));
-//# sourceMappingURL=VQuitUser.js.map
+}(VUserQuitBase));
+//# sourceMappingURL=VUserQuit.js.map

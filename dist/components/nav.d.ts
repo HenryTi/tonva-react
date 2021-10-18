@@ -154,7 +154,7 @@ export declare class Nav {
     showForget(): Promise<void>;
     logout(callback?: () => Promise<void>): Promise<void>;
     changePassword(): Promise<void>;
-    quitUser(): Promise<void>;
+    userQuit(): Promise<void>;
     get level(): number;
     startWait(): void;
     endWait(): void;

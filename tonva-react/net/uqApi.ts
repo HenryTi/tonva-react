@@ -387,8 +387,8 @@ export class UserApi extends CenterApiBase {
 		return await this.get('tie/user-from-key', {key});
 	}
 
-    async quitUser(): Promise<void> {
-        await this.get('tie/user-ask-quit', {});
+    async userQuit(): Promise<void> {
+        await this.get('user/user-ask-quit', {});
     }
 }
 

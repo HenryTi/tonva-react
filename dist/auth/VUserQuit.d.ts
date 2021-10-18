@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { CLogin } from "./CLogin";
 import { VPage } from "../vm";
-declare abstract class VQuitUserBase extends VPage<CLogin> {
+declare abstract class VUserQuitBase extends VPage<CLogin> {
     protected abstract get note(): any;
     protected get button1Caption(): string;
     protected get button2Caption(): string;
@@ -12,7 +12,7 @@ declare abstract class VQuitUserBase extends VPage<CLogin> {
     protected onClickButton1(): void;
     protected onClickButton2(): void;
 }
-export declare class VQuitUser extends VQuitUserBase {
+export declare class VUserQuit extends VUserQuitBase {
     protected get note(): any;
     protected get button2Caption(): string;
     protected onClickButton2(): void;
