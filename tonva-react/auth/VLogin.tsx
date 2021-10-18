@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Form, Schema, UiSchema, UiTextItem, UiPasswordItem, Context, UiButton, StringSchema, Ax, nav} from '../components';
 import { tonvaTop, getSender } from './tools';
 import { CLogin } from './CLogin';

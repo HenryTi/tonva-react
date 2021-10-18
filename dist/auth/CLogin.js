@@ -58,6 +58,7 @@ var VLogout_1 = require("./VLogout");
 var VLogin_1 = require("./VLogin");
 var net_1 = require("../net");
 var VChangePassword_1 = require("./VChangePassword");
+var VQuitUser_1 = require("./VQuitUser");
 var CLogin = /** @class */ (function (_super) {
     __extends(CLogin, _super);
     function CLogin() {
@@ -144,6 +145,14 @@ var CLogin = /** @class */ (function (_super) {
                         }
                     });
                 }); });
+                return [2 /*return*/];
+            });
+        });
+    };
+    CLogin.prototype.showQuitUser = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.openVPage(VQuitUser_1.VQuitUser);
                 return [2 /*return*/];
             });
         });

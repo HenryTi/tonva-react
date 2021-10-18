@@ -1210,6 +1210,20 @@ var Nav = /** @class */ (function () {
             });
         });
     };
+    Nav.prototype.quitUser = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var login;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getLogin()];
+                    case 1:
+                        login = _a.sent();
+                        login.showQuitUser();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     Object.defineProperty(Nav.prototype, "level", {
         get: function () {
             return this.navView.level;

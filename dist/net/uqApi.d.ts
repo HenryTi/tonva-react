@@ -118,5 +118,6 @@ export declare class UserApi extends CenterApiBase {
         nick: string;
         icon: string;
     }>;
+    quitUser(): Promise<void>;
 }
 export declare const userApi: UserApi;

@@ -5,6 +5,7 @@ import { VLogout } from './VLogout';
 import { VLogin } from './VLogin';
 import { CenterAppApi, userApi } from '../net';
 import { VChangePassword } from './VChangePassword';
+import { VQuitUser } from './VQuitUser';
 
 export class CLogin extends Controller implements Login {
 	protected async internalStart() {
@@ -54,4 +55,8 @@ export class CLogin extends Controller implements Login {
 			return ret;
 		});
     }
+
+	async showQuitUser():Promise<void> {
+		this.openVPage(VQuitUser);
+	}
 }

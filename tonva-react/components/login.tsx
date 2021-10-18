@@ -5,7 +5,8 @@ export interface Login {
 	showLogout(callback?: ()=>Promise<void>):void
 	//showRegister():void
 	//showForget():void
-	showChangePassword():void
+	showChangePassword():void;
+	showQuitUser():void;
 }
 
 export async function createLogin():Promise<Login> {

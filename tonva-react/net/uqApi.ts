@@ -386,6 +386,10 @@ export class UserApi extends CenterApiBase {
 	async fromKey(key:string): Promise<{id:number, name:string, nick:string, icon:string}> {
 		return await this.get('tie/user-from-key', {key});
 	}
+
+    async quitUser(): Promise<void> {
+        await this.get('tie/user-ask-quit', {});
+    }
 }
 
 export const userApi = new UserApi('tv/', undefined);
