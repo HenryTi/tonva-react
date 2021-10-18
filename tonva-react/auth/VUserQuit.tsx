@@ -1,7 +1,7 @@
 import { CLogin } from "./CLogin";
 import { VPage } from "../vm";
 import { nav } from "../components";
-import { userApi } from "../net";
+import { CenterAppApi } from "../net";
 
 const waitingTime = '一小时';
 
@@ -71,7 +71,8 @@ class VQuitConfirm extends VUserQuitBase {
     }
 
     protected async onClickButton2() {
-        await userApi.userQuit();
+        let centerAppApi = new CenterAppApi('tv/', undefined);
+        await centerAppApi.userQuit();
         this.openVPage(VQuitDone);
     }
 }

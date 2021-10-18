@@ -153,9 +153,12 @@ var VQuitConfirm = /** @class */ (function (_super) {
     };
     VQuitConfirm.prototype.onClickButton2 = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var centerAppApi;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, net_1.userApi.userQuit()];
+                    case 0:
+                        centerAppApi = new net_1.CenterAppApi('tv/', undefined);
+                        return [4 /*yield*/, centerAppApi.userQuit()];
                     case 1:
                         _a.sent();
                         this.openVPage(VQuitDone);

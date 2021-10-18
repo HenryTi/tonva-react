@@ -87,6 +87,7 @@ export declare class CenterAppApi extends CenterApiBase {
         orgPassword: string;
         newPassword: string;
     }): Promise<any>;
+    userQuit(): Promise<void>;
 }
 export interface RegisterParameter {
     nick: string;
@@ -118,6 +119,5 @@ export declare class UserApi extends CenterApiBase {
         nick: string;
         icon: string;
     }>;
-    userQuit(): Promise<void>;
 }
 export declare const userApi: UserApi;

@@ -320,6 +320,10 @@ export class CenterAppApi extends CenterApiBase {
     async changePassword(param: {orgPassword:string, newPassword:string}) {
         return await this.post('tie/change-password', param);
     }
+
+    async userQuit(): Promise<void> {
+        await this.get('tie/user-ask-quit', {});
+    }
 }
 
 export interface RegisterParameter {
@@ -386,10 +390,6 @@ export class UserApi extends CenterApiBase {
 	async fromKey(key:string): Promise<{id:number, name:string, nick:string, icon:string}> {
 		return await this.get('tie/user-from-key', {key});
 	}
-
-    async userQuit(): Promise<void> {
-        await this.get('user/user-ask-quit', {});
-    }
 }
 
 export const userApi = new UserApi('tv/', undefined);
