@@ -46,7 +46,7 @@ function startPage(CApp, appConfig) {
                 case 0:
                     components_1.nav.setSettings(appConfig);
                     cApp = new CApp(appConfig);
-                    cApp.init();
+                    cApp.internalInit();
                     return [4 /*yield*/, cApp.start()];
                 case 1:
                     _a.sent();

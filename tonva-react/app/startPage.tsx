@@ -5,6 +5,6 @@ export async function startPage(CApp: new (config: AppConfig) => CAppBase<any>, 
 	nav.setSettings(appConfig);
 
 	let cApp = new CApp(appConfig);
-	cApp.init();
+	cApp.internalInit();
     await cApp.start();
 }
