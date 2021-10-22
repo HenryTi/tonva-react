@@ -15,7 +15,7 @@ export abstract class CUqSub<A extends CAppBase<U>, U, T extends CBase<A,U>> ext
 export abstract class CUqApp extends CAppBase<UQs> {
 	protected newC<T extends CUqBase>(type: IConstructor<T>, ...param:any[]): T {
 		let c = new type(this);
-		c.internalInit(param);
+		c.internalInit(...param);
 		return c;
 	}
 }

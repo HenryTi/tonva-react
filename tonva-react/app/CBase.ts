@@ -26,13 +26,13 @@ export abstract class CBase<A extends CAppBase<U>, U> extends Controller {
 
     protected newC<T extends CBase<A,U>>(type: IConstructor<T>, ...param:any[]):T {
 		let c = new type(this.cApp);
-		c.internalInit(param);
+		c.internalInit(...param);
 		return c;
     }
 
     newSub<O extends CBase<A,U>, T extends CSub<A,U,O>>(type: IConstructor<T>, ...param:any[]):T {
 		let s = new type(this);
-		s.internalInit(param);
+		s.internalInit(...param);
 		return s;
 	}
 	

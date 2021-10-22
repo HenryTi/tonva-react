@@ -95,7 +95,7 @@ var CBase = /** @class */ (function (_super) {
             param[_i - 1] = arguments[_i];
         }
         var c = new type(this.cApp);
-        c.internalInit(param);
+        c.internalInit.apply(c, param);
         return c;
     };
     CBase.prototype.newSub = function (type) {
@@ -104,7 +104,7 @@ var CBase = /** @class */ (function (_super) {
             param[_i - 1] = arguments[_i];
         }
         var s = new type(this);
-        s.internalInit(param);
+        s.internalInit.apply(s, param);
         return s;
     };
     CBase.prototype.getWebNav = function () {
