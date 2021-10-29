@@ -59,6 +59,8 @@ export interface Elements {
 export abstract class CAppBase<U> extends Controller {
 	private appConfig: AppConfig;
     protected _uqs: U;
+	timezone: number;
+	unitTimezone: number;
 
     constructor(config?: AppConfig) {
 		super();

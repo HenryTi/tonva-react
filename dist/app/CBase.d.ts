@@ -6,6 +6,8 @@ export declare abstract class CBase<A extends CAppBase<U>, U> extends Controller
     constructor(cApp: any);
     get uqs(): U;
     get cApp(): A;
+    get timezone(): number;
+    get unitTimezone(): number;
     getUqRoles(uqName: string): Promise<string[]>;
     internalT(str: string): any;
     protected newC<T extends CBase<A, U>>(type: IConstructor<T>, ...param: any[]): T;

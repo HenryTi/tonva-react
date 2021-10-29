@@ -14,6 +14,8 @@ export abstract class CBase<A extends CAppBase<U>, U> extends Controller {
 
     get uqs(): U {return this._uqs}
 	get cApp(): A {return this._cApp}
+	get timezone():number {return this._cApp.timezone;}
+	get unitTimezone():number {return this._cApp.unitTimezone;}
 	async getUqRoles(uqName:string):Promise<string[]> {
 		return this._cApp?.getUqRoles(uqName);
 	}

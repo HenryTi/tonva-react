@@ -95,8 +95,6 @@ export abstract class Controller {
     protected onDispose() {
 	}
 	
-	get timeZone():number { return env.timeZone; }
-
 	isMe(id:any):boolean {
 		if (id === null) return false;
 		let {user} = this;

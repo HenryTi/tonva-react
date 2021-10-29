@@ -157,11 +157,6 @@ var Controller = /** @class */ (function () {
     Controller.prototype.getRes = function () { return this.res; };
     Controller.prototype.onDispose = function () {
     };
-    Object.defineProperty(Controller.prototype, "timeZone", {
-        get: function () { return tool_1.env.timeZone; },
-        enumerable: false,
-        configurable: true
-    });
     Controller.prototype.isMe = function (id) {
         if (id === null)
             return false;
