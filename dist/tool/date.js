@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dateFromMinuteId = exports.miniSecondsOf2020_01_01 = exports.toLocaleDateString = void 0;
-var tool_1 = require("tool");
+var tool_1 = require("../tool");
 var options = {
     weekday: 'long',
     year: 'numeric',
