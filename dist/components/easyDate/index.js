@@ -170,7 +170,7 @@ var VDate = function (props) {
     var year = date.getFullYear();
     var vTime;
     if (hideTime !== true) {
-        vTime = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", date.getMinutes()] }, void 0);
+        vTime = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", String(100 + date.getMinutes()).substr(1, 2)] }, void 0);
     }
     var vDate = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [date.getMonth() + 1, "-", date.getDate()] }, void 0);
     if (hideSameYear === true && year === new Date().getFullYear()) {
