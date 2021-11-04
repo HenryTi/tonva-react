@@ -102,7 +102,7 @@ var Tab = /** @class */ (function () {
     function Tab() {
         this.loaded = false;
         this.selected = false;
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             loaded: mobx_1.observable,
             selected: mobx_1.observable,
         });
@@ -121,7 +121,7 @@ var Tab = /** @class */ (function () {
                     this._content = this.page.content();
                 }
                 else {
-                    this._content = jsx_runtime_1.jsx("div", __assign({ className: "p-5" }, { children: "tab \u5E94\u8BE5\u5B9A\u4E49content\u6216\u8005page" }), void 0);
+                    this._content = (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-5" }, { children: "tab \u5E94\u8BE5\u5B9A\u4E49content\u6216\u8005page" }), void 0);
                 }
             }
             return this._content;
@@ -146,7 +146,7 @@ var Tab = /** @class */ (function () {
                         return [4 /*yield*/, this.load()];
                     case 3:
                         _a.sent();
-                        mobx_1.runInAction(function () {
+                        (0, mobx_1.runInAction)(function () {
                             _this.loaded = true;
                         });
                         _a.label = 4;
@@ -157,7 +157,7 @@ var Tab = /** @class */ (function () {
     };
     return Tab;
 }());
-var TabCaptionComponent = function (label, icon, color) { return jsx_runtime_1.jsxs("div", __assign({ className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color }, { children: [jsx_runtime_1.jsx("div", { children: jsx_runtime_1.jsx("i", { className: 'fa fa-lg fa-' + icon }, void 0) }, void 0), jsx_runtime_1.jsx("small", { children: label }, void 0)] }), void 0); };
+var TabCaptionComponent = function (label, icon, color) { return (0, jsx_runtime_1.jsxs)("div", __assign({ className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color }, { children: [(0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)("i", { className: 'fa fa-lg fa-' + icon }, void 0) }, void 0), (0, jsx_runtime_1.jsx)("small", { children: label }, void 0)] }), void 0); };
 exports.TabCaptionComponent = TabCaptionComponent;
 //export const TabCaption = TabCaptionComponent;
 var TabsView = /** @class */ (function () {
@@ -178,7 +178,7 @@ var TabsView = /** @class */ (function () {
                                 tab = this.tabArr[0];
                             }
                         }
-                        mobx_1.runInAction(function () {
+                        (0, mobx_1.runInAction)(function () {
                             _this.selectedTab.selected = false;
                             tab.selected = true;
                             _this.selectedTab = tab;
@@ -190,7 +190,7 @@ var TabsView = /** @class */ (function () {
                 }
             });
         }); };
-        this.tabs = mobx_react_1.observer(function () {
+        this.tabs = (0, mobx_react_1.observer)(function () {
             var _a = _this.props, tabPosition = _a.tabPosition, borderColor = _a.borderColor;
             var bsCur, bsTab;
             if (borderColor) {
@@ -224,26 +224,26 @@ var TabsView = /** @class */ (function () {
                     bsTab.borderBottomWidth = 0;
                 }
             }
-            var cn = classnames_1.default('tv-tabs', _this.tabBg, _this.sep, 'tv-tabs-' + _this.size);
-            var tabs = jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: _this.tabArr.map(function (v, index) {
+            var cn = (0, classnames_1.default)('tv-tabs', _this.tabBg, _this.sep, 'tv-tabs-' + _this.size);
+            var tabs = (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: _this.tabArr.map(function (v, index) {
                     var selected = v.selected, caption = v.caption, notify = v.notify;
                     var notifyCircle;
                     if (notify !== undefined) {
                         var num = typeof notify === 'number' ? notify : notify.get();
                         if (num !== undefined) {
                             if (num > 0)
-                                notifyCircle = jsx_runtime_1.jsx("u", { children: num > 99 ? '99+' : num }, void 0);
+                                notifyCircle = (0, jsx_runtime_1.jsx)("u", { children: num > 99 ? '99+' : num }, void 0);
                             else if (num < 0)
-                                notifyCircle = jsx_runtime_1.jsx("u", { className: "dot" }, void 0);
+                                notifyCircle = (0, jsx_runtime_1.jsx)("u", { className: "dot" }, void 0);
                         }
                     }
-                    return jsx_runtime_1.jsx("div", __assign({ onClick: function () { return _this.tabClick(v); }, style: selected === true ? bsCur : bsTab }, { children: jsx_runtime_1.jsxs("div", { children: [notifyCircle, caption(selected)] }, void 0) }), index);
+                    return (0, jsx_runtime_1.jsx)("div", __assign({ onClick: function () { return _this.tabClick(v); }, style: selected === true ? bsCur : bsTab }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [notifyCircle, caption(selected)] }, void 0) }), index);
                 }) }), void 0);
             return tabs;
         });
-        this.content = mobx_react_1.observer(function () {
+        this.content = (0, mobx_react_1.observer)(function () {
             var displayNone = { visibility: 'hidden' };
-            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: _this.tabArr.map(function (v, index) {
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: _this.tabArr.map(function (v, index) {
                     var tabPosition = _this.props.tabPosition;
                     var content = v.content, page = v.page, onScroll = v.onScroll, onScrollTop = v.onScrollTop, onScrollBottom = v.onScrollBottom, className = v.className;
                     var tabs = React.createElement(_this.tabs);
@@ -255,21 +255,21 @@ var TabsView = /** @class */ (function () {
                     var header, footer;
                     var visibility = { visibility: 'hidden' };
                     if (tabPosition === 'top') {
-                        header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: "tv-page-header" }, { children: jsx_runtime_1.jsxs("header", { children: [tabs, pageHeader] }, void 0) }), void 0), jsx_runtime_1.jsxs("header", __assign({ style: visibility }, { children: [tabs, pageHeader] }), void 0)] }, void 0);
+                        header = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-header" }, { children: (0, jsx_runtime_1.jsxs)("header", { children: [tabs, pageHeader] }, void 0) }), void 0), (0, jsx_runtime_1.jsxs)("header", __assign({ style: visibility }, { children: [tabs, pageHeader] }), void 0)] }, void 0);
                         if (pageFooter !== undefined) {
-                            footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("footer", __assign({ style: visibility }, { children: pageFooter }), void 0), jsx_runtime_1.jsx("section", __assign({ className: "tv-page-footer" }, { children: jsx_runtime_1.jsx("footer", { children: pageFooter }, void 0) }), void 0)] }, void 0);
+                            footer = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("footer", __assign({ style: visibility }, { children: pageFooter }), void 0), (0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-footer" }, { children: (0, jsx_runtime_1.jsx)("footer", { children: pageFooter }, void 0) }), void 0)] }, void 0);
                         }
                     }
                     else {
                         if (pageHeader !== undefined) {
-                            header = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-header' }, { children: jsx_runtime_1.jsx("header", { children: pageHeader }, void 0) }), void 0), jsx_runtime_1.jsx("header", __assign({ style: visibility }, { children: pageHeader }), void 0)] }, void 0);
+                            header = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: 'tv-page-header' }, { children: (0, jsx_runtime_1.jsx)("header", { children: pageHeader }, void 0) }), void 0), (0, jsx_runtime_1.jsx)("header", __assign({ style: visibility }, { children: pageHeader }), void 0)] }, void 0);
                         }
-                        footer = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsxs("footer", __assign({ style: visibility }, { children: [pageFooter, tabs] }), void 0), jsx_runtime_1.jsx("section", __assign({ className: 'tv-page-footer' }, { children: jsx_runtime_1.jsxs("footer", { children: [pageFooter, tabs] }, void 0) }), void 0)] }, void 0);
+                        footer = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("footer", __assign({ style: visibility }, { children: [pageFooter, tabs] }), void 0), (0, jsx_runtime_1.jsx)("section", __assign({ className: 'tv-page-footer' }, { children: (0, jsx_runtime_1.jsxs)("footer", { children: [pageFooter, tabs] }, void 0) }), void 0)] }, void 0);
                     }
                     var style;
                     if (v.selected === false)
                         style = displayNone;
-                    return jsx_runtime_1.jsxs(scrollView_1.ScrollView, __assign({ className: className, style: style, onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom }, { children: [header, content, footer] }), index);
+                    return (0, jsx_runtime_1.jsxs)(scrollView_1.ScrollView, __assign({ className: className, style: style, onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom }, { children: [header, content, footer] }), index);
                 }) }, void 0);
         });
         this.props = props;
@@ -307,7 +307,7 @@ var TabsView = /** @class */ (function () {
             this.selectedTab = this.tabArr[0];
         }
         this.selectedTab.selected = true;
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             selectedTab: mobx_1.observable,
             tabArr: mobx_1.observable,
         });
@@ -321,16 +321,16 @@ var TabsView = /** @class */ (function () {
         var header, footer;
         var visibility = { display: 'none' };
         if (tabPosition === 'top') {
-            header = jsx_runtime_1.jsx("header", { children: tabs }, void 0);
+            header = (0, jsx_runtime_1.jsx)("header", { children: tabs }, void 0);
         }
         else {
-            footer = jsx_runtime_1.jsx("footer", { children: tabs }, void 0);
+            footer = (0, jsx_runtime_1.jsx)("footer", { children: tabs }, void 0);
         }
-        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [header, this.tabArr.map(function (v, index) {
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [header, this.tabArr.map(function (v, index) {
                     var style;
                     if (v.selected === false)
                         style = visibility;
-                    return jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(v.className), style: style }, { children: v.content }), index);
+                    return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(v.className), style: style }, { children: v.content }), index);
                 }), footer] }, void 0);
     };
     return TabsView;

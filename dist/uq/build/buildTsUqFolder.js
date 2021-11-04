@@ -1,8 +1,12 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -19,9 +23,9 @@ function buildTsUqFolder(uq, uqsFolder, uqAlias) {
     if (fs_1.default.existsSync(uqFolder) === false) {
         fs_1.default.mkdirSync(uqFolder);
     }
-    var tsUq = tools_1.buildTsHeader();
-    tsUq += buildUQ_1.buildUQ(uq, uqAlias);
-    tools_1.overrideTsFile(uqFolder + "/" + uqAlias + ".ts", tsUq);
+    var tsUq = (0, tools_1.buildTsHeader)();
+    tsUq += (0, buildUQ_1.buildUQ)(uq, uqAlias);
+    (0, tools_1.overrideTsFile)(uqFolder + "/" + uqAlias + ".ts", tsUq);
     saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias);
 }
 exports.buildTsUqFolder = buildTsUqFolder;
@@ -33,20 +37,20 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         var i = tuidArr_1[_i];
         var sName = i.sName;
         coll[sName.toLowerCase()] = i;
-        var cName = tool_1.capitalCase(sName);
+        var cName = (0, tool_1.capitalCase)(sName);
         if (cName[0] === '$')
             continue;
         imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
         sets += "\n\tassign(uq, '" + cName + "', " + cName + ");";
         var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, FieldItem, FieldItemNumber, FieldItemString, FieldItemId, UI, uqStringify } from \"tonva-react\";\nimport { Tuid" + cName + " } from \"./" + uqAlias + "\";\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: Tuid" + cName + "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n";
         var path = uqFolder + "/" + cName + ".ui.tsx";
-        tools_1.saveTsFileIfNotExists(path, tsUI);
+        (0, tools_1.saveTsFileIfNotExists)(path, tsUI);
     }
-    for (var _a = 0, _b = __spreadArray(__spreadArray(__spreadArray([], idArr), idxArr), ixArr); _a < _b.length; _a++) {
+    for (var _a = 0, _b = __spreadArray(__spreadArray(__spreadArray([], idArr, true), idxArr, true), ixArr, true); _a < _b.length; _a++) {
         var i = _b[_a];
         var sName = i.sName;
         //coll[sName.toLowerCase()] = i;
-        var cName = tool_1.capitalCase(sName);
+        var cName = (0, tool_1.capitalCase)(sName);
         if (cName[0] === '$')
             continue;
         coll[cName.toLocaleLowerCase()] = i;
@@ -54,7 +58,7 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         sets += "\n\tassign(uq, '" + cName + "', " + cName + ");";
         var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, UI, uqStringify } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n";
         var path = uqFolder + "/" + cName + ".ui.tsx";
-        tools_1.saveTsFileIfNotExists(path, tsUI);
+        (0, tools_1.saveTsFileIfNotExists)(path, tsUI);
         var fields = buildFields(i);
         var tsFieldArr = buildFieldArr(i);
         replaceTsFileFields(path, fields);
@@ -69,7 +73,7 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         replaceTsFileString(path, { begin: '\nconst fieldArr: FieldItem[] = [\n', end: '\n];\n', content: tsFieldArr });
     }
     var tsIndex = "import { UqExt as Uq, assign } from './" + uqAlias + "';" + imports + "\n\t\nexport function setUI(uq: Uq) {" + sets + "\n}\nexport * from './" + uqAlias + "';\n";
-    tools_1.overrideTsFile(uqFolder + "/index.ts", tsIndex);
+    (0, tools_1.overrideTsFile)(uqFolder + "/index.ts", tsIndex);
     var files = fs_1.default.readdirSync(uqFolder);
     var suffix = '.ui.tsx';
     for (var _c = 0, files_1 = files; _c < files_1.length; _c++) {
@@ -101,7 +105,7 @@ function buildIDFields(ID) {
     var _loop_1 = function (f) {
         var name_1 = f.name;
         var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_1; })) >= 0;
-        ret[name_1] = fieldItem_1.buildFieldItem(f, isKey);
+        ret[name_1] = (0, fieldItem_1.buildFieldItem)(f, isKey);
     };
     for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
         var f = fields_1[_i];
@@ -117,7 +121,7 @@ function buildIDXFields(IDX) {
     var _loop_2 = function (f) {
         var name_2 = f.name;
         var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_2; })) >= 0;
-        ret[name_2] = fieldItem_1.buildFieldItem(f, isKey);
+        ret[name_2] = (0, fieldItem_1.buildFieldItem)(f, isKey);
     };
     for (var _i = 0, fields_2 = fields; _i < fields_2.length; _i++) {
         var f = fields_2[_i];
@@ -134,7 +138,7 @@ function buildIXFields(IX) {
     var _loop_3 = function (f) {
         var name_3 = f.name;
         var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_3; })) >= 0;
-        ret[name_3] = fieldItem_1.buildFieldItem(f, isKey);
+        ret[name_3] = (0, fieldItem_1.buildFieldItem)(f, isKey);
     };
     for (var _i = 0, fields_3 = fields; _i < fields_3.length; _i++) {
         var f = fields_3[_i];

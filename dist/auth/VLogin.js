@@ -99,7 +99,7 @@ var VLogin = /** @class */ (function (_super) {
                         ret = _a.sent();
                         if (ret === true)
                             return [2 /*return*/];
-                        sender = tools_1.getSender(un);
+                        sender = (0, tools_1.getSender)(un);
                         type = sender !== undefined ? sender.caption : '用户名';
                         return [2 /*return*/, type + '或密码错！'];
                 }
@@ -130,7 +130,7 @@ var VLogin = /** @class */ (function (_super) {
         return false;
     };
     VLogin.prototype.content = function () {
-        return jsx_runtime_1.jsxs("div", __assign({ className: "d-flex p-5 flex-column justify-content-center align-items-center" }, { children: [jsx_runtime_1.jsx("div", { className: "flex-fill" }, void 0), jsx_runtime_1.jsxs("div", __assign({ className: "w-20c" }, { children: [tools_1.tonvaTop(), jsx_runtime_1.jsx("div", { className: "h-2c" }, void 0), jsx_runtime_1.jsx(components_1.Form, { schema: schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0), jsx_runtime_1.jsxs("div", __assign({ className: "text-center" }, { children: [jsx_runtime_1.jsx(components_1.Ax, __assign({ className: "btn btn-link", href: "/forget" }, { children: "\u5FD8\u8BB0\u5BC6\u7801" }), void 0), jsx_runtime_1.jsx(components_1.Ax, __assign({ href: "/register", className: "btn btn-link" }, { children: "\u6CE8\u518C\u8D26\u53F7" }), void 0)] }), void 0), components_1.nav.privacyEntry()] }), void 0), jsx_runtime_1.jsx("div", { className: "flex-fill" }, void 0), jsx_runtime_1.jsx("div", { className: "flex-fill" }, void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "d-flex p-5 flex-column justify-content-center align-items-center" }, { children: [(0, jsx_runtime_1.jsx)("div", { className: "flex-fill" }, void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "w-20c" }, { children: [(0, tools_1.tonvaTop)(), (0, jsx_runtime_1.jsx)("div", { className: "h-2c" }, void 0), (0, jsx_runtime_1.jsx)(components_1.Form, { schema: schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "text-center" }, { children: [(0, jsx_runtime_1.jsx)(components_1.Ax, __assign({ className: "btn btn-link", href: "/forget" }, { children: "\u5FD8\u8BB0\u5BC6\u7801" }), void 0), (0, jsx_runtime_1.jsx)(components_1.Ax, __assign({ href: "/register", className: "btn btn-link" }, { children: "\u6CE8\u518C\u8D26\u53F7" }), void 0)] }), void 0), components_1.nav.privacyEntry()] }), void 0), (0, jsx_runtime_1.jsx)("div", { className: "flex-fill" }, void 0), (0, jsx_runtime_1.jsx)("div", { className: "flex-fill" }, void 0)] }), void 0);
     };
     return VLogin;
 }(vm_1.VPage));

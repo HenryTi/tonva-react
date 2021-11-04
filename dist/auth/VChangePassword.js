@@ -117,7 +117,7 @@ var VChangePassword = /** @class */ (function (_super) {
                             context.setError('orgPassword', '原密码错误');
                             return [2 /*return*/];
                         }
-                        components_1.nav.replace(jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u4FEE\u6539\u5BC6\u7801", back: "close" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "m-3  text-success" }, { children: "\u5BC6\u7801\u4FEE\u6539\u6210\u529F\uFF01" }), void 0) }), void 0));
+                        components_1.nav.replace((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "\u4FEE\u6539\u5BC6\u7801", back: "close" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3  text-success" }, { children: "\u5BC6\u7801\u4FEE\u6539\u6210\u529F\uFF01" }), void 0) }), void 0));
                         return [2 /*return*/];
                 }
             });
@@ -129,7 +129,7 @@ var VChangePassword = /** @class */ (function (_super) {
     };
     VChangePassword.prototype.header = function () { return '修改密码'; };
     VChangePassword.prototype.content = function () {
-        return jsx_runtime_1.jsx(components_1.Form, { className: "m-3", schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, fieldLabelSize: 2 }, void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.Form, { className: "m-3", schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, fieldLabelSize: 2 }, void 0);
     };
     return VChangePassword;
 }(vm_1.VPage));

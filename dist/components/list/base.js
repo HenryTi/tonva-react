@@ -17,7 +17,7 @@ var mobx_1 = require("mobx");
 var ListBase = /** @class */ (function () {
     function ListBase(list) {
         this.list = list;
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             loading: mobx_1.computed,
         });
     }
@@ -70,7 +70,7 @@ var ListBase = /** @class */ (function () {
     ListBase.prototype.renderContent = function (item, index) {
         var render = this.list.props.item.render;
         if (render === undefined)
-            return jsx_runtime_1.jsx("div", __assign({ className: "px-3 py-2" }, { children: JSON.stringify(item) }), void 0);
+            return (0, jsx_runtime_1.jsx)("div", __assign({ className: "px-3 py-2" }, { children: JSON.stringify(item) }), void 0);
         return render(item, index);
     };
     return ListBase;

@@ -41,10 +41,10 @@ var Static = /** @class */ (function (_super) {
         _this.render = function (item, index) {
             var _a = _this.list.props.item, className = _a.className, key = _a.key;
             if (typeof item === 'string') {
-                var cn = classnames_1.default('va-list-gap', 'px-3', 'pt-1');
-                return jsx_runtime_1.jsx("li", __assign({ className: cn }, { children: item }), uid_1.uid());
+                var cn = (0, classnames_1.default)('va-list-gap', 'px-3', 'pt-1');
+                return (0, jsx_runtime_1.jsx)("li", __assign({ className: cn }, { children: item }), (0, uid_1.uid)());
             }
-            return jsx_runtime_1.jsx("li", __assign({ className: classnames_1.default(className) }, { children: _this.renderContent(item, index) }), key === undefined ? index : key(item));
+            return (0, jsx_runtime_1.jsx)("li", __assign({ className: (0, classnames_1.default)(className) }, { children: _this.renderContent(item, index) }), key === undefined ? index : key(item));
         };
         return _this;
     }

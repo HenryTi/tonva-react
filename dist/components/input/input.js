@@ -58,7 +58,7 @@ var Input = /** @class */ (function (_super) {
         _this.rules = [];
         _this.value = null;
         _this.ruleMessage = null;
-        mobx_1.makeObservable(_this, {
+        (0, mobx_1.makeObservable)(_this, {
             ruleMessage: mobx_1.observable,
             onChange: mobx_1.action,
             onFocus: mobx_1.action,
@@ -126,12 +126,12 @@ var Input = /** @class */ (function (_super) {
     Input.prototype.render = function () {
         var _this = this;
         var _a = this.props, defaultValue = _a.defaultValue, disabled = _a.disabled, required = _a.required;
-        var content = jsx_runtime_1.jsx("input", { ref: function (inp) { return _this.input = inp; }, className: this.className, type: this.type, placeholder: this.placeholder, defaultValue: defaultValue, defaultChecked: defaultValue, maxLength: this.maxLength, max: this.max, min: this.min, disabled: disabled, onChange: function () { return _this.onChange(); }, onBlur: function () { return _this.onBlur(); }, onFocus: function () { return _this.onFocus(); } }, void 0);
+        var content = (0, jsx_runtime_1.jsx)("input", { ref: function (inp) { return _this.input = inp; }, className: this.className, type: this.type, placeholder: this.placeholder, defaultValue: defaultValue, defaultChecked: defaultValue, maxLength: this.maxLength, max: this.max, min: this.min, disabled: disabled, onChange: function () { return _this.onChange(); }, onBlur: function () { return _this.onBlur(); }, onFocus: function () { return _this.onFocus(); } }, void 0);
         if (this.rules.length === 0)
             return content;
         var _b = this.props, containerClassName = _b.containerClassName, ruleClassName = _b.ruleClassName;
-        return jsx_runtime_1.jsxs("span", __assign({ className: containerClassName }, { children: [required === true && this.requiredFlagElement, content, react_1.default.createElement(mobx_react_1.observer(function () {
-                    return jsx_runtime_1.jsx("span", __assign({ className: ruleClassName !== null && ruleClassName !== void 0 ? ruleClassName : Input.defaultRuleClassName }, { children: _this.ruleMessage }), void 0);
+        return (0, jsx_runtime_1.jsxs)("span", __assign({ className: containerClassName }, { children: [required === true && this.requiredFlagElement, content, react_1.default.createElement((0, mobx_react_1.observer)(function () {
+                    return (0, jsx_runtime_1.jsx)("span", __assign({ className: ruleClassName !== null && ruleClassName !== void 0 ? ruleClassName : Input.defaultRuleClassName }, { children: _this.ruleMessage }), void 0);
                 }))] }), void 0);
     };
     Input.prototype.onChange = function () {
@@ -164,7 +164,7 @@ var Input = /** @class */ (function (_super) {
     Input.prototype.onFocus = function () {
         this.ruleMessage = null;
     };
-    Input.defaultRequiredFlagElement = jsx_runtime_1.jsx("span", __assign({ className: "mx-2 text-danger" }, { children: "*" }), void 0);
+    Input.defaultRequiredFlagElement = (0, jsx_runtime_1.jsx)("span", __assign({ className: "mx-2 text-danger" }, { children: "*" }), void 0);
     Input.defaultRuleClassName = ' mx-2 text-danger ';
     return Input;
 }(react_1.Component));

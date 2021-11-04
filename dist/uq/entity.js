@@ -306,7 +306,7 @@ var Entity = /** @class */ (function () {
             for (var _i = 0, arrs_2 = arrs; _i < arrs_2.length; _i++) {
                 var arr = arrs_2[_i];
                 var name_3 = arr.name, fields_4 = arr.fields;
-                var arrData = tool_1.getObjPropIgnoreCase(data, name_3);
+                var arrData = (0, tool_1.getObjPropIgnoreCase)(data, name_3);
                 //if (!arrData) arrData = data[name.toLowerCase()];
                 this.packArr(ret, fields_4, arrData);
             }

@@ -18,7 +18,7 @@ exports.Muted = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
 var Muted = function (props) {
-    return jsx_runtime_1.jsx("small", __assign({ className: classnames_1.default('text-muted', props.className), style: props.style }, { children: props.children }), void 0);
+    return (0, jsx_runtime_1.jsx)("small", __assign({ className: (0, classnames_1.default)('text-muted', props.className), style: props.style }, { children: props.children }), void 0);
 };
 exports.Muted = Muted;
 //# sourceMappingURL=Muted.js.map

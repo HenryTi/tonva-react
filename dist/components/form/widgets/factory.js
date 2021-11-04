@@ -115,7 +115,7 @@ function factory(context, itemSchema, children, fieldProps) {
     switch (type) {
         case 'arr':
             var arrSchema = context.getItemSchema(name);
-            return jsx_runtime_1.jsx(arrComponent_1.ArrComponent, { parentContext: context, arrSchema: arrSchema, children: children }, void 0);
+            return (0, jsx_runtime_1.jsx)(arrComponent_1.ArrComponent, { parentContext: context, arrSchema: arrSchema, children: children }, void 0);
         default:
             break;
     }
@@ -158,7 +158,7 @@ function factory(context, itemSchema, children, fieldProps) {
                 typeWidget = ui.WidgetClass;
                 break;
             case 'group':
-                return jsx_runtime_1.jsx("span", { children: "impletment group" }, void 0);
+                return (0, jsx_runtime_1.jsx)("span", { children: "impletment group" }, void 0);
         }
         //label = uiLabel || name;
     }
@@ -169,7 +169,7 @@ function factory(context, itemSchema, children, fieldProps) {
         widget.init();
         widgets[name] = widget;
     }
-    return jsx_runtime_1.jsx(widget.container, {}, void 0);
+    return (0, jsx_runtime_1.jsx)(widget.container, {}, void 0);
     /*
     if (isRow === false) {
         let WidgetElement = observer(() => widget.container());

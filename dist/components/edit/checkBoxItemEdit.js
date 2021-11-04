@@ -102,7 +102,7 @@ var CheckBoxItemEdit = /** @class */ (function (_super) {
         var onChange;
         if (readOnly !== true)
             onChange = this.onChange;
-        return jsx_runtime_1.jsx("input", { ref: function (r) { return _this.input = r; }, type: "checkbox", defaultChecked: this.value, disabled: disabled, onChange: onChange }, void 0);
+        return (0, jsx_runtime_1.jsx)("input", { ref: function (r) { return _this.input = r; }, type: "checkbox", defaultChecked: this.value, disabled: disabled, onChange: onChange }, void 0);
     };
     CheckBoxItemEdit.prototype.getValue = function (checked) {
         var _a = this.uiItem, trueValue = _a.trueValue, falseValue = _a.falseValue;

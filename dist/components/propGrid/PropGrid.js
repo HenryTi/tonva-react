@@ -69,8 +69,8 @@ var PropGrid = /** @class */ (function (_super) {
         var _a = this.props, className = _a.className, rows = _a.rows, values = _a.values;
         var propView = new propView_1.PropView(this.props, rows);
         propView.setValues(values);
-        var cn = classnames_1.default('container-fluid', className);
-        return jsx_runtime_1.jsx("div", __assign({ className: cn }, { children: propView.render() }), void 0);
+        var cn = (0, classnames_1.default)('container-fluid', className);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: propView.render() }), void 0);
     };
     PropGrid = __decorate([
         mobx_react_1.observer

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodeGuestToken = exports.decodeUserToken = void 0;
 var jwt_decode_1 = __importDefault(require("jwt-decode"));
 function decodeUserToken(token) {
-    var ret = jwt_decode_1.default(token);
+    var ret = (0, jwt_decode_1.default)(token);
     var user = {
         id: ret.id,
         name: ret.name,
@@ -17,7 +17,7 @@ function decodeUserToken(token) {
 }
 exports.decodeUserToken = decodeUserToken;
 function decodeGuestToken(token) {
-    var ret = jwt_decode_1.default(token);
+    var ret = (0, jwt_decode_1.default)(token);
     var guest = {
         id: 0,
         guest: ret.guest,

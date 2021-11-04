@@ -134,16 +134,16 @@ var View = /** @class */ (function () {
     View.prototype.renderUser = function (user, imageClassName, textClassName) {
         var renderUser = function (user) {
             var name = user.name, nick = user.nick, icon = user.icon;
-            return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c me-2' }, void 0), jsx_runtime_1.jsx("span", __assign({ className: textClassName }, { children: nick || name }), void 0)] }, void 0);
+            return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c me-2' }, void 0), (0, jsx_runtime_1.jsx)("span", __assign({ className: textClassName }, { children: nick || name }), void 0)] }, void 0);
         };
-        return jsx_runtime_1.jsx(components_1.UserView, { user: user, render: renderUser }, void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.UserView, { user: user, render: renderUser }, void 0);
     };
     View.prototype.renderUserText = function (user) {
         var renderUser = function (user) {
             var name = user.name, nick = user.nick;
-            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: nick || name }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: nick || name }, void 0);
         };
-        return jsx_runtime_1.jsx(components_1.UserView, { user: user, render: renderUser }, void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.UserView, { user: user, render: renderUser }, void 0);
     };
     View.prototype.renderMe = function (imageClassName, textClassName) {
         var user = this.controller.user;
@@ -157,7 +157,7 @@ var View = /** @class */ (function () {
             this.controller.openPage(React.createElement(view, param), onClosePage);
         }
         else {
-            this.controller.openPage(jsx_runtime_1.jsxs(components_1.Page, __assign({ header: "param type error" }, { children: ["View.openPage param must be object, but here is ", type] }), void 0), onClosePage);
+            this.controller.openPage((0, jsx_runtime_1.jsxs)(components_1.Page, __assign({ header: "param type error" }, { children: ["View.openPage param must be object, but here is ", type] }), void 0), onClosePage);
         }
     };
     View.prototype.replacePage = function (view, param) {

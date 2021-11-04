@@ -84,14 +84,14 @@ function buildUqsFolder(uqsFolder, appConfig) {
                     else {
                         tsUqsIndexContent = "\n\nexport interface UQs {";
                     }
-                    tsUqsIndexHeader += tools_1.buildTsHeader();
+                    tsUqsIndexHeader += (0, tools_1.buildTsHeader)();
                     tsUqsIndexReExport = '\n';
                     tsUqsUI = "\n\nexport function setUI(uqs:UQs) {";
                     for (_a = 0, uqMans_2 = uqMans; _a < uqMans_2.length; _a++) {
                         uq = uqMans_2[_a];
-                        _b = tools_1.getNameFromUq(uq), o1 = _b.devName, n1 = _b.uqName;
+                        _b = (0, tools_1.getNameFromUq)(uq), o1 = _b.devName, n1 = _b.uqName;
                         uqAlias = o1 + n1;
-                        buildTsUqFolder_1.buildTsUqFolder(uq, uqsFolder, uqAlias);
+                        (0, buildTsUqFolder_1.buildTsUqFolder)(uq, uqsFolder, uqAlias);
                         tsUqsIndexHeader += "\nimport * as " + uqAlias + " from './" + uqAlias + "';";
                         tsUqsIndexContent += "\n\t" + uqAlias + ": " + uqAlias + ".UqExt;";
                         tsUqsIndexReExport += "\nexport * as " + uqAlias + " from './" + uqAlias + "';";
@@ -115,7 +115,7 @@ function buildUqsFolder(uqsFolder, appConfig) {
                             throw err;
                         }
                     }
-                    tools_1.overrideTsFile(uqsIndexFile, tsUqsIndexHeader + tsUqsIndexContent + '\n}' + tsUqsIndexReExport + tsUqsUI + '\n}\n');
+                    (0, tools_1.overrideTsFile)(uqsIndexFile, tsUqsIndexHeader + tsUqsIndexContent + '\n}' + tsUqsIndexReExport + tsUqsUI + '\n}\n');
                     return [2 /*return*/];
             }
         });

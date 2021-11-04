@@ -56,7 +56,7 @@ var ItemEdit = /** @class */ (function () {
     function ItemEdit(edit, itemSchema, uiItem, label, value) {
         this.error = null;
         this.isChanged = false;
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             error: mobx_1.observable,
             isChanged: mobx_1.observable,
         });
@@ -134,10 +134,10 @@ var ItemEdit = /** @class */ (function () {
                     case 'radio':
                     case 'select':
                         var list = uiItem.list;
-                        divValue = jsx_runtime_1.jsx("b", { children: list.find(function (v) { return v.value === _this.value; }).title }, void 0);
+                        divValue = (0, jsx_runtime_1.jsx)("b", { children: list.find(function (v) { return v.value === _this.value; }).title }, void 0);
                         break;
                     case 'id':
-                        divValue = jsx_runtime_1.jsxs("b", { children: ["no templet for ", name, "=", this.value] }, void 0);
+                        divValue = (0, jsx_runtime_1.jsxs)("b", { children: ["no templet for ", name, "=", this.value] }, void 0);
                         break;
                 }
             }
@@ -146,12 +146,12 @@ var ItemEdit = /** @class */ (function () {
             switch (type) {
                 default:
                     divValue = this.value ?
-                        jsx_runtime_1.jsx("b", { children: this.value }, void 0)
+                        (0, jsx_runtime_1.jsx)("b", { children: this.value }, void 0)
                         :
-                            jsx_runtime_1.jsxs("small", __assign({ className: "text-muted" }, { children: ["[", labelHide === true ? label : '无', "]"] }), void 0);
+                            (0, jsx_runtime_1.jsxs)("small", __assign({ className: "text-muted" }, { children: ["[", labelHide === true ? label : '无', "]"] }), void 0);
                     break;
                 case 'image':
-                    divValue = jsx_runtime_1.jsx(image_1.Image, { className: "w-4c h-4c", src: this.value }, void 0);
+                    divValue = (0, jsx_runtime_1.jsx)(image_1.Image, { className: "w-4c h-4c", src: this.value }, void 0);
                     break;
             }
         }

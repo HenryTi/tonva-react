@@ -56,7 +56,7 @@ var IconText = /** @class */ (function (_super) {
     }
     IconText.prototype.render = function () {
         var _a = this.props, icon = _a.icon, iconClass = _a.iconClass, text = _a.text, textClass = _a.textClass;
-        return jsx_runtime_1.jsxs("div", __assign({ className: "py-2" }, { children: [jsx_runtime_1.jsx(FA_1.FA, { className: iconClass, name: icon, fixWidth: true }, void 0), jsx_runtime_1.jsx("span", __assign({ className: textClass }, { children: text }), void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "py-2" }, { children: [(0, jsx_runtime_1.jsx)(FA_1.FA, { className: iconClass, name: icon, fixWidth: true }, void 0), (0, jsx_runtime_1.jsx)("span", __assign({ className: textClass }, { children: text }), void 0)] }), void 0);
     };
     return IconText;
 }(React.Component));

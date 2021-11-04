@@ -160,11 +160,11 @@ var TuidInner = /** @class */ (function (_super) {
     };
     TuidInner.prototype.tv = function (id, render) {
         var _this = this;
-        var TuidView = mobx_react_1.observer(function () {
+        var TuidView = (0, mobx_react_1.observer)(function () {
             var obj = _this.valueFromId(id);
             if (obj === undefined) {
                 _this.useId(id);
-                return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [_this.sName, ":", id] }, void 0);
+                return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.sName, ":", id] }, void 0);
             }
             var r;
             if (render) {
@@ -176,12 +176,12 @@ var TuidInner = /** @class */ (function (_super) {
             else {
                 console.log('render', render, 'this.render', _this.render);
                 r = function (item) {
-                    return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [_this.sName, ":", reactBoxId_1.uqStringify(item)] }, void 0);
+                    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.sName, ":", (0, reactBoxId_1.uqStringify)(item)] }, void 0);
                 };
             }
             return r(obj);
         });
-        return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: jsx_runtime_1.jsx(TuidView, {}, void 0) }, void 0);
+        return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsx)(TuidView, {}, void 0) }, void 0);
     };
     TuidInner.prototype.useId = function (id, defer) {
         if (this.noCache === true)

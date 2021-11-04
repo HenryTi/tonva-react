@@ -61,7 +61,7 @@ function buildTsHeader() {
 }
 exports.buildTsHeader = buildTsHeader;
 function entityName(s) {
-    return tool_1.capitalCase(s);
+    return (0, tool_1.capitalCase)(s);
 }
 exports.entityName = entityName;
 function getNameFromUq(uqMan) {
@@ -79,8 +79,8 @@ function getNameFromUq(uqMan) {
         uqPart = uqName;
     }
     return {
-        devName: tool_1.capitalCase(devPart),
-        uqName: tool_1.capitalCase(uqPart),
+        devName: (0, tool_1.capitalCase)(devPart),
+        uqName: (0, tool_1.capitalCase)(uqPart),
     };
 }
 exports.getNameFromUq = getNameFromUq;

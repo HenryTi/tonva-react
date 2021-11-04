@@ -24,7 +24,7 @@ var VRegister = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     VRegister.prototype.content = function () {
-        return jsx_runtime_1.jsx("div", { children: "register" }, void 0);
+        return (0, jsx_runtime_1.jsx)("div", { children: "register" }, void 0);
     };
     return VRegister;
 }(vm_1.VPage));

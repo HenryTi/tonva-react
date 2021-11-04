@@ -44,10 +44,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -89,7 +93,7 @@ var Selectable = /** @class */ (function (_super) {
                     return {
                         selected: isItemSelected(v),
                         item: v,
-                        labelId: uid_1.uid()
+                        labelId: (0, uid_1.uid)()
                     };
                 });
                 _this._items = retItems;
@@ -112,7 +116,7 @@ var Selectable = /** @class */ (function (_super) {
                     return {
                         selected: selected,
                         item: v,
-                        labelId: uid_1.uid()
+                        labelId: (0, uid_1.uid)()
                     };
                 });
                 _this._items = retItems;
@@ -122,16 +126,16 @@ var Selectable = /** @class */ (function (_super) {
             var key = _this.list.props.item.key;
             return React.createElement(_this.row, { item: item, index: index, key: key === undefined ? index : key(item) });
         };
-        _this.row = mobx_react_1.observer(function (props) {
+        _this.row = (0, mobx_react_1.observer)(function (props) {
             var item = props.item, index = props.index;
             var className = _this.list.props.item.className;
             var labelId = item.labelId, selected = item.selected, obItem = item.item;
-            return jsx_runtime_1.jsx("li", __assign({ className: classnames_1.default(className) }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "d-flex align-items-center px-3" }, { children: [jsx_runtime_1.jsx("input", { ref: function (input) { if (input)
+            return (0, jsx_runtime_1.jsx)("li", __assign({ className: (0, classnames_1.default)(className) }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "d-flex align-items-center px-3" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: function (input) { if (input)
                                 _this.inputItems[labelId] = input; }, className: "", type: "checkbox", value: "", id: labelId, defaultChecked: selected, onChange: function (e) {
                                 _this.onSelect(item, e.target.checked);
-                            } }, void 0), jsx_runtime_1.jsx("label", __assign({ className: "", style: { flex: 1, marginBottom: 0 }, htmlFor: labelId }, { children: _this.renderContent(obItem, index) }), void 0)] }), void 0) }), void 0);
+                            } }, void 0), (0, jsx_runtime_1.jsx)("label", __assign({ className: "", style: { flex: 1, marginBottom: 0 }, htmlFor: labelId }, { children: _this.renderContent(obItem, index) }), void 0)] }), void 0) }), void 0);
         });
-        mobx_1.makeObservable(_this, {
+        (0, mobx_1.makeObservable)(_this, {
             _items: mobx_1.observable
         });
         _this.buildItems();
@@ -152,8 +156,8 @@ var Selectable = /** @class */ (function (_super) {
         else {
             itemsArray = items.items;
         }
-        if (mobx_1.isObservableArray(items) === true) {
-            mobx_1.observe(itemsArray, function (change) {
+        if ((0, mobx_1.isObservableArray)(items) === true) {
+            (0, mobx_1.observe)(itemsArray, function (change) {
                 var _a;
                 if (change.type === 'splice') {
                     var index = change.index, removedCount = change.removedCount, added = change.added;
@@ -161,10 +165,10 @@ var Selectable = /** @class */ (function (_super) {
                         return {
                             selected: false,
                             item: v,
-                            labelId: uid_1.uid()
+                            labelId: (0, uid_1.uid)()
                         };
                     });
-                    (_a = _this._items).splice.apply(_a, __spreadArray([index, removedCount], _added));
+                    (_a = _this._items).splice.apply(_a, __spreadArray([index, removedCount], _added, false));
                     _this.buildItems();
                 }
             }, true);

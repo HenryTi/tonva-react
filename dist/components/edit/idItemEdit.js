@@ -76,7 +76,7 @@ var IdItemEdit = /** @class */ (function (_super) {
             var preValue = _this.value;
             _this.isChanged = (_this.newValue !== preValue);
         };
-        _this.page = mobx_react_1.observer(function (props) {
+        _this.page = (0, mobx_react_1.observer)(function (props) {
             /*
             let {resolve, reject} = props;
             let {list} = this.uiItem;
@@ -95,7 +95,7 @@ var IdItemEdit = /** @class */ (function (_super) {
                 </div>
             </Page>;
             */
-            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: '更改' + _this.label }, { children: "ddd" }), void 0);
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label }, { children: "ddd" }), void 0);
         });
         return _this;
     }

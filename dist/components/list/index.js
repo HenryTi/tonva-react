@@ -117,7 +117,7 @@ var List = /** @class */ (function (_super) {
         if (before === undefined)
             before = '-';
         if (loading === undefined)
-            loading = function () { return jsx_runtime_1.jsx("i", { className: "fa fa-spinner fa-spin fa-2x fa-fw text-info" }, void 0); };
+            loading = function () { return (0, jsx_runtime_1.jsx)("i", { className: "fa fa-spinner fa-spin fa-2x fa-fw text-info" }, void 0); };
         if (none === undefined)
             none = List_1.res.none;
         var _b = this.listBase, items = _b.items, isLoading = _b.loading;
@@ -126,9 +126,9 @@ var List = /** @class */ (function (_super) {
                 return;
             switch (typeof row) {
                 default:
-                case 'string': return jsx_runtime_1.jsx("li", __assign({ className: "va-list-" + type }, { children: row }), void 0);
-                case 'function': return jsx_runtime_1.jsx("li", __assign({ className: "va-list-" + type }, { children: row() }), void 0);
-                case 'object': return jsx_runtime_1.jsx("li", { children: row }, void 0);
+                case 'string': return (0, jsx_runtime_1.jsx)("li", __assign({ className: "va-list-" + type }, { children: row }), void 0);
+                case 'function': return (0, jsx_runtime_1.jsx)("li", __assign({ className: "va-list-" + type }, { children: row() }), void 0);
+                case 'object': return (0, jsx_runtime_1.jsx)("li", { children: row }, void 0);
             }
         }
         var content, waitingMore;
@@ -149,10 +149,10 @@ var List = /** @class */ (function (_super) {
         var tabIndex;
         if (onFocus !== undefined)
             tabIndex = -1;
-        return jsx_runtime_1.jsxs("ul", __assign({ className: classnames_1.default('va-list', className), onFocus: onFocus, tabIndex: tabIndex }, { children: [staticRow(header, 'header'), content, waitingMore, staticRow(footer, 'footer')] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("ul", __assign({ className: (0, classnames_1.default)('va-list', className), onFocus: onFocus, tabIndex: tabIndex }, { children: [staticRow(header, 'header'), content, waitingMore, staticRow(footer, 'footer')] }), void 0);
     };
     var List_1;
-    List.res = res_1.resLang(res_2.listRes);
+    List.res = (0, res_1.resLang)(res_2.listRes);
     List = List_1 = __decorate([
         mobx_react_1.observer
     ], List);

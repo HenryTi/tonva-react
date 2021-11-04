@@ -97,11 +97,11 @@ var RadioItemEdit = /** @class */ (function (_super) {
             var preValue = _this.value;
             _this.isChanged = (_this.newValue !== preValue);
         };
-        _this.page = mobx_react_1.observer(function (props) {
+        _this.page = (0, mobx_react_1.observer)(function (props) {
             var resolve = props.resolve;
             var name = _this.itemSchema.name;
             var list = _this.uiItem.list;
-            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: function () {
+            var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: function () {
                     _this.verifyValue();
                     if (!_this.error)
                         resolve(_this.newValue);
@@ -109,11 +109,11 @@ var RadioItemEdit = /** @class */ (function (_super) {
             var content = list ?
                 list.map(function (v, index) {
                     var title = v.title, value = v.value;
-                    return jsx_runtime_1.jsx("div", __assign({ className: "col" }, { children: jsx_runtime_1.jsxs("label", __assign({ className: "px-3 py-2 cursor-pointer" }, { children: [jsx_runtime_1.jsx("input", { name: name, type: "radio", value: value, onClick: function () { return _this.onChange(value); }, defaultChecked: value === _this.value }, void 0), " ", title || value, " \u00A0"] }), void 0) }), index);
+                    return (0, jsx_runtime_1.jsx)("div", __assign({ className: "col" }, { children: (0, jsx_runtime_1.jsxs)("label", __assign({ className: "px-3 py-2 cursor-pointer" }, { children: [(0, jsx_runtime_1.jsx)("input", { name: name, type: "radio", value: value, onClick: function () { return _this.onChange(value); }, defaultChecked: value === _this.value }, void 0), " ", title || value, " \u00A0"] }), void 0) }), index);
                 })
                 :
-                    jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "no list defined" }, void 0);
-            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: jsx_runtime_1.jsx("div", __assign({ className: "m-3" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "row row-cols-2 row-cols-sm-3 row-cols-md-4" }, { children: content }), void 0) }), void 0) }), void 0);
+                    (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "no list defined" }, void 0);
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "row row-cols-2 row-cols-sm-3 row-cols-md-4" }, { children: content }), void 0) }), void 0) }), void 0);
         });
         return _this;
     }

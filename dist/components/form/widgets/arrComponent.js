@@ -42,7 +42,7 @@ var classnames_1 = __importDefault(require("classnames"));
 var context_1 = require("../context");
 var unknown_1 = require("./unknown");
 var factory_1 = require("./factory");
-exports.ArrComponent = mobx_react_1.observer(function (_a) {
+exports.ArrComponent = (0, mobx_react_1.observer)(function (_a) {
     var parentContext = _a.parentContext, arrSchema = _a.arrSchema, children = _a.children;
     var name = arrSchema.name, arr = arrSchema.arr;
     var data = parentContext.initData[name];
@@ -79,11 +79,11 @@ exports.ArrComponent = mobx_react_1.observer(function (_a) {
             RowSeperator = rs;
         Templet = ui.Templet;
         if (widgetType !== 'arr')
-            return unknown_1.Unknown(arrSchema.type, widgetType, ['arr']);
+            return (0, unknown_1.Unknown)(arrSchema.type, widgetType, ['arr']);
         arrLabel = label || arrLabel;
     }
     var first = true;
-    return ArrContainer(arrLabel, jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: data.map(function (row, index) {
+    return ArrContainer(arrLabel, (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: data.map(function (row, index) {
             var rowContext;
             var rowContent;
             var sep = undefined;
@@ -93,13 +93,13 @@ exports.ArrComponent = mobx_react_1.observer(function (_a) {
                 first = false;
             if (children !== undefined) {
                 rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
-                rowContent = jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: children }, void 0);
+                rowContent = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: children }, void 0);
             }
             else {
                 var typeofTemplet = typeof Templet;
                 if (typeofTemplet === 'function') {
                     rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
-                    rowContent = React.createElement(mobx_react_1.observer(Templet), row);
+                    rowContent = React.createElement((0, mobx_react_1.observer)(Templet), row);
                 }
                 else if (typeofTemplet === 'object') {
                     rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
@@ -107,8 +107,8 @@ exports.ArrComponent = mobx_react_1.observer(function (_a) {
                 }
                 else {
                     rowContext = new context_1.RowContext(parentContext, arrSchema, row, false);
-                    rowContent = jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: arr.map(function (v, index) {
-                            return jsx_runtime_1.jsx(React.Fragment, { children: factory_1.factory(rowContext, v, undefined) }, v.name);
+                    rowContent = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: arr.map(function (v, index) {
+                            return (0, jsx_runtime_1.jsx)(React.Fragment, { children: (0, factory_1.factory)(rowContext, v, undefined) }, v.name);
                         }) }, void 0);
                 }
             }
@@ -124,7 +124,7 @@ exports.ArrComponent = mobx_react_1.observer(function (_a) {
                         $source.$isSelected = checked;
                     rowContext.clearErrors();
                 };
-                selectCheck = jsx_runtime_1.jsx("div", __assign({ className: "form-row-checkbox" }, { children: jsx_runtime_1.jsx("input", { type: "checkbox", onClick: onClick, defaultChecked: row.$isSelected }, void 0) }), void 0);
+                selectCheck = (0, jsx_runtime_1.jsx)("div", __assign({ className: "form-row-checkbox" }, { children: (0, jsx_runtime_1.jsx)("input", { type: "checkbox", onClick: onClick, defaultChecked: row.$isSelected }, void 0) }), void 0);
             }
             var isDeleted = !(row.$isDeleted === undefined || row.$isDeleted === false);
             if (deletable === true) {
@@ -147,13 +147,13 @@ exports.ArrComponent = mobx_react_1.observer(function (_a) {
                     }
                     rowContext.clearErrors();
                 };
-                deleteIcon = jsx_runtime_1.jsx("div", __assign({ className: "form-row-edit text-info", onClick: onDelClick }, { children: jsx_runtime_1.jsx("i", { className: classnames_1.default('fa', icon, 'fa-fw') }, void 0) }), void 0);
+                deleteIcon = (0, jsx_runtime_1.jsx)("div", __assign({ className: "form-row-edit text-info", onClick: onDelClick }, { children: (0, jsx_runtime_1.jsx)("i", { className: (0, classnames_1.default)('fa', icon, 'fa-fw') }, void 0) }), void 0);
             }
             var editContainer = selectable === true || deletable === true ?
-                function (content) { return jsx_runtime_1.jsx("fieldset", __assign({ disabled: isDeleted }, { children: jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('d-flex', { 'deleted': isDeleted, 'row-selected': row.$isSelected }) }, { children: [selectCheck, jsx_runtime_1.jsx("div", __assign({ className: selectable === true && deletable === true ? "form-row-content" : "form-row-content-1" }, { children: content }), void 0), deleteIcon] }), void 0) }), void 0); }
+                function (content) { return (0, jsx_runtime_1.jsx)("fieldset", __assign({ disabled: isDeleted }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: (0, classnames_1.default)('d-flex', { 'deleted': isDeleted, 'row-selected': row.$isSelected }) }, { children: [selectCheck, (0, jsx_runtime_1.jsx)("div", __assign({ className: selectable === true && deletable === true ? "form-row-content" : "form-row-content-1" }, { children: content }), void 0), deleteIcon] }), void 0) }), void 0); }
                 :
                     function (content) { return content; };
-            return jsx_runtime_1.jsxs(context_1.ContextContainer.Provider, __assign({ value: rowContext }, { children: [sep, RowContainer(editContainer(jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx(rowContext.renderErrors, {}, void 0), rowContent] }, void 0)))] }), rowKey);
+            return (0, jsx_runtime_1.jsxs)(context_1.ContextContainer.Provider, __assign({ value: rowContext }, { children: [sep, RowContainer(editContainer((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(rowContext.renderErrors, {}, void 0), rowContent] }, void 0)))] }), rowKey);
         }) }, void 0));
 });
 //# sourceMappingURL=arrComponent.js.map

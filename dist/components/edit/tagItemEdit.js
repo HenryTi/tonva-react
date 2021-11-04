@@ -93,9 +93,9 @@ var TagItemEdit = /** @class */ (function (_super) {
     function TagItemEdit() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.inputs = {};
-        _this.page = mobx_react_1.observer(function (props) {
+        _this.page = (0, mobx_react_1.observer)(function (props) {
             var resolve = props.resolve;
-            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: function () {
+            var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: function () {
                     _this.verifyValue();
                     if (!_this.error)
                         resolve(_this.newValue);
@@ -113,7 +113,7 @@ var TagItemEdit = /** @class */ (function (_super) {
                 :
                 <>no list defined</>;
             */
-            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: jsx_runtime_1.jsx("div", __assign({ className: "p-3" }, { children: _this.renderInputs() }), void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-3" }, { children: _this.renderInputs() }), void 0) }), void 0);
         });
         return _this;
     }

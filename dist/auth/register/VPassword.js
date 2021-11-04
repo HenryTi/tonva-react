@@ -92,7 +92,7 @@ var VPassword = /** @class */ (function (_super) {
                     case 2:
                         error = _a.sent();
                         if (error !== undefined) {
-                            components_1.nav.push(jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u6CE8\u518C\u4E0D\u6210\u529F" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "p-5 text-danger" }, { children: error }), void 0) }), void 0));
+                            components_1.nav.push((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "\u6CE8\u518C\u4E0D\u6210\u529F" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-5 text-danger" }, { children: error }), void 0) }), void 0));
                         }
                         _a.label = 3;
                     case 3: return [2 /*return*/, error];
@@ -128,7 +128,7 @@ var VPassword = /** @class */ (function (_super) {
                 submit: { widget: 'button', className: 'btn btn-primary btn-block mt-3', label: this.submitCaption },
             }
         };
-        return jsx_runtime_1.jsxs("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u6CE8\u518C\u8D26\u53F7", jsx_runtime_1.jsx("br", {}, void 0), jsx_runtime_1.jsx("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: jsx_runtime_1.jsx("b", { children: this.account }, void 0) }), void 0), jsx_runtime_1.jsx("div", { className: "h-1c" }, void 0), jsx_runtime_1.jsx(components_1.Form, { schema: this.schema, uiSchema: uiSchema, onButtonClick: this.onButtonSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u6CE8\u518C\u8D26\u53F7", (0, jsx_runtime_1.jsx)("br", {}, void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: (0, jsx_runtime_1.jsx)("b", { children: this.account }, void 0) }), void 0), (0, jsx_runtime_1.jsx)("div", { className: "h-1c" }, void 0), (0, jsx_runtime_1.jsx)(components_1.Form, { schema: this.schema, uiSchema: uiSchema, onButtonClick: this.onButtonSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0)] }), void 0);
     };
     return VPassword;
 }(vm_1.VPage));

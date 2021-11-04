@@ -29,10 +29,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -56,7 +60,7 @@ var Widget = /** @class */ (function () {
         this.onInputChange = function (evt) {
             _this.changeValue(evt.target.value, true);
         };
-        this.container = mobx_react_1.observer(function () {
+        this.container = (0, mobx_react_1.observer)(function () {
             if (_this.visible === false)
                 return null;
             var _a = _this.context, form = _a.form, inNode = _a.inNode;
@@ -65,11 +69,11 @@ var Widget = /** @class */ (function () {
             var label = _this.label;
             if (_this.itemSchema.required === true && form.props.requiredFlag !== false) {
                 if (label !== null)
-                    label = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [label, "\u00A0", jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "*" }), void 0)] }, void 0);
+                    label = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [label, "\u00A0", (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "*" }), void 0)] }, void 0);
             }
             return form.FieldContainer(label, _this.renderBody());
         });
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             errors: mobx_1.observable,
             contextErrors: mobx_1.observable,
             hasError: mobx_1.computed,
@@ -237,7 +241,7 @@ var Widget = /** @class */ (function () {
             var fieldClass;
             if (this.context.inNode === false)
                 fieldClass = 'form-control';
-            return classnames_1.default(fieldClass, this.context.form.FieldClass, this.ui && this.ui.className);
+            return (0, classnames_1.default)(fieldClass, this.context.form.FieldClass, this.ui && this.ui.className);
         },
         enumerable: false,
         configurable: true
@@ -248,9 +252,9 @@ var Widget = /** @class */ (function () {
             var _a = this.ui, discription = _a.discription, discriptionClassName = _a.discriptionClassName;
             if (discriptionClassName === undefined)
                 discriptionClassName = 'small text-muted';
-            elDiscription = jsx_runtime_1.jsx("span", __assign({ className: discriptionClassName }, { children: discription }), void 0);
+            elDiscription = (0, jsx_runtime_1.jsx)("span", __assign({ className: discriptionClassName }, { children: discription }), void 0);
         }
-        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [this.render(), elDiscription] }, void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [this.render(), elDiscription] }, void 0);
     };
     Object.defineProperty(Widget.prototype, "label", {
         get: function () {
@@ -272,7 +276,7 @@ var Widget = /** @class */ (function () {
     });
     Widget.prototype.renderTemplet = function () {
         if (this.children !== undefined) {
-            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: this.children }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: this.children }, void 0);
         }
         if (this.ui === undefined)
             return undefined;
@@ -282,7 +286,7 @@ var Widget = /** @class */ (function () {
         return Templet;
     };
     Widget.prototype.renderErrors = function () {
-        var errorList = __spreadArray(__spreadArray([], this.errors), this.contextErrors);
+        var errorList = __spreadArray(__spreadArray([], this.errors, true), this.contextErrors, true);
         if (errorList.length === 0)
             return null;
         var inNode = this.context.inNode;
@@ -290,7 +294,7 @@ var Widget = /** @class */ (function () {
         return errorList.map(function (err) { return React.createElement(tag, {
             key: err,
             className: 'text-danger d-inline-block my-2 ms-3'
-        }, jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }, void 0)); });
+        }, (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }, void 0)); });
     };
     return Widget;
 }());

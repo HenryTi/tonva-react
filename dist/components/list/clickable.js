@@ -39,7 +39,7 @@ var Clickable = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.render = function (item, index) {
             var _a = _this.list.props.item, className = _a.className, key = _a.key, onClick = _a.onClick;
-            return jsx_runtime_1.jsx("li", __assign({ className: classnames_1.default('va-row-clickable', className), onClick: function () { return onClick && onClick(item); } }, { children: _this.renderContent(item, index) }), key === undefined ? index : key(item));
+            return (0, jsx_runtime_1.jsx)("li", __assign({ className: (0, classnames_1.default)('va-row-clickable', className), onClick: function () { return onClick && onClick(item); } }, { children: _this.renderContent(item, index) }), key === undefined ? index : key(item));
         };
         return _this;
     }

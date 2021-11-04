@@ -1,8 +1,12 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -15,11 +19,11 @@ var mobx_react_1 = require("mobx-react");
 var react_1 = __importDefault(require("react"));
 var InputList = /** @class */ (function () {
     function InputList(valuesArr, keyFromItem, createInputForm) {
-        this.valuesArr = __spreadArray([], valuesArr);
+        this.valuesArr = __spreadArray([], valuesArr, true);
         this.keyFromItem = keyFromItem;
         this.createInputForm = createInputForm;
         this.itemForms = valuesArr.map(function (item) { return createInputForm(item); });
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             itemForms: mobx_1.observable.shallow,
             valuesArr: mobx_1.observable.shallow,
             hasError: mobx_1.computed,
@@ -40,10 +44,10 @@ var InputList = /** @class */ (function () {
     };
     InputList.prototype.render = function () {
         var _this = this;
-        return react_1.default.createElement(mobx_react_1.observer(function () { return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: _this.itemForms.map(function (v) {
+        return react_1.default.createElement((0, mobx_react_1.observer)(function () { return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: _this.itemForms.map(function (v) {
                 var key = _this.keyFromItem(v.values);
                 var element = v.render();
-                return jsx_runtime_1.jsx(react_1.default.Fragment, { children: _this.renderItemContainer(element) }, key);
+                return (0, jsx_runtime_1.jsx)(react_1.default.Fragment, { children: _this.renderItemContainer(element) }, key);
             }) }, void 0); }));
     };
     Object.defineProperty(InputList.prototype, "hasError", {

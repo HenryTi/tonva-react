@@ -77,13 +77,13 @@ var RadioWidget = /** @class */ (function (_super) {
         if (isRow === true) {
             rowKey = this.context.rowKey;
         }
-        var cn = classnames_1.default(this.className, 'py-0');
-        return jsx_runtime_1.jsx("span", __assign({ className: cn, style: radioStyle }, { children: list.map(function (v, index) {
+        var cn = (0, classnames_1.default)(this.className, 'py-0');
+        return (0, jsx_runtime_1.jsx)("span", __assign({ className: cn, style: radioStyle }, { children: list.map(function (v, index) {
                 var value = v.value, title = v.title;
                 var name = _this.name;
                 if (rowKey !== undefined)
                     name += '-' + rowKey;
-                return jsx_runtime_1.jsxs("label", __assign({ className: "form-radio-inline" }, { children: [jsx_runtime_1.jsx("input", { ref: function (input) { return _this.inputs[index] = input; }, type: "radio", name: name, value: value, defaultChecked: (_this.defaultValue || defaultValue) === value, onChange: _this.onInputChange }, void 0), title || value] }), index);
+                return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "form-radio-inline" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: function (input) { return _this.inputs[index] = input; }, type: "radio", name: name, value: value, defaultChecked: (_this.defaultValue || defaultValue) === value, onChange: _this.onInputChange }, void 0), title || value] }), index);
                 //</span>
             }) }), void 0);
     };

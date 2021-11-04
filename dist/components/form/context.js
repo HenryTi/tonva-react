@@ -94,13 +94,13 @@ var Context = /** @class */ (function () {
         this.widgets = {};
         this.errors = [];
         this.errorWidgets = [];
-        this.renderErrors = mobx_react_1.observer(function () {
+        this.renderErrors = (0, mobx_react_1.observer)(function () {
             var errors = _this.errors;
             if (errors.length === 0)
                 return null;
-            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: errors.map(function (err) { return jsx_runtime_1.jsxs("span", __assign({ className: "text-danger inline-block my-1 ms-3" }, { children: [jsx_runtime_1.jsx("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }), err); }) }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: errors.map(function (err) { return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-danger inline-block my-1 ms-3" }, { children: [(0, jsx_runtime_1.jsx)("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }), err); }) }, void 0);
         });
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             errors: mobx_1.observable,
             errorWidgets: mobx_1.observable,
             hasError: mobx_1.computed,
@@ -253,7 +253,7 @@ var Context = /** @class */ (function () {
     };
     Context.prototype.setError = function (itemName, error) {
         var _this = this;
-        mobx_1.runInAction(function () {
+        (0, mobx_1.runInAction)(function () {
             var widget = _this.widgets[itemName];
             if (widget === undefined)
                 return;
@@ -263,7 +263,7 @@ var Context = /** @class */ (function () {
     };
     Context.prototype.clearContextErrors = function () {
         var _this = this;
-        mobx_1.runInAction(function () {
+        (0, mobx_1.runInAction)(function () {
             for (var i in _this.widgets) {
                 var widget = _this.widgets[i];
                 if (widget === undefined)
@@ -274,7 +274,7 @@ var Context = /** @class */ (function () {
     };
     Context.prototype.clearWidgetsErrors = function () {
         var _this = this;
-        mobx_1.runInAction(function () {
+        (0, mobx_1.runInAction)(function () {
             for (var i in _this.widgets) {
                 var widget = _this.widgets[i];
                 if (widget === undefined)
@@ -326,7 +326,7 @@ var Context = /** @class */ (function () {
     ;
     Context.prototype.clearErrors = function () {
         var _this = this;
-        mobx_1.runInAction(function () {
+        (0, mobx_1.runInAction)(function () {
             _this.errors.splice(0);
             _this.errorWidgets.splice(0);
             _this.clearContextErrors();

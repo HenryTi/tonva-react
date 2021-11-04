@@ -96,7 +96,7 @@ var ImageItemEdit = /** @class */ (function (_super) {
             this.isChanged = (this.resId !== this.value);
         }
         */
-        _this.page = mobx_react_1.observer(function (props) {
+        _this.page = (0, mobx_react_1.observer)(function (props) {
             var resolve = props.resolve;
             var size = _this.uiItem && _this.uiItem.size;
             /*
@@ -111,7 +111,7 @@ var ImageItemEdit = /** @class */ (function (_super) {
                 </div>;
             }
             */
-            return jsx_runtime_1.jsx(resUploader_1.ImageUploader, { label: '更改' + _this.label, id: _this.resId, size: size, onSaved: function (resId) { resolve(resId); return; } }, void 0);
+            return (0, jsx_runtime_1.jsx)(resUploader_1.ImageUploader, { label: '更改' + _this.label, id: _this.resId, size: size, onSaved: function (resId) { resolve(resId); return; } }, void 0);
             /*
             return <Page header={'更改' + this.label} right={right}>
                 <div className="my-3 px-3 py-3 bg-white">
@@ -140,7 +140,7 @@ var ImageItemEdit = /** @class */ (function (_super) {
             </Page>;
             */
         });
-        mobx_1.makeObservable(_this, {
+        (0, mobx_1.makeObservable)(_this, {
             resId: mobx_1.observable
         });
         return _this;

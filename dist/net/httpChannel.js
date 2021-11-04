@@ -424,8 +424,8 @@ var CenterHttpChannel = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         u = this.hostUrl + url;
-                        if (!(this.apiToken === undefined && appBridge_1.isBridged())) return [3 /*break*/, 2];
-                        return [4 /*yield*/, appBridge_1.bridgeCenterApi(u, options.method, options.body)];
+                        if (!(this.apiToken === undefined && (0, appBridge_1.isBridged)())) return [3 /*break*/, 2];
+                        return [4 /*yield*/, (0, appBridge_1.bridgeCenterApi)(u, options.method, options.body)];
                     case 1: return [2 /*return*/, _a.sent()];
                     case 2: return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {

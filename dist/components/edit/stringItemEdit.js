@@ -103,7 +103,7 @@ var StringItemEdit = /** @class */ (function (_super) {
         _this.onFocus = function () {
             _this.error = undefined;
         };
-        _this.page = mobx_react_1.observer(function (props) {
+        _this.page = (0, mobx_react_1.observer)(function (props) {
             var resolve = props.resolve;
             var onSave = function () {
                 _this.verifyValue();
@@ -112,13 +112,13 @@ var StringItemEdit = /** @class */ (function (_super) {
                     resolve(val);
                 }
             };
-            var right = jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0);
+            var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0);
             var onKeyDown = function (evt) {
                 if (evt.keyCode === 13)
                     onSave();
             };
             var _a = _this.inputOptions(), type = _a.type, max = _a.max, min = _a.min, step = _a.step;
-            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: _this.label, right: right }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("input", { type: type, onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, min: min, max: max, step: step }, void 0), _this.uiItem && jsx_runtime_1.jsx("div", __assign({ className: "small muted m-2" }, { children: _this.uiItem.placeholder }), void 0), _this.error && jsx_runtime_1.jsx("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: _this.label, right: right }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsx)("input", { type: type, onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, min: min, max: max, step: step }, void 0), _this.uiItem && (0, jsx_runtime_1.jsx)("div", __assign({ className: "small muted m-2" }, { children: _this.uiItem.placeholder }), void 0), _this.error && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0);
         });
         return _this;
     }

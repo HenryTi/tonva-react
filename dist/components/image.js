@@ -27,7 +27,7 @@ function Image(props) {
             if (src.startsWith(':') === true) {
                 src = nav_1.nav.resUrl + src.substr(1);
             }
-            return jsx_runtime_1.jsx("img", { src: src, className: className, alt: "img", style: style, onError: function (evt) {
+            return (0, jsx_runtime_1.jsx)("img", { src: src, className: className, alt: "img", style: style, onError: function (evt) {
                     if (altImage)
                         evt.currentTarget.src = altImage;
                     else
@@ -39,7 +39,7 @@ function Image(props) {
     else {
         icon = 'file-o';
     }
-    return jsx_runtime_1.jsx("span", __assign({ className: classnames_1.default(className, 'image-none'), style: style }, { children: jsx_runtime_1.jsx("i", { className: 'fa fa-' + icon }, void 0) }), void 0);
+    return (0, jsx_runtime_1.jsx)("span", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: (0, jsx_runtime_1.jsx)("i", { className: 'fa fa-' + icon }, void 0) }), void 0);
 }
 exports.Image = Image;
 //# sourceMappingURL=image.js.map

@@ -1,8 +1,12 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.env = void 0;
@@ -27,7 +31,7 @@ exports.env = (function () {
             for (var _i = 3; _i < arguments.length; _i++) {
                 args[_i - 3] = arguments[_i];
             }
-            return global.setTimeout.apply(global, __spreadArray([callback, ms], args));
+            return global.setTimeout.apply(global, __spreadArray([callback, ms], args, false));
         },
         clearTimeout: function (handle) {
             global.clearTimeout(handle);
@@ -37,7 +41,7 @@ exports.env = (function () {
             for (var _i = 2; _i < arguments.length; _i++) {
                 args[_i - 2] = arguments[_i];
             }
-            return global.setInterval.apply(global, __spreadArray([callback, ms], args));
+            return global.setInterval.apply(global, __spreadArray([callback, ms], args, false));
         },
         clearInterval: function (handle) {
             global.clearInterval(handle);
@@ -72,7 +76,7 @@ function initEnv() {
             unit = Number(sUnit);
         }
         else {
-            unit = _62_1.from62(sUnit);
+            unit = (0, _62_1.from62)(sUnit);
         }
         if (isNaN(unit) === true)
             unit = undefined;

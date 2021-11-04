@@ -97,17 +97,17 @@ var SelectItemEdit = /** @class */ (function (_super) {
             var preValue = _this.value;
             _this.isChanged = (_this.newValue !== preValue);
         };
-        _this.page = mobx_react_1.observer(function (props) {
+        _this.page = (0, mobx_react_1.observer)(function (props) {
             var resolve = props.resolve;
             var list = _this.uiItem.list;
             var content = list ?
                 list.map(function (v, index) {
                     var title = v.title, value = v.value;
-                    return jsx_runtime_1.jsx("div", __assign({ className: "px-3 py-2 cursor-pointer bg-white mb-1", onClick: function () { _this.onChange(value); resolve(_this.newValue); } }, { children: title || value }), index);
+                    return (0, jsx_runtime_1.jsx)("div", __assign({ className: "px-3 py-2 cursor-pointer bg-white mb-1", onClick: function () { _this.onChange(value); resolve(_this.newValue); } }, { children: title || value }), index);
                 })
                 :
-                    jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "no list defined" }, void 0);
-            return jsx_runtime_1.jsx(page_1.Page, __assign({ header: '更改' + _this.label }, { children: jsx_runtime_1.jsx("div", __assign({ className: "my-3" }, { children: content }), void 0) }), void 0);
+                    (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "no list defined" }, void 0);
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "my-3" }, { children: content }), void 0) }), void 0);
         });
         return _this;
     }

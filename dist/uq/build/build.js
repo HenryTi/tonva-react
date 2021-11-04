@@ -68,19 +68,19 @@ function build(appConfig, uqSrcPath) {
                     if (!fs_1.default.existsSync(uqTsSrcPath)) {
                         fs_1.default.mkdirSync(uqTsSrcPath);
                     }
-                    tsIndex = tsIndex_1.buildTsIndex();
-                    tools_1.saveTsFile(buildContext, 'index', tsIndex);
-                    tsCApp = tsCApp_1.buildTsCApp();
-                    tools_1.saveSrcTsFileIfNotExists(buildContext, 'CApp', 'ts', tsCApp);
-                    tsCBase = tsCBase_1.buildTsCBase();
-                    tools_1.saveTsFile(buildContext, 'CBase', tsCBase);
-                    tsVMain = tsVMain_1.buildTsVMain();
-                    tools_1.saveSrcTsFileIfNotExists(buildContext, 'VMain', 'tsx', tsVMain);
-                    tsApp = tsApp_1.buildTsApp();
-                    tools_1.saveSrcTsFileIfNotExists(buildContext, 'App', 'tsx', tsApp);
-                    tools_1.saveTsFile(buildContext, 'uqs', '');
+                    tsIndex = (0, tsIndex_1.buildTsIndex)();
+                    (0, tools_1.saveTsFile)(buildContext, 'index', tsIndex);
+                    tsCApp = (0, tsCApp_1.buildTsCApp)();
+                    (0, tools_1.saveSrcTsFileIfNotExists)(buildContext, 'CApp', 'ts', tsCApp);
+                    tsCBase = (0, tsCBase_1.buildTsCBase)();
+                    (0, tools_1.saveTsFile)(buildContext, 'CBase', tsCBase);
+                    tsVMain = (0, tsVMain_1.buildTsVMain)();
+                    (0, tools_1.saveSrcTsFileIfNotExists)(buildContext, 'VMain', 'tsx', tsVMain);
+                    tsApp = (0, tsApp_1.buildTsApp)();
+                    (0, tools_1.saveSrcTsFileIfNotExists)(buildContext, 'App', 'tsx', tsApp);
+                    (0, tools_1.saveTsFile)(buildContext, 'uqs', '');
                     fs_1.default.unlinkSync(uqTsSrcPath + '/uqs.ts');
-                    return [4 /*yield*/, uqsFolder_1.buildUqsFolder(uqTsSrcPath + '/uqs', appConfig)];
+                    return [4 /*yield*/, (0, uqsFolder_1.buildUqsFolder)(uqTsSrcPath + '/uqs', appConfig)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

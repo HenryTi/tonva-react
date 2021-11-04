@@ -69,9 +69,9 @@ var GuestApi = /** @class */ (function (_super) {
                         ret = _a.sent();
                         switch (typeof ret) {
                             default: return [2 /*return*/];
-                            case 'string': return [2 /*return*/, user_1.decodeGuestToken(ret)];
+                            case 'string': return [2 /*return*/, (0, user_1.decodeGuestToken)(ret)];
                             case 'object':
-                                guest = user_1.decodeGuestToken(ret.token);
+                                guest = (0, user_1.decodeGuestToken)(ret.token);
                                 return [2 /*return*/, guest];
                         }
                         return [2 /*return*/];

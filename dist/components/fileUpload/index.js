@@ -58,7 +58,7 @@ var FileUpload = /** @class */ (function (_super) {
     FileUpload.prototype.onSubmit = function () {
     };
     FileUpload.prototype.render = function () {
-        return jsx_runtime_1.jsxs("form", __assign({ onSubmit: this.onSubmit }, { children: [jsx_runtime_1.jsx("input", { id: "uname", name: "uname" }, void 0), jsx_runtime_1.jsx("input", { id: "age", name: "age" }, void 0), jsx_runtime_1.jsx("input", { id: "sex", name: "sex" }, void 0), jsx_runtime_1.jsx("input", { type: "file", id: "photo", name: "photo" }, void 0), jsx_runtime_1.jsx("button", __assign({ type: "submit" }, { children: "\u63D0\u4EA4" }), void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("form", __assign({ onSubmit: this.onSubmit }, { children: [(0, jsx_runtime_1.jsx)("input", { id: "uname", name: "uname" }, void 0), (0, jsx_runtime_1.jsx)("input", { id: "age", name: "age" }, void 0), (0, jsx_runtime_1.jsx)("input", { id: "sex", name: "sex" }, void 0), (0, jsx_runtime_1.jsx)("input", { type: "file", id: "photo", name: "photo" }, void 0), (0, jsx_runtime_1.jsx)("button", __assign({ type: "submit" }, { children: "\u63D0\u4EA4" }), void 0)] }), void 0);
     };
     return FileUpload;
 }(React.Component));

@@ -170,7 +170,7 @@ var ScrollView = /** @class */ (function (_super) {
     }
     ScrollView.prototype.render = function () {
         var _a = this.props, className = _a.className, style = _a.style;
-        return jsx_runtime_1.jsx("div", __assign({ ref: this.refDiv, className: "tv-page", onScroll: this.onScroll, style: style }, { children: jsx_runtime_1.jsx("article", __assign({ className: className }, { children: this.props.children }), void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ ref: this.refDiv, className: "tv-page", onScroll: this.onScroll, style: style }, { children: (0, jsx_runtime_1.jsx)("article", __assign({ className: className }, { children: this.props.children }), void 0) }), void 0);
     };
     return ScrollView;
 }(ScrollViewBase));
@@ -187,12 +187,12 @@ var WebNavScrollView = /** @class */ (function (_super) {
         if (navRawHeader)
             vHeader = navRawHeader;
         else if (navHeader)
-            vHeader = jsx_runtime_1.jsx("header", { children: jsx_runtime_1.jsx("main", { children: navHeader }, void 0) }, void 0);
+            vHeader = (0, jsx_runtime_1.jsx)("header", { children: (0, jsx_runtime_1.jsx)("main", { children: navHeader }, void 0) }, void 0);
         if (navRawFooter)
             vFooter = navRawFooter;
         else if (navFooter)
-            vFooter = jsx_runtime_1.jsx("footer", { children: jsx_runtime_1.jsx("main", { children: navFooter }, void 0) }, void 0);
-        return jsx_runtime_1.jsxs("div", __assign({ ref: this.refDiv, className: "tv-page-webnav", onScroll: this.onScroll, style: style }, { children: [vHeader, jsx_runtime_1.jsx("article", __assign({ className: className }, { children: this.props.children }), void 0), vFooter] }), void 0);
+            vFooter = (0, jsx_runtime_1.jsx)("footer", { children: (0, jsx_runtime_1.jsx)("main", { children: navFooter }, void 0) }, void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ ref: this.refDiv, className: "tv-page-webnav", onScroll: this.onScroll, style: style }, { children: [vHeader, (0, jsx_runtime_1.jsx)("article", __assign({ className: className }, { children: this.props.children }), void 0), vFooter] }), void 0);
     };
     return WebNavScrollView;
 }(ScrollViewBase));

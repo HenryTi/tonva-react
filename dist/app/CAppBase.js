@@ -78,10 +78,10 @@ var CAppBase = /** @class */ (function (_super) {
         configurable: true
     });
     CAppBase.prototype.internalT = function (str) {
-        return res_1.t(str);
+        return (0, res_1.t)(str);
     };
     CAppBase.prototype.setRes = function (res) {
-        res_1.setGlobalRes(res);
+        (0, res_1.setGlobalRes)(res);
     };
     CAppBase.prototype.afterBuiltUQs = function (uqs) { };
     CAppBase.prototype.initUQs = function () {
@@ -96,7 +96,7 @@ var CAppBase = /** @class */ (function (_super) {
                         if (user === this.uqsUser)
                             return [2 /*return*/];
                         this.uqsUser = user;
-                        net_1.logoutApis();
+                        (0, net_1.logoutApis)();
                         return [4 /*yield*/, uq_1.UQsMan.build(this.appConfig)];
                     case 1:
                         retErrors = _a.sent();

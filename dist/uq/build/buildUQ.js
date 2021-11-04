@@ -112,7 +112,7 @@ function buildArrs(arrFields) {
     var ts = '\n';
     for (var _i = 0, arrFields_1 = arrFields; _i < arrFields_1.length; _i++) {
         var af = arrFields_1[_i];
-        ts += "\t" + tool_1.camelCase(af.name) + ": {";
+        ts += "\t" + (0, tool_1.camelCase)(af.name) + ": {";
         ts += buildFields(af.fields, false, 2);
         ts += '\n\t}[];\n';
     }
@@ -130,11 +130,11 @@ function buildReturns(entity, returns) {
     //let {typeName} = entity;
     //let type = typeMap[typeName] || typeName;
     var sName = entity.sName;
-    sName = tool_1.capitalCase(sName);
+    sName = (0, tool_1.capitalCase)(sName);
     var ts = '';
     for (var _i = 0, returns_1 = returns; _i < returns_1.length; _i++) {
         var ret = returns_1[_i];
-        var retName = tool_1.capitalCase(ret.name);
+        var retName = (0, tool_1.capitalCase)(ret.name);
         ts += "export interface Return" + sName + retName + " {";
         ts += buildFields(ret.fields);
         ts += '\n}\n';
@@ -142,29 +142,29 @@ function buildReturns(entity, returns) {
     ts += "export interface Result" + sName + " {\n";
     for (var _a = 0, returns_2 = returns; _a < returns_2.length; _a++) {
         var ret = returns_2[_a];
-        var retName = tool_1.capitalCase(ret.name);
+        var retName = (0, tool_1.capitalCase)(ret.name);
         ts += "\t" + ret.name + ": Return" + sName + retName + "[];\n";
     }
     ts += '}';
     return ts;
 }
 function buildTuid(tuid) {
-    var ts = "\t" + tools_1.entityName(tuid.sName) + ": UqTuid<Tuid" + tool_1.capitalCase(tuid.sName) + ">;";
+    var ts = "\t" + (0, tools_1.entityName)(tuid.sName) + ": UqTuid<Tuid" + (0, tool_1.capitalCase)(tuid.sName) + ">;";
     return ts;
 }
 function buildTuidInterface(tuid) {
-    var ts = "export interface Tuid" + tool_1.capitalCase(tuid.sName) + " {";
+    var ts = "export interface Tuid" + (0, tool_1.capitalCase)(tuid.sName) + " {";
     ts += "\n\tid?: number;";
     ts += buildFields(tuid.fields);
     ts += '\n}';
     return ts;
 }
 function buildAction(action) {
-    var ts = "\t" + tools_1.entityName(action.sName) + ": UqAction<Param" + tool_1.capitalCase(action.sName) + ", Result" + tool_1.capitalCase(action.sName) + ">;";
+    var ts = "\t" + (0, tools_1.entityName)(action.sName) + ": UqAction<Param" + (0, tool_1.capitalCase)(action.sName) + ", Result" + (0, tool_1.capitalCase)(action.sName) + ">;";
     return ts;
 }
 function buildActionInterface(action) {
-    var ts = "export interface Param" + tool_1.capitalCase(action.sName) + " {";
+    var ts = "export interface Param" + (0, tool_1.capitalCase)(action.sName) + " {";
     ts += buildFields(action.fields);
     ts += buildArrs(action.arrFields);
     ts += '\n}\n';
@@ -176,7 +176,7 @@ function buildEnumInterface(enm) {
     if (!schema)
         return;
     var values = schema.values;
-    var ts = "export enum " + tool_1.capitalCase(enm.sName) + " {";
+    var ts = "export enum " + (0, tool_1.capitalCase)(enm.sName) + " {";
     var first = true;
     for (var i in values) {
         if (first === false) {
@@ -198,11 +198,11 @@ function buildEnumInterface(enm) {
 }
 function buildQuery(query) {
     var sName = query.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqQuery<Param" + tool_1.capitalCase(sName) + ", Result" + tool_1.capitalCase(sName) + ">;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqQuery<Param" + (0, tool_1.capitalCase)(sName) + ", Result" + (0, tool_1.capitalCase)(sName) + ">;";
     return ts;
 }
 function buildQueryInterface(query) {
-    var ts = "export interface Param" + tool_1.capitalCase(query.sName) + " {";
+    var ts = "export interface Param" + (0, tool_1.capitalCase)(query.sName) + " {";
     ts += buildFields(query.fields);
     ts += '\n}\n';
     ts += buildReturns(query, query.returns);
@@ -210,20 +210,20 @@ function buildQueryInterface(query) {
 }
 function buildSheet(sheet) {
     var sName = sheet.sName, verify = sheet.verify;
-    var cName = tool_1.capitalCase(sName);
+    var cName = (0, tool_1.capitalCase)(sName);
     var v = verify ? "Verify" + cName : 'any';
-    var ts = "\t" + tools_1.entityName(sName) + ": UqSheet<Sheet" + cName + ", " + v + ">;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqSheet<Sheet" + cName + ", " + v + ">;";
     return ts;
 }
 function buildSheetInterface(sheet) {
     var sName = sheet.sName, fields = sheet.fields, arrFields = sheet.arrFields, verify = sheet.verify;
-    var ts = "export interface Sheet" + tool_1.capitalCase(sName) + " {";
+    var ts = "export interface Sheet" + (0, tool_1.capitalCase)(sName) + " {";
     ts += buildFields(fields);
     ts += buildArrs(arrFields);
     ts += '}';
     if (verify) {
         var returns = verify.returns;
-        ts += "\nexport interface Verify" + tool_1.capitalCase(sName) + " {";
+        ts += "\nexport interface Verify" + (0, tool_1.capitalCase)(sName) + " {";
         for (var _i = 0, returns_3 = returns; _i < returns_3.length; _i++) {
             var item = returns_3[_i];
             var arrName = item.name, fields_2 = item.fields;
@@ -237,12 +237,12 @@ function buildSheetInterface(sheet) {
 }
 function buildBook(book) {
     var sName = book.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqBook<Param" + tool_1.capitalCase(sName) + ", Result" + tool_1.capitalCase(sName) + ">;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqBook<Param" + (0, tool_1.capitalCase)(sName) + ", Result" + (0, tool_1.capitalCase)(sName) + ">;";
     return ts;
 }
 function buildBookInterface(book) {
     var sName = book.sName, fields = book.fields, returns = book.returns;
-    var ts = "export interface Param" + tool_1.capitalCase(sName) + " {";
+    var ts = "export interface Param" + (0, tool_1.capitalCase)(sName) + " {";
     ts += buildFields(fields);
     ts += '\n}\n';
     ts += buildReturns(book, returns);
@@ -250,7 +250,7 @@ function buildBookInterface(book) {
 }
 function buildMap(map) {
     var sName = map.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqMap;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqMap;";
     return ts;
 }
 function buildMapInterface(map) {
@@ -266,12 +266,12 @@ function buildMapInterface(map) {
 }
 function buildHistory(history) {
     var sName = history.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqHistory<Param" + tool_1.capitalCase(sName) + ", Result" + tool_1.capitalCase(sName) + ">;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqHistory<Param" + (0, tool_1.capitalCase)(sName) + ", Result" + (0, tool_1.capitalCase)(sName) + ">;";
     return ts;
 }
 function buildHistoryInterface(history) {
     var sName = history.sName, fields = history.fields, returns = history.returns;
-    var ts = "export interface Param" + tool_1.capitalCase(sName) + " {";
+    var ts = "export interface Param" + (0, tool_1.capitalCase)(sName) + " {";
     ts += buildFields(fields);
     ts += '\n}\n';
     ts += buildReturns(history, returns);
@@ -279,7 +279,7 @@ function buildHistoryInterface(history) {
 }
 function buildPending(pending) {
     var sName = pending.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqPending<any, any>;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqPending<any, any>;";
     return ts;
 }
 function buildPendingInterface(pending) {
@@ -295,22 +295,22 @@ function buildPendingInterface(pending) {
 }
 function buildTag(tag) {
     var sName = tag.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqTag;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqTag;";
     return ts;
 }
 function buildID(id) {
     var sName = id.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqID<any>;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqID<any>;";
     return ts;
 }
 function buildIDX(idx) {
     var sName = idx.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqIDX<any>;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqIDX<any>;";
     return ts;
 }
 function buildIX(ix) {
     var sName = ix.sName;
-    var ts = "\t" + tools_1.entityName(sName) + ": UqIX<any>;";
+    var ts = "\t" + (0, tools_1.entityName)(sName) + ": UqIX<any>;";
     return ts;
 }
 function buildTagInterface(tag) {
@@ -333,7 +333,7 @@ function buildIDInterface(idEntity) {
         var f = fields_3[_i];
         _loop_1(f);
     }
-    var ts = "export interface " + tool_1.capitalCase(sName) + " {";
+    var ts = "export interface " + (0, tool_1.capitalCase)(sName) + " {";
     ts += "\n\tid?: number;";
     ts += buildFields(keys, true);
     ts += buildFields(others, true);
@@ -343,7 +343,7 @@ function buildIDInterface(idEntity) {
 function buildIDXInterface(idx) {
     var sName = idx.sName, fields = idx.fields, schema = idx.schema;
     var exFields = schema.exFields;
-    var ts = "export interface " + tool_1.capitalCase(sName) + " {";
+    var ts = "export interface " + (0, tool_1.capitalCase)(sName) + " {";
     var indent = 1;
     for (var _i = 0, fields_4 = fields; _i < fields_4.length; _i++) {
         var field = fields_4[_i];
@@ -381,7 +381,7 @@ function buildIDXInterface(idx) {
 function buildIDXActParamInterface(idx) {
     var sName = idx.sName, fields = idx.fields, schema = idx.schema;
     var exFields = schema.exFields;
-    var ts = "export interface ActParam" + tool_1.capitalCase(sName) + " {";
+    var ts = "export interface ActParam" + (0, tool_1.capitalCase)(sName) + " {";
     var indent = 1;
     for (var _i = 0, fields_5 = fields; _i < fields_5.length; _i++) {
         var field = fields_5[_i];
@@ -418,7 +418,7 @@ function buildIDXActParamInterface(idx) {
 }
 function buildIXInterface(ix) {
     var sName = ix.sName, fields = ix.fields;
-    var ts = "export interface " + tool_1.capitalCase(sName) + " {";
+    var ts = "export interface " + (0, tool_1.capitalCase)(sName) + " {";
     ts += buildFields(fields);
     ts += '\n}';
     return ts;
@@ -427,15 +427,15 @@ function buildActsInterface(uq) {
     var ts = "\nexport interface ParamActs {";
     uq.idArr.forEach(function (v) {
         var sName = v.sName;
-        ts += "\n\t" + tool_1.camelCase(sName) + "?: " + tool_1.capitalCase(sName) + "[];";
+        ts += "\n\t" + (0, tool_1.camelCase)(sName) + "?: " + (0, tool_1.capitalCase)(sName) + "[];";
     });
     uq.idxArr.forEach(function (v) {
         var sName = v.sName;
-        ts += "\n\t" + tool_1.camelCase(sName) + "?: ActParam" + tool_1.capitalCase(sName) + "[];";
+        ts += "\n\t" + (0, tool_1.camelCase)(sName) + "?: ActParam" + (0, tool_1.capitalCase)(sName) + "[];";
     });
     uq.ixArr.forEach(function (v) {
         var sName = v.sName;
-        ts += "\n\t" + tool_1.camelCase(sName) + "?: " + tool_1.capitalCase(sName) + "[];";
+        ts += "\n\t" + (0, tool_1.camelCase)(sName) + "?: " + (0, tool_1.capitalCase)(sName) + "[];";
     });
     ts += '\n}\n';
     return ts;

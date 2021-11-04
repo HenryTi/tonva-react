@@ -91,7 +91,7 @@ var TextWidget = /** @class */ (function (_super) {
             });
         }); };
         _this.onBlur = function (evt) {
-            mobx_1.runInAction(function () {
+            (0, mobx_1.runInAction)(function () {
                 _this.onInputChange(evt);
                 _this.checkRules();
                 _this.context.checkContextRules();
@@ -99,7 +99,7 @@ var TextWidget = /** @class */ (function (_super) {
             });
         };
         _this.onFocus = function (evt) {
-            mobx_1.runInAction(function () {
+            (0, mobx_1.runInAction)(function () {
                 _this.clearError();
                 _this.context.removeErrorWidget(_this);
                 _this.context.clearErrors();
@@ -111,7 +111,7 @@ var TextWidget = /** @class */ (function (_super) {
                 _this.input.select();
             }, 10);
         };
-        mobx_1.makeObservable(_this, {
+        (0, mobx_1.makeObservable)(_this, {
             hasFocus: mobx_1.observable,
         });
         return _this;
@@ -171,7 +171,7 @@ var TextWidget = /** @class */ (function (_super) {
         else {
             cn['required-item'] = this.itemSchema.required === true;
         }
-        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("input", { ref: function (input) { return _this.input = input; }, className: classnames_1.default(this.className, cn), type: this.inputType, defaultValue: this.value, onChange: function (evt) { return _this.onChange(evt); }, placeholder: typeof this.placeholder === 'string' ? this.placeholder : undefined, readOnly: this.readOnly, disabled: this.disabled, onKeyDown: this.onKeyDown, onFocus: this.onFocus, onBlur: this.onBlur, maxLength: this.itemSchema.maxLength }, void 0), this.renderErrors()] }, void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("input", { ref: function (input) { return _this.input = input; }, className: (0, classnames_1.default)(this.className, cn), type: this.inputType, defaultValue: this.value, onChange: function (evt) { return _this.onChange(evt); }, placeholder: typeof this.placeholder === 'string' ? this.placeholder : undefined, readOnly: this.readOnly, disabled: this.disabled, onKeyDown: this.onKeyDown, onFocus: this.onFocus, onBlur: this.onBlur, maxLength: this.itemSchema.maxLength }, void 0), this.renderErrors()] }, void 0);
     };
     return TextWidget;
 }(widget_1.Widget));

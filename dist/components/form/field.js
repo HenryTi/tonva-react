@@ -59,11 +59,11 @@ var FormField = /** @class */ (function (_super) {
         var _a = this.props, name = _a.name, children = _a.children;
         var context = this.context;
         if (context === undefined)
-            return jsx_runtime_1.jsx("span", __assign({ className: "text-danger" }, { children: "!only in Form!" }), void 0);
+            return (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "!only in Form!" }), void 0);
         var itemSchema = context.getItemSchema(name);
-        var content = widgets_1.factory(context, itemSchema, children, this.props);
+        var content = (0, widgets_1.factory)(context, itemSchema, children, this.props);
         if (content === undefined) {
-            return jsx_runtime_1.jsxs("span", __assign({ className: "text-danger" }, { children: ["!!", name, " is not defined!!"] }), void 0);
+            return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-danger" }, { children: ["!!", name, " is not defined!!"] }), void 0);
         }
         return content;
     };

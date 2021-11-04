@@ -98,7 +98,7 @@ var ButtonWidget = /** @class */ (function (_super) {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        mobx_1.runInAction(function () {
+                        (0, mobx_1.runInAction)(function () {
                             _this.clearError();
                             _this.clearContextError();
                         });
@@ -119,20 +119,20 @@ var ButtonWidget = /** @class */ (function (_super) {
                         ret = _b.sent();
                         if (ret === undefined)
                             return [2 /*return*/];
-                        mobx_1.runInAction(function () {
+                        (0, mobx_1.runInAction)(function () {
                             _this.context.setError(name, ret);
                         });
                         return [2 /*return*/];
                 }
             });
         }); };
-        _this.observerRender = mobx_react_1.observer(function () {
+        _this.observerRender = (0, mobx_react_1.observer)(function () {
             var _a = _this.itemSchema, name = _a.name, type = _a.type;
             var Templet, cn, caption;
             if (_this.ui !== undefined) {
                 var widgetType = _this.ui.widget;
                 if (widgetType !== 'button')
-                    return unknown_1.Unknown(type, widgetType, ['button']);
+                    return (0, unknown_1.Unknown)(type, widgetType, ['button']);
                 Templet = _this.ui.Templet;
                 cn = _this.ui.className;
                 caption = _this.ui.label;
@@ -149,10 +149,10 @@ var ButtonWidget = /** @class */ (function (_super) {
                 content = Templet;
             else
                 content = caption;
-            var button = jsx_runtime_1.jsx("button", __assign({ className: cn, type: "button", disabled: disabled, onClick: _this.onClick }, { children: content || name }), void 0);
+            var button = (0, jsx_runtime_1.jsx)("button", __assign({ className: cn, type: "button", disabled: disabled, onClick: _this.onClick }, { children: content || name }), void 0);
             if (context.inNode === true)
-                return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [button, _this.renderErrors()] }, void 0);
-            return jsx_runtime_1.jsxs("div", __assign({ className: form.ButtonClass }, { children: [jsx_runtime_1.jsx("div", { children: _this.renderErrors() }, void 0), button] }), void 0);
+                return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [button, _this.renderErrors()] }, void 0);
+            return (0, jsx_runtime_1.jsxs)("div", __assign({ className: form.ButtonClass }, { children: [(0, jsx_runtime_1.jsx)("div", { children: _this.renderErrors() }, void 0), button] }), void 0);
         });
         return _this;
     }

@@ -105,7 +105,7 @@ var VPage = /** @class */ (function (_super) {
         if (!header)
             header = false;
         var logout = this.logout();
-        return jsx_runtime_1.jsx(components_1.Page, __assign({ header: header, right: this.right(), footer: this.footer(), onScroll: function (e) { return _this.onPageScroll(e); }, onScrollTop: function (scroller) { return _this.onPageScrollTop(scroller); }, onScrollBottom: function (scroller) { return _this.onPageScrollBottom(scroller); }, back: this.back, headerClassName: this.headerClassName, className: this.className, afterBack: function () { return _this.afterBack(); }, tabsProps: this.tabsProps, logout: logout, webNav: this.controller.pageWebNav }, { children: this.content() }), void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: header, right: this.right(), footer: this.footer(), onScroll: function (e) { return _this.onPageScroll(e); }, onScrollTop: function (scroller) { return _this.onPageScrollTop(scroller); }, onScrollBottom: function (scroller) { return _this.onPageScrollBottom(scroller); }, back: this.back, headerClassName: this.headerClassName, className: this.className, afterBack: function () { return _this.afterBack(); }, tabsProps: this.tabsProps, logout: logout, webNav: this.controller.pageWebNav }, { children: this.content() }), void 0);
     };
     VPage.prototype.onPageScroll = function (e) { };
     VPage.prototype.onPageScrollTop = function (scroller) {

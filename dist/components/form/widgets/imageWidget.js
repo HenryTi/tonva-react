@@ -118,7 +118,7 @@ var ImageWidget = /** @class */ (function (_super) {
                 }
             });
         }); };
-        _this.observerRender = mobx_react_1.observer(function () {
+        _this.observerRender = (0, mobx_react_1.observer)(function () {
             var cn = [
                 'bg-white p-1 d-flex justify-content-center',
             ];
@@ -127,9 +127,9 @@ var ImageWidget = /** @class */ (function (_super) {
                 cn.push('cursor-pointer');
                 onClick = _this.onClick;
             }
-            return jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(cn), onClick: onClick }, { children: jsx_runtime_1.jsx(image_1.Image, { src: _this.imageSrc, className: "w-4c h-4c" }, void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(cn), onClick: onClick }, { children: (0, jsx_runtime_1.jsx)(image_1.Image, { src: _this.imageSrc, className: "w-4c h-4c" }, void 0) }), void 0);
         });
-        mobx_1.makeObservable(_this, {
+        (0, mobx_1.makeObservable)(_this, {
             imageSrc: mobx_1.observable,
         });
         return _this;

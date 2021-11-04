@@ -81,7 +81,7 @@ var PageItems = /** @class */ (function () {
         this.pageSize = 30;
         this.appendPosition = 'tail';
         this.changing = false;
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             loading: mobx_1.observable,
             beforeLoad: mobx_1.observable,
             loaded: mobx_1.observable,
@@ -153,7 +153,7 @@ var PageItems = /** @class */ (function () {
     };
     PageItems.prototype.reset = function () {
         var _this = this;
-        mobx_1.runInAction(function () {
+        (0, mobx_1.runInAction)(function () {
             _this.isFirst = true;
             _this.beforeLoad = true;
             _this.loaded = false;
@@ -329,7 +329,7 @@ var PageItems = /** @class */ (function () {
                             return [2 /*return*/, true];
                         if (this.changing === true)
                             return [2 /*return*/, true];
-                        mobx_1.runInAction(function () {
+                        (0, mobx_1.runInAction)(function () {
                             _this.loading = true;
                             _this.changing = true;
                         });
@@ -358,7 +358,7 @@ var PageItems = /** @class */ (function () {
                         }
                         this.setLoaded(ret);
                         this.onLoaded();
-                        mobx_1.runInAction(function () {
+                        (0, mobx_1.runInAction)(function () {
                             _this.loaded = true;
                             _this.allLoaded = allLoaded;
                             _this.isFirst = false;

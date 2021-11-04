@@ -118,7 +118,7 @@ var ResUploader = /** @class */ (function (_super) {
     ResUploader.prototype.render = function () {
         var _this = this;
         var _a = this.props, className = _a.className, multiple = _a.multiple, onFilesChange = _a.onFilesChange;
-        return jsx_runtime_1.jsx("input", { className: className, ref: function (t) { return _this.fileInput = t; }, onChange: onFilesChange, type: 'file', name: 'file', multiple: multiple }, void 0);
+        return (0, jsx_runtime_1.jsx)("input", { className: className, ref: function (t) { return _this.fileInput = t; }, onChange: onFilesChange, type: 'file', name: 'file', multiple: multiple }, void 0);
     };
     return ResUploader;
 }(React.Component));

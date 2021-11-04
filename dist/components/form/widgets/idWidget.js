@@ -70,7 +70,7 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
 var widget_1 = require("./widget");
 var mobx_1 = require("mobx");
-var none = jsx_runtime_1.jsx("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
+var none = (0, jsx_runtime_1.jsx)("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
 var IdWidget = /** @class */ (function (_super) {
     __extends(IdWidget, _super);
     function IdWidget() {
@@ -89,7 +89,7 @@ var IdWidget = /** @class */ (function (_super) {
                         return [4 /*yield*/, pickId(this.context, this.name, this.value)];
                     case 1:
                         id = _a.sent();
-                        mobx_1.runInAction(function () {
+                        (0, mobx_1.runInAction)(function () {
                             _this.setDataValue(id);
                             _this.clearError();
                             _this.clearContextError();
@@ -147,7 +147,7 @@ var IdWidget = /** @class */ (function (_super) {
                         break;
                 }
             }
-            content = jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: c }, void 0);
+            content = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: c }, void 0);
         }
         else if (typeof Templet === 'function') {
             content = Templet(this.value);
@@ -155,7 +155,7 @@ var IdWidget = /** @class */ (function (_super) {
         else {
             content = Templet;
         }
-        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(cn), onClick: this.onClick }, { children: content }), void 0), this.renderErrors()] }, void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(cn), onClick: this.onClick }, { children: content }), void 0), this.renderErrors()] }, void 0);
     };
     return IdWidget;
 }(widget_1.Widget));

@@ -69,13 +69,13 @@ var LMR = /** @class */ (function (_super) {
         var _a = this.props, className = _a.className, style = _a.style, left = _a.left, children = _a.children, right = _a.right, onClick = _a.onClick;
         var l, r;
         if (left !== undefined)
-            l = jsx_runtime_1.jsx("header", { children: left }, void 0);
+            l = (0, jsx_runtime_1.jsx)("header", { children: left }, void 0);
         if (right !== undefined)
-            r = jsx_runtime_1.jsx("footer", { children: right }, void 0);
+            r = (0, jsx_runtime_1.jsx)("footer", { children: right }, void 0);
         var cursor;
         if (onClick !== undefined)
             cursor = 'cursor-pointer';
-        return jsx_runtime_1.jsxs("div", __assign({ className: classnames_1.default('va-lmr', className, cursor), style: style, onClick: onClick }, { children: [l, jsx_runtime_1.jsx("div", { children: children }, void 0), r] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: (0, classnames_1.default)('va-lmr', className, cursor), style: style, onClick: onClick }, { children: [l, (0, jsx_runtime_1.jsx)("div", { children: children }, void 0), r] }), void 0);
     };
     LMR = __decorate([
         mobx_react_1.observer

@@ -67,11 +67,11 @@ var Badge = /** @class */ (function (_super) {
     }
     Badge.prototype.render = function () {
         var _a = this.props, className = _a.className, badge = _a.badge, size = _a.size, color = _a.color, badgeAlign = _a.badgeAlign, badgeVertical = _a.badgeVertical, children = _a.children;
-        var cn = classnames_1.default(className, 'va-badge', size && 'va-badge-' + size, 'va-badge-' + (color || 'secondary'), badgeAlign && 'va-badg-' + badgeAlign, badgeVertical && 'va-badg-' + badgeVertical);
+        var cn = (0, classnames_1.default)(className, 'va-badge', size && 'va-badge-' + size, 'va-badge-' + (color || 'secondary'), badgeAlign && 'va-badg-' + badgeAlign, badgeVertical && 'va-badg-' + badgeVertical);
         var b;
         if (badge)
-            b = jsx_runtime_1.jsx("b", { children: badge }, void 0);
-        return jsx_runtime_1.jsxs("div", __assign({ className: cn }, { children: [children, b] }), void 0);
+            b = (0, jsx_runtime_1.jsx)("b", { children: badge }, void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: cn }, { children: [children, b] }), void 0);
     };
     Badge = __decorate([
         mobx_react_1.observer

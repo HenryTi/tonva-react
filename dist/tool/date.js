@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dateFromMinuteId = exports.minute2020_01_01 = exports.toLocaleDateString = void 0;
+exports.dateFromHourId = exports.dateFromMinuteId = exports.minute2020_01_01 = exports.toLocaleDateString = void 0;
 var tool_1 = require("../tool");
 var options = {
     weekday: 'long',
@@ -21,4 +21,10 @@ function dateFromMinuteId(id, timeZone) {
     return new Date((m + exports.minute2020_01_01) * 60000);
 }
 exports.dateFromMinuteId = dateFromMinuteId;
+function dateFromHourId(id, timeZone) {
+    var envTimezone = tool_1.env.timeZone;
+    var m = id + (-envTimezone + (timeZone !== null && timeZone !== void 0 ? timeZone : envTimezone));
+    return new Date((m + exports.minute2020_01_01 / 24) * 60 * 60000);
+}
+exports.dateFromHourId = dateFromHourId;
 //# sourceMappingURL=date.js.map

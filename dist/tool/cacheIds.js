@@ -43,7 +43,7 @@ var CacheIds = /** @class */ (function () {
         if (maxCount === void 0) { maxCount = 100; }
         this.arr = [];
         this.dict = new Map();
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             dict: mobx_1.observable,
         });
         this.maxCount = maxCount;

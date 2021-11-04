@@ -92,7 +92,7 @@ var Page = /** @class */ (function (_super) {
         else {
             inWebNav = false;
         }
-        return pageHeader_1.renderPageHeader(pageHeaderProps, inWebNav);
+        return (0, pageHeader_1.renderPageHeader)(pageHeaderProps, inWebNav);
         /*
         let pageHeader = header !== false && <PageHeader
             back={back}
@@ -109,10 +109,10 @@ var Page = /** @class */ (function (_super) {
         var footer = this.props.footer;
         if (!footer)
             return;
-        var elFooter = jsx_runtime_1.jsx("footer", { children: footer }, void 0);
+        var elFooter = (0, jsx_runtime_1.jsx)("footer", { children: footer }, void 0);
         if (webNav)
             return elFooter;
-        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [jsx_runtime_1.jsx("section", __assign({ className: "tv-page-footer" }, { children: elFooter }), void 0), elFooter] }, void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-footer" }, { children: elFooter }), void 0), elFooter] }, void 0);
     };
     Page.prototype.componentDidCatch = function (error, errorInfo) {
         // You can also log the error to an error reporting service
@@ -131,12 +131,12 @@ var Page = /** @class */ (function (_super) {
         else {
             pageWebNav = webNav;
         }
-        var content = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [this.renderHeader(pageWebNav), jsx_runtime_1.jsx("main", { children: children }, void 0), this.renderFooter(pageWebNav)] }, void 0);
+        var content = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [this.renderHeader(pageWebNav), (0, jsx_runtime_1.jsx)("main", { children: children }, void 0), this.renderFooter(pageWebNav)] }, void 0);
         if (pageWebNav) {
-            return jsx_runtime_1.jsx(scrollView_1.WebNavScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className, webNav: pageWebNav }, { children: content }), void 0);
+            return (0, jsx_runtime_1.jsx)(scrollView_1.WebNavScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className, webNav: pageWebNav }, { children: content }), void 0);
         }
         else {
-            return jsx_runtime_1.jsx(scrollView_1.ScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className }, { children: content }), void 0);
+            return (0, jsx_runtime_1.jsx)(scrollView_1.ScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className }, { children: content }), void 0);
         }
     };
     Page = __decorate([

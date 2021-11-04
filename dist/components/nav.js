@@ -259,7 +259,7 @@ var NavView = /** @class */ (function (_super) {
                         //nav.navigateToLogin();
                         return [2 /*return*/];
                     case 5:
-                        exports.nav.push(jsx_runtime_1.jsx(fetchErrorView_1.SystemNotifyPage, { message: "\u5355\u636E\u6B63\u5728\u5904\u7406\u4E2D\u3002\u8BF7\u91CD\u65B0\u64CD\u4F5C\uFF01" }, void 0));
+                        exports.nav.push((0, jsx_runtime_1.jsx)(fetchErrorView_1.SystemNotifyPage, { message: "\u5355\u636E\u6B63\u5728\u5904\u7406\u4E2D\u3002\u8BF7\u91CD\u65B0\u64CD\u4F5C\uFF01" }, void 0));
                         return [2 /*return*/];
                     case 6:
                         this.setState({
@@ -273,7 +273,7 @@ var NavView = /** @class */ (function (_super) {
     NavView.prototype.showUpgradeUq = function (uq, version) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.show(jsx_runtime_1.jsx(page_1.Page, __assign({ header: false }, { children: jsx_runtime_1.jsxs("div", { children: ["UQ\u5347\u7EA7\u4E86\uFF0C\u8BF7\u70B9\u51FB\u6309\u94AE\u5347\u7EA7 ", jsx_runtime_1.jsx("br", {}, void 0), jsx_runtime_1.jsxs("small", __assign({ className: "text-muted" }, { children: [uq, " ver-", version] }), void 0), jsx_runtime_1.jsx("button", __assign({ className: "btn btn-primary", onClick: this.upgradeUq }, { children: "\u5347\u7EA7" }), void 0)] }, void 0) }), void 0));
+                this.show((0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: false }, { children: (0, jsx_runtime_1.jsxs)("div", { children: ["UQ\u5347\u7EA7\u4E86\uFF0C\u8BF7\u70B9\u51FB\u6309\u94AE\u5347\u7EA7 ", (0, jsx_runtime_1.jsx)("br", {}, void 0), (0, jsx_runtime_1.jsxs)("small", __assign({ className: "text-muted" }, { children: [uq, " ver-", version] }), void 0), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-primary", onClick: this.upgradeUq }, { children: "\u5347\u7EA7" }), void 0)] }, void 0) }), void 0));
                 return [2 /*return*/];
             });
         });
@@ -433,28 +433,28 @@ var NavView = /** @class */ (function (_super) {
     NavView.prototype.render = function () {
         var _a = this.state, notSupportedBrowser = _a.notSupportedBrowser, wait = _a.wait, fetchError = _a.fetchError;
         if (notSupportedBrowser === true) {
-            return jsx_runtime_1.jsxs("div", __assign({ className: "p-3 text-danger" }, { children: [tool_1.env.browser, " not supported !"] }), void 0);
+            return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "p-3 text-danger" }, { children: [tool_1.env.browser, " not supported !"] }), void 0);
         }
         var stack = this.state.stack;
         var top = stack.length - 1;
         var elWait = null, elError = null;
         switch (wait) {
             case 1:
-                elWait = jsx_runtime_1.jsx("div", { className: "va-wait va-wait1" }, void 0);
+                elWait = (0, jsx_runtime_1.jsx)("div", { className: "va-wait va-wait1" }, void 0);
                 break;
             case 2:
-                elWait = jsx_runtime_1.jsx("div", __assign({ className: "va-wait va-wait2" }, { children: jsx_runtime_1.jsx(loading_1.Loading, {}, void 0) }), void 0);
+                elWait = (0, jsx_runtime_1.jsx)("div", __assign({ className: "va-wait va-wait2" }, { children: (0, jsx_runtime_1.jsx)(loading_1.Loading, {}, void 0) }), void 0);
                 break;
         }
         if (fetchError) {
-            elError = jsx_runtime_1.jsx(fetchErrorView_1.default, __assign({ clearError: this.clearError }, fetchError), void 0);
+            elError = (0, jsx_runtime_1.jsx)(fetchErrorView_1.default, __assign({ clearError: this.clearError }, fetchError), void 0);
             ++top;
         }
         var test = exports.nav.testing === true &&
-            jsx_runtime_1.jsx("span", __assign({ className: "cursor-pointer position-fixed", style: { top: 0, left: '0.2rem', zIndex: 90001 } }, { children: jsx_runtime_1.jsx(simple_1.FA, { className: "text-warning", name: "info-circle" }, void 0) }), void 0);
-        return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [stack.map(function (item, index) {
+            (0, jsx_runtime_1.jsx)("span", __assign({ className: "cursor-pointer position-fixed", style: { top: 0, left: '0.2rem', zIndex: 90001 } }, { children: (0, jsx_runtime_1.jsx)(simple_1.FA, { className: "text-warning", name: "info-circle" }, void 0) }), void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [stack.map(function (item, index) {
                     var key = item.key, view = item.view;
-                    return jsx_runtime_1.jsx("div", __assign({ style: index < top ? { visibility: 'hidden', position: 'absolute' } : undefined }, { children: view }), key);
+                    return (0, jsx_runtime_1.jsx)("div", __assign({ style: index < top ? { visibility: 'hidden', position: 'absolute' } : undefined }, { children: view }), key);
                 }), elWait, elError, test] }, void 0);
     };
     NavView.prototype.refresh = function () {
@@ -541,22 +541,22 @@ var Nav = /** @class */ (function () {
             '/forget': this.navForget,
         };
         this.isWebNav = false;
-        this.backIcon = jsx_runtime_1.jsx("i", { className: "fa fa-angle-left" }, void 0);
-        this.closeIcon = jsx_runtime_1.jsx("i", { className: "fa fa-close" }, void 0);
+        this.backIcon = (0, jsx_runtime_1.jsx)("i", { className: "fa fa-angle-left" }, void 0);
+        this.closeIcon = (0, jsx_runtime_1.jsx)("i", { className: "fa fa-close" }, void 0);
         this.showPrivacyPage = function () {
             var privacy = _this.getPrivacyContent();
             if (privacy) {
                 _this.privacyPage(privacy);
             }
             else {
-                exports.nav.push(jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u9690\u79C1\u653F\u7B56" }, { children: jsx_runtime_1.jsx("div", __assign({ className: "p-3" }, { children: "AppConfig \u4E2D\u6CA1\u6709\u5B9A\u4E49 privacy\u3002\u53EF\u4EE5\u5B9A\u4E49\u4E3A\u5B57\u7B26\u4E32\uFF0C\u6216\u8005url\u3002markdown\u683C\u5F0F" }), void 0) }), void 0));
+                exports.nav.push((0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u9690\u79C1\u653F\u7B56" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-3" }, { children: "AppConfig \u4E2D\u6CA1\u6709\u5B9A\u4E49 privacy\u3002\u53EF\u4EE5\u5B9A\u4E49\u4E3A\u5B57\u7B26\u4E32\uFF0C\u6216\u8005url\u3002markdown\u683C\u5F0F" }), void 0) }), void 0));
             }
         };
         this.privacyPage = function (htmlString) { return __awaiter(_this, void 0, void 0, function () {
             var content;
             return __generator(this, function (_a) {
                 content = { __html: htmlString };
-                exports.nav.push(jsx_runtime_1.jsx(page_1.Page, __assign({ header: "\u9690\u79C1\u653F\u7B56" }, { children: jsx_runtime_1.jsx("div", { className: "p-3", dangerouslySetInnerHTML: content }, void 0) }), void 0));
+                exports.nav.push((0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u9690\u79C1\u653F\u7B56" }, { children: (0, jsx_runtime_1.jsx)("div", { className: "p-3", dangerouslySetInnerHTML: content }, void 0) }), void 0));
                 return [2 /*return*/];
             });
         }); };
@@ -599,7 +599,7 @@ var Nav = /** @class */ (function () {
             });
         }); };
         this.resetAll = function () {
-            _this.push(jsx_runtime_1.jsx(reloadPage_1.ConfirmReloadPage, { confirm: function (ok) {
+            _this.push((0, jsx_runtime_1.jsx)(reloadPage_1.ConfirmReloadPage, { confirm: function (ok) {
                     if (ok === true) {
                         _this.showReloadPage('彻底升级');
                         localStorage.clear();
@@ -615,7 +615,7 @@ var Nav = /** @class */ (function () {
                     return;
                 } }, void 0));
         };
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             user: mobx_1.observable,
         });
         var lang = res_1.resOptions.lang, district = res_1.resOptions.district;
@@ -810,9 +810,9 @@ var Nav = /** @class */ (function () {
                         _a.sent();
                         url = net_1.host.url, ws = net_1.host.ws, resHost = net_1.host.resHost;
                         this.centerHost = url;
-                        this.resUrl = net_1.resUrlFromHost(resHost);
+                        this.resUrl = (0, net_1.resUrlFromHost)(resHost);
                         this.wsHost = ws;
-                        net_1.setCenterUrl(url);
+                        (0, net_1.setCenterUrl)(url);
                         guest = this.local.guest.get();
                         if (!(guest === undefined)) return [3 /*break*/, 3];
                         return [4 /*yield*/, net_1.guestApi.guest()];
@@ -962,8 +962,8 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.setIsWebNav = function () {
         this.isWebNav = true;
-        this.backIcon = jsx_runtime_1.jsx("i", { className: "fa fa-arrow-left" }, void 0);
-        this.closeIcon = jsx_runtime_1.jsx("i", { className: "fa fa-close" }, void 0);
+        this.backIcon = (0, jsx_runtime_1.jsx)("i", { className: "fa fa-arrow-left" }, void 0);
+        this.closeIcon = (0, jsx_runtime_1.jsx)("i", { className: "fa fa-close" }, void 0);
     };
     Nav.prototype.navigate = function (url, absolute) {
         if (!this.navigo) {
@@ -991,7 +991,7 @@ var Nav = /** @class */ (function () {
                     case 0:
                         onLogined = this.navView.props.onLogined;
                         if (onLogined === undefined) {
-                            exports.nav.push(jsx_runtime_1.jsx("div", { children: "NavView has no prop onLogined" }, void 0));
+                            exports.nav.push((0, jsx_runtime_1.jsx)("div", { children: "NavView has no prop onLogined" }, void 0));
                             return [2 /*return*/];
                         }
                         exports.nav.clear();
@@ -1039,7 +1039,7 @@ var Nav = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        net_1.logoutApis();
+                        (0, net_1.logoutApis)();
                         this.user = user;
                         this.saveLocalUser();
                         netToken_1.netToken.set(user.id, user.token);
@@ -1097,7 +1097,7 @@ var Nav = /** @class */ (function () {
     Nav.prototype.privacyEntry = function () {
         if (!this.getPrivacyContent())
             return;
-        return jsx_runtime_1.jsx("div", __assign({ className: "text-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-sm btn-link", onClick: this.showPrivacyPage }, { children: jsx_runtime_1.jsx("small", __assign({ className: "text-muted" }, { children: "\u9690\u79C1\u653F\u7B56" }), void 0) }), void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-link", onClick: this.showPrivacyPage }, { children: (0, jsx_runtime_1.jsx)("small", __assign({ className: "text-muted" }, { children: "\u9690\u79C1\u653F\u7B56" }), void 0) }), void 0) }), void 0);
     };
     Nav.prototype.getPrivacyContent = function () {
         if (!this.navSettings)
@@ -1154,7 +1154,7 @@ var Nav = /** @class */ (function () {
     Nav.prototype.showRegister = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                login_1.showRegister();
+                (0, login_1.showRegister)();
                 return [2 /*return*/];
             });
         });
@@ -1162,7 +1162,7 @@ var Nav = /** @class */ (function () {
     Nav.prototype.showForget = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                login_1.showForget();
+                (0, login_1.showForget)();
                 return [2 /*return*/];
             });
         });
@@ -1176,9 +1176,9 @@ var Nav = /** @class */ (function () {
                     case 0:
                         this.local.logoutClear();
                         this.user = undefined; //{} as User;
-                        net_1.logoutApis();
+                        (0, net_1.logoutApis)();
                         guest = this.local.guest.get();
-                        net_1.setCenterToken(0, guest && guest.token);
+                        (0, net_1.setCenterToken)(0, guest && guest.token);
                         this.clear();
                         if (!(callback === undefined)) return [3 /*break*/, 2];
                         return [4 /*yield*/, exports.nav.start()];
@@ -1361,7 +1361,7 @@ var Nav = /** @class */ (function () {
     };
     Nav.prototype.showReloadPage = function (msg) {
         var seconds = -1;
-        this.push(jsx_runtime_1.jsx(reloadPage_1.ReloadPage, { message: msg, seconds: seconds }, void 0));
+        this.push((0, jsx_runtime_1.jsx)(reloadPage_1.ReloadPage, { message: msg, seconds: seconds }, void 0));
         /*
         if (seconds > 0) {
             env.setTimeout(undefined, this.reload, seconds*1000);

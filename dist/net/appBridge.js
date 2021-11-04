@@ -137,7 +137,7 @@ window.addEventListener('message', function (evt) {
 function subFrameStarted(evt) {
     var message = evt.data;
     var subWin = evt.source;
-    wsChannel_1.setSubAppWindow(subWin);
+    (0, wsChannel_1.setSubAppWindow)(subWin);
     hideFrameBack(message.hash);
     var msg = lodash_1.default.clone(components_1.nav.user);
     msg.type = 'init-sub-win';
@@ -156,7 +156,7 @@ function initSubWin(message) {
                 case 0:
                     console.log('initSubWin: set nav.user', message);
                     user = components_1.nav.user = message;
-                    uqApi_1.setCenterToken(user.id, user.token);
+                    (0, uqApi_1.setCenterToken)(user.id, user.token);
                     return [4 /*yield*/, components_1.nav.showAppView()];
                 case 1:
                     _a.sent();
@@ -286,7 +286,7 @@ function bridgeCenterApi(url, method, body) {
                     var callId, bca;
                     return __generator(this, function (_a) {
                         for (;;) {
-                            callId = uid_1.uid();
+                            callId = (0, uid_1.uid)();
                             bca = brideCenterApis[callId];
                             if (bca === undefined) {
                                 brideCenterApis[callId] = {

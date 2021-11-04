@@ -118,7 +118,7 @@ var EditMeInfo = /** @class */ (function (_super) {
                 }
             });
         }); };
-        mobx_1.makeObservable(_this, {
+        (0, mobx_1.makeObservable)(_this, {
             data: mobx_1.observable,
         });
         var _a = components_1.nav.user, nick = _a.nick, icon = _a.icon;
@@ -129,7 +129,7 @@ var EditMeInfo = /** @class */ (function (_super) {
         return _this;
     }
     EditMeInfo.prototype.render = function () {
-        return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u4E2A\u4EBA\u4FE1\u606F" }, { children: jsx_runtime_1.jsx(components_1.Edit, { schema: this.schema, uiSchema: this.uiSchema, data: this.data, onItemChanged: this.onItemChanged }, void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "\u4E2A\u4EBA\u4FE1\u606F" }, { children: (0, jsx_runtime_1.jsx)(components_1.Edit, { schema: this.schema, uiSchema: this.uiSchema, data: this.data, onItemChanged: this.onItemChanged }, void 0) }), void 0);
     };
     return EditMeInfo;
 }(React.Component));

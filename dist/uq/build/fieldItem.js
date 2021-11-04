@@ -35,7 +35,7 @@ function buildFieldItem(field, isKey) {
         type: fieldItemType,
         isKey: isKey,
         widget: widget,
-        label: tool_1.capitalCase(name),
+        label: (0, tool_1.capitalCase)(name),
         $FieldItemType: $FieldItemType,
     };
 }

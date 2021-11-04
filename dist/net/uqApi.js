@@ -69,7 +69,7 @@ function logoutApis() {
     channelUIs = {};
     channelNoUIs = {};
     logoutUnitxApis();
-    appBridge_1.logoutUqTokens();
+    (0, appBridge_1.logoutUqTokens)();
 }
 exports.logoutApis = logoutApis;
 var UqApi = /** @class */ (function (_super) {
@@ -88,7 +88,7 @@ var UqApi = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, appBridge_1.buildAppUq(this.uq, this.uqOwner, this.uqName)];
+                    case 0: return [4 /*yield*/, (0, appBridge_1.buildAppUq)(this.uq, this.uqOwner, this.uqName)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -125,14 +125,14 @@ var UqApi = /** @class */ (function (_super) {
                                     arr.push({ resolve: resolve, reject: reject });
                                     if (arr.length !== 1)
                                         return [2 /*return*/];
-                                    uqToken = appBridge_1.getUqToken(this.uq);
+                                    uqToken = (0, appBridge_1.getUqToken)(this.uq);
                                     if (!!uqToken) return [3 /*break*/, 2];
                                     //debugger;
                                     return [4 /*yield*/, this.init()];
                                 case 1:
                                     //debugger;
                                     _a.sent();
-                                    uqToken = appBridge_1.getUqToken(this.uq);
+                                    uqToken = (0, appBridge_1.getUqToken)(this.uq);
                                     _a.label = 2;
                                 case 2:
                                     url = uqToken.url, token = uqToken.token;
@@ -542,10 +542,10 @@ var UserApi = /** @class */ (function (_super) {
                         ret = _a.sent();
                         switch (typeof ret) {
                             default: return [2 /*return*/];
-                            case 'string': return [2 /*return*/, user_1.decodeUserToken(ret)];
+                            case 'string': return [2 /*return*/, (0, user_1.decodeUserToken)(ret)];
                             case 'object':
                                 token = ret.token;
-                                user = user_1.decodeUserToken(token);
+                                user = (0, user_1.decodeUserToken)(token);
                                 nick = ret.nick, icon = ret.icon;
                                 if (nick)
                                     user.nick = nick;

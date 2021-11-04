@@ -40,7 +40,7 @@ var RangeWidget = /** @class */ (function (_super) {
     RangeWidget.prototype.render = function () {
         var _this = this;
         var _a = this.ui, min = _a.min, max = _a.max, step = _a.step;
-        return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: jsx_runtime_1.jsx("input", { ref: function (input) { return _this.input = input; }, className: classnames_1.default(this.className, 'form-control', 'w-min-6c'), type: this.inputType, defaultValue: this.defaultValue, onChange: this.onInputChange, max: max, min: min, step: step }, void 0) }, void 0);
+        return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsx)("input", { ref: function (input) { return _this.input = input; }, className: (0, classnames_1.default)(this.className, 'form-control', 'w-min-6c'), type: this.inputType, defaultValue: this.defaultValue, onChange: this.onInputChange, max: max, min: min, step: step }, void 0) }, void 0);
     };
     return RangeWidget;
 }(widget_1.Widget));

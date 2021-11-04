@@ -23,7 +23,7 @@ var mobx_1 = require("mobx");
 var net_1 = require("../net");
 var UserCache = /** @class */ (function () {
     function UserCache(loader) {
-        this.map = mobx_1.observable(new Map());
+        this.map = (0, mobx_1.observable)(new Map());
         if (loader === undefined)
             loader = function (userId) { return net_1.userApi.user(userId); };
         this.loader = loader;
@@ -79,32 +79,32 @@ var UserCache = /** @class */ (function () {
 }());
 exports.UserCache = UserCache;
 var userCache = new UserCache(undefined);
-exports.UserIcon = mobx_react_1.observer(function (props) {
+exports.UserIcon = (0, mobx_react_1.observer)(function (props) {
     var className = props.className, style = props.style, id = props.id, altImage = props.altImage, noneImage = props.noneImage;
     var user = userCache.getValue(id);
     switch (typeof user) {
         case 'undefined':
         case 'number':
-            return jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(className, 'image-none'), style: style }, { children: noneImage || jsx_runtime_1.jsx("i", { className: "fa fa-file-o" }, void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: noneImage || (0, jsx_runtime_1.jsx)("i", { className: "fa fa-file-o" }, void 0) }), void 0);
     }
     var icon = user.icon;
     if (!icon) {
-        return jsx_runtime_1.jsx("div", __assign({ className: classnames_1.default(className, 'image-none'), style: style }, { children: jsx_runtime_1.jsx("i", { className: "fa fa-file-o" }, void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: (0, jsx_runtime_1.jsx)("i", { className: "fa fa-file-o" }, void 0) }), void 0);
     }
     if (icon.startsWith(':') === true) {
         icon = nav_1.nav.resUrl + icon.substr(1);
     }
-    return jsx_runtime_1.jsx("img", { src: icon, className: className, alt: "img", style: style, onError: function (evt) {
+    return (0, jsx_runtime_1.jsx)("img", { src: icon, className: className, alt: "img", style: style, onError: function (evt) {
             if (altImage)
                 evt.currentTarget.src = altImage;
             else
                 evt.currentTarget.src = 'https://tv.jkchemical.com/imgs/0001.png';
         } }, void 0);
 });
-exports.UserView = mobx_react_1.observer(function (props) {
+exports.UserView = (0, mobx_react_1.observer)(function (props) {
     var idProp = props.id, user = props.user, render = props.render, onLoaded = props.onLoaded;
     if (user === null)
-        return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "null" }, void 0);
+        return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "null" }, void 0);
     switch (typeof user) {
         case 'undefined':
             user = userCache.getValue(idProp);
@@ -131,7 +131,7 @@ exports.UserView = mobx_react_1.observer(function (props) {
     switch (typeof user) {
         case 'undefined':
         case 'number':
-            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: user }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: user }, void 0);
     }
     return render(user);
 });

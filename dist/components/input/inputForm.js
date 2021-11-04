@@ -22,7 +22,7 @@ var InputForm = /** @class */ (function () {
         this.inputLists = null;
         this.values = values;
         this.widgetViews = {};
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             hasError: mobx_1.computed,
             widgetViews: mobx_1.observable.shallow,
         });
@@ -80,15 +80,15 @@ var InputForm = /** @class */ (function () {
     };
     InputForm.prototype.renderInputBoolean = function (name, widgetProps) {
         var _this = this;
-        return jsx_runtime_1.jsx(inputs_1.InputCheckBox, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
+        return (0, jsx_runtime_1.jsx)(inputs_1.InputCheckBox, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
     };
     InputForm.prototype.renderInputInteger = function (name, widgetProps) {
         var _this = this;
-        return jsx_runtime_1.jsx(inputs_1.InputInteger, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
+        return (0, jsx_runtime_1.jsx)(inputs_1.InputInteger, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
     };
     InputForm.prototype.renderInputNumber = function (name, widgetProps) {
         var _this = this;
-        return jsx_runtime_1.jsx(inputs_1.InputNumber, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
+        return (0, jsx_runtime_1.jsx)(inputs_1.InputNumber, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
     };
     InputForm.prototype.getValues = function () {
         var data = __assign({}, this.values);

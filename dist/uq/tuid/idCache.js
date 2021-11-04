@@ -50,10 +50,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -68,7 +72,7 @@ var IdCache = /** @class */ (function () {
         this.queue = []; // 每次使用，都排到队头
         this.cache = new Map(); // 已经缓冲的
         this.waitingIds = []; // 等待loading的
-        mobx_1.makeObservable(this, {
+        (0, mobx_1.makeObservable)(this, {
             cache: mobx_1.observable.shallow,
             cacheSet: mobx_1.action,
         });
@@ -218,7 +222,7 @@ var IdCache = /** @class */ (function () {
                     case 0:
                         if (this.waitingIds.length === 0)
                             return [2 /*return*/];
-                        loadingIds = __spreadArray([], this.waitingIds);
+                        loadingIds = __spreadArray([], this.waitingIds, true);
                         this.waitingIds = [];
                         return [4 /*yield*/, this.loadTuidIdsOrLocal(loadingIds)];
                     case 1: return [2 /*return*/, _a.sent()];

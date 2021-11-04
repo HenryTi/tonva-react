@@ -109,9 +109,9 @@ var VUnsupportedUnit = /** @class */ (function (_super) {
             var user = components_1.nav.user;
             var userName = user ? user.name : '[未登录]';
             //let {appOwner, appName} = UQsMan.value;
-            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "APP\u65E0\u6CD5\u8FD0\u884C", logout: true }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3 text-danger container" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "mb-3 row" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "\u767B\u5F55\u7528\u6237" }), void 0), jsx_runtime_1.jsx("div", __assign({ className: "col-sm text-body" }, { children: userName }), void 0)] }), void 0), jsx_runtime_1.jsxs("div", __assign({ className: "mb-3 row" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "\u9884\u8BBE\u5C0F\u53F7" }), void 0), jsx_runtime_1.jsx("div", __assign({ className: "col-sm text-body" }, { children: predefinedUnit || jsx_runtime_1.jsx("small", __assign({ className: "" }, { children: "[\u65E0\u9884\u8BBE\u5C0F\u53F7]" }), void 0) }), void 0)] }), void 0), uqsLoadErrors && uqsLoadErrors.map(function (v) {
-                            return jsx_runtime_1.jsxs("div", __assign({ className: "mb-3 row" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "App" }), void 0), jsx_runtime_1.jsx("div", __assign({ className: "col-sm text-body" }, { children: v }), void 0)] }), void 0);
-                        }), jsx_runtime_1.jsxs("div", __assign({ className: "mb-3 row" }, { children: [jsx_runtime_1.jsxs("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: ["\u5C0F\u53F7", predefinedUnit] }), void 0), jsx_runtime_1.jsxs("div", __assign({ className: "col-sm text-body" }, { children: ["\u9884\u8BBE\u5C0F\u53F7\u5B9A\u4E49\u5728 public/unit.json \u6587\u4EF6\u4E2D\u3002 \u5B9A\u4E49\u4E86\u8FD9\u4E2A\u6587\u4EF6\u7684\u7A0B\u5E8F\uFF0C\u53EA\u80FD\u7531url\u76F4\u63A5\u542F\u52A8\u3002 \u7528\u6237\u7B2C\u4E00\u6B21\u8BBF\u95EEapp\u4E4B\u540E\uFF0C\u4F1A\u7F13\u5B58\u5728localStorage\u91CC\u3002", jsx_runtime_1.jsx("br", {}, void 0), "\u5982\u679C\u8981\u5220\u53BB\u7F13\u5B58\u7684\u9884\u5B9A\u4E49Unit\uFF0Clogout\u7136\u540E\u518Dlogin\u3002"] }), void 0)] }), void 0)] }), void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "APP\u65E0\u6CD5\u8FD0\u884C", logout: true }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3 text-danger container" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 row" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "\u767B\u5F55\u7528\u6237" }), void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "col-sm text-body" }, { children: userName }), void 0)] }), void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 row" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "\u9884\u8BBE\u5C0F\u53F7" }), void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "col-sm text-body" }, { children: predefinedUnit || (0, jsx_runtime_1.jsx)("small", __assign({ className: "" }, { children: "[\u65E0\u9884\u8BBE\u5C0F\u53F7]" }), void 0) }), void 0)] }), void 0), uqsLoadErrors && uqsLoadErrors.map(function (v) {
+                            return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 row" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: "App" }), void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "col-sm text-body" }, { children: v }), void 0)] }), void 0);
+                        }), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 row" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "col-sm-3 font-weight-bold" }, { children: ["\u5C0F\u53F7", predefinedUnit] }), void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "col-sm text-body" }, { children: ["\u9884\u8BBE\u5C0F\u53F7\u5B9A\u4E49\u5728 public/unit.json \u6587\u4EF6\u4E2D\u3002 \u5B9A\u4E49\u4E86\u8FD9\u4E2A\u6587\u4EF6\u7684\u7A0B\u5E8F\uFF0C\u53EA\u80FD\u7531url\u76F4\u63A5\u542F\u52A8\u3002 \u7528\u6237\u7B2C\u4E00\u6B21\u8BBF\u95EEapp\u4E4B\u540E\uFF0C\u4F1A\u7F13\u5B58\u5728localStorage\u91CC\u3002", (0, jsx_runtime_1.jsx)("br", {}, void 0), "\u5982\u679C\u8981\u5220\u53BB\u7F13\u5B58\u7684\u9884\u5B9A\u4E49Unit\uFF0Clogout\u7136\u540E\u518Dlogin\u3002"] }), void 0)] }), void 0)] }), void 0) }), void 0);
         };
         return _this;
         /*
@@ -150,7 +150,7 @@ var VUnitSelect = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.renderRow = function (item, index) {
             var id = item.id, nick = item.nick, name = item.name;
-            return jsx_runtime_1.jsx(components_1.LMR, __assign({ className: "px-3 py-2", right: 'id: ' + id }, { children: jsx_runtime_1.jsx("div", { children: nick || name }, void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(components_1.LMR, __assign({ className: "px-3 py-2", right: 'id: ' + id }, { children: (0, jsx_runtime_1.jsx)("div", { children: nick || name }, void 0) }), void 0);
         };
         _this.onRowClick = function (appUnit) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -168,7 +168,7 @@ var VUnitSelect = /** @class */ (function (_super) {
             });
         }); };
         _this.page = function () {
-            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "\u9009\u62E9\u5C0F\u53F7", logout: true }, { children: jsx_runtime_1.jsx("div", { children: "this.controller.appUnits appUnits removed" }, void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "\u9009\u62E9\u5C0F\u53F7", logout: true }, { children: (0, jsx_runtime_1.jsx)("div", { children: "this.controller.appUnits appUnits removed" }, void 0) }), void 0);
             // <List items={this.controller.appUnits} item={{render: this.renderRow, onClick: this.onRowClick}}/>
         };
         return _this;
@@ -189,7 +189,7 @@ var VErrorsPage = /** @class */ (function (_super) {
     function VErrorsPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.page = function (errors) {
-            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "ERROR" }, { children: jsx_runtime_1.jsxs("div", __assign({ className: "m-3" }, { children: [jsx_runtime_1.jsx("div", __assign({ className: "p-3 d-flex justify-content-center align-items-center" }, { children: jsx_runtime_1.jsx("button", __assign({ className: "btn btn-danger", onClick: components_1.nav.resetAll }, { children: "\u91CD\u542F\u7F51\u9875" }), void 0) }), void 0), jsx_runtime_1.jsx("div", { children: "Load Uqs \u53D1\u751F\u9519\u8BEF\uFF1A" }, void 0), errors.errors.map(function (r, i) { return jsx_runtime_1.jsx("div", { children: r }, i); })] }), void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "ERROR" }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "p-3 d-flex justify-content-center align-items-center" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-danger", onClick: components_1.nav.resetAll }, { children: "\u91CD\u542F\u7F51\u9875" }), void 0) }), void 0), (0, jsx_runtime_1.jsx)("div", { children: "Load Uqs \u53D1\u751F\u9519\u8BEF\uFF1A" }, void 0), errors.errors.map(function (r, i) { return (0, jsx_runtime_1.jsx)("div", { children: r }, i); })] }), void 0) }), void 0);
         };
         return _this;
     }
@@ -210,7 +210,7 @@ var VStartError = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.page = function (_a) {
             var error = _a.error;
-            return jsx_runtime_1.jsx(components_1.Page, __assign({ header: "App start error!" }, { children: jsx_runtime_1.jsx("pre", { children: typeof error === 'string' ? error : error.message }, void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "App start error!" }, { children: (0, jsx_runtime_1.jsx)("pre", { children: typeof error === 'string' ? error : error.message }, void 0) }), void 0);
         };
         return _this;
     }

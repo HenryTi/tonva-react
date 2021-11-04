@@ -513,7 +513,7 @@ var UqMan = /** @class */ (function () {
             });
         }); };
         this.IDRender = function (id, render) {
-            return react_1.default.createElement(mobx_react_1.observer(function () {
+            return react_1.default.createElement((0, mobx_react_1.observer)(function () {
                 var ret = _this.idCache.getValue(id);
                 if (ret === undefined) {
                     return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ['id=' + id] });
@@ -991,7 +991,7 @@ var UqMan = /** @class */ (function () {
             return;
         var uqKey = this.uqName.split(/[-._]/).join('').toLowerCase();
         var _a = this.config, dev = _a.dev, alias = _a.alias;
-        uqKey = tool_1.capitalCase(dev.alias || dev.name) + tool_1.capitalCase(alias !== null && alias !== void 0 ? alias : uqKey);
+        uqKey = (0, tool_1.capitalCase)(dev.alias || dev.name) + (0, tool_1.capitalCase)(alias !== null && alias !== void 0 ? alias : uqKey);
         return uqKey;
     };
     UqMan.prototype.hasEntity = function (name) {

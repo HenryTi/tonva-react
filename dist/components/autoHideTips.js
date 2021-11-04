@@ -9,7 +9,7 @@ var react_1 = __importDefault(require("react"));
 var mobx_react_1 = require("mobx-react");
 function autoHideTips(tips, templet, timeout) {
     var timer;
-    return react_1.default.createElement(mobx_react_1.observer(function () {
+    return react_1.default.createElement((0, mobx_react_1.observer)(function () {
         if (timer) {
             clearTimeout(timer);
             timer = undefined;
@@ -25,9 +25,9 @@ function autoHideTips(tips, templet, timeout) {
             }, timeout);
         }
         switch (typeof templet) {
-            case 'undefined': return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: t }, void 0);
+            case 'undefined': return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: t }, void 0);
             case 'function': return templet(t);
-            case 'string': return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: templet }, void 0);
+            case 'string': return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: templet }, void 0);
             default: return templet;
         }
     }));

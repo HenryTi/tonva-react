@@ -51,7 +51,7 @@ exports.tv = exports.ReactBoxId = exports.uqStringify = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var mobx_react_1 = require("mobx-react");
 var TuidContent = function (tuidName, values, x) {
-    return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [tuidName, ": ", uqStringify(values)] }, void 0);
+    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [tuidName, ": ", uqStringify(values)] }, void 0);
 };
 function uqStringify(values) {
     var s = '{';
@@ -117,9 +117,9 @@ var ReactBoxId = /** @class */ (function () {
         }
         switch (typeof val) {
             case 'undefined':
-                return jsx_runtime_1.jsxs("span", __assign({ className: "text-black-50" }, { children: [boxName, " undefined"] }), void 0);
+                return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-black-50" }, { children: [boxName, " undefined"] }), void 0);
             case 'number':
-                return jsx_runtime_1.jsxs("span", __assign({ className: "text-light" }, { children: [boxName, " ", this.id] }), void 0);
+                return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-light" }, { children: [boxName, " ", this.id] }), void 0);
         }
         if (ui === undefined) {
             ui = this.ui;
@@ -132,7 +132,7 @@ var ReactBoxId = /** @class */ (function () {
                 var ret = ui(val /*, this.tuidUR.res*/);
                 if (ret !== undefined)
                     return ret;
-                return jsx_runtime_1.jsxs("span", __assign({ className: "text-danger" }, { children: [boxName, " ", this.id] }), void 0);
+                return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-danger" }, { children: [boxName, " ", this.id] }), void 0);
             }
         }
         return TuidContent(boxName, val);
@@ -164,10 +164,10 @@ function boxIdContent(bi, ui, x) {
     var boxId = bi;
     switch (typeof bi) {
         case 'undefined':
-            logContent = jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "boxId undefined" }, void 0);
+            logContent = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "boxId undefined" }, void 0);
             break;
         case 'number':
-            logContent = jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: ["id:", bi] }, void 0);
+            logContent = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: ["id:", bi] }, void 0);
             break;
         default:
             if (typeof boxId.render !== 'function') {
@@ -181,44 +181,44 @@ function boxIdContent(bi, ui, x) {
             break;
     }
     if (logContent !== undefined) {
-        return jsx_runtime_1.jsx("del", __assign({ className: "text-danger" }, { children: logContent }), void 0);
+        return (0, jsx_runtime_1.jsx)("del", __assign({ className: "text-danger" }, { children: logContent }), void 0);
     }
     return boxId.render(ui, x);
 }
-var Tv = mobx_react_1.observer(function (_a) {
+var Tv = (0, mobx_react_1.observer)(function (_a) {
     var tuidValue = _a.tuidValue, ui = _a.ui, x = _a.x, nullUI = _a.nullUI;
     if (tuidValue === undefined) {
         if (nullUI === undefined)
-            return jsx_runtime_1.jsx("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
+            return (0, jsx_runtime_1.jsx)("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
         return nullUI();
     }
     if (tuidValue === null) {
         if (nullUI === undefined)
-            return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "[null]" }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "[null]" }, void 0);
         return nullUI();
     }
     var ttv = typeof tuidValue;
     switch (ttv) {
         default:
             if (ui === undefined)
-                return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: [ttv, "-", tuidValue] }, void 0);
+                return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [ttv, "-", tuidValue] }, void 0);
             else {
                 var ret = ui(tuidValue, x);
                 if (ret !== undefined)
                     return ret;
-                return jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: tuidValue }, void 0);
+                return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: tuidValue }, void 0);
             }
         case 'object':
             var divObj = boxIdContent(tuidValue, ui, x);
             if (divObj !== undefined)
                 return divObj;
-            return nullUI === undefined ? jsx_runtime_1.jsx(jsx_runtime_1.Fragment, { children: "id null" }, void 0) : nullUI();
+            return nullUI === undefined ? (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "id null" }, void 0) : nullUI();
         case 'number':
-            return jsx_runtime_1.jsxs(jsx_runtime_1.Fragment, { children: ["id...", tuidValue] }, void 0);
+            return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: ["id...", tuidValue] }, void 0);
     }
 });
 var tv = function (tuidValue, ui, x, nullUI) {
-    return jsx_runtime_1.jsx(Tv, { tuidValue: tuidValue, ui: ui, x: x, nullUI: nullUI }, void 0);
+    return (0, jsx_runtime_1.jsx)(Tv, { tuidValue: tuidValue, ui: ui, x: x, nullUI: nullUI }, void 0);
 };
 exports.tv = tv;
 //# sourceMappingURL=reactBoxId.js.map

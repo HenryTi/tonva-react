@@ -28,7 +28,7 @@ var Rule = /** @class */ (function () {
     return Rule;
 }());
 exports.Rule = Rule;
-var defaultInputRes = res_1.resLang(inputRes_1.inputRes);
+var defaultInputRes = (0, res_1.resLang)(inputRes_1.inputRes);
 var RuleCustom = /** @class */ (function (_super) {
     __extends(RuleCustom, _super);
     function RuleCustom(func) {
