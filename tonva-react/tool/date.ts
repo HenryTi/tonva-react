@@ -22,5 +22,5 @@ export function dateFromMinuteId(id: number, timeZone?: number): Date {
 export function dateFromHourId(id: number, timeZone?: number): Date {
 	let envTimezone = env.timeZone;
 	let m = id + (- envTimezone + (timeZone??envTimezone));
-	return new Date((m + minute2020_01_01/(24*60)) * 60 * 60000);
+	return new Date((m + minute2020_01_01/60) * 60 * 60000);
 }

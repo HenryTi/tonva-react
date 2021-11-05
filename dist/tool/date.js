@@ -24,7 +24,7 @@ exports.dateFromMinuteId = dateFromMinuteId;
 function dateFromHourId(id, timeZone) {
     var envTimezone = tool_1.env.timeZone;
     var m = id + (-envTimezone + (timeZone !== null && timeZone !== void 0 ? timeZone : envTimezone));
-    return new Date((m + exports.minute2020_01_01 / (24 * 60)) * 60 * 60000);
+    return new Date((m + exports.minute2020_01_01 / 60) * 60 * 60000);
 }
 exports.dateFromHourId = dateFromHourId;
 //# sourceMappingURL=date.js.map
