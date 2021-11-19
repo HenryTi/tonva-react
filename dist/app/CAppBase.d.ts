@@ -3,6 +3,7 @@ import { RouteFunc, Hooks, Navigo, NamedRoute } from "../components";
 import { Controller } from '../vm';
 import { TVs } from "../uq";
 import { User } from "../tool";
+import { TryCode } from "tonva-core";
 export interface IConstructor<T> {
     new (...args: any[]): T;
 }
@@ -43,6 +44,7 @@ export declare abstract class CAppBase<U> extends Controller {
     protected _uqs: U;
     timezone: number;
     unitTimezone: number;
+    tryCode: TryCode;
     constructor(config?: AppConfig);
     get uqs(): U;
     internalT(str: string): any;

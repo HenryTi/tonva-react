@@ -5,6 +5,7 @@ import { UQsMan, TVs } from "../uq";
 import { centerApi, logoutApis } from "../net";
 import { VErrorsPage, VStartError } from "./vMain";
 import { User } from "../tool";
+import { TryCode } from "tonva-core";
 
 export interface IConstructor<T> {
     new (...args: any[]): T;
@@ -61,6 +62,7 @@ export abstract class CAppBase<U> extends Controller {
     protected _uqs: U;
 	timezone: number;
 	unitTimezone: number;
+	tryCode: TryCode;
 
     constructor(config?: AppConfig) {
 		super();
@@ -71,6 +73,8 @@ export abstract class CAppBase<U> extends Controller {
 				throw new Error('app or uqs must be defined in AppConfig');
 			}
 		}
+		this.tryCode = new TryCode();
+		this.tryCode.hello();
     }
 
     get uqs(): U {return this._uqs;}

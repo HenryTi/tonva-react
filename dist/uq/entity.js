@@ -529,6 +529,7 @@ var Entity = /** @class */ (function () {
             case 'date':
                 var parts = v.split('-');
                 return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+            case 'enum':
             case 'tinyint':
             case 'smallint':
             case 'int':

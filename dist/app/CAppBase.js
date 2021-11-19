@@ -58,6 +58,7 @@ var vm_1 = require("../vm");
 var uq_1 = require("../uq");
 var net_1 = require("../net");
 var vMain_1 = require("./vMain");
+var tonva_core_1 = require("tonva-core");
 var CAppBase = /** @class */ (function (_super) {
     __extends(CAppBase, _super);
     function CAppBase(config) {
@@ -70,6 +71,8 @@ var CAppBase = /** @class */ (function (_super) {
                 throw new Error('app or uqs must be defined in AppConfig');
             }
         }
+        _this.tryCode = new tonva_core_1.TryCode();
+        _this.tryCode.hello();
         return _this;
     }
     Object.defineProperty(CAppBase.prototype, "uqs", {
