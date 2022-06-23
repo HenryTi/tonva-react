@@ -41,21 +41,21 @@ var res_1 = require("../../res");
 //type YMD = (year:number, month:number, date:number) => string;
 //type MD = (month:number, date:number) => string;
 var timeRes = {
-    md: function (month, date) { return month + "-" + date; },
-    ymd: function (year, month, date) { return year + "-" + month + "-" + date; },
+    md: function (month, date) { return "".concat(month, "-").concat(date); },
+    ymd: function (year, month, date) { return "".concat(year, "-").concat(month, "-").concat(date); },
     yesterday: 'Yday',
     today: 'Today',
     tomorrow: 'Tmw',
     $zh: {
-        md: function (month, date) { return month + "\u6708" + date + "\u65E5"; },
-        ymd: function (year, month, date) { return year + "\u5E74" + month + "\u6708" + date + "\u65E5"; },
+        md: function (month, date) { return "".concat(month, "\u6708").concat(date, "\u65E5"); },
+        ymd: function (year, month, date) { return "".concat(year, "\u5E74").concat(month, "\u6708").concat(date, "\u65E5"); },
         yesterday: '昨天',
         today: '今天',
         tomorrow: '明天',
     },
     $en: {
-        md: function (month, date) { return month + "-" + date; },
-        ymd: function (year, month, date) { return year + "-" + month + "-" + date; },
+        md: function (month, date) { return "".concat(month, "-").concat(date); },
+        ymd: function (year, month, date) { return "".concat(year, "-").concat(month, "-").concat(date); },
         yesterday: 'Yday',
         today: 'Today',
         tomorrow: 'Tmw',

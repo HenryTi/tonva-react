@@ -123,8 +123,8 @@ var EntityCaller = /** @class */ (function (_super) {
             var _a = this.entity, ver = _a.ver, uq = _a.uq;
             var uqVersion = uq.uqVersion;
             return {
-                uq: "" + uqVersion,
-                en: "" + ver,
+                uq: "".concat(uqVersion),
+                en: "".concat(ver),
             };
         },
         enumerable: false,
@@ -182,7 +182,7 @@ var QueryQueryCaller = /** @class */ (function (_super) {
     });
     ;
     Object.defineProperty(QueryQueryCaller.prototype, "path", {
-        get: function () { return "query/" + this.entity.name; },
+        get: function () { return "query/".concat(this.entity.name); },
         enumerable: false,
         configurable: true
     });
@@ -213,7 +213,7 @@ var QueryPageCaller = /** @class */ (function (_super) {
     ;
     Object.defineProperty(QueryPageCaller.prototype, "path", {
         //results: {[name:string]:any[]};
-        get: function () { return "query-page/" + this.entity.name; },
+        get: function () { return "query-page/".concat(this.entity.name); },
         enumerable: false,
         configurable: true
     });

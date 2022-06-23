@@ -147,7 +147,7 @@ function factory(context, itemSchema, children, fieldProps) {
                     var widgetFactory = widgetFactories[widgetType];
                     if (!widgetFactory) {
                         debugger;
-                        throw new Error("unknown widget " + widgetType);
+                        throw new Error("unknown widget ".concat(widgetType));
                     }
                     typeWidget = widgetFactory.widget;
                 }

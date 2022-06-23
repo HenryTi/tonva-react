@@ -81,7 +81,7 @@ function urlFromHost(host) {
             return host;
         return host + '/';
     }
-    return "http://" + host + "/";
+    return "http://".concat(host, "/");
 }
 function centerUrlFromHost(host) {
     return urlFromHost(host);
@@ -94,7 +94,7 @@ function centerWsFromHost(host) {
             host = host.substr(0, host.length - 1);
         return 'wss://' + host + '/tv/';
     }
-    return "ws://" + host + "/tv/";
+    return "ws://".concat(host, "/tv/");
 }
 function resUrlFromHost(host) {
     if (!host)
@@ -137,7 +137,7 @@ var Host = /** @class */ (function () {
             });
         });
     };
-    Host.prototype.debugHostUrl = function (host) { return "http://" + host + "/hello"; };
+    Host.prototype.debugHostUrl = function (host) { return "http://".concat(host, "/hello"); };
     Host.prototype.tryLocal = function () {
         return __awaiter(this, void 0, void 0, function () {
             var promises, hostArr, _loop_1, i, _i, hostArr_1, host_1, fetchUrl, results, len, i, local, host_2, j, hostValue;
@@ -213,7 +213,7 @@ var Host = /** @class */ (function () {
         var value = host.value, local = host.local;
         if (local === false)
             return url;
-        return "http://" + value + "/";
+        return "http://".concat(value, "/");
     };
     Host.prototype.getUrlOrTest = function (db, url, urlTest) {
         if (!urlTest) {
@@ -239,7 +239,7 @@ var Host = /** @class */ (function () {
         if (url.endsWith('/') === false) {
             url += '/';
         }
-        return url + "uq/" + testProd + "/" + db + "/";
+        return "".concat(url, "uq/").concat(testProd, "/").concat(db, "/");
     };
     Host.prototype.localCheck = function (urlDebug) {
         return __awaiter(this, void 0, void 0, function () {

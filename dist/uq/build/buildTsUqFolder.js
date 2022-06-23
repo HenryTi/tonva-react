@@ -25,7 +25,7 @@ function buildTsUqFolder(uq, uqsFolder, uqAlias) {
     }
     var tsUq = (0, tools_1.buildTsHeader)();
     tsUq += (0, buildUQ_1.buildUQ)(uq, uqAlias);
-    (0, tools_1.overrideTsFile)(uqFolder + "/" + uqAlias + ".ts", tsUq);
+    (0, tools_1.overrideTsFile)("".concat(uqFolder, "/").concat(uqAlias, ".ts"), tsUq);
     saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias);
 }
 exports.buildTsUqFolder = buildTsUqFolder;
@@ -40,10 +40,10 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         var cName = (0, tool_1.capitalCase)(sName);
         if (cName[0] === '$')
             continue;
-        imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
-        sets += "\n\tassign(uq, '" + cName + "', " + cName + ");";
-        var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, FieldItem, FieldItemNumber, FieldItemString, FieldItemId, UI, uqStringify } from \"tonva-react\";\nimport { Tuid" + cName + " } from \"./" + uqAlias + "\";\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: Tuid" + cName + "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n";
-        var path = uqFolder + "/" + cName + ".ui.tsx";
+        imports += "\nimport * as ".concat(cName, " from './").concat(cName, ".ui';");
+        sets += "\n\tassign(uq, '".concat(cName, "', ").concat(cName, ");");
+        var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, FieldItem, FieldItemNumber, FieldItemString, FieldItemId, UI, uqStringify } from \"tonva-react\";\nimport { Tuid".concat(cName, " } from \"./").concat(uqAlias, "\";\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: Tuid").concat(cName, "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n");
+        var path = "".concat(uqFolder, "/").concat(cName, ".ui.tsx");
         (0, tools_1.saveTsFileIfNotExists)(path, tsUI);
     }
     for (var _a = 0, _b = __spreadArray(__spreadArray(__spreadArray([], idArr, true), idxArr, true), ixArr, true); _a < _b.length; _a++) {
@@ -54,10 +54,10 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         if (cName[0] === '$')
             continue;
         coll[cName.toLocaleLowerCase()] = i;
-        imports += "\nimport * as " + cName + " from './" + cName + ".ui';";
-        sets += "\n\tassign(uq, '" + cName + "', " + cName + ");";
-        var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, UI, uqStringify } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { " + cName + " } from \"./" + uqAlias + "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"" + cName + "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: " + cName + "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n";
-        var path = uqFolder + "/" + cName + ".ui.tsx";
+        imports += "\nimport * as ".concat(cName, " from './").concat(cName, ".ui';");
+        sets += "\n\tassign(uq, '".concat(cName, "', ").concat(cName, ");");
+        var tsUI = "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { Res, setRes, TFunc, UI, uqStringify } from \"tonva-react\";\n// eslint-disable-next-line @typescript-eslint/no-unused-vars\nimport { FieldItem, FieldItemNumber, FieldItemString, FieldItemId } from \"tonva-react\";\nimport { ".concat(cName, " } from \"./").concat(uqAlias, "\";\n\n/*--fields--*/\nconst fields = {\n};\n/*==fields==*/\n\nconst fieldArr: FieldItem[] = [\n];\n\nexport const ui: UI = {\n\tlabel: \"").concat(cName, "\",\n\tfieldArr,\n\tfields,\n};\n\nconst resRaw: Res<any> = {\n\t$zh: {\n\t},\n\t$en: {\n\t}\n};\nconst res: any = {};\nsetRes(res, resRaw);\n\nexport const t:TFunc = (str:string|JSX.Element): string|JSX.Element => {\n\treturn res[str as string] ?? str;\n}\n\nexport function render(item: ").concat(cName, "):JSX.Element {\n\treturn <>{uqStringify(item)}</>;\n};\n");
+        var path = "".concat(uqFolder, "/").concat(cName, ".ui.tsx");
         (0, tools_1.saveTsFileIfNotExists)(path, tsUI);
         var fields = buildFields(i);
         var tsFieldArr = buildFieldArr(i);
@@ -72,8 +72,8 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         });
         replaceTsFileString(path, { begin: '\nconst fieldArr: FieldItem[] = [\n', end: '\n];\n', content: tsFieldArr });
     }
-    var tsIndex = "import { UqExt as Uq, assign } from './" + uqAlias + "';" + imports + "\n\t\nexport function setUI(uq: Uq) {" + sets + "\n}\nexport * from './" + uqAlias + "';\n";
-    (0, tools_1.overrideTsFile)(uqFolder + "/index.ts", tsIndex);
+    var tsIndex = "import { UqExt as Uq, assign } from './".concat(uqAlias, "';").concat(imports, "\n\t\nexport function setUI(uq: Uq) {").concat(sets, "\n}\nexport * from './").concat(uqAlias, "';\n");
+    (0, tools_1.overrideTsFile)("".concat(uqFolder, "/index.ts"), tsIndex);
     var files = fs_1.default.readdirSync(uqFolder);
     var suffix = '.ui.tsx';
     for (var _c = 0, files_1 = files; _c < files_1.length; _c++) {
@@ -84,7 +84,7 @@ function saveTuidAndIDTsIndexAndRender(uqFolder, uq, uqAlias) {
         var fileEntityName = file.substring(0, from);
         var entity = coll[fileEntityName.toLocaleLowerCase()];
         if (entity === undefined || fileEntityName[0] === '$') {
-            var unFile = uqFolder + "/" + file;
+            var unFile = "".concat(uqFolder, "/").concat(file);
             fs_1.default.unlinkSync(unFile);
         }
     }
@@ -170,7 +170,7 @@ function buildIDFieldArr(i) {
         var name_4 = f.name;
         if (name_4 === 'id')
             continue;
-        ts += "fields." + name_4 + ", ";
+        ts += "fields.".concat(name_4, ", ");
     }
     return ts;
 }
@@ -182,7 +182,7 @@ function buildIDXFieldArr(i) {
         var name_5 = f.name;
         if (name_5 === 'id')
             continue;
-        ts += "fields." + name_5 + ", ";
+        ts += "fields.".concat(name_5, ", ");
     }
     return ts;
 }
@@ -196,7 +196,7 @@ function buildIXFieldArr(i) {
             continue;
         if (name_6 === 'id')
             continue;
-        ts += "fields." + name_6 + ", ";
+        ts += "fields.".concat(name_6, ", ");
     }
     return ts;
 }

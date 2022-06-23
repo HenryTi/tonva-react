@@ -125,7 +125,7 @@ var NavView = /** @class */ (function (_super) {
             _this.isHistoryBack = true;
             _this.back(true);
             _this.isHistoryBack = false;
-            console.log("///\\\\ " + (Date.now() - tick) + "ms backbutton pressed - nav level: " + _this.stack.length);
+            console.log("///\\\\ ".concat(Date.now() - tick, "ms backbutton pressed - nav level: ").concat(_this.stack.length));
         };
         _this.back = function (confirm) {
             if (confirm === void 0) { confirm = true; }
@@ -846,8 +846,7 @@ var Nav = /** @class */ (function () {
                         }
                         exports.nav.clear();
                         this.startWait();
-                        user = this.local.user.get();
-                        if (!(user === undefined)) return [3 /*break*/, 8];
+                        user = undefined;
                         userPassword = this.navView.props.userPassword;
                         if (!userPassword) return [3 /*break*/, 3];
                         return [4 /*yield*/, userPassword()];
@@ -865,6 +864,8 @@ var Nav = /** @class */ (function () {
                         user = logindUser;
                         _a.label = 3;
                     case 3:
+                        if (!(user === undefined)) return [3 /*break*/, 8];
+                        user = this.local.user.get();
                         if (!(user === undefined)) return [3 /*break*/, 8];
                         notLogined = this.navView.props.notLogined;
                         if (!(notLogined !== undefined)) return [3 /*break*/, 5];

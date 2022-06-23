@@ -117,7 +117,7 @@ var UQsMan = /** @class */ (function () {
                     case 0:
                         app = appConfig.app, uqConfigs = appConfig.uqs, tvs = appConfig.tvs, version = appConfig.version;
                         name = app.name, dev = app.dev;
-                        uqsMan = UQsMan.value = new UQsManApp(dev.name + "/" + name, tvs);
+                        uqsMan = UQsMan.value = new UQsManApp("".concat(dev.name, "/").concat(name), tvs);
                         appOwner = uqsMan.appOwner, appName = uqsMan.appName;
                         localData = uqsMan.localData;
                         uqAppData = localData.get();
@@ -127,7 +127,7 @@ var UQsMan = /** @class */ (function () {
                         uqAppData = _c.sent();
                         if (!uqAppData.id) {
                             return [2 /*return*/, [
-                                    appOwner + "/" + appName + "\u4E0D\u5B58\u5728\u3002\u8BF7\u4ED4\u7EC6\u68C0\u67E5app\u5168\u540D\u3002"
+                                    "".concat(appOwner, "/").concat(appName, "\u4E0D\u5B58\u5728\u3002\u8BF7\u4ED4\u7EC6\u68C0\u67E5app\u5168\u540D\u3002")
                                 ]];
                         }
                         uqAppData.version = version;
@@ -366,8 +366,8 @@ var UQsMan = /** @class */ (function () {
                 if (ret !== undefined)
                     return ret;
                 debugger;
-                console.error("controller.uqs." + String(key) + " undefined");
-                _this.showReload("\u65B0\u589E uq " + String(key));
+                console.error("controller.uqs.".concat(String(key), " undefined"));
+                _this.showReload("\u65B0\u589E uq ".concat(String(key)));
                 return undefined;
             },
         });
@@ -404,7 +404,7 @@ var UQsMan = /** @class */ (function () {
         if (uq === undefined) {
             //debugger;
             if (tool_1.env.buildingUq === false) {
-                console.error("setInner(tuidImport: TuidImport): uq " + fromName + " is not loaded");
+                console.error("setInner(tuidImport: TuidImport): uq ".concat(fromName, " is not loaded"));
             }
             return;
         }
@@ -412,11 +412,11 @@ var UQsMan = /** @class */ (function () {
         var tuid = uq.tuid(iName);
         if (tuid === undefined) {
             //debugger;
-            return "setInner(tuidImport: TuidImport): uq " + fromName + " has no Tuid " + iName;
+            return "setInner(tuidImport: TuidImport): uq ".concat(fromName, " has no Tuid ").concat(iName);
         }
         if (tuid.isImport === true) {
             //debugger;
-            return "setInner(tuidImport: TuidImport): uq " + fromName + " Tuid " + iName + " is import";
+            return "setInner(tuidImport: TuidImport): uq ".concat(fromName, " Tuid ").concat(iName, " is import");
         }
         tuidImport.setFrom(tuid);
     };
@@ -471,7 +471,7 @@ function loadUqs(uqConfigs) {
                 case 1:
                     ret = _b.sent();
                     if (ret.length < uqs.length) {
-                        err = "\u4E0B\u5217UQ\uFF1A\n" + uqs.map(function (v) { return v.owner + "/" + v.name; }).join('\n') + "\u4E4B\u4E00\u4E0D\u5B58\u5728";
+                        err = "\u4E0B\u5217UQ\uFF1A\n".concat(uqs.map(function (v) { return "".concat(v.owner, "/").concat(v.name); }).join('\n'), "\u4E4B\u4E00\u4E0D\u5B58\u5728");
                         console.error(err);
                         throw Error(err);
                     }

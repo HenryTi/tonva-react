@@ -192,7 +192,7 @@ var Context = /** @class */ (function () {
                         }
                         onButtonClick = this.form.props.onButtonClick;
                         if (onButtonClick === undefined) {
-                            alert("button " + buttonName + " clicked. you should define form onButtonClick");
+                            alert("button ".concat(buttonName, " clicked. you should define form onButtonClick"));
                             return [2 /*return*/];
                         }
                         return [4 /*yield*/, onButtonClick(buttonName, this)];

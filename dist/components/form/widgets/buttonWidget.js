@@ -111,7 +111,7 @@ var ButtonWidget = /** @class */ (function (_super) {
                     case 2:
                         onButtonClick = this.context.form.props.onButtonClick;
                         if (onButtonClick === undefined) {
-                            alert("button " + name + " clicked. you should define form onButtonClick");
+                            alert("button ".concat(name, " clicked. you should define form onButtonClick"));
                             return [2 /*return*/];
                         }
                         return [4 /*yield*/, onButtonClick(name, this.context)];

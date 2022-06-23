@@ -161,7 +161,7 @@ var LocalArr = /** @class */ (function (_super) {
         var i = lodash_1.default.indexOf(this.index, key);
         if (i < 0)
             return undefined;
-        return this.name + "." + key;
+        return "".concat(this.name, ".").concat(key);
     };
     LocalArr.prototype.keyForSet = function (key) {
         var i = lodash_1.default.indexOf(this.index, key);
@@ -175,7 +175,7 @@ var LocalArr = /** @class */ (function (_super) {
             this.index.unshift(key);
         }
         this.saveIndex();
-        return this.name + "." + key;
+        return "".concat(this.name, ".").concat(key);
     };
     LocalArr.prototype.keyForRemove = function (key) {
         var i = lodash_1.default.indexOf(this.index, key);
@@ -183,12 +183,12 @@ var LocalArr = /** @class */ (function (_super) {
             return;
         this.index.splice(i, 1);
         this.saveIndex();
-        return this.name + "." + key;
+        return "".concat(this.name, ".").concat(key);
     };
     LocalArr.prototype.removeAll = function () {
         for (var _i = 0, _a = this.index; _i < _a.length; _i++) {
             var i = _a[_i];
-            __ls.removeItem(this.name + "." + i);
+            __ls.removeItem("".concat(this.name, ".").concat(i));
         }
         __ls.removeItem(this.name);
         this.index.splice(0);
@@ -229,7 +229,7 @@ var LocalMap = /** @class */ (function (_super) {
             var v = this.index[k];
             if (v === undefined)
                 continue;
-            ls.push(k + "\t" + v);
+            ls.push("".concat(k, "\t").concat(v));
         }
         __ls.setItem(this.name, ls.join('\n'));
     };
@@ -237,7 +237,7 @@ var LocalMap = /** @class */ (function (_super) {
         var i = this.index[key];
         if (i === undefined)
             return undefined;
-        return this.name + "." + i;
+        return "".concat(this.name, ".").concat(i);
     };
     LocalMap.prototype.keyForSet = function (key) {
         var i = this.index[key];
@@ -247,7 +247,7 @@ var LocalMap = /** @class */ (function (_super) {
             this.index[key] = i;
             this.saveIndex();
         }
-        return this.name + "." + i;
+        return "".concat(this.name, ".").concat(i);
     };
     LocalMap.prototype.keyForRemove = function (key) {
         var i = this.index[key];
@@ -255,11 +255,11 @@ var LocalMap = /** @class */ (function (_super) {
             return;
         this.index[key] = undefined;
         this.saveIndex();
-        return this.name + "." + i;
+        return "".concat(this.name, ".").concat(i);
     };
     LocalMap.prototype.removeAll = function () {
         for (var i in this.index) {
-            __ls.removeItem(this.name + "." + this.index[i]);
+            __ls.removeItem("".concat(this.name, ".").concat(this.index[i]));
             this.index[i] = undefined;
         }
         __ls.removeItem(this.name);

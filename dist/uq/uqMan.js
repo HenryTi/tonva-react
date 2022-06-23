@@ -952,7 +952,7 @@ var UqMan = /** @class */ (function () {
                 }
                 if (ownerField === undefined) {
                     debugger;
-                    throw new Error("owner field " + owner + " is undefined");
+                    throw new Error("owner field ".concat(owner, " is undefined"));
                 }
             }
             var arr = f.arr, tuid = f.tuid;
@@ -1012,7 +1012,7 @@ var UqMan = /** @class */ (function () {
                 var func = _this[key];
                 if (func !== undefined)
                     return func;
-                var err = "entity " + _this.name + "." + String(key) + " not defined";
+                var err = "entity ".concat(_this.name, ".").concat(String(key), " not defined");
                 console.error('UQ错误：' + err);
                 _this.showReload('服务器正在更新');
                 return undefined;
@@ -1403,7 +1403,7 @@ var UqMan = /** @class */ (function () {
         });
     };
     UqMan.prototype.renderIDUnknownType = function (id) {
-        return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ["id=" + id + " type undefined"] });
+        return react_1.default.createElement('span', { props: { className: 'text-muted' }, children: ["id=".concat(id, " type undefined")] });
     };
     UqMan.prototype.IDLocalTv = function (ids) {
         return this.IDTv(ids.map(function (v) { return -v; }));

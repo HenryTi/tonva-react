@@ -226,7 +226,7 @@ var ImageUploader = /** @class */ (function (_super) {
                 if (pos >= 0)
                     _this.suffix = _this.file.name.substr(pos + 1).toLowerCase();
                 if (_this.imageTypes.indexOf(_this.suffix) < 0) {
-                    _this.fileError = "\u56FE\u7247\u7C7B\u578B\u5FC5\u987B\u662F " + _this.imageTypes.join(', ') + " \u4E2D\u7684\u4E00\u79CD";
+                    _this.fileError = "\u56FE\u7247\u7C7B\u578B\u5FC5\u987B\u662F ".concat(_this.imageTypes.join(', '), " \u4E2D\u7684\u4E00\u79CD");
                     return;
                 }
                 var reader_1 = new FileReader();
@@ -489,7 +489,7 @@ var AudioUploader = /** @class */ (function (_super) {
                 if (pos >= 0)
                     _this.suffix = _this.file.name.substr(pos + 1).toLowerCase();
                 if (AudioUploader_1.audioTypes.indexOf(_this.suffix) < 0) {
-                    _this.fileError = "\u97F3\u9891\u7C7B\u578B\u5FC5\u987B\u662F " + AudioUploader_1.audioTypes.join(', ') + " \u4E2D\u7684\u4E00\u79CD";
+                    _this.fileError = "\u97F3\u9891\u7C7B\u578B\u5FC5\u987B\u662F ".concat(AudioUploader_1.audioTypes.join(', '), " \u4E2D\u7684\u4E00\u79CD");
                     return;
                 }
                 var reader_2 = new FileReader();

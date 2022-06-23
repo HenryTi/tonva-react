@@ -146,7 +146,7 @@ var Edit = /** @class */ (function (_super) {
                         // 2020-04-15：改值之后，应该赋值吧。所以移到这里来
                         this.props.data[itemSchema.name] = changeValue;
                         if (!(onItemChanged === undefined)) return [3 /*break*/, 5];
-                        alert(itemSchema.name + " value changed, new: " + changeValue + ", pre: " + value);
+                        alert("".concat(itemSchema.name, " value changed, new: ").concat(changeValue, ", pre: ").concat(value));
                         return [3 /*break*/, 7];
                     case 5: return [4 /*yield*/, onItemChanged(itemSchema, changeValue, value)];
                     case 6:
@@ -233,7 +233,7 @@ var Edit = /** @class */ (function (_super) {
                         if ((uiItem === null || uiItem === void 0 ? void 0 : uiItem.readOnly) === true)
                             return [2 /*return*/];
                         if (!(onItemChanged === undefined)) return [3 /*break*/, 1];
-                        alert(itemSchema.name + " value changed, new: " + newValue + ", pre: " + value);
+                        alert("".concat(itemSchema.name, " value changed, new: ").concat(newValue, ", pre: ").concat(value));
                         return [3 /*break*/, 3];
                     case 1: return [4 /*yield*/, onItemChanged(itemSchema, newValue, value)];
                     case 2:
