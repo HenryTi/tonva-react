@@ -266,7 +266,7 @@ var Entity = /** @class */ (function () {
             default:
                 debugger;
                 throw new Error('escape datetime field in pack data error: value=' + val);
-            case 'undefined': return undefined;
+            case 'undefined': return '';
             case 'object':
                 dt = val;
                 break;

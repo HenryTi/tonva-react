@@ -16,7 +16,7 @@ import { UqEnum } from './enum';
 import { UqConfig } from '../app';
 import { ID, IX, IDX } from './ID';
 export type FieldType = 'id' | 'tinyint' | 'smallint' | 'int' | 'bigint' | 'dec' | 'float' | 'double' | 'char' | 'text' | 'datetime' | 'date' | 'time' | 'timestamp' | 'enum';
-export declare function fieldDefaultValue(type: FieldType): "" | 0 | "2000-1-1" | "0:00";
+export declare function fieldDefaultValue(type: FieldType): 0 | "" | "2000-1-1" | "0:00";
 export interface Field {
     name: string;
     type: FieldType;
