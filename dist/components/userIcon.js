@@ -85,11 +85,11 @@ exports.UserIcon = (0, mobx_react_1.observer)(function (props) {
     switch (typeof user) {
         case 'undefined':
         case 'number':
-            return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: noneImage || (0, jsx_runtime_1.jsx)("i", { className: "fa fa-file-o" }, void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: noneImage || (0, jsx_runtime_1.jsx)("i", { className: "fa fa-file-o" }) }));
     }
     var icon = user.icon;
     if (!icon) {
-        return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: (0, jsx_runtime_1.jsx)("i", { className: "fa fa-file-o" }, void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: (0, jsx_runtime_1.jsx)("i", { className: "fa fa-file-o" }) }));
     }
     if (icon.startsWith(':') === true) {
         icon = nav_1.nav.resUrl + icon.substr(1);
@@ -99,12 +99,12 @@ exports.UserIcon = (0, mobx_react_1.observer)(function (props) {
                 evt.currentTarget.src = altImage;
             else
                 evt.currentTarget.src = 'https://tv.jkchemical.com/imgs/0001.png';
-        } }, void 0);
+        } });
 });
 exports.UserView = (0, mobx_react_1.observer)(function (props) {
     var idProp = props.id, user = props.user, render = props.render, onLoaded = props.onLoaded;
     if (user === null)
-        return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "null" }, void 0);
+        return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "null" });
     switch (typeof user) {
         case 'undefined':
             user = userCache.getValue(idProp);
@@ -131,7 +131,7 @@ exports.UserView = (0, mobx_react_1.observer)(function (props) {
     switch (typeof user) {
         case 'undefined':
         case 'number':
-            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: user }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: user });
     }
     return render(user);
 });

@@ -40,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -106,12 +106,12 @@ var CStringEdit = /** @class */ (function (_super) {
                         onValueChange(_this.value);
                 }
             };
-            var right = react_1.default.createElement((0, mobx_react_1.observer)(function () { return (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0); }));
+            var right = react_1.default.createElement((0, mobx_react_1.observer)(function () { return (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" })); }));
             var onKeyDown = function (evt) {
                 if (evt.keyCode === 13)
                     onSave();
             };
-            _this.openPage((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: label, right: right }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsx)("input", { type: "text", onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, maxLength: maxLength }, void 0), react_1.default.createElement((0, mobx_react_1.observer)(function () { return placeholder && (0, jsx_runtime_1.jsx)("div", __assign({ className: "small muted m-2" }, { children: placeholder }), void 0); })), _this.error && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0));
+            _this.openPage((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: label, right: right }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsx)("input", { type: "text", onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, maxLength: maxLength }), react_1.default.createElement((0, mobx_react_1.observer)(function () { return placeholder && (0, jsx_runtime_1.jsx)("div", __assign({ className: "small muted m-2" }, { children: placeholder })); })), _this.error && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: _this.error }))] })) })));
         };
         (0, mobx_1.makeObservable)(_this, {
             value: mobx_1.observable,
@@ -131,11 +131,11 @@ var CStringEdit = /** @class */ (function (_super) {
         this.value = value;
         if (props)
             lodash_1.default.merge(this.props, props);
-        return react_1.default.createElement((0, mobx_react_1.observer)(function () { return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.renderValue(), _this.renderPencil()] }, void 0); }));
+        return react_1.default.createElement((0, mobx_react_1.observer)(function () { return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.renderValue(), _this.renderPencil()] }); }));
     };
-    CStringEdit.prototype.renderValue = function () { return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: this.value }, void 0); };
+    CStringEdit.prototype.renderValue = function () { return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: this.value }); };
     CStringEdit.prototype.renderPencil = function () {
-        return (0, jsx_runtime_1.jsxs)("span", __assign({ onClick: this.onEdit, className: "cursor-pointer" }, { children: ["\u00A0 ", (0, jsx_runtime_1.jsx)(components_1.FA, { className: "text-info", name: "pencil-square-o" }, void 0), " \u00A0"] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("span", __assign({ onClick: this.onEdit, className: "cursor-pointer" }, { children: ["\u00A0 ", (0, jsx_runtime_1.jsx)(components_1.FA, { className: "text-info", name: "pencil-square-o" }), " \u00A0"] }));
     };
     CStringEdit.prototype.verifyValue = function () { };
     return CStringEdit;

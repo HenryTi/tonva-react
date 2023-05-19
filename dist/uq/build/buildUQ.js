@@ -35,7 +35,11 @@ function buildUQ(uq, uqAlias) {
             tsImport += ', Uq' + type;
         }
     }
-    appendArr(uq.tuidArr, 'Tuid', function (v) { return uqBlock(v, buildTuid); });
+    appendArr(uq.tuidArr, 'Tuid', function (v) {
+        if (v.name === '$user')
+            return '';
+        return uqBlock(v, buildTuid);
+    });
     appendArr(uq.actionArr, 'Action', function (v) { return uqBlock(v, buildAction); });
     appendArr(uq.sheetArr, 'Sheet', function (v) { return uqBlock(v, buildSheet); });
     appendArr(uq.bookArr, 'Book', function (v) { return uqBlock(v, buildBook); });

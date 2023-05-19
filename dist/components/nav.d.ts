@@ -8,7 +8,7 @@ import '../css/va.css';
 import '../css/animation.css';
 import { PageWebNav } from './page';
 import { Login } from './login';
-export declare type NavPage = (params: any) => Promise<void>;
+export type NavPage = (params: any) => Promise<void>;
 export interface Props {
     onLogined: (isUserLogin?: boolean) => Promise<void>;
     notLogined?: () => Promise<void>;

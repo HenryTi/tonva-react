@@ -40,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -133,7 +133,7 @@ var VStart = /** @class */ (function (_super) {
     };
     VStart.prototype.header = function () { return this.pageCaption; };
     VStart.prototype.content = function () {
-        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: [(0, tools_1.tonvaTop)(), (0, jsx_runtime_1.jsx)("div", { className: "h-3c" }, void 0), (0, jsx_runtime_1.jsx)(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center py-3" }, { children: (0, jsx_runtime_1.jsx)(components_1.Ax, __assign({ href: "/login", className: "text-primary" }, { children: "\u5DF2\u6709\u8D26\u53F7\uFF0C\u76F4\u63A5\u767B\u5F55" }), void 0) }), void 0), components_1.nav.privacyEntry()] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: [(0, tools_1.tonvaTop)(), (0, jsx_runtime_1.jsx)("div", { className: "h-3c" }), (0, jsx_runtime_1.jsx)(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }), (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center py-3" }, { children: (0, jsx_runtime_1.jsx)(components_1.Ax, __assign({ href: "/login", className: "text-primary" }, { children: "\u5DF2\u6709\u8D26\u53F7\uFF0C\u76F4\u63A5\u767B\u5F55" })) })), components_1.nav.privacyEntry()] }));
     };
     return VStart;
 }(vm_1.VPage));

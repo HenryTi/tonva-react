@@ -16,7 +16,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -170,15 +174,15 @@ var VDate = function (props) {
     var year = date.getFullYear();
     var vTime;
     if (hideTime !== true) {
-        vTime = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", String(100 + date.getMinutes()).substr(1, 2)] }, void 0);
+        vTime = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [date.getHours(), ":", String(100 + date.getMinutes()).substr(1, 2)] });
     }
-    var vDate = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [date.getMonth() + 1, "-", date.getDate()] }, void 0);
+    var vDate = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [date.getMonth() + 1, "-", date.getDate()] });
     if (hideSameYear === true && year === new Date().getFullYear()) {
     }
     else {
-        vDate = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [year, "-", vDate] }, void 0);
+        vDate = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [year, "-", vDate] });
     }
-    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [vDate, " ", vTime] }, void 0);
+    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [vDate, " ", vTime] });
 };
 exports.VDate = VDate;
 //# sourceMappingURL=index.js.map

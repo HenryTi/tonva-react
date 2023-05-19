@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -60,27 +64,27 @@ var React = __importStar(require("react"));
 var mobx_react_1 = require("mobx-react");
 var classnames_1 = __importDefault(require("classnames"));
 require("../../css/va-lmr.css");
-var LMR = /** @class */ (function (_super) {
+var LMR = exports.LMR = /** @class */ (function (_super) {
     __extends(LMR, _super);
     function LMR() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     LMR.prototype.render = function () {
-        var _a = this.props, className = _a.className, style = _a.style, left = _a.left, children = _a.children, right = _a.right, onClick = _a.onClick;
+        var _a;
+        var className = (_a = this.props, _a.className), style = _a.style, left = _a.left, children = _a.children, right = _a.right, onClick = _a.onClick;
         var l, r;
         if (left !== undefined)
-            l = (0, jsx_runtime_1.jsx)("header", { children: left }, void 0);
+            l = (0, jsx_runtime_1.jsx)("header", { children: left });
         if (right !== undefined)
-            r = (0, jsx_runtime_1.jsx)("footer", { children: right }, void 0);
+            r = (0, jsx_runtime_1.jsx)("footer", { children: right });
         var cursor;
         if (onClick !== undefined)
             cursor = 'cursor-pointer';
-        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: (0, classnames_1.default)('va-lmr', className, cursor), style: style, onClick: onClick }, { children: [l, (0, jsx_runtime_1.jsx)("div", { children: children }, void 0), r] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: (0, classnames_1.default)('va-lmr', className, cursor), style: style, onClick: onClick }, { children: [l, (0, jsx_runtime_1.jsx)("div", { children: children }), r] }));
     };
     LMR = __decorate([
         mobx_react_1.observer
     ], LMR);
     return LMR;
 }(React.Component));
-exports.LMR = LMR;
 //# sourceMappingURL=LMR.js.map

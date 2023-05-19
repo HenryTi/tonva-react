@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -66,7 +70,7 @@ var selectable_1 = require("./selectable");
 require("../../css/va-list.css");
 var res_1 = require("../../res/res");
 var res_2 = require("../../res");
-var List = /** @class */ (function (_super) {
+var List = exports.List = /** @class */ (function (_super) {
     __extends(List, _super);
     function List(props) {
         var _this = _super.call(this, props) || this;
@@ -112,23 +116,24 @@ var List = /** @class */ (function (_super) {
         configurable: true
     });
     List.prototype.render = function () {
+        var _a, _b;
         var _this = this;
-        var _a = this.props, className = _a.className, header = _a.header, footer = _a.footer, before = _a.before, loading = _a.loading, none = _a.none, onFocus = _a.onFocus;
+        var className = (_a = this.props, _a.className), header = _a.header, footer = _a.footer, before = _a.before, loading = _a.loading, none = _a.none, onFocus = _a.onFocus;
         if (before === undefined)
             before = '-';
         if (loading === undefined)
-            loading = function () { return (0, jsx_runtime_1.jsx)("i", { className: "fa fa-spinner fa-spin fa-2x fa-fw text-info" }, void 0); };
+            loading = function () { return (0, jsx_runtime_1.jsx)("i", { className: "fa fa-spinner fa-spin fa-2x fa-fw text-info" }); };
         if (none === undefined)
             none = List_1.res.none;
-        var _b = this.listBase, items = _b.items, isLoading = _b.loading;
+        var items = (_b = this.listBase, _b.items), isLoading = _b.loading;
         function staticRow(row, type) {
             if (!row)
                 return;
             switch (typeof row) {
                 default:
-                case 'string': return (0, jsx_runtime_1.jsx)("li", __assign({ className: "va-list-" + type }, { children: row }), void 0);
-                case 'function': return (0, jsx_runtime_1.jsx)("li", __assign({ className: "va-list-" + type }, { children: row() }), void 0);
-                case 'object': return (0, jsx_runtime_1.jsx)("li", { children: row }, void 0);
+                case 'string': return (0, jsx_runtime_1.jsx)("li", __assign({ className: "va-list-" + type }, { children: row }));
+                case 'function': return (0, jsx_runtime_1.jsx)("li", __assign({ className: "va-list-" + type }, { children: row() }));
+                case 'object': return (0, jsx_runtime_1.jsx)("li", { children: row });
             }
         }
         var content, waitingMore;
@@ -149,7 +154,7 @@ var List = /** @class */ (function (_super) {
         var tabIndex;
         if (onFocus !== undefined)
             tabIndex = -1;
-        return (0, jsx_runtime_1.jsxs)("ul", __assign({ className: (0, classnames_1.default)('va-list', className), onFocus: onFocus, tabIndex: tabIndex }, { children: [staticRow(header, 'header'), content, waitingMore, staticRow(footer, 'footer')] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("ul", __assign({ className: (0, classnames_1.default)('va-list', className), onFocus: onFocus, tabIndex: tabIndex }, { children: [staticRow(header, 'header'), content, waitingMore, staticRow(footer, 'footer')] }));
     };
     var List_1;
     List.res = (0, res_1.resLang)(res_2.listRes);
@@ -158,5 +163,4 @@ var List = /** @class */ (function (_super) {
     ], List);
     return List;
 }(React.Component));
-exports.List = List;
 //# sourceMappingURL=index.js.map

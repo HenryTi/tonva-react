@@ -1,4 +1,4 @@
-export declare type DataType = 'id' | 'integer' | 'number' | 'string' | 'image' | 'date' | 'boolean' | 'object' | 'arr' | 'button' | 'submit';
+export type DataType = 'id' | 'integer' | 'number' | 'string' | 'image' | 'date' | 'boolean' | 'object' | 'arr' | 'button' | 'submit';
 export interface ItemSchema {
     name: string;
     required?: boolean;
@@ -44,4 +44,4 @@ export interface ArrSchema extends ItemSchema {
 export interface ButtonSchema extends ItemSchema {
     type: 'button' | 'submit';
 }
-export declare type Schema = ItemSchema[];
+export type Schema = ItemSchema[];

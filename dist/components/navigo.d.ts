@@ -1,4 +1,4 @@
-export declare type RouteFunc = (params?: string | {
+export type RouteFunc = (params?: string | {
     [name: string]: string;
 }, query?: string) => void;
 export interface NamedRoute {

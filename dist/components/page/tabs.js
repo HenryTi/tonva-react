@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -65,7 +69,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -121,7 +125,7 @@ var Tab = /** @class */ (function () {
                     this._content = this.page.content();
                 }
                 else {
-                    this._content = (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-5" }, { children: "tab \u5E94\u8BE5\u5B9A\u4E49content\u6216\u8005page" }), void 0);
+                    this._content = (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-5" }, { children: "tab \u5E94\u8BE5\u5B9A\u4E49content\u6216\u8005page" }));
                 }
             }
             return this._content;
@@ -157,7 +161,7 @@ var Tab = /** @class */ (function () {
     };
     return Tab;
 }());
-var TabCaptionComponent = function (label, icon, color) { return (0, jsx_runtime_1.jsxs)("div", __assign({ className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color }, { children: [(0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)("i", { className: 'fa fa-lg fa-' + icon }, void 0) }, void 0), (0, jsx_runtime_1.jsx)("small", { children: label }, void 0)] }), void 0); };
+var TabCaptionComponent = function (label, icon, color) { return (0, jsx_runtime_1.jsxs)("div", __assign({ className: 'd-flex justify-content-center align-items-center flex-column cursor-pointer ' + color }, { children: [(0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)("i", { className: 'fa fa-lg fa-' + icon }) }), (0, jsx_runtime_1.jsx)("small", { children: label })] })); };
 exports.TabCaptionComponent = TabCaptionComponent;
 //export const TabCaption = TabCaptionComponent;
 var TabsView = /** @class */ (function () {
@@ -232,13 +236,13 @@ var TabsView = /** @class */ (function () {
                         var num = typeof notify === 'number' ? notify : notify.get();
                         if (num !== undefined) {
                             if (num > 0)
-                                notifyCircle = (0, jsx_runtime_1.jsx)("u", { children: num > 99 ? '99+' : num }, void 0);
+                                notifyCircle = (0, jsx_runtime_1.jsx)("u", { children: num > 99 ? '99+' : num });
                             else if (num < 0)
-                                notifyCircle = (0, jsx_runtime_1.jsx)("u", { className: "dot" }, void 0);
+                                notifyCircle = (0, jsx_runtime_1.jsx)("u", { className: "dot" });
                         }
                     }
-                    return (0, jsx_runtime_1.jsx)("div", __assign({ onClick: function () { return _this.tabClick(v); }, style: selected === true ? bsCur : bsTab }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [notifyCircle, caption(selected)] }, void 0) }), index);
-                }) }), void 0);
+                    return (0, jsx_runtime_1.jsx)("div", __assign({ onClick: function () { return _this.tabClick(v); }, style: selected === true ? bsCur : bsTab }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [notifyCircle, caption(selected)] }) }), index);
+                }) }));
             return tabs;
         });
         this.content = (0, mobx_react_1.observer)(function () {
@@ -255,22 +259,22 @@ var TabsView = /** @class */ (function () {
                     var header, footer;
                     var visibility = { visibility: 'hidden' };
                     if (tabPosition === 'top') {
-                        header = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-header" }, { children: (0, jsx_runtime_1.jsxs)("header", { children: [tabs, pageHeader] }, void 0) }), void 0), (0, jsx_runtime_1.jsxs)("header", __assign({ style: visibility }, { children: [tabs, pageHeader] }), void 0)] }, void 0);
+                        header = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-header" }, { children: (0, jsx_runtime_1.jsxs)("header", { children: [tabs, pageHeader] }) })), (0, jsx_runtime_1.jsxs)("header", __assign({ style: visibility }, { children: [tabs, pageHeader] }))] });
                         if (pageFooter !== undefined) {
-                            footer = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("footer", __assign({ style: visibility }, { children: pageFooter }), void 0), (0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-footer" }, { children: (0, jsx_runtime_1.jsx)("footer", { children: pageFooter }, void 0) }), void 0)] }, void 0);
+                            footer = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("footer", __assign({ style: visibility }, { children: pageFooter })), (0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-footer" }, { children: (0, jsx_runtime_1.jsx)("footer", { children: pageFooter }) }))] });
                         }
                     }
                     else {
                         if (pageHeader !== undefined) {
-                            header = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: 'tv-page-header' }, { children: (0, jsx_runtime_1.jsx)("header", { children: pageHeader }, void 0) }), void 0), (0, jsx_runtime_1.jsx)("header", __assign({ style: visibility }, { children: pageHeader }), void 0)] }, void 0);
+                            header = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: 'tv-page-header' }, { children: (0, jsx_runtime_1.jsx)("header", { children: pageHeader }) })), (0, jsx_runtime_1.jsx)("header", __assign({ style: visibility }, { children: pageHeader }))] });
                         }
-                        footer = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("footer", __assign({ style: visibility }, { children: [pageFooter, tabs] }), void 0), (0, jsx_runtime_1.jsx)("section", __assign({ className: 'tv-page-footer' }, { children: (0, jsx_runtime_1.jsxs)("footer", { children: [pageFooter, tabs] }, void 0) }), void 0)] }, void 0);
+                        footer = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("footer", __assign({ style: visibility }, { children: [pageFooter, tabs] })), (0, jsx_runtime_1.jsx)("section", __assign({ className: 'tv-page-footer' }, { children: (0, jsx_runtime_1.jsxs)("footer", { children: [pageFooter, tabs] }) }))] });
                     }
                     var style;
                     if (v.selected === false)
                         style = displayNone;
                     return (0, jsx_runtime_1.jsxs)(scrollView_1.ScrollView, __assign({ className: className, style: style, onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom }, { children: [header, content, footer] }), index);
-                }) }, void 0);
+                }) });
         });
         this.props = props;
         var size = props.size, tabs = props.tabs, tabBack = props.tabBg, sep = props.sep, selected = props.selected;
@@ -321,23 +325,23 @@ var TabsView = /** @class */ (function () {
         var header, footer;
         var visibility = { display: 'none' };
         if (tabPosition === 'top') {
-            header = (0, jsx_runtime_1.jsx)("header", { children: tabs }, void 0);
+            header = (0, jsx_runtime_1.jsx)("header", { children: tabs });
         }
         else {
-            footer = (0, jsx_runtime_1.jsx)("footer", { children: tabs }, void 0);
+            footer = (0, jsx_runtime_1.jsx)("footer", { children: tabs });
         }
         return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [header, this.tabArr.map(function (v, index) {
                     var style;
                     if (v.selected === false)
                         style = visibility;
                     return (0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(v.className), style: style }, { children: v.content }), index);
-                }), footer] }, void 0);
+                }), footer] });
     };
     return TabsView;
 }());
 exports.TabsView = TabsView;
 ;
-var Tabs = /** @class */ (function (_super) {
+var Tabs = exports.Tabs = /** @class */ (function (_super) {
     __extends(Tabs, _super);
     function Tabs(props) {
         var _this = _super.call(this, props) || this;
@@ -357,9 +361,8 @@ var Tabs = /** @class */ (function (_super) {
     ], Tabs);
     return Tabs;
 }(React.Component));
-exports.Tabs = Tabs;
 ;
-var RootTabs = /** @class */ (function (_super) {
+var RootTabs = exports.RootTabs = /** @class */ (function (_super) {
     __extends(RootTabs, _super);
     function RootTabs(props) {
         var _this = _super.call(this, props) || this;
@@ -379,6 +382,5 @@ var RootTabs = /** @class */ (function (_super) {
     ], RootTabs);
     return RootTabs;
 }(React.Component));
-exports.RootTabs = RootTabs;
 ;
 //# sourceMappingURL=tabs.js.map

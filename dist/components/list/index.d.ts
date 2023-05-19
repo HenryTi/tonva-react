@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PageItems } from '../../tool/pageItems';
 import '../../css/va-list.css';
 import { IObservableArray } from 'mobx';
-declare type StaticRow = string | JSX.Element | (() => string | JSX.Element);
+type StaticRow = string | JSX.Element | (() => string | JSX.Element);
 interface ItemProps {
     className?: string | string[];
     render?: (item: any, index: number) => JSX.Element;

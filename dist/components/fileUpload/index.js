@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -58,7 +62,7 @@ var FileUpload = /** @class */ (function (_super) {
     FileUpload.prototype.onSubmit = function () {
     };
     FileUpload.prototype.render = function () {
-        return (0, jsx_runtime_1.jsxs)("form", __assign({ onSubmit: this.onSubmit }, { children: [(0, jsx_runtime_1.jsx)("input", { id: "uname", name: "uname" }, void 0), (0, jsx_runtime_1.jsx)("input", { id: "age", name: "age" }, void 0), (0, jsx_runtime_1.jsx)("input", { id: "sex", name: "sex" }, void 0), (0, jsx_runtime_1.jsx)("input", { type: "file", id: "photo", name: "photo" }, void 0), (0, jsx_runtime_1.jsx)("button", __assign({ type: "submit" }, { children: "\u63D0\u4EA4" }), void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("form", __assign({ onSubmit: this.onSubmit }, { children: [(0, jsx_runtime_1.jsx)("input", { id: "uname", name: "uname" }), (0, jsx_runtime_1.jsx)("input", { id: "age", name: "age" }), (0, jsx_runtime_1.jsx)("input", { id: "sex", name: "sex" }), (0, jsx_runtime_1.jsx)("input", { type: "file", id: "photo", name: "photo" }), (0, jsx_runtime_1.jsx)("button", __assign({ type: "submit" }, { children: "\u63D0\u4EA4" }))] }));
     };
     return FileUpload;
 }(React.Component));

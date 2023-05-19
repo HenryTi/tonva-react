@@ -40,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -170,7 +170,7 @@ var ScrollView = /** @class */ (function (_super) {
     }
     ScrollView.prototype.render = function () {
         var _a = this.props, className = _a.className, style = _a.style;
-        return (0, jsx_runtime_1.jsx)("div", __assign({ ref: this.refDiv, className: "tv-page", onScroll: this.onScroll, style: style }, { children: (0, jsx_runtime_1.jsx)("article", __assign({ className: className }, { children: this.props.children }), void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ ref: this.refDiv, className: "tv-page", onScroll: this.onScroll, style: style }, { children: (0, jsx_runtime_1.jsx)("article", __assign({ className: className }, { children: this.props.children })) }));
     };
     return ScrollView;
 }(ScrollViewBase));
@@ -187,12 +187,12 @@ var WebNavScrollView = /** @class */ (function (_super) {
         if (navRawHeader)
             vHeader = navRawHeader;
         else if (navHeader)
-            vHeader = (0, jsx_runtime_1.jsx)("header", { children: (0, jsx_runtime_1.jsx)("main", { children: navHeader }, void 0) }, void 0);
+            vHeader = (0, jsx_runtime_1.jsx)("header", { children: (0, jsx_runtime_1.jsx)("main", { children: navHeader }) });
         if (navRawFooter)
             vFooter = navRawFooter;
         else if (navFooter)
-            vFooter = (0, jsx_runtime_1.jsx)("footer", { children: (0, jsx_runtime_1.jsx)("main", { children: navFooter }, void 0) }, void 0);
-        return (0, jsx_runtime_1.jsxs)("div", __assign({ ref: this.refDiv, className: "tv-page-webnav", onScroll: this.onScroll, style: style }, { children: [vHeader, (0, jsx_runtime_1.jsx)("article", __assign({ className: className }, { children: this.props.children }), void 0), vFooter] }), void 0);
+            vFooter = (0, jsx_runtime_1.jsx)("footer", { children: (0, jsx_runtime_1.jsx)("main", { children: navFooter }) });
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ ref: this.refDiv, className: "tv-page-webnav", onScroll: this.onScroll, style: style }, { children: [vHeader, (0, jsx_runtime_1.jsx)("article", __assign({ className: className }, { children: this.props.children })), vFooter] }));
     };
     return WebNavScrollView;
 }(ScrollViewBase));

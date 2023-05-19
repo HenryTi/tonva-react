@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +63,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -105,15 +109,15 @@ var RadioItemEdit = /** @class */ (function (_super) {
                     _this.verifyValue();
                     if (!_this.error)
                         resolve(_this.newValue);
-                } }, { children: "\u4FDD\u5B58" }), void 0);
+                } }, { children: "\u4FDD\u5B58" }));
             var content = list ?
                 list.map(function (v, index) {
                     var title = v.title, value = v.value;
-                    return (0, jsx_runtime_1.jsx)("div", __assign({ className: "col" }, { children: (0, jsx_runtime_1.jsxs)("label", __assign({ className: "px-3 py-2 cursor-pointer" }, { children: [(0, jsx_runtime_1.jsx)("input", { name: name, type: "radio", value: value, onClick: function () { return _this.onChange(value); }, defaultChecked: value === _this.value }, void 0), " ", title || value, " \u00A0"] }), void 0) }), index);
+                    return (0, jsx_runtime_1.jsx)("div", __assign({ className: "col" }, { children: (0, jsx_runtime_1.jsxs)("label", __assign({ className: "px-3 py-2 cursor-pointer" }, { children: [(0, jsx_runtime_1.jsx)("input", { name: name, type: "radio", value: value, onClick: function () { return _this.onChange(value); }, defaultChecked: value === _this.value }), " ", title || value, " \u00A0"] })) }), index);
                 })
                 :
-                    (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "no list defined" }, void 0);
-            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "row row-cols-2 row-cols-sm-3 row-cols-md-4" }, { children: content }), void 0) }), void 0) }), void 0);
+                    (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "no list defined" });
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label, right: right }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "row row-cols-2 row-cols-sm-3 row-cols-md-4" }, { children: content })) })) }));
         });
         return _this;
     }

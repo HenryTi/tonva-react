@@ -25,7 +25,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -230,7 +230,7 @@ var Controller = /** @class */ (function () {
         alert(text);
     };
     Controller.prototype.errorPage = function (header, err) {
-        this.openPage((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "App error!" }, { children: (0, jsx_runtime_1.jsx)("pre", { children: typeof err === 'string' ? err : err.message }, void 0) }), void 0));
+        this.openPage((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "App error!" }, { children: (0, jsx_runtime_1.jsx)("pre", { children: typeof err === 'string' ? err : err.message }) })));
     };
     Controller.prototype.onMessage = function (message) {
         return;
@@ -412,7 +412,7 @@ var Controller = /** @class */ (function () {
                             if (no !== undefined) {
                                 buttons.push((0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-outline-danger me-3", onClick: function () { return close('no'); } }, { children: no }), "no"));
                             }
-                            this.openPage((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: caption || '请确认', back: "close" }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: classNames || "rounded bg-white m-5 p-3 border" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "d-flex align-items-center justify-content-center" }, { children: message }), void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "mt-3 d-flex align-items-center justify-content-center" }, { children: buttons }), void 0)] }), void 0) }), void 0));
+                            this.openPage((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: caption || '请确认', back: "close" }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: classNames || "rounded bg-white m-5 p-3 border" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "d-flex align-items-center justify-content-center" }, { children: message })), (0, jsx_runtime_1.jsx)("div", __assign({ className: "mt-3 d-flex align-items-center justify-content-center" }, { children: buttons }))] })) })));
                             components_1.nav.regConfirmClose(function () { return __awaiter(_this, void 0, void 0, function () {
                                 return __generator(this, function (_a) {
                                     resolve(undefined);

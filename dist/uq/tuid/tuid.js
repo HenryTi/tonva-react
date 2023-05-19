@@ -29,7 +29,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -164,7 +164,7 @@ var TuidInner = /** @class */ (function (_super) {
             var obj = _this.valueFromId(id);
             if (obj === undefined) {
                 _this.useId(id);
-                return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.sName, ":", id] }, void 0);
+                return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.sName, ":", id] });
             }
             var r;
             if (render) {
@@ -176,12 +176,12 @@ var TuidInner = /** @class */ (function (_super) {
             else {
                 console.log('render', render, 'this.render', _this.render);
                 r = function (item) {
-                    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.sName, ":", (0, reactBoxId_1.uqStringify)(item)] }, void 0);
+                    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [_this.sName, ":", (0, reactBoxId_1.uqStringify)(item)] });
                 };
             }
             return r(obj);
         });
-        return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsx)(TuidView, {}, void 0) }, void 0);
+        return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsx)(TuidView, {}) });
     };
     TuidInner.prototype.useId = function (id, defer) {
         if (this.noCache === true)

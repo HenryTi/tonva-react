@@ -48,7 +48,7 @@ var InputList = /** @class */ (function () {
                 var key = _this.keyFromItem(v.values);
                 var element = v.render();
                 return (0, jsx_runtime_1.jsx)(react_1.default.Fragment, { children: _this.renderItemContainer(element) }, key);
-            }) }, void 0); }));
+            }) }); }));
     };
     Object.defineProperty(InputList.prototype, "hasError", {
         get: function () {

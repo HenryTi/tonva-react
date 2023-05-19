@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +63,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -118,21 +122,21 @@ var FetchErrorView = /** @class */ (function (_super) {
         if (typeof error === 'object') {
             var err = [];
             for (var i in error) {
-                err.push((0, jsx_runtime_1.jsxs)("li", { children: [(0, jsx_runtime_1.jsx)("label", { children: i }, void 0), (0, jsx_runtime_1.jsx)("div", __assign({ style: { wordWrap: "break-word" } }, { children: error[i] }), void 0)] }, i));
+                err.push((0, jsx_runtime_1.jsxs)("li", { children: [(0, jsx_runtime_1.jsx)("label", { children: i }), (0, jsx_runtime_1.jsx)("div", __assign({ style: { wordWrap: "break-word" } }, { children: error[i] }))] }, i));
             }
-            errContent = (0, jsx_runtime_1.jsx)("ul", { children: err }, void 0);
+            errContent = (0, jsx_runtime_1.jsx)("ul", { children: err });
         }
         else {
-            errContent = (0, jsx_runtime_1.jsx)("div", { children: error }, void 0);
+            errContent = (0, jsx_runtime_1.jsx)("div", { children: error });
         }
-        return (0, jsx_runtime_1.jsx)("div", __assign({ className: "tv-page" }, { children: (0, jsx_runtime_1.jsx)("article", { children: (0, jsx_runtime_1.jsxs)("main", __assign({ className: "va-error p-3" }, { children: [(0, jsx_runtime_1.jsx)("div", { children: "\u7F51\u7EDC\u51FA\u73B0\u95EE\u9898" }, void 0), (0, jsx_runtime_1.jsx)("div", { children: "\u70B9\u51FB\u91CD\u65B0\u8BBF\u95EE" }, void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ style: { wordWrap: "break-word" } }, { children: ["url: ", url] }), void 0), errContent, (0, jsx_runtime_1.jsxs)("div", __assign({ className: "p-3 text-center" }, { children: [(0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-primary me-3", type: 'button', onClick: this.close }, { children: "\u5173\u95ED" }), void 0), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-outline-primary", type: 'button', onClick: this.reApi }, { children: "\u91CD\u8BD5" }), void 0)] }), void 0)] }), void 0) }, void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: "tv-page" }, { children: (0, jsx_runtime_1.jsx)("article", { children: (0, jsx_runtime_1.jsxs)("main", __assign({ className: "va-error p-3" }, { children: [(0, jsx_runtime_1.jsx)("div", { children: "\u7F51\u7EDC\u51FA\u73B0\u95EE\u9898" }), (0, jsx_runtime_1.jsx)("div", { children: "\u70B9\u51FB\u91CD\u65B0\u8BBF\u95EE" }), (0, jsx_runtime_1.jsxs)("div", __assign({ style: { wordWrap: "break-word" } }, { children: ["url: ", url] })), errContent, (0, jsx_runtime_1.jsxs)("div", __assign({ className: "p-3 text-center" }, { children: [(0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-primary me-3", type: 'button', onClick: this.close }, { children: "\u5173\u95ED" })), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-outline-primary", type: 'button', onClick: this.reApi }, { children: "\u91CD\u8BD5" }))] }))] })) }) }));
     };
     return FetchErrorView;
 }(React.Component));
 exports.default = FetchErrorView;
 var SystemNotifyPage = function (_a) {
     var message = _a.message;
-    return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u7CFB\u7EDF\u63D0\u9192" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "px-3" }, { children: message }), void 0) }), void 0);
+    return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u7CFB\u7EDF\u63D0\u9192" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "px-3" }, { children: message })) }));
 };
 exports.SystemNotifyPage = SystemNotifyPage;
 //# sourceMappingURL=fetchErrorView.js.map

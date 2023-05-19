@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +63,7 @@ var pageHeader_1 = require("./pageHeader");
 var tabs_1 = require("./tabs");
 var scrollView_1 = require("./scrollView");
 var nav_1 = require("../nav");
-var Page = /** @class */ (function (_super) {
+var Page = exports.Page = /** @class */ (function (_super) {
     __extends(Page, _super);
     function Page(props) {
         var _this = _super.call(this, props) || this;
@@ -70,7 +74,8 @@ var Page = /** @class */ (function (_super) {
         return _this;
     }
     Page.prototype.renderHeader = function (webNav) {
-        var _a = this.props, back = _a.back, header = _a.header, right = _a.right, headerClassName = _a.headerClassName, afterBack = _a.afterBack, logout = _a.logout;
+        var _a;
+        var back = (_a = this.props, _a.back), header = _a.header, right = _a.right, headerClassName = _a.headerClassName, afterBack = _a.afterBack, logout = _a.logout;
         if (header === false)
             return;
         //const {webNav} = this.props;
@@ -109,10 +114,10 @@ var Page = /** @class */ (function (_super) {
         var footer = this.props.footer;
         if (!footer)
             return;
-        var elFooter = (0, jsx_runtime_1.jsx)("footer", { children: footer }, void 0);
+        var elFooter = (0, jsx_runtime_1.jsx)("footer", { children: footer });
         if (webNav)
             return elFooter;
-        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-footer" }, { children: elFooter }), void 0), elFooter] }, void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-footer" }, { children: elFooter })), elFooter] });
     };
     Page.prototype.componentDidCatch = function (error, errorInfo) {
         // You can also log the error to an error reporting service
@@ -120,10 +125,11 @@ var Page = /** @class */ (function (_super) {
         debugger;
     };
     Page.prototype.render = function () {
+        var _a;
         if (this.tabsView) {
             return React.createElement(this.tabsView.content);
         }
-        var _a = this.props, onScroll = _a.onScroll, onScrollTop = _a.onScrollTop, onScrollBottom = _a.onScrollBottom, children = _a.children, className = _a.className, webNav = _a.webNav;
+        var onScroll = (_a = this.props, _a.onScroll), onScrollTop = _a.onScrollTop, onScrollBottom = _a.onScrollBottom, children = _a.children, className = _a.className, webNav = _a.webNav;
         var pageWebNav;
         if (!webNav) {
             pageWebNav = nav_1.nav.pageWebNav;
@@ -131,12 +137,12 @@ var Page = /** @class */ (function (_super) {
         else {
             pageWebNav = webNav;
         }
-        var content = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [this.renderHeader(pageWebNav), (0, jsx_runtime_1.jsx)("main", { children: children }, void 0), this.renderFooter(pageWebNav)] }, void 0);
+        var content = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [this.renderHeader(pageWebNav), (0, jsx_runtime_1.jsx)("main", { children: children }), this.renderFooter(pageWebNav)] });
         if (pageWebNav) {
-            return (0, jsx_runtime_1.jsx)(scrollView_1.WebNavScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className, webNav: pageWebNav }, { children: content }), void 0);
+            return (0, jsx_runtime_1.jsx)(scrollView_1.WebNavScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className, webNav: pageWebNav }, { children: content }));
         }
         else {
-            return (0, jsx_runtime_1.jsx)(scrollView_1.ScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className }, { children: content }), void 0);
+            return (0, jsx_runtime_1.jsx)(scrollView_1.ScrollView, __assign({ onScroll: onScroll, onScrollTop: onScrollTop, onScrollBottom: onScrollBottom, className: className }, { children: content }));
         }
     };
     Page = __decorate([
@@ -144,5 +150,4 @@ var Page = /** @class */ (function (_super) {
     ], Page);
     return Page;
 }(React.Component));
-exports.Page = Page;
 //# sourceMappingURL=page.js.map

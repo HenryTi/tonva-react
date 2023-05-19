@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -68,44 +68,50 @@ var MessageHub = /** @class */ (function () {
     };
     MessageHub.prototype.dispatch = function (msg) {
         return __awaiter(this, void 0, void 0, function () {
-            var $type, _a, _b, _i, i, _c, _d, _e, i, _f, type, handler;
-            return __generator(this, function (_g) {
-                switch (_g.label) {
+            var $type, _a, _b, _c, _i, i, _d, _e, _f, _g, i, _h, type, handler;
+            return __generator(this, function (_j) {
+                switch (_j.label) {
                     case 0:
                         $type = msg.$type;
-                        _a = [];
-                        for (_b in this.anyHandlers)
-                            _a.push(_b);
+                        _a = this.anyHandlers;
+                        _b = [];
+                        for (_c in _a)
+                            _b.push(_c);
                         _i = 0;
-                        _g.label = 1;
+                        _j.label = 1;
                     case 1:
-                        if (!(_i < _a.length)) return [3 /*break*/, 4];
-                        i = _a[_i];
+                        if (!(_i < _b.length)) return [3 /*break*/, 4];
+                        _c = _b[_i];
+                        if (!(_c in _a)) return [3 /*break*/, 3];
+                        i = _c;
                         return [4 /*yield*/, this.anyHandlers[i](msg)];
                     case 2:
-                        _g.sent();
-                        _g.label = 3;
+                        _j.sent();
+                        _j.label = 3;
                     case 3:
                         _i++;
                         return [3 /*break*/, 1];
                     case 4:
-                        _c = [];
-                        for (_d in this.msgHandlers)
-                            _c.push(_d);
-                        _e = 0;
-                        _g.label = 5;
+                        _d = this.msgHandlers;
+                        _e = [];
+                        for (_f in _d)
+                            _e.push(_f);
+                        _g = 0;
+                        _j.label = 5;
                     case 5:
-                        if (!(_e < _c.length)) return [3 /*break*/, 8];
-                        i = _c[_e];
-                        _f = this.msgHandlers[i], type = _f.type, handler = _f.handler;
+                        if (!(_g < _e.length)) return [3 /*break*/, 8];
+                        _f = _e[_g];
+                        if (!(_f in _d)) return [3 /*break*/, 7];
+                        i = _f;
+                        _h = this.msgHandlers[i], type = _h.type, handler = _h.handler;
                         if (type !== $type)
                             return [3 /*break*/, 7];
                         return [4 /*yield*/, handler(msg)];
                     case 6:
-                        _g.sent();
-                        _g.label = 7;
+                        _j.sent();
+                        _j.label = 7;
                     case 7:
-                        _e++;
+                        _g++;
                         return [3 /*break*/, 5];
                     case 8: return [2 /*return*/];
                 }

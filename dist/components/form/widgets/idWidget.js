@@ -40,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -70,7 +70,7 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var classnames_1 = __importDefault(require("classnames"));
 var widget_1 = require("./widget");
 var mobx_1 = require("mobx");
-var none = (0, jsx_runtime_1.jsx)("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }), void 0);
+var none = (0, jsx_runtime_1.jsx)("small", __assign({ className: "text-muted" }, { children: "[\u65E0]" }));
 var IdWidget = /** @class */ (function (_super) {
     __extends(IdWidget, _super);
     function IdWidget() {
@@ -147,7 +147,7 @@ var IdWidget = /** @class */ (function (_super) {
                         break;
                 }
             }
-            content = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: c }, void 0);
+            content = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: c });
         }
         else if (typeof Templet === 'function') {
             content = Templet(this.value);
@@ -155,7 +155,7 @@ var IdWidget = /** @class */ (function (_super) {
         else {
             content = Templet;
         }
-        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(cn), onClick: this.onClick }, { children: content }), void 0), this.renderErrors()] }, void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)(cn), onClick: this.onClick }, { children: content })), this.renderErrors()] });
     };
     return IdWidget;
 }(widget_1.Widget));

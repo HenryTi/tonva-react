@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -65,7 +69,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -97,7 +101,7 @@ var page_1 = require("./page/page");
 var mobx_react_1 = require("mobx-react");
 var mobx_1 = require("mobx");
 var simple_1 = require("./simple");
-var ResUploader = /** @class */ (function (_super) {
+var ResUploader = exports.ResUploader = /** @class */ (function (_super) {
     __extends(ResUploader, _super);
     function ResUploader(props) {
         var _this = _super.call(this, props) || this;
@@ -176,16 +180,16 @@ var ResUploader = /** @class */ (function (_super) {
         return this.fileInput.files[0];
     };
     ResUploader.prototype.render = function () {
+        var _a;
         var _this = this;
-        var _a = this.props, className = _a.className, multiple = _a.multiple, label = _a.label;
-        return (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsxs)("label", __assign({ className: "btn btn-outline-success" }, { children: [label || '选择文件', (0, jsx_runtime_1.jsx)("input", { className: className, ref: function (t) { return _this.fileInput = t; }, onChange: this.onFilesChange, type: 'file', name: 'file', multiple: multiple, style: { display: 'none' } }, void 0)] }), void 0), "\u00A0", this.fileName] }, void 0);
+        var className = (_a = this.props, _a.className), multiple = _a.multiple, label = _a.label;
+        return (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsxs)("label", __assign({ className: "btn btn-outline-success" }, { children: [label || '选择文件', (0, jsx_runtime_1.jsx)("input", { className: className, ref: function (t) { return _this.fileInput = t; }, onChange: this.onFilesChange, type: 'file', name: 'file', multiple: multiple, style: { display: 'none' } })] })), "\u00A0", this.fileName] });
     };
     ResUploader = __decorate([
         mobx_react_1.observer
     ], ResUploader);
     return ResUploader;
 }(React.Component));
-exports.ResUploader = ResUploader;
 function formatSize(size, pointLength, units) {
     if (pointLength === void 0) { pointLength = 2; }
     var unit;
@@ -199,7 +203,7 @@ var xlargeSize = 1600;
 var largeSize = 800;
 var mediumSize = 400;
 var smallSize = 180;
-var ImageUploader = /** @class */ (function (_super) {
+var ImageUploader = exports.ImageUploader = /** @class */ (function (_super) {
     __extends(ImageUploader, _super);
     function ImageUploader(props) {
         var _this = _super.call(this, props) || this;
@@ -357,7 +361,7 @@ var ImageUploader = /** @class */ (function (_super) {
             return;
         };
         _this.showOrgImage = function () {
-            nav_1.nav.push((0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u539F\u56FE" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-3 text-center" }, { children: (0, jsx_runtime_1.jsx)(image_1.Image, { className: "h-min-4c", style: { maxWidth: '100%' }, src: _this.srcImage }, void 0) }), void 0) }), void 0));
+            nav_1.nav.push((0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u539F\u56FE" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "p-3 text-center" }, { children: (0, jsx_runtime_1.jsx)(image_1.Image, { className: "h-min-4c", style: { maxWidth: '100%' }, src: _this.srcImage }) })) })));
         };
         (0, mobx_1.makeObservable)(_this, {
             file: mobx_1.observable,
@@ -442,21 +446,21 @@ var ImageUploader = /** @class */ (function (_super) {
             return;
         return (0, jsx_runtime_1.jsx)("div", { children: arr.map(function (v, index) {
                 var caption = v.caption, size = v.size;
-                return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "me-3" }, { children: [(0, jsx_runtime_1.jsx)("input", { type: "radio", name: "size", onChange: function () { return _this.setSize(size); }, defaultChecked: index === 0 }, void 0), " ", caption] }), index);
-            }) }, void 0);
+                return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "me-3" }, { children: [(0, jsx_runtime_1.jsx)("input", { type: "radio", name: "size", onChange: function () { return _this.setSize(size); }, defaultChecked: index === 0 }), " ", caption] }), index);
+            }) });
     };
     ImageUploader.prototype.render = function () {
         var _this = this;
         var label = this.props.label;
-        var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !this.isChanged, onClick: this.onSaved }, { children: "\u4FDD\u5B58" }), void 0);
-        return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: label || '更改图片', right: right }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "my-3 px-3 py-3 bg-white" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: [(0, jsx_runtime_1.jsx)(ResUploader, { ref: function (v) { return _this.resUploader = v; }, multiple: false, maxSize: 2048, label: "\u9009\u62E9\u56FE\u7247\u6587\u4EF6", onFilesChange: this.onFileChange }, void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "small text-muted" }, { children: ["\u652F\u6301 ", this.imageTypes.join(', '), " \u683C\u5F0F\u56FE\u7247\u3002"] }), void 0), this.fileError && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: this.fileError }), void 0)] }), void 0), (0, jsx_runtime_1.jsx)(simple_1.LMR, { left: this.uploaded === true ?
-                                    (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-success p-2" }, { children: "\u4E0A\u4F20\u6210\u529F\uFF01" }), void 0)
+        var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !this.isChanged, onClick: this.onSaved }, { children: "\u4FDD\u5B58" }));
+        return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: label || '更改图片', right: right }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "my-3 px-3 py-3 bg-white" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: [(0, jsx_runtime_1.jsx)(ResUploader, { ref: function (v) { return _this.resUploader = v; }, multiple: false, maxSize: 2048, label: "\u9009\u62E9\u56FE\u7247\u6587\u4EF6", onFilesChange: this.onFileChange }), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "small text-muted" }, { children: ["\u652F\u6301 ", this.imageTypes.join(', '), " \u683C\u5F0F\u56FE\u7247\u3002"] })), this.fileError && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: this.fileError }))] })), (0, jsx_runtime_1.jsx)(simple_1.LMR, { left: this.uploaded === true ?
+                                    (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-success p-2" }, { children: "\u4E0A\u4F20\u6210\u529F\uFF01" }))
                                     :
-                                        this.file && this.desImgSize > 0 && (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 d-flex align-items-end" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "me-5" }, { children: [this.levelDiv(), (0, jsx_runtime_1.jsxs)("div", { children: ["\u5206\u8FA8\u7387\uFF1A", this.desImgWidth, " x ", this.desImgHeight, "\u00A0 \u00A0 \u6587\u4EF6\u5927\u5C0F\uFF1A", formatSize(this.desImgSize)] }, void 0)] }), void 0), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-primary", disabled: !this.enableUploadButton, onClick: this.upload }, { children: "\u4E0A\u4F20" }), void 0)] }), void 0), right: this.desImage &&
-                                    (0, jsx_runtime_1.jsxs)("button", __assign({ className: "btn btn-link btn-sm text-right mb-3", onClick: this.showOrgImage }, { children: ["\u539F\u56FE\u5927\u5C0F: ", formatSize(this.file.size), (0, jsx_runtime_1.jsx)("br", {}, void 0), "\u5206\u8FA8\u7387\uFF1A", this.srcImgWidth, " x ", this.srcImgHeight] }), void 0) }, void 0)] }, void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center", style: {
+                                        this.file && this.desImgSize > 0 && (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 d-flex align-items-end" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "me-5" }, { children: [this.levelDiv(), (0, jsx_runtime_1.jsxs)("div", { children: ["\u5206\u8FA8\u7387\uFF1A", this.desImgWidth, " x ", this.desImgHeight, "\u00A0 \u00A0 \u6587\u4EF6\u5927\u5C0F\uFF1A", formatSize(this.desImgSize)] })] })), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-primary", disabled: !this.enableUploadButton, onClick: this.upload }, { children: "\u4E0A\u4F20" }))] })), right: this.desImage &&
+                                    (0, jsx_runtime_1.jsxs)("button", __assign({ className: "btn btn-link btn-sm text-right mb-3", onClick: this.showOrgImage }, { children: ["\u539F\u56FE\u5927\u5C0F: ", formatSize(this.file.size), (0, jsx_runtime_1.jsx)("br", {}), "\u5206\u8FA8\u7387\uFF1A", this.srcImgWidth, " x ", this.srcImgHeight] })) })] }), (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center", style: {
                             border: (this.uploaded === true ? '2px solid green' : '1px dotted gray'),
                             padding: '8px'
-                        } }, { children: (0, jsx_runtime_1.jsx)(image_1.Image, { className: "h-min-4c", style: { maxWidth: '100%' }, src: this.desImage }, void 0) }), void 0)] }), void 0) }), void 0);
+                        } }, { children: (0, jsx_runtime_1.jsx)(image_1.Image, { className: "h-min-4c", style: { maxWidth: '100%' }, src: this.desImage }) }))] })) }));
     };
     var ImageUploader_1;
     ImageUploader.imageTypes = ['gif', 'jpg', 'jpeg', 'png', 'svg', 'apng', 'bmp', 'ico', 'cur', 'tiff', 'tif', 'webp'];
@@ -465,8 +469,7 @@ var ImageUploader = /** @class */ (function (_super) {
     ], ImageUploader);
     return ImageUploader;
 }(React.Component));
-exports.ImageUploader = ImageUploader;
-var AudioUploader = /** @class */ (function (_super) {
+var AudioUploader = exports.AudioUploader = /** @class */ (function (_super) {
     __extends(AudioUploader, _super);
     function AudioUploader(props) {
         var _this = _super.call(this, props) || this;
@@ -579,14 +582,14 @@ var AudioUploader = /** @class */ (function (_super) {
     AudioUploader.prototype.render = function () {
         var _this = this;
         var label = this.props.label;
-        var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !this.isChanged, onClick: this.onSaved }, { children: "\u4FDD\u5B58" }), void 0);
-        return (0, jsx_runtime_1.jsxs)(page_1.Page, __assign({ header: label || '更改文件', right: right }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "my-3 px-3 py-3 bg-white" }, { children: (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: [(0, jsx_runtime_1.jsx)(ResUploader, { ref: function (v) { return _this.resUploader = v; }, multiple: false, maxSize: 2048, label: "\u9009\u62E9\u97F3\u9891\u6587\u4EF6", onFilesChange: this.onFileChange }, void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "small text-muted" }, { children: ["\u652F\u6301 ", AudioUploader_1.audioTypes.join(', '), " \u683C\u5F0F\u3002"] }), void 0), this.fileError && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: this.fileError }), void 0)] }), void 0) }, void 0) }), void 0), (0, jsx_runtime_1.jsx)(simple_1.LMR, { left: this.uploaded === true ?
-                        (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-success p-2" }, { children: "\u4E0A\u4F20\u6210\u529F\uFF01" }), void 0)
+        var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !this.isChanged, onClick: this.onSaved }, { children: "\u4FDD\u5B58" }));
+        return (0, jsx_runtime_1.jsxs)(page_1.Page, __assign({ header: label || '更改文件', right: right }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "my-3 px-3 py-3 bg-white" }, { children: (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: [(0, jsx_runtime_1.jsx)(ResUploader, { ref: function (v) { return _this.resUploader = v; }, multiple: false, maxSize: 2048, label: "\u9009\u62E9\u97F3\u9891\u6587\u4EF6", onFilesChange: this.onFileChange }), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "small text-muted" }, { children: ["\u652F\u6301 ", AudioUploader_1.audioTypes.join(', '), " \u683C\u5F0F\u3002"] })), this.fileError && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: this.fileError }))] })) }) })), (0, jsx_runtime_1.jsx)(simple_1.LMR, { left: this.uploaded === true ?
+                        (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-success p-2" }, { children: "\u4E0A\u4F20\u6210\u529F\uFF01" }))
                         :
                             this.uploading === true ?
-                                (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3" }, { children: (0, jsx_runtime_1.jsx)(loading_1.Loading, {}, void 0) }), void 0)
+                                (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3" }, { children: (0, jsx_runtime_1.jsx)(loading_1.Loading, {}) }))
                                 :
-                                    this.file && this.content && (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: ["\u6587\u4EF6\u5927\u5C0F\uFF1A", formatSize(this.fileSize)] }), void 0), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-primary", disabled: !this.enableUploadButton, onClick: this.upload }, { children: "\u4E0A\u4F20" }), void 0)] }), void 0) }, void 0)] }), void 0);
+                                    this.file && this.content && (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: ["\u6587\u4EF6\u5927\u5C0F\uFF1A", formatSize(this.fileSize)] })), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-primary", disabled: !this.enableUploadButton, onClick: this.upload }, { children: "\u4E0A\u4F20" }))] })) })] }));
     };
     var AudioUploader_1;
     AudioUploader.audioTypes = ['mp3', 'wav'];
@@ -595,5 +598,4 @@ var AudioUploader = /** @class */ (function (_super) {
     ], AudioUploader);
     return AudioUploader;
 }(React.Component));
-exports.AudioUploader = AudioUploader;
 //# sourceMappingURL=resUploader.js.map

@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -51,7 +55,7 @@ var mobx_1 = require("mobx");
 var mobx_react_1 = require("mobx-react");
 var react_1 = __importStar(require("react"));
 var inputRules_1 = require("../inputRules");
-var Input = /** @class */ (function (_super) {
+var Input = exports.Input = /** @class */ (function (_super) {
     __extends(Input, _super);
     function Input(props) {
         var _this = _super.call(this, props) || this;
@@ -93,7 +97,8 @@ var Input = /** @class */ (function (_super) {
         configurable: true
     });
     Input.prototype.init = function () {
-        var _a = this.props, required = _a.required, rules = _a.rules, requiredFlagElement = _a.requiredFlagElement, defaultValue = _a.defaultValue;
+        var _a;
+        var required = (_a = this.props, _a.required), rules = _a.rules, requiredFlagElement = _a.requiredFlagElement, defaultValue = _a.defaultValue;
         if (required === true) {
             if (requiredFlagElement === undefined)
                 requiredFlagElement = Input.defaultRequiredFlagElement;
@@ -124,15 +129,16 @@ var Input = /** @class */ (function (_super) {
             onValueChange(v, p, this.ruleMessage);
     };
     Input.prototype.render = function () {
+        var _a, _b;
         var _this = this;
-        var _a = this.props, defaultValue = _a.defaultValue, disabled = _a.disabled, required = _a.required;
-        var content = (0, jsx_runtime_1.jsx)("input", { ref: function (inp) { return _this.input = inp; }, className: this.className, type: this.type, placeholder: this.placeholder, defaultValue: defaultValue, defaultChecked: defaultValue, maxLength: this.maxLength, max: this.max, min: this.min, disabled: disabled, onChange: function () { return _this.onChange(); }, onBlur: function () { return _this.onBlur(); }, onFocus: function () { return _this.onFocus(); } }, void 0);
+        var defaultValue = (_a = this.props, _a.defaultValue), disabled = _a.disabled, required = _a.required;
+        var content = (0, jsx_runtime_1.jsx)("input", { ref: function (inp) { return _this.input = inp; }, className: this.className, type: this.type, placeholder: this.placeholder, defaultValue: defaultValue, defaultChecked: defaultValue, maxLength: this.maxLength, max: this.max, min: this.min, disabled: disabled, onChange: function () { return _this.onChange(); }, onBlur: function () { return _this.onBlur(); }, onFocus: function () { return _this.onFocus(); } });
         if (this.rules.length === 0)
             return content;
-        var _b = this.props, containerClassName = _b.containerClassName, ruleClassName = _b.ruleClassName;
+        var containerClassName = (_b = this.props, _b.containerClassName), ruleClassName = _b.ruleClassName;
         return (0, jsx_runtime_1.jsxs)("span", __assign({ className: containerClassName }, { children: [required === true && this.requiredFlagElement, content, react_1.default.createElement((0, mobx_react_1.observer)(function () {
-                    return (0, jsx_runtime_1.jsx)("span", __assign({ className: ruleClassName !== null && ruleClassName !== void 0 ? ruleClassName : Input.defaultRuleClassName }, { children: _this.ruleMessage }), void 0);
-                }))] }), void 0);
+                    return (0, jsx_runtime_1.jsx)("span", __assign({ className: ruleClassName !== null && ruleClassName !== void 0 ? ruleClassName : Input.defaultRuleClassName }, { children: _this.ruleMessage }));
+                }))] }));
     };
     Input.prototype.onChange = function () {
         var preValue = this.value;
@@ -164,9 +170,8 @@ var Input = /** @class */ (function (_super) {
     Input.prototype.onFocus = function () {
         this.ruleMessage = null;
     };
-    Input.defaultRequiredFlagElement = (0, jsx_runtime_1.jsx)("span", __assign({ className: "mx-2 text-danger" }, { children: "*" }), void 0);
+    Input.defaultRequiredFlagElement = (0, jsx_runtime_1.jsx)("span", __assign({ className: "mx-2 text-danger" }, { children: "*" }));
     Input.defaultRuleClassName = ' mx-2 text-danger ';
     return Input;
 }(react_1.Component));
-exports.Input = Input;
 //# sourceMappingURL=input.js.map

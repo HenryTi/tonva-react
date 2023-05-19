@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -94,15 +94,15 @@ var TuidsCache = /** @class */ (function () {
     };
     TuidsCache.prototype.innerPullModify = function (tuidLists) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, uqApi, tuids, max, ret, group, modifyMax, _i, _b, modify, id, entity, key, tuid, item, _c, _d, _e, i, _f, tuid, ids, now;
-            return __generator(this, function (_g) {
-                switch (_g.label) {
+            var _a, uqApi, tuids, max, ret, group, modifyMax, _i, _b, modify, id, entity, key, tuid, item, _c, _d, _e, _f, i, _g, tuid, ids, now;
+            return __generator(this, function (_h) {
+                switch (_h.label) {
                     case 0:
                         _a = this.uq, uqApi = _a.uqApi, tuids = _a.tuids;
                         max = this.modifyMax.max;
                         return [4 /*yield*/, uqApi.queueModify(max, 30, tuidLists)];
                     case 1:
-                        ret = _g.sent();
+                        ret = _h.sent();
                         group = {};
                         modifyMax = 0;
                         for (_i = 0, _b = ret.queue; _i < _b.length; _i++) {
@@ -121,21 +121,24 @@ var TuidsCache = /** @class */ (function () {
                             if (id > modifyMax)
                                 modifyMax = id;
                         }
-                        _c = [];
-                        for (_d in group)
-                            _c.push(_d);
-                        _e = 0;
-                        _g.label = 2;
+                        _c = group;
+                        _d = [];
+                        for (_e in _c)
+                            _d.push(_e);
+                        _f = 0;
+                        _h.label = 2;
                     case 2:
-                        if (!(_e < _c.length)) return [3 /*break*/, 5];
-                        i = _c[_e];
-                        _f = group[i], tuid = _f.tuid, ids = _f.ids;
+                        if (!(_f < _d.length)) return [3 /*break*/, 5];
+                        _e = _d[_f];
+                        if (!(_e in _c)) return [3 /*break*/, 4];
+                        i = _e;
+                        _g = group[i], tuid = _g.tuid, ids = _g.ids;
                         return [4 /*yield*/, tuid.modifyIds(ids)];
                     case 3:
-                        _g.sent();
-                        _g.label = 4;
+                        _h.sent();
+                        _h.label = 4;
                     case 4:
-                        _e++;
+                        _f++;
                         return [3 /*break*/, 2];
                     case 5:
                         now = Math.floor(Date.now() / 1000);

@@ -83,9 +83,9 @@ var RadioWidget = /** @class */ (function (_super) {
                 var name = _this.name;
                 if (rowKey !== undefined)
                     name += '-' + rowKey;
-                return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "form-radio-inline" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: function (input) { return _this.inputs[index] = input; }, type: "radio", name: name, value: value, defaultChecked: (_this.defaultValue || defaultValue) === value, onChange: _this.onInputChange }, void 0), title || value] }), index);
+                return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "form-radio-inline" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: function (input) { return _this.inputs[index] = input; }, type: "radio", name: name, value: value, defaultChecked: (_this.defaultValue || defaultValue) === value, onChange: _this.onInputChange }), title || value] }), index);
                 //</span>
-            }) }), void 0);
+            }) }));
     };
     return RadioWidget;
 }(widget_1.Widget));

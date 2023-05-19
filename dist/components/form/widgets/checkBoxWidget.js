@@ -78,12 +78,12 @@ var CheckBoxWidget = /** @class */ (function (_super) {
     CheckBoxWidget.prototype.render = function () {
         var _this = this;
         var cn = (0, classnames_1.default)(this.className, 'form-check-inline p-0');
-        var input = (0, jsx_runtime_1.jsx)("input", { ref: function (input) { return _this.input = input; }, className: 'align-self-center', type: "checkbox", defaultChecked: this.defaultValue, onChange: this.onInputChange, onClick: this.onClick }, void 0);
+        var input = (0, jsx_runtime_1.jsx)("input", { ref: function (input) { return _this.input = input; }, className: 'align-self-center', type: "checkbox", defaultChecked: this.defaultValue, onChange: this.onInputChange, onClick: this.onClick });
         if (this.context.inNode === true) {
-            return (0, jsx_runtime_1.jsxs)("label", __assign({ className: cn }, { children: [input, " ", (this.ui && this.ui.label) || this.name] }), void 0);
+            return (0, jsx_runtime_1.jsxs)("label", __assign({ className: cn }, { children: [input, " ", (this.ui && this.ui.label) || this.name] }));
         }
         else {
-            return (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: (0, jsx_runtime_1.jsx)("label", __assign({ className: "w-100 h-100 mb-0 d-flex justify-content-center" }, { children: input }), void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: (0, jsx_runtime_1.jsx)("label", __assign({ className: "w-100 h-100 mb-0 d-flex justify-content-center" }, { children: input })) }));
         }
     };
     return CheckBoxWidget;

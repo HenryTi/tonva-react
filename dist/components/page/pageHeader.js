@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +63,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -133,9 +137,9 @@ function renderPageHeader(props, inWebNav) {
             var user = nav_1.nav.user;
             if (user !== undefined) {
                 var nick = user.nick, name_1 = user.name;
-                debugLogout = (0, jsx_runtime_1.jsxs)("div", __assign({ className: "d-flex align-items-center" }, { children: [(0, jsx_runtime_1.jsx)("small", __assign({ className: "text-light" }, { children: nick || name_1 }), void 0), 
+                debugLogout = (0, jsx_runtime_1.jsxs)("div", __assign({ className: "d-flex align-items-center" }, { children: [(0, jsx_runtime_1.jsx)("small", __assign({ className: "text-light" }, { children: nick || name_1 })), 
                         // eslint-disable-next-line
-                        (0, jsx_runtime_1.jsx)("div", __assign({ className: "ms-2 py-2 px-3 cursor-pointer", role: "button", onClick: onLogoutClick }, { children: (0, jsx_runtime_1.jsx)("i", { className: "fa fa-sign-out fa-lg" }, void 0) }), void 0)] }), void 0);
+                        (0, jsx_runtime_1.jsx)("div", __assign({ className: "ms-2 py-2 px-3 cursor-pointer", role: "button", onClick: onLogoutClick }, { children: (0, jsx_runtime_1.jsx)("i", { className: "fa fa-sign-out fa-lg" }) }))] }));
             }
         }
     }
@@ -146,10 +150,10 @@ function renderPageHeader(props, inWebNav) {
                 break;
             default:
             case 'back':
-                vBack = (0, jsx_runtime_1.jsx)("nav", __assign({ onClick: onBack }, { children: nav_1.nav.backIcon }), void 0);
+                vBack = (0, jsx_runtime_1.jsx)("nav", __assign({ onClick: onBack }, { children: nav_1.nav.backIcon }));
                 break;
             case 'close':
-                vBack = (0, jsx_runtime_1.jsx)("nav", __assign({ onClick: onBack }, { children: nav_1.nav.closeIcon }), void 0);
+                vBack = (0, jsx_runtime_1.jsx)("nav", __assign({ onClick: onBack }, { children: nav_1.nav.closeIcon }));
                 break;
         }
     }
@@ -158,13 +162,13 @@ function renderPageHeader(props, inWebNav) {
         // pop = <header onClick={this.openWindow} className="mx-1"><FA name="external-link" /></header>;
     }
     if (vBack === undefined && typeof center === 'string') {
-        center = (0, jsx_runtime_1.jsx)("div", __assign({ className: "px-3" }, { children: center }), void 0);
+        center = (0, jsx_runtime_1.jsx)("div", __assign({ className: "px-3" }, { children: center }));
     }
-    var rightView = (right || debugLogout) && (0, jsx_runtime_1.jsxs)("aside", { children: [right, " ", debugLogout] }, void 0);
-    var header = (0, jsx_runtime_1.jsxs)("header", __assign({ className: className }, { children: [(0, jsx_runtime_1.jsxs)("nav", { children: [vBack, (0, jsx_runtime_1.jsx)("div", { children: center }, void 0), rightView] }, void 0), ex] }), void 0);
+    var rightView = (right || debugLogout) && (0, jsx_runtime_1.jsxs)("aside", { children: [right, " ", debugLogout] });
+    var header = (0, jsx_runtime_1.jsxs)("header", __assign({ className: className }, { children: [(0, jsx_runtime_1.jsxs)("nav", { children: [vBack, (0, jsx_runtime_1.jsx)("div", { children: center }), rightView] }), ex] }));
     if (inWebNav === true)
         return header;
-    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-header" }, { children: header }), void 0), header] }, void 0);
+    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("section", __assign({ className: "tv-page-header" }, { children: header })), header] });
 }
 exports.renderPageHeader = renderPageHeader;
 var PageHeader = /** @class */ (function (_super) {

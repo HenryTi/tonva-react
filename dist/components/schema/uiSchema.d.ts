@@ -5,10 +5,10 @@ import { FieldProps } from '../form/field';
 import { Widget } from '../form/widgets';
 import { IValuesView } from './IValuesView';
 import { FieldRule } from '../inputRules';
-export declare type TypeWidget = new (context: Context, itemSchema: ItemSchema, fieldProps: FieldProps, children: React.ReactNode) => Widget;
-export declare type UiType = 'form' | 'arr' | 'group' | 'button' | 'submit' | 'custom' | 'image' | 'id' | 'text' | 'textarea' | 'password' | 'date' | 'datetime' | 'select' | 'url' | 'email' | 'updown' | 'number' | 'color' | 'checkbox' | 'checkboxes' | 'radio' | 'range' | 'tagSingle' | 'tagMulti';
-export declare type ChangingHandler = (context: Context, value: any, prev: any) => boolean;
-export declare type ChangedHandler = (context: Context, value: any, prev: any) => Promise<void>;
+export type TypeWidget = new (context: Context, itemSchema: ItemSchema, fieldProps: FieldProps, children: React.ReactNode) => Widget;
+export type UiType = 'form' | 'arr' | 'group' | 'button' | 'submit' | 'custom' | 'image' | 'id' | 'text' | 'textarea' | 'password' | 'date' | 'datetime' | 'select' | 'url' | 'email' | 'updown' | 'number' | 'color' | 'checkbox' | 'checkboxes' | 'radio' | 'range' | 'tagSingle' | 'tagMulti';
+export type ChangingHandler = (context: Context, value: any, prev: any) => boolean;
+export type ChangedHandler = (context: Context, value: any, prev: any) => Promise<void>;
 export interface UiItem {
     widget?: UiType;
     readOnly?: boolean;
@@ -34,7 +34,7 @@ export interface UiImageItem extends UiItem {
     widget: 'image';
     size: 'sm' | 'lg';
 }
-export declare type PickId = (context: Context, name: string, value: number) => Promise<any>;
+export type PickId = (context: Context, name: string, value: number) => Promise<any>;
 export interface UiIdItem extends UiItem {
     widget: 'id';
     placeholder?: string | JSX.Element;
@@ -99,7 +99,7 @@ export interface UiTagMulti extends UiTag {
 export interface UiItemCollection {
     [field: string]: UiItem;
 }
-export declare type TempletType = ((item?: any) => JSX.Element) | JSX.Element;
+export type TempletType = ((item?: any) => JSX.Element) | JSX.Element;
 export interface UiSchema {
     items?: UiItemCollection;
     Templet?: TempletType;

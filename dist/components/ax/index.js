@@ -25,7 +25,7 @@ var Ax = function (axProps) {
     if (nav_1.nav.isWebNav === true) {
         var aClassName = axProps.aClassName;
         if (!href)
-            return (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "Error: href not defined in Ax" }), void 0);
+            return (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "Error: href not defined in Ax" }));
         var onAxClick = function (evt) {
             evt.preventDefault();
             var ret;
@@ -38,7 +38,7 @@ var Ax = function (axProps) {
             }
             return ret;
         };
-        return (0, jsx_runtime_1.jsx)("a", __assign({}, axProps, { className: (0, classnames_1.default)(className, aClassName), onClick: onAxClick }, { children: children }), void 0);
+        return (0, jsx_runtime_1.jsx)("a", __assign({}, axProps, { className: (0, classnames_1.default)(className, aClassName), onClick: onAxClick }, { children: children }));
     }
     else {
         var naClassName = axProps.naClassName;
@@ -51,7 +51,7 @@ var Ax = function (axProps) {
                 return false;
             };
         }
-        return (0, jsx_runtime_1.jsx)("span", __assign({ className: (0, classnames_1.default)(className, 'cursor-pointer', naClassName), onClick: onClick }, { children: children }), void 0);
+        return (0, jsx_runtime_1.jsx)("span", __assign({ className: (0, classnames_1.default)(className, 'cursor-pointer', naClassName), onClick: onClick }, { children: children }));
     }
 };
 exports.Ax = Ax;
@@ -60,7 +60,7 @@ exports.Ax = Ax;
 var A = function (props) {
     var children = props.children;
     if (nav_1.nav.isWebNav === false) {
-        return (0, jsx_runtime_1.jsx)("a", __assign({}, props, { children: children }), void 0);
+        return (0, jsx_runtime_1.jsx)("a", __assign({}, props, { children: children }));
     }
     var href = props.href;
     //if (nav.testing === true) href += '#test';
@@ -69,7 +69,7 @@ var A = function (props) {
         nav_1.nav.navigate(href);
         return false;
     };
-    return (0, jsx_runtime_1.jsx)("a", __assign({}, props, { href: href, onClick: onClick }, { children: children }), void 0);
+    return (0, jsx_runtime_1.jsx)("a", __assign({}, props, { href: href, onClick: onClick }, { children: children }));
 };
 exports.A = A;
 //# sourceMappingURL=index.js.map

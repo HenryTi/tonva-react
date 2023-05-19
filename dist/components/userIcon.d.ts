@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { User } from '../tool';
-export declare type UserLoader = (userId: number) => Promise<any>;
+export type UserLoader = (userId: number) => Promise<any>;
 export declare class UserCache<T> {
     private loader;
     private onLoaded;

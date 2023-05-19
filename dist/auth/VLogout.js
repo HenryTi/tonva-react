@@ -40,7 +40,7 @@ var VLogout = /** @class */ (function (_super) {
     };
     VLogout.prototype.header = function () { return this.isWebNav === true ? false : '安全退出'; };
     VLogout.prototype.footer = function () {
-        return (0, jsx_runtime_1.jsx)("div", __assign({ className: "mt-5 text-center justify-content-center" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-outline-warning", onClick: components_1.nav.resetAll }, { children: "\u5347\u7EA7\u8F6F\u4EF6" }), void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: "mt-5 text-center justify-content-center" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-outline-warning", onClick: components_1.nav.resetAll }, { children: "\u5347\u7EA7\u8F6F\u4EF6" })) }));
     };
     Object.defineProperty(VLogout.prototype, "back", {
         get: function () { return 'close'; },
@@ -48,7 +48,7 @@ var VLogout = /** @class */ (function (_super) {
         configurable: true
     });
     VLogout.prototype.content = function () {
-        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-5 border border-info bg-white rounded-3 p-5 text-center" }, { children: [(0, jsx_runtime_1.jsx)("div", { children: "\u9000\u51FA\u5F53\u524D\u8D26\u53F7\u4E0D\u4F1A\u5220\u9664\u4EFB\u4F55\u5386\u53F2\u6570\u636E\uFF0C\u4E0B\u6B21\u767B\u5F55\u4F9D\u7136\u53EF\u4EE5\u4F7F\u7528\u672C\u8D26\u53F7" }, void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "mt-5 text-center" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-danger", onClick: this.onLogout }, { children: "\u5B89\u5168\u9000\u51FA" }), void 0) }), void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-5 border border-info bg-white rounded-3 p-5 text-center" }, { children: [(0, jsx_runtime_1.jsx)("div", { children: "\u9000\u51FA\u5F53\u524D\u8D26\u53F7\u4E0D\u4F1A\u5220\u9664\u4EFB\u4F55\u5386\u53F2\u6570\u636E\uFF0C\u4E0B\u6B21\u767B\u5F55\u4F9D\u7136\u53EF\u4EE5\u4F7F\u7528\u672C\u8D26\u53F7" }), (0, jsx_runtime_1.jsx)("div", __assign({ className: "mt-5 text-center" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-danger", onClick: this.onLogout }, { children: "\u5B89\u5168\u9000\u51FA" })) }))] }));
     };
     return VLogout;
 }(vm_1.VPage));

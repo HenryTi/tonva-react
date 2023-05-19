@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -87,13 +91,13 @@ var ReloadPage = /** @class */ (function (_super) {
             title = '程序需要升级';
             msg = '请点击下面按钮重启';
         }
-        return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: false }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "text-center p-5" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "text-info py-5" }, { children: [(0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: title }), void 0), (0, jsx_runtime_1.jsx)("br", {}, void 0), msg, (0, jsx_runtime_1.jsx)("br", {}, void 0), (0, jsx_runtime_1.jsx)("span", __assign({ className: "small text-muted" }, { children: this.props.message }), void 0)] }), void 0), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-danger", onClick: this.reload }, { children: "\u7ACB\u523B\u91CD\u542F" }), void 0)] }), void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: false }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "text-center p-5" }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: "text-info py-5" }, { children: [(0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: title })), (0, jsx_runtime_1.jsx)("br", {}), msg, (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("span", __assign({ className: "small text-muted" }, { children: this.props.message }))] })), (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-danger", onClick: this.reload }, { children: "\u7ACB\u523B\u91CD\u542F" }))] })) }));
     };
     return ReloadPage;
 }(React.Component));
 exports.ReloadPage = ReloadPage;
 var ConfirmReloadPage = function (props) {
-    return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u5347\u7EA7\u8F6F\u4EF6", back: "close" }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "py-5 px-3 my-5 mx-2 border bg-white rounded" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center text-info" }, { children: "\u5347\u7EA7\u5C06\u6E05\u9664\u6240\u6709\u672C\u673A\u7F13\u51B2\u533A\u5185\u5BB9\uFF0C\u5E76\u4ECE\u670D\u52A1\u5668\u91CD\u65B0\u5B89\u88C5\u7A0B\u5E8F\uFF01" }), void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center mt-5" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-danger me-3", onClick: function () { return props.confirm(true); } }, { children: "\u786E\u8BA4\u5347\u7EA7" }), void 0) }), void 0)] }), void 0) }), void 0);
+    return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: "\u5347\u7EA7\u8F6F\u4EF6", back: "close" }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "py-5 px-3 my-5 mx-2 border bg-white rounded" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center text-info" }, { children: "\u5347\u7EA7\u5C06\u6E05\u9664\u6240\u6709\u672C\u673A\u7F13\u51B2\u533A\u5185\u5BB9\uFF0C\u5E76\u4ECE\u670D\u52A1\u5668\u91CD\u65B0\u5B89\u88C5\u7A0B\u5E8F\uFF01" })), (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-center mt-5" }, { children: (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-danger me-3", onClick: function () { return props.confirm(true); } }, { children: "\u786E\u8BA4\u5347\u7EA7" })) }))] })) }));
     // <button className="btn btn-outline-danger" onClick={()=>props.confirm(false)}>暂不</button>
 };
 exports.ConfirmReloadPage = ConfirmReloadPage;

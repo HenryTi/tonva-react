@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -65,7 +69,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -102,14 +106,15 @@ var textAreaItemEdit_1 = require("./textAreaItemEdit");
 var checkBoxItemEdit_1 = require("./checkBoxItemEdit");
 var rangeItemEdit_1 = require("./rangeItemEdit");
 var numberItemEdit_1 = require("./numberItemEdit");
-var Edit = /** @class */ (function (_super) {
+var Edit = exports.Edit = /** @class */ (function (_super) {
     __extends(Edit, _super);
     function Edit(props) {
         var _this = _super.call(this, props) || this;
         _this.defaultSepClassName = 'border-top edit-sep-light-gray';
         _this.defaultRowContainerClassName = 'd-flex px-3 py-2 bg-white align-items-center';
         _this.rowClick = function (itemEdit) { return __awaiter(_this, void 0, void 0, function () {
-            var itemSchema, uiItem, value, editInRow, _a, onItemChanged, onItemClick, stopEdit, changeValue, err_1;
+            var itemSchema, uiItem, value, editInRow, onItemChanged, onItemClick, stopEdit, changeValue, err_1;
+            var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -120,7 +125,7 @@ var Edit = /** @class */ (function (_super) {
                         itemSchema = itemEdit.itemSchema, uiItem = itemEdit.uiItem, value = itemEdit.value, editInRow = itemEdit.editInRow;
                         if (editInRow === true)
                             return [2 /*return*/];
-                        _a = this.props, onItemChanged = _a.onItemChanged, onItemClick = _a.onItemClick, stopEdit = _a.stopEdit;
+                        onItemChanged = (_a = this.props, _a.onItemChanged), onItemClick = _a.onItemClick, stopEdit = _a.stopEdit;
                         if (stopEdit === true)
                             return [2 /*return*/];
                         if ((uiItem === null || uiItem === void 0 ? void 0 : uiItem.readOnly) === true)
@@ -167,11 +172,11 @@ var Edit = /** @class */ (function (_super) {
             });
         }); };
         var topBorderClassName = props.topBorderClassName, bottomBorderClassName = props.bottomBorderClassName, sepClassName = props.sepClassName, rowContainerClassName = props.rowContainerClassName, uiSchema = props.uiSchema;
-        _this.topBorder = (0, jsx_runtime_1.jsx)("div", { className: topBorderClassName || _this.defaultSepClassName }, void 0);
-        _this.bottomBorder = (0, jsx_runtime_1.jsx)("div", { className: bottomBorderClassName || _this.defaultSepClassName }, void 0);
+        _this.topBorder = (0, jsx_runtime_1.jsx)("div", { className: topBorderClassName || _this.defaultSepClassName });
+        _this.bottomBorder = (0, jsx_runtime_1.jsx)("div", { className: bottomBorderClassName || _this.defaultSepClassName });
         _this.rowContainerClassName = rowContainerClassName || _this.defaultRowContainerClassName;
         //if (stopEdit !== true) this.rowContainerClassName += ' cursor-pointer';
-        _this.sep = (0, jsx_runtime_1.jsx)("div", { className: sepClassName || _this.defaultSepClassName }, void 0);
+        _this.sep = (0, jsx_runtime_1.jsx)("div", { className: sepClassName || _this.defaultSepClassName });
         _this.uiSchema = (uiSchema && uiSchema.items) || {};
         return _this;
     }
@@ -200,13 +205,13 @@ var Edit = /** @class */ (function (_super) {
                     if (editInRow === false)
                         rowContainerClassName += ' cursor-pointer';
                     var required = itemSchema.required;
-                    var requireFlag = required === true && (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "*" }), void 0);
+                    var requireFlag = required === true && (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "*" }));
                     var divLabel, cn = 'flex-fill d-flex ';
                     if (labelHide === true) {
                         divLabel = undefined;
                     }
                     else {
-                        divLabel = (0, jsx_runtime_1.jsxs)("div", { children: [label, " ", requireFlag] }, void 0);
+                        divLabel = (0, jsx_runtime_1.jsxs)("div", { children: [label, " ", requireFlag] });
                         cn += 'justify-content-end';
                     }
                     var ret = (0, jsx_runtime_1.jsxs)(React.Fragment, { children: [sep, (0, jsx_runtime_1.jsxs)("div", __assign({ className: 'd-flex align-items-center' + rowContainerClassName, onClick: function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
@@ -214,20 +219,21 @@ var Edit = /** @class */ (function (_super) {
                                         case 0: return [4 /*yield*/, this.rowClick(itemEdit)];
                                         case 1: return [2 /*return*/, _a.sent()];
                                     }
-                                }); }); } }, { children: [divLabel, (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: itemEdit === undefined ? undefined : itemEdit.renderContent() }), void 0), editInRow === false && (0, jsx_runtime_1.jsx)("div", __assign({ className: "w-2c text-right" }, { children: (0, jsx_runtime_1.jsx)("i", { className: "fa fa-angle-right" }, void 0) }), void 0)] }), void 0)] }, index);
+                                }); }); } }, { children: [divLabel, (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: itemEdit === undefined ? undefined : itemEdit.renderContent() })), editInRow === false && (0, jsx_runtime_1.jsx)("div", __assign({ className: "w-2c text-right" }, { children: (0, jsx_runtime_1.jsx)("i", { className: "fa fa-angle-right" }) }))] }))] }, index);
                     sep = _this.sep;
                     return ret;
-                }), this.bottomBorder] }, void 0);
+                }), this.bottomBorder] });
     };
     Edit.prototype.onItemChanged = function (itemEdit, newValue) {
         return __awaiter(this, void 0, void 0, function () {
-            var itemSchema, uiItem, value, _a, onItemChanged, stopEdit;
+            var itemSchema, uiItem, value, onItemChanged, stopEdit;
+            var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         itemSchema = itemEdit.itemSchema, uiItem = itemEdit.uiItem, value = itemEdit.value;
                         this.props.data[itemSchema.name] = newValue;
-                        _a = this.props, onItemChanged = _a.onItemChanged, stopEdit = _a.stopEdit;
+                        onItemChanged = (_a = this.props, _a.onItemChanged), stopEdit = _a.stopEdit;
                         if (stopEdit === true)
                             return [2 /*return*/];
                         if ((uiItem === null || uiItem === void 0 ? void 0 : uiItem.readOnly) === true)
@@ -249,7 +255,6 @@ var Edit = /** @class */ (function (_super) {
     ], Edit);
     return Edit;
 }(React.Component));
-exports.Edit = Edit;
 function createItemEdit(edit, itemSchema, uiItem, label, value) {
     var ie;
     var itemEdit;

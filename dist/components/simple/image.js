@@ -11,7 +11,7 @@ function Image(props) {
     else if (src.startsWith(':') === true) {
         src = 'http://localhost:3015/res/' + src.substr(1);
     }
-    return (0, jsx_runtime_1.jsx)("img", { src: src, className: className, style: style }, void 0);
+    return (0, jsx_runtime_1.jsx)("img", { src: src, className: className, style: style });
     //}
 }
 exports.Image = Image;

@@ -40,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -117,7 +117,7 @@ var VChangePassword = /** @class */ (function (_super) {
                             context.setError('orgPassword', '原密码错误');
                             return [2 /*return*/];
                         }
-                        components_1.nav.replace((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "\u4FEE\u6539\u5BC6\u7801", back: "close" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3  text-success" }, { children: "\u5BC6\u7801\u4FEE\u6539\u6210\u529F\uFF01" }), void 0) }), void 0));
+                        components_1.nav.replace((0, jsx_runtime_1.jsx)(components_1.Page, __assign({ header: "\u4FEE\u6539\u5BC6\u7801", back: "close" }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "m-3  text-success" }, { children: "\u5BC6\u7801\u4FEE\u6539\u6210\u529F\uFF01" })) })));
                         return [2 /*return*/];
                 }
             });
@@ -129,7 +129,7 @@ var VChangePassword = /** @class */ (function (_super) {
     };
     VChangePassword.prototype.header = function () { return '修改密码'; };
     VChangePassword.prototype.content = function () {
-        return (0, jsx_runtime_1.jsx)(components_1.Form, { className: "m-3", schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, fieldLabelSize: 2 }, void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.Form, { className: "m-3", schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, fieldLabelSize: 2 });
     };
     return VChangePassword;
 }(vm_1.VPage));

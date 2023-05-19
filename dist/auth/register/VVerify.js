@@ -40,7 +40,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -135,10 +135,10 @@ var VVerify = /** @class */ (function (_super) {
                 break;
             case 'email':
                 typeText = '邮箱';
-                extra = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "\u6CE8\u610F" }), void 0), ": \u6709\u53EF\u80FD\u8BEF\u4E3A\u5783\u573E\u90AE\u4EF6\uFF0C\u8BF7\u68C0\u67E5", (0, jsx_runtime_1.jsx)("br", {}, void 0)] }, void 0);
+                extra = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "\u6CE8\u610F" })), ": \u6709\u53EF\u80FD\u8BEF\u4E3A\u5783\u573E\u90AE\u4EF6\uFF0C\u8BF7\u68C0\u67E5", (0, jsx_runtime_1.jsx)("br", {})] });
                 break;
         }
-        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u9A8C\u8BC1\u7801\u5DF2\u7ECF\u53D1\u9001\u5230", typeText, (0, jsx_runtime_1.jsx)("br", {}, void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: (0, jsx_runtime_1.jsx)("b", { children: this.controller.account }, void 0) }), void 0), extra, (0, jsx_runtime_1.jsx)("div", { className: "h-1c" }, void 0), (0, jsx_runtime_1.jsx)(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false }, void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "w-max-20c my-5 py-5", style: { marginLeft: 'auto', marginRight: 'auto' } }, { children: ["\u9A8C\u8BC1\u7801\u5DF2\u7ECF\u53D1\u9001\u5230", typeText, (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("div", __assign({ className: "py-2 px-3 my-2 text-primary bg-light" }, { children: (0, jsx_runtime_1.jsx)("b", { children: this.controller.account }) })), extra, (0, jsx_runtime_1.jsx)("div", { className: "h-1c" }), (0, jsx_runtime_1.jsx)(components_1.Form, { schema: this.schema, uiSchema: this.uiSchema, onButtonClick: this.onSubmit, onEnter: this.onEnter, requiredFlag: false })] }));
     };
     return VVerify;
 }(vm_1.VPage));

@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +63,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -106,8 +110,8 @@ var SelectItemEdit = /** @class */ (function (_super) {
                     return (0, jsx_runtime_1.jsx)("div", __assign({ className: "px-3 py-2 cursor-pointer bg-white mb-1", onClick: function () { _this.onChange(value); resolve(_this.newValue); } }, { children: title || value }), index);
                 })
                 :
-                    (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "no list defined" }, void 0);
-            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "my-3" }, { children: content }), void 0) }), void 0);
+                    (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "no list defined" });
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: '更改' + _this.label }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: "my-3" }, { children: content })) }));
         });
         return _this;
     }

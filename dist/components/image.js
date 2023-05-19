@@ -32,14 +32,14 @@ function Image(props) {
                         evt.currentTarget.src = altImage;
                     else
                         evt.currentTarget.src = 'https://tv.jkchemical.com/imgs/0001.png';
-                } }, void 0);
+                } });
         }
         icon = src.substr(1);
     }
     else {
         icon = 'file-o';
     }
-    return (0, jsx_runtime_1.jsx)("span", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: (0, jsx_runtime_1.jsx)("i", { className: 'fa fa-' + icon }, void 0) }), void 0);
+    return (0, jsx_runtime_1.jsx)("span", __assign({ className: (0, classnames_1.default)(className, 'image-none'), style: style }, { children: (0, jsx_runtime_1.jsx)("i", { className: 'fa fa-' + icon }) }));
 }
 exports.Image = Image;
 //# sourceMappingURL=image.js.map

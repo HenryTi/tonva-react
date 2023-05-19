@@ -2,7 +2,7 @@ import { InputRes } from '../res/inputRes';
 export declare abstract class Rule {
     abstract check(defy: string[], value: any): void;
 }
-export declare type FieldRule = (value: any) => string[] | string;
+export type FieldRule = (value: any) => string[] | string;
 export declare class RuleCustom extends Rule {
     private func;
     constructor(func: FieldRule);

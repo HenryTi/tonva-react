@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +63,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -105,7 +109,7 @@ var Form = /** @class */ (function (_super) {
             _this.calcSelectOrDelete();
         };
         _this.DefaultContainer = function (content) {
-            return (0, jsx_runtime_1.jsx)("form", __assign({ className: (0, classnames_1.default)(_this.props.className), onSubmit: function (e) { return e.preventDefault(); } }, { children: content }), void 0);
+            return (0, jsx_runtime_1.jsx)("form", __assign({ className: (0, classnames_1.default)(_this.props.className), onSubmit: function (e) { return e.preventDefault(); } }, { children: content }));
         };
         _this.DefaultFieldContainer = function (label, content) {
             var _a = _this.props, fieldLabelSize = _a.fieldLabelSize, fieldLabelAlign = _a.fieldLabelAlign;
@@ -124,26 +128,26 @@ var Form = /** @class */ (function (_super) {
                             cnAlign = 'text-sm-center';
                             break;
                     }
-                    labelView = (0, jsx_runtime_1.jsx)("label", __assign({ className: (0, classnames_1.default)('col-sm-' + fieldLabelSize, 'col-form-label', cnAlign) }, { children: label }), void 0);
+                    labelView = (0, jsx_runtime_1.jsx)("label", __assign({ className: (0, classnames_1.default)('col-sm-' + fieldLabelSize, 'col-form-label', cnAlign) }, { children: label }));
                 }
                 var fieldCol = 'col-sm-' + (12 - fieldLabelSize);
-                return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 row" }, { children: [labelView, (0, jsx_runtime_1.jsx)("div", __assign({ className: fieldCol }, { children: content }), void 0)] }), void 0);
+                return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3 row" }, { children: [labelView, (0, jsx_runtime_1.jsx)("div", __assign({ className: fieldCol }, { children: content }))] }));
             }
-            return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: [label === null ? null : (0, jsx_runtime_1.jsx)("label", __assign({ className: "col-form-label" }, { children: label }), void 0), content] }), void 0);
+            return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "mb-3" }, { children: [label === null ? null : (0, jsx_runtime_1.jsx)("label", __assign({ className: "col-form-label" }, { children: label })), content] }));
         };
         _this.DefaultFieldClass = undefined;
         _this.DefaultButtonClass = 'text-center py-2';
         _this.DefaultRes = (0, res_1.resLang)(res_1.inputRes);
         _this.ArrContainer = function (label, content) {
-            return (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)('small text-muted text-center bg-light py-1 px-3 mt-4 mb-1') }, { children: label }), void 0), content] }, void 0);
+            return (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: (0, classnames_1.default)('small text-muted text-center bg-light py-1 px-3 mt-4 mb-1') }, { children: label })), content] });
         };
         _this.RowContainer = function (content) {
             var cn = (0, classnames_1.default)({
                 'py-3': true
             });
-            return (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: content }), void 0);
+            return (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: content }));
         };
-        _this.RowSeperator = (0, jsx_runtime_1.jsx)("div", { className: "border border-gray border-top" }, void 0);
+        _this.RowSeperator = (0, jsx_runtime_1.jsx)("div", { className: "border border-gray border-top" });
         var schema = props.schema, uiSchema = props.uiSchema, Container = props.Container, FieldContainer = props.FieldContainer, FieldClass = props.FieldClass, ButtonClass = props.ButtonClass, res = props.res;
         _this.Container = Container || _this.DefaultContainer;
         _this.FieldContainer = FieldContainer || _this.DefaultFieldContainer;
@@ -167,7 +171,7 @@ var Form = /** @class */ (function (_super) {
         var children = this.props.children;
         if (children !== undefined) {
             this.formContext = new context_1.FormContext(this, true);
-            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: children }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: children });
         }
         var Templet;
         if (this.uiSchema !== undefined) {
@@ -182,7 +186,7 @@ var Form = /** @class */ (function (_super) {
         }
         return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: this.schema.map(function (v, index) {
                 return (0, jsx_runtime_1.jsx)(React.Fragment, { children: (0, widgets_1.factory)(_this.formContext, v, children) }, index);
-            }) }, void 0);
+            }) });
     };
     Form.prototype.initData = function (formData) {
         if (formData === undefined)
@@ -291,7 +295,7 @@ var Form = /** @class */ (function (_super) {
     };
     Form.prototype.render = function () {
         var content = this.renderContent();
-        return (0, jsx_runtime_1.jsxs)(context_1.ContextContainer.Provider, __assign({ value: this.formContext }, { children: [React.createElement(this.formContext.renderErrors), this.Container(content)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)(context_1.ContextContainer.Provider, __assign({ value: this.formContext }, { children: [React.createElement(this.formContext.renderErrors), this.Container(content)] }));
     };
     Form.prototype.buttonClick = function (buttonName) {
         return __awaiter(this, void 0, void 0, function () {

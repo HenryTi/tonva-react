@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -59,7 +63,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -112,11 +116,11 @@ var TextAreaItemEdit = /** @class */ (function (_super) {
                     resolve(val);
                 }
             };
-            var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }), void 0);
+            var right = (0, jsx_runtime_1.jsx)("button", __assign({ className: "btn btn-sm btn-success align-self-center me-2", disabled: !_this.isChanged, onClick: onSave }, { children: "\u4FDD\u5B58" }));
             var onKeyDown = function (evt) {
                 // if (evt.keyCode === 13) onSave();
             };
-            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: _this.label, right: right }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsx)("textarea", { onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, rows: 6 }, void 0), _this.uiItem && (0, jsx_runtime_1.jsx)("div", __assign({ className: "small muted m-2" }, { children: _this.uiItem.placeholder }), void 0), _this.error && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: _this.error }), void 0)] }), void 0) }), void 0);
+            return (0, jsx_runtime_1.jsx)(page_1.Page, __assign({ header: _this.label, right: right }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "m-3" }, { children: [(0, jsx_runtime_1.jsx)("textarea", { onChange: _this.onChange, onKeyDown: onKeyDown, onBlur: _this.onBlur, onFocus: _this.onFocus, className: "form-control", defaultValue: _this.value, rows: 6 }), _this.uiItem && (0, jsx_runtime_1.jsx)("div", __assign({ className: "small muted m-2" }, { children: _this.uiItem.placeholder })), _this.error && (0, jsx_runtime_1.jsx)("div", __assign({ className: "text-danger" }, { children: _this.error }))] })) }));
         });
         return _this;
     }

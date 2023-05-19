@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IVPage } from './page';
 import { IObservableValue } from 'mobx';
 import '../../css/va-tab.css';
-export declare type TabCaption = (selected: boolean) => JSX.Element;
+export type TabCaption = (selected: boolean) => JSX.Element;
 export interface TabProp {
     name: string;
     caption: TabCaption;

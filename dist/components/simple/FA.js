@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -60,7 +64,7 @@ var FA = /** @class */ (function (_super) {
     FA.prototype.render = function () {
         var _a = this.props, name = _a.name, className = _a.className, size = _a.size, spin = _a.spin, fixWidth = _a.fixWidth, border = _a.border, pull = _a.pull, pulse = _a.pulse, rotate = _a.rotate, flip = _a.flip, inverse = _a.inverse;
         var cn = (0, classnames_1.default)(className, 'fa', name && ('fa-' + name), size && 'fa-' + size, fixWidth && 'fa-fw', border && 'fa-border', pull && 'fa-pull-' + pull, spin && 'fa-spin', pulse && 'fa-pulse', rotate && 'fa-rotate-' + rotate, flip && 'fa-flip-' + flip, inverse && 'fa-inverse');
-        return (0, jsx_runtime_1.jsx)("i", { className: cn }, void 0);
+        return (0, jsx_runtime_1.jsx)("i", { className: cn });
     };
     return FA;
 }(React.Component));
@@ -73,7 +77,7 @@ var StackedFA = /** @class */ (function (_super) {
     StackedFA.prototype.render = function () {
         var _a = this.props, className = _a.className, size = _a.size, children = _a.children;
         var cn = (0, classnames_1.default)('fa-stack', className, size && 'fa-' + size);
-        return (0, jsx_runtime_1.jsx)("span", __assign({ className: cn }, { children: children }), void 0);
+        return (0, jsx_runtime_1.jsx)("span", __assign({ className: cn }, { children: children }));
     };
     return StackedFA;
 }(React.Component));

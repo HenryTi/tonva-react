@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -56,7 +60,7 @@ var IconText = /** @class */ (function (_super) {
     }
     IconText.prototype.render = function () {
         var _a = this.props, icon = _a.icon, iconClass = _a.iconClass, text = _a.text, textClass = _a.textClass;
-        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "py-2" }, { children: [(0, jsx_runtime_1.jsx)(FA_1.FA, { className: iconClass, name: icon, fixWidth: true }, void 0), (0, jsx_runtime_1.jsx)("span", __assign({ className: textClass }, { children: text }), void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: "py-2" }, { children: [(0, jsx_runtime_1.jsx)(FA_1.FA, { className: iconClass, name: icon, fixWidth: true }), (0, jsx_runtime_1.jsx)("span", __assign({ className: textClass }, { children: text }))] }));
     };
     return IconText;
 }(React.Component));

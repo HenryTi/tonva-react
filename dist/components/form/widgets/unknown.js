@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Unknown = void 0;
 var jsx_runtime_1 = require("react/jsx-runtime");
 var Unknown = function (dataType, uiType, dataTypes) {
-    return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-danger" }, { children: ["!!data type ", dataType, " only support ", (dataTypes || []).join(', '), ", can't use ui ", uiType, "!!"] }), void 0);
+    return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-danger" }, { children: ["!!data type ", dataType, " only support ", (dataTypes || []).join(', '), ", can't use ui ", uiType, "!!"] }));
 };
 exports.Unknown = Unknown;
 //# sourceMappingURL=unknown.js.map

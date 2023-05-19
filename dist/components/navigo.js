@@ -2,12 +2,12 @@
 // typescript version of krasimir/navigo
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.navigo = exports.Navigo = void 0;
-var Navigo = /** @class */ (function () {
+var Navigo = exports.Navigo = /** @class */ (function () {
     function Navigo(r, useHash, hash) {
-        var _this = this;
         if (r === void 0) { r = null; }
         if (useHash === void 0) { useHash = false; }
         if (hash === void 0) { hash = '#'; }
+        var _this = this;
         this._routes = [];
         this._onLocationChange = function () {
             console.log('_onLocationChange');
@@ -84,7 +84,8 @@ var Navigo = /** @class */ (function () {
     Navigo.findMatchedRoutes = function (url, routes) {
         if (routes === void 0) { routes = []; }
         return routes.map(function (route) {
-            var _a = Navigo.replaceDynamicURLParts(Navigo.clean(route.route)), regexp = _a.regexp, paramNames = _a.paramNames;
+            var _a;
+            var regexp = (_a = Navigo.replaceDynamicURLParts(Navigo.clean(route.route)), _a.regexp), paramNames = _a.paramNames;
             var match = url.replace(/^\/+/, '/').match(regexp);
             var params = Navigo.regExpResultToParams(match, paramNames);
             return match ? { match: match, route: route, params: params } : false;
@@ -517,7 +518,6 @@ var Navigo = /** @class */ (function () {
     Navigo.MATCH_REGEXP_FLAGS = '';
     return Navigo;
 }());
-exports.Navigo = Navigo;
 //export default Navigo;
 exports.navigo = new Navigo();
 //# sourceMappingURL=navigo.js.map

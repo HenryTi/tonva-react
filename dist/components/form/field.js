@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -50,25 +54,25 @@ var jsx_runtime_1 = require("react/jsx-runtime");
 var React = __importStar(require("react"));
 var widgets_1 = require("./widgets");
 var context_1 = require("./context");
-var FormField = /** @class */ (function (_super) {
+var FormField = exports.FormField = /** @class */ (function (_super) {
     __extends(FormField, _super);
     function FormField() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     FormField.prototype.render = function () {
-        var _a = this.props, name = _a.name, children = _a.children;
+        var _a;
+        var name = (_a = this.props, _a.name), children = _a.children;
         var context = this.context;
         if (context === undefined)
-            return (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "!only in Form!" }), void 0);
+            return (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "!only in Form!" }));
         var itemSchema = context.getItemSchema(name);
         var content = (0, widgets_1.factory)(context, itemSchema, children, this.props);
         if (content === undefined) {
-            return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-danger" }, { children: ["!!", name, " is not defined!!"] }), void 0);
+            return (0, jsx_runtime_1.jsxs)("span", __assign({ className: "text-danger" }, { children: ["!!", name, " is not defined!!"] }));
         }
         return content;
     };
     FormField.contextType = context_1.ContextContainer;
     return FormField;
 }(React.Component));
-exports.FormField = FormField;
 //# sourceMappingURL=field.js.map

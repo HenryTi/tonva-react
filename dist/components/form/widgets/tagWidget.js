@@ -61,7 +61,7 @@ var TagSingleWidget = /** @class */ (function (_super) {
     TagSingleWidget.prototype.render = function () {
         var _a = this.ui, valuesView = _a.valuesView, wrapClassName = _a.wrapClassName;
         if (valuesView === undefined)
-            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "valuesView must be defined" }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "valuesView must be defined" });
         var isRow = this.context.isRow;
         var rowKey;
         if (isRow === true) {
@@ -112,7 +112,7 @@ var TagMultiWidget = /** @class */ (function (_super) {
     TagMultiWidget.prototype.render = function () {
         var _a = this.ui, valuesView = _a.valuesView, wrapClassName = _a.wrapClassName;
         if (valuesView === undefined)
-            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "valuesView must be defined" }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: "valuesView must be defined" });
         var cn = (0, classnames_1.default)(this.className, 'py-0');
         var options = {
             className: cn,

@@ -61,7 +61,7 @@ var SelectWidget = /** @class */ (function (_super) {
         if (this.readOnly === true) {
             var option = this.ui.list.find(function (v) { return v.value === _this.value; });
             var title = (option === undefined) ? '(???)' : option.title;
-            return (0, jsx_runtime_1.jsx)("span", __assign({ className: "form-control w-min-6c" }, { children: title }), void 0);
+            return (0, jsx_runtime_1.jsx)("span", __assign({ className: "form-control w-min-6c" }, { children: title }));
         }
         return (0, jsx_runtime_1.jsx)("select", __assign({ ref: function (select) { return _this.select = select; }, className: (0, classnames_1.default)(this.className, 'form-control'), defaultValue: this.defaultValue, onChange: this.onInputChange }, { children: this.ui.list.map(function (v, index) {
                 var title = v.title, value = v.value;
@@ -69,7 +69,7 @@ var SelectWidget = /** @class */ (function (_super) {
                 //if (value === undefined || value === null) cn = 'text-light small';
                 //else cn = 'text-danger';
                 return (0, jsx_runtime_1.jsx)("option", __assign({ className: cn, value: value }, { children: title || value }), index);
-            }) }), void 0);
+            }) }));
     };
     return SelectWidget;
 }(widget_1.Widget));

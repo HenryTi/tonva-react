@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -62,11 +66,11 @@ var Media = /** @class */ (function (_super) {
         var _a = this.props, icon = _a.icon, main = _a.main, discription = _a.discription, px = _a.px, py = _a.py;
         var disp;
         if (typeof discription === 'string')
-            disp = (0, jsx_runtime_1.jsx)("div", { children: discription }, void 0);
+            disp = (0, jsx_runtime_1.jsx)("div", { children: discription });
         else
             disp = discription;
         var cn = (0, classnames_1.default)('media', px === undefined ? 'px-0' : 'px-' + px, py === undefined ? 'py-2' : 'py-' + py);
-        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: cn }, { children: [(0, jsx_runtime_1.jsx)(_1.Image, { className: "me-3 w-4c h-4c", src: icon }, void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "media-body" }, { children: [(0, jsx_runtime_1.jsx)("h5", __assign({ className: "mt-0" }, { children: main }), void 0), disp] }), void 0)] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("div", __assign({ className: cn }, { children: [(0, jsx_runtime_1.jsx)(_1.Image, { className: "me-3 w-4c h-4c", src: icon }), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "media-body" }, { children: [(0, jsx_runtime_1.jsx)("h5", __assign({ className: "mt-0" }, { children: main })), disp] }))] }));
     };
     return Media;
 }(React.Component));

@@ -36,8 +36,8 @@ var VTestMobx = /** @class */ (function () {
     }
     VTestMobx.prototype.render = function () {
         var _this = this;
-        var VTest = (0, mobx_react_1.observer)(function () { return (0, jsx_runtime_1.jsxs)("div", { children: ["test: ", JSON.stringify(_this.map.get(1))] }, void 0); });
-        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(VTest, {}, void 0), (0, jsx_runtime_1.jsx)("button", __assign({ onClick: this.mapAdd }, { children: "click" }), void 0)] }, void 0);
+        var VTest = (0, mobx_react_1.observer)(function () { return (0, jsx_runtime_1.jsxs)("div", { children: ["test: ", JSON.stringify(_this.map.get(1))] }); });
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(VTest, {}), (0, jsx_runtime_1.jsx)("button", __assign({ onClick: this.mapAdd }, { children: "click" }))] });
     };
     return VTestMobx;
 }());

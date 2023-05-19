@@ -12,7 +12,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -69,7 +73,7 @@ var Widget = /** @class */ (function () {
             var label = _this.label;
             if (_this.itemSchema.required === true && form.props.requiredFlag !== false) {
                 if (label !== null)
-                    label = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [label, "\u00A0", (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "*" }), void 0)] }, void 0);
+                    label = (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [label, "\u00A0", (0, jsx_runtime_1.jsx)("span", __assign({ className: "text-danger" }, { children: "*" }))] });
             }
             return form.FieldContainer(label, _this.renderBody());
         });
@@ -252,9 +256,9 @@ var Widget = /** @class */ (function () {
             var _a = this.ui, discription = _a.discription, discriptionClassName = _a.discriptionClassName;
             if (discriptionClassName === undefined)
                 discriptionClassName = 'small text-muted';
-            elDiscription = (0, jsx_runtime_1.jsx)("span", __assign({ className: discriptionClassName }, { children: discription }), void 0);
+            elDiscription = (0, jsx_runtime_1.jsx)("span", __assign({ className: discriptionClassName }, { children: discription }));
         }
-        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [this.render(), elDiscription] }, void 0);
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [this.render(), elDiscription] });
     };
     Object.defineProperty(Widget.prototype, "label", {
         get: function () {
@@ -276,7 +280,7 @@ var Widget = /** @class */ (function () {
     });
     Widget.prototype.renderTemplet = function () {
         if (this.children !== undefined) {
-            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: this.children }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: this.children });
         }
         if (this.ui === undefined)
             return undefined;
@@ -294,7 +298,7 @@ var Widget = /** @class */ (function () {
         return errorList.map(function (err) { return React.createElement(tag, {
             key: err,
             className: 'text-danger d-inline-block my-2 ms-3'
-        }, (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("i", { className: "fa fa-exclamation-circle" }, void 0), " \u00A0", err] }, void 0)); });
+        }, (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("i", { className: "fa fa-exclamation-circle" }), " \u00A0", err] })); });
     };
     return Widget;
 }());

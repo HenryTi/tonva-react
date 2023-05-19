@@ -17,7 +17,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InputCheckBox = void 0;
 var input_1 = require("../input");
-var InputCheckBox = /** @class */ (function (_super) {
+var InputCheckBox = exports.InputCheckBox = /** @class */ (function (_super) {
     __extends(InputCheckBox, _super);
     function InputCheckBox() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -51,5 +51,4 @@ var InputCheckBox = /** @class */ (function (_super) {
     InputCheckBox.defaultClassName = 'form-check-input p-2';
     return InputCheckBox;
 }(input_1.Input));
-exports.InputCheckBox = InputCheckBox;
 //# sourceMappingURL=checkBox.js.map

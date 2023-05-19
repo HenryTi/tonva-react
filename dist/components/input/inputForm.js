@@ -80,15 +80,15 @@ var InputForm = /** @class */ (function () {
     };
     InputForm.prototype.renderInputBoolean = function (name, widgetProps) {
         var _this = this;
-        return (0, jsx_runtime_1.jsx)(inputs_1.InputCheckBox, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
+        return (0, jsx_runtime_1.jsx)(inputs_1.InputCheckBox, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps));
     };
     InputForm.prototype.renderInputInteger = function (name, widgetProps) {
         var _this = this;
-        return (0, jsx_runtime_1.jsx)(inputs_1.InputInteger, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
+        return (0, jsx_runtime_1.jsx)(inputs_1.InputInteger, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps));
     };
     InputForm.prototype.renderInputNumber = function (name, widgetProps) {
         var _this = this;
-        return (0, jsx_runtime_1.jsx)(inputs_1.InputNumber, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps), void 0);
+        return (0, jsx_runtime_1.jsx)(inputs_1.InputNumber, __assign({ ref: function (w) { return _this.widgetViews[name] = w; } }, widgetProps));
     };
     InputForm.prototype.getValues = function () {
         var data = __assign({}, this.values);

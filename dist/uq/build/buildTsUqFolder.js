@@ -98,13 +98,12 @@ function buildFields(i) {
 }
 ;
 function buildIDFields(ID) {
-    var _a;
     var ret = {};
     var schema = ID.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_1 = function (f) {
         var name_1 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_1; })) >= 0;
+        var isKey = (keys === null || keys === void 0 ? void 0 : keys.findIndex(function (v) { return v.name === name_1; })) >= 0;
         ret[name_1] = (0, fieldItem_1.buildFieldItem)(f, isKey);
     };
     for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
@@ -114,13 +113,12 @@ function buildIDFields(ID) {
     return ret;
 }
 function buildIDXFields(IDX) {
-    var _a;
     var ret = {};
     var schema = IDX.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_2 = function (f) {
         var name_2 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_2; })) >= 0;
+        var isKey = (keys === null || keys === void 0 ? void 0 : keys.findIndex(function (v) { return v.name === name_2; })) >= 0;
         ret[name_2] = (0, fieldItem_1.buildFieldItem)(f, isKey);
     };
     for (var _i = 0, fields_2 = fields; _i < fields_2.length; _i++) {
@@ -131,13 +129,12 @@ function buildIDXFields(IDX) {
 }
 ;
 function buildIXFields(IX) {
-    var _a;
     var ret = {};
     var schema = IX.schema;
     var keys = schema.keys, fields = schema.fields;
     var _loop_3 = function (f) {
         var name_3 = f.name;
-        var isKey = ((_a = keys) === null || _a === void 0 ? void 0 : _a.findIndex(function (v) { return v.name === name_3; })) >= 0;
+        var isKey = (keys === null || keys === void 0 ? void 0 : keys.findIndex(function (v) { return v.name === name_3; })) >= 0;
         ret[name_3] = (0, fieldItem_1.buildFieldItem)(f, isKey);
     };
     for (var _i = 0, fields_3 = fields; _i < fields_3.length; _i++) {

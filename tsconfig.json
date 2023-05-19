@@ -5,11 +5,11 @@
             "dom",
             "dom.iterable",
             "esnext"
-		],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "declaration": true,
         "composite": true,
         "outDir": "./dist",
@@ -22,13 +22,15 @@
         "noImplicitReturns": false,
         "noImplicitThis": true,
         "noImplicitAny": false,
-        "suppressImplicitAnyIndexErrors": true,
         "noUnusedLocals": false,
         "jsx": "react-jsx",
         "strictNullChecks": false,
         "experimentalDecorators": true,
         "baseUrl": "tonva-react/",
-		"typeRoots" : ["node_modules/@types", "tonva-react/types"]
+        "typeRoots": [
+            "node_modules/@types",
+            "tonva-react/types"
+        ]
     },
     "exclude": [
         "node_modules",

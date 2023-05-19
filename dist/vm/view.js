@@ -12,7 +12,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -44,7 +48,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -134,16 +138,16 @@ var View = /** @class */ (function () {
     View.prototype.renderUser = function (user, imageClassName, textClassName) {
         var renderUser = function (user) {
             var name = user.name, nick = user.nick, icon = user.icon;
-            return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c me-2' }, void 0), (0, jsx_runtime_1.jsx)("span", __assign({ className: textClassName }, { children: nick || name }), void 0)] }, void 0);
+            return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(components_1.Image, { src: icon, className: imageClassName || 'w-1c h-1c me-2' }), (0, jsx_runtime_1.jsx)("span", __assign({ className: textClassName }, { children: nick || name }))] });
         };
-        return (0, jsx_runtime_1.jsx)(components_1.UserView, { user: user, render: renderUser }, void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.UserView, { user: user, render: renderUser });
     };
     View.prototype.renderUserText = function (user) {
         var renderUser = function (user) {
             var name = user.name, nick = user.nick;
-            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: nick || name }, void 0);
+            return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: nick || name });
         };
-        return (0, jsx_runtime_1.jsx)(components_1.UserView, { user: user, render: renderUser }, void 0);
+        return (0, jsx_runtime_1.jsx)(components_1.UserView, { user: user, render: renderUser });
     };
     View.prototype.renderMe = function (imageClassName, textClassName) {
         var user = this.controller.user;
@@ -157,7 +161,7 @@ var View = /** @class */ (function () {
             this.controller.openPage(React.createElement(view, param), onClosePage);
         }
         else {
-            this.controller.openPage((0, jsx_runtime_1.jsxs)(components_1.Page, __assign({ header: "param type error" }, { children: ["View.openPage param must be object, but here is ", type] }), void 0), onClosePage);
+            this.controller.openPage((0, jsx_runtime_1.jsxs)(components_1.Page, __assign({ header: "param type error" }, { children: ["View.openPage param must be object, but here is ", type] })), onClosePage);
         }
     };
     View.prototype.replacePage = function (view, param) {

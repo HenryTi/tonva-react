@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.InputInteger = exports.InputNumber = void 0;
 var inputRules_1 = require("../../inputRules");
 var input_1 = require("./../input");
-var InputNumber = /** @class */ (function (_super) {
+var InputNumber = exports.InputNumber = /** @class */ (function (_super) {
     __extends(InputNumber, _super);
     function InputNumber() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -51,7 +51,8 @@ var InputNumber = /** @class */ (function (_super) {
         configurable: true
     });
     InputNumber.prototype.buildRules = function () {
-        var _a = this.props, max = _a.max, min = _a.min;
+        var _a;
+        var max = (_a = this.props, _a.max), min = _a.min;
         this.rules.push(new inputRules_1.RuleNum(undefined, min, max));
     };
     InputNumber.prototype.parseValue = function () {
@@ -66,7 +67,6 @@ var InputNumber = /** @class */ (function (_super) {
     InputNumber.defaultClassName = 'form-control w-8c d-inline text-right';
     return InputNumber;
 }(input_1.Input));
-exports.InputNumber = InputNumber;
 var InputInteger = /** @class */ (function (_super) {
     __extends(InputInteger, _super);
     function InputInteger() {

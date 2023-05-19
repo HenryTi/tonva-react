@@ -2,7 +2,7 @@
 import { ChangedHandler, ChangingHandler, PickId } from "../components";
 import { ID } from "../uq";
 import { FieldUIType } from "./fieldUI";
-export declare type FieldItemType = 'id' | 'integer' | 'number' | 'string' | 'image' | 'date' | 'boolean' | 'object' | 'arr' | 'button' | 'submit';
+export type FieldItemType = 'id' | 'integer' | 'number' | 'string' | 'image' | 'date' | 'boolean' | 'object' | 'arr' | 'button' | 'submit';
 export interface FieldItem {
     name: string;
     type: FieldItemType;
@@ -38,7 +38,7 @@ export interface FieldItemInt extends FieldItemNumBase {
 export interface FieldItemNum extends FieldItemNumBase {
     type: 'number';
 }
-export declare type FieldItemNumber = FieldItemNum;
+export type FieldItemNumber = FieldItemNum;
 export interface FieldItemBool extends FieldItem {
     type: 'boolean';
 }
@@ -63,7 +63,7 @@ export interface FieldItemArr extends FieldItem {
 export interface FieldItemButton extends FieldItem {
     type: 'button' | 'submit';
 }
-export declare type FieldItems = FieldItem[];
-export declare type FieldCustoms = {
+export type FieldItems = FieldItem[];
+export type FieldCustoms = {
     [name: string]: Partial<FieldItem>;
 };

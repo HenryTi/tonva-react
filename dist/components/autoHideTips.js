@@ -25,9 +25,9 @@ function autoHideTips(tips, templet, timeout) {
             }, timeout);
         }
         switch (typeof templet) {
-            case 'undefined': return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: t }, void 0);
+            case 'undefined': return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: t });
             case 'function': return templet(t);
-            case 'string': return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: templet }, void 0);
+            case 'string': return (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: templet });
             default: return templet;
         }
     }));

@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -133,7 +137,7 @@ var Selectable = /** @class */ (function (_super) {
             return (0, jsx_runtime_1.jsx)("li", __assign({ className: (0, classnames_1.default)(className) }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "d-flex align-items-center px-3" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: function (input) { if (input)
                                 _this.inputItems[labelId] = input; }, className: "", type: "checkbox", value: "", id: labelId, defaultChecked: selected, onChange: function (e) {
                                 _this.onSelect(item, e.target.checked);
-                            } }, void 0), (0, jsx_runtime_1.jsx)("label", __assign({ className: "", style: { flex: 1, marginBottom: 0 }, htmlFor: labelId }, { children: _this.renderContent(obItem, index) }), void 0)] }), void 0) }), void 0);
+                            } }), (0, jsx_runtime_1.jsx)("label", __assign({ className: "", style: { flex: 1, marginBottom: 0 }, htmlFor: labelId }, { children: _this.renderContent(obItem, index) }))] })) }));
         });
         (0, mobx_1.makeObservable)(_this, {
             _items: mobx_1.observable

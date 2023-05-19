@@ -12,7 +12,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -93,7 +97,7 @@ exports.ArrComponent = (0, mobx_react_1.observer)(function (_a) {
                 first = false;
             if (children !== undefined) {
                 rowContext = new context_1.RowContext(parentContext, arrSchema, row, true);
-                rowContent = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: children }, void 0);
+                rowContent = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: children });
             }
             else {
                 var typeofTemplet = typeof Templet;
@@ -109,7 +113,7 @@ exports.ArrComponent = (0, mobx_react_1.observer)(function (_a) {
                     rowContext = new context_1.RowContext(parentContext, arrSchema, row, false);
                     rowContent = (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: arr.map(function (v, index) {
                             return (0, jsx_runtime_1.jsx)(React.Fragment, { children: (0, factory_1.factory)(rowContext, v, undefined) }, v.name);
-                        }) }, void 0);
+                        }) });
                 }
             }
             var rowKey = rowContext.rowKey;
@@ -124,7 +128,7 @@ exports.ArrComponent = (0, mobx_react_1.observer)(function (_a) {
                         $source.$isSelected = checked;
                     rowContext.clearErrors();
                 };
-                selectCheck = (0, jsx_runtime_1.jsx)("div", __assign({ className: "form-row-checkbox" }, { children: (0, jsx_runtime_1.jsx)("input", { type: "checkbox", onClick: onClick, defaultChecked: row.$isSelected }, void 0) }), void 0);
+                selectCheck = (0, jsx_runtime_1.jsx)("div", __assign({ className: "form-row-checkbox" }, { children: (0, jsx_runtime_1.jsx)("input", { type: "checkbox", onClick: onClick, defaultChecked: row.$isSelected }) }));
             }
             var isDeleted = !(row.$isDeleted === undefined || row.$isDeleted === false);
             if (deletable === true) {
@@ -147,13 +151,13 @@ exports.ArrComponent = (0, mobx_react_1.observer)(function (_a) {
                     }
                     rowContext.clearErrors();
                 };
-                deleteIcon = (0, jsx_runtime_1.jsx)("div", __assign({ className: "form-row-edit text-info", onClick: onDelClick }, { children: (0, jsx_runtime_1.jsx)("i", { className: (0, classnames_1.default)('fa', icon, 'fa-fw') }, void 0) }), void 0);
+                deleteIcon = (0, jsx_runtime_1.jsx)("div", __assign({ className: "form-row-edit text-info", onClick: onDelClick }, { children: (0, jsx_runtime_1.jsx)("i", { className: (0, classnames_1.default)('fa', icon, 'fa-fw') }) }));
             }
             var editContainer = selectable === true || deletable === true ?
-                function (content) { return (0, jsx_runtime_1.jsx)("fieldset", __assign({ disabled: isDeleted }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: (0, classnames_1.default)('d-flex', { 'deleted': isDeleted, 'row-selected': row.$isSelected }) }, { children: [selectCheck, (0, jsx_runtime_1.jsx)("div", __assign({ className: selectable === true && deletable === true ? "form-row-content" : "form-row-content-1" }, { children: content }), void 0), deleteIcon] }), void 0) }), void 0); }
+                function (content) { return (0, jsx_runtime_1.jsx)("fieldset", __assign({ disabled: isDeleted }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: (0, classnames_1.default)('d-flex', { 'deleted': isDeleted, 'row-selected': row.$isSelected }) }, { children: [selectCheck, (0, jsx_runtime_1.jsx)("div", __assign({ className: selectable === true && deletable === true ? "form-row-content" : "form-row-content-1" }, { children: content })), deleteIcon] })) })); }
                 :
                     function (content) { return content; };
-            return (0, jsx_runtime_1.jsxs)(context_1.ContextContainer.Provider, __assign({ value: rowContext }, { children: [sep, RowContainer(editContainer((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(rowContext.renderErrors, {}, void 0), rowContent] }, void 0)))] }), rowKey);
-        }) }, void 0));
+            return (0, jsx_runtime_1.jsxs)(context_1.ContextContainer.Provider, __assign({ value: rowContext }, { children: [sep, RowContainer(editContainer((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(rowContext.renderErrors, {}), rowContent] })))] }), rowKey);
+        }) }));
 });
 //# sourceMappingURL=arrComponent.js.map

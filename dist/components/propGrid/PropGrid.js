@@ -27,7 +27,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -60,22 +64,22 @@ var React = __importStar(require("react"));
 var classnames_1 = __importDefault(require("classnames"));
 var mobx_react_1 = require("mobx-react");
 var propView_1 = require("./propView");
-var PropGrid = /** @class */ (function (_super) {
+var PropGrid = exports.PropGrid = /** @class */ (function (_super) {
     __extends(PropGrid, _super);
     function PropGrid() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     PropGrid.prototype.render = function () {
-        var _a = this.props, className = _a.className, rows = _a.rows, values = _a.values;
+        var _a;
+        var className = (_a = this.props, _a.className), rows = _a.rows, values = _a.values;
         var propView = new propView_1.PropView(this.props, rows);
         propView.setValues(values);
         var cn = (0, classnames_1.default)('container-fluid', className);
-        return (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: propView.render() }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: cn }, { children: propView.render() }));
     };
     PropGrid = __decorate([
         mobx_react_1.observer
     ], PropGrid);
     return PropGrid;
 }(React.Component));
-exports.PropGrid = PropGrid;
 //# sourceMappingURL=PropGrid.js.map

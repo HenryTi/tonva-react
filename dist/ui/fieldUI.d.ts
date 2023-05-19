@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export declare type FieldUIType = 'form' | 'arr' | 'group' | 'button' | 'submit' | 'custom' | 'image' | 'id' | 'string' | 'textarea' | 'password' | 'date' | 'datetime' | 'select' | 'url' | 'email' | 'updown' | 'number' | 'color' | 'checkbox' | 'checkboxes' | 'radio' | 'range' | 'tagSingle' | 'tagMulti';
+export type FieldUIType = 'form' | 'arr' | 'group' | 'button' | 'submit' | 'custom' | 'image' | 'id' | 'string' | 'textarea' | 'password' | 'date' | 'datetime' | 'select' | 'url' | 'email' | 'updown' | 'number' | 'color' | 'checkbox' | 'checkboxes' | 'radio' | 'range' | 'tagSingle' | 'tagMulti';
 export interface FieldUI {
     widget?: FieldUIType;
     readOnly?: boolean;
@@ -76,7 +76,7 @@ export interface FieldUITagMulti extends FieldUITag {
 export interface FieldUICollection {
     [field: string]: FieldUI;
 }
-export declare type FieldUITempletType = ((item?: any) => JSX.Element) | JSX.Element;
+export type FieldUITempletType = ((item?: any) => JSX.Element) | JSX.Element;
 export interface FieldUIGroup extends FieldUI {
     widget: 'group';
     with: string[];

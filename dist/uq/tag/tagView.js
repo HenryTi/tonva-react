@@ -28,7 +28,7 @@ var TagView = /** @class */ (function () {
         }
         return (0, jsx_runtime_1.jsx)("div", __assign({ className: "d-flex flex-wrap " }, { children: names.map(function (name, index) {
                 return (0, jsx_runtime_1.jsx)("div", __assign({ className: "mx-2 border border-muted rounded px-3 bg-light" }, { children: name }), index);
-            }) }), void 0);
+            }) }));
     };
     TagView.prototype.renderRadios = function (value, options) {
         var _this = this;
@@ -52,19 +52,19 @@ var TagView = /** @class */ (function () {
             'row ' + wrapClassName
             :
                 'row row-cols-2 row-cols-sm-3 row-cols-md-4';
-        return (0, jsx_runtime_1.jsx)("div", __assign({ className: className, style: radioStyle }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: wrapClassName }, { children: content }), void 0) }), void 0);
+        return (0, jsx_runtime_1.jsx)("div", __assign({ className: className, style: radioStyle }, { children: (0, jsx_runtime_1.jsx)("div", __assign({ className: wrapClassName }, { children: content })) }));
     };
     TagView.prototype.renderRadio = function (item, value, options) {
         var id = item.id, name = item.name;
         var inputs = options.inputs, inputName = options.inputName, onInputChange = options.onInputChange;
         var ref = inputs && (function (input) { return inputs[id] = input; });
-        return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "form-radio-inline" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: ref, type: "radio", name: inputName, value: id, defaultChecked: value === id, onChange: onInputChange }, void 0), name] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "form-radio-inline" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: ref, type: "radio", name: inputName, value: id, defaultChecked: value === id, onChange: onInputChange }), name] }));
     };
     TagView.prototype.renderCheck = function (item, checked, options) {
         var id = item.id, name = item.name;
         var inputs = options.inputs, onInputChange = options.onInputChange;
         var ref = inputs && (function (input) { return inputs[id] = input; });
-        return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "form-radio-inline" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: ref, type: "checkbox", value: id, defaultChecked: checked, onChange: onInputChange }, void 0), name] }), void 0);
+        return (0, jsx_runtime_1.jsxs)("label", __assign({ className: "form-radio-inline" }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: ref, type: "checkbox", value: id, defaultChecked: checked, onChange: onInputChange }), name] }));
     };
     return TagView;
 }());

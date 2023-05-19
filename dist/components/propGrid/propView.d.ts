@@ -34,7 +34,7 @@ export interface ComponentProp extends LabeledProp {
     full?: boolean;
     component: any;
 }
-export declare type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;
+export type Prop = StringProp | NumberProp | FormatProp | ListProp | ComponentProp | string;
 export declare class PropView {
     private gridProps;
     private props;
